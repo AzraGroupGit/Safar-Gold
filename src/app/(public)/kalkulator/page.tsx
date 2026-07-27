@@ -15,7 +15,7 @@ export default function KalkulatorPage() {
   return (
     <main className="bg-white">
       <div className="bg-surface">
-        <div className="mx-auto max-w-7xl px-4 pb-12 pt-24 md:px-6 md:pb-20 md:pt-36">
+        <div className="mx-auto max-w-7xl px-4 pb-24 pt-24 md:px-6 md:pb-32 md:pt-36">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-gold-dark">
@@ -38,17 +38,20 @@ export default function KalkulatorPage() {
         </div>
       </div>
 
-      <div className="mx-auto max-w-7xl px-4 pb-16 md:px-6 md:pb-20">
+      <div className="mx-auto -mt-16 max-w-7xl px-4 pb-16 md:-mt-20 md:px-6 md:pb-20">
         <div className="grid gap-8 lg:grid-cols-5">
           <div className="lg:col-span-3">
             <Calculator goldTypes={goldTypes} prices={prices} />
           </div>
 
           <div className="lg:col-span-2">
-            <div className="rounded-2xl border border-border/60 bg-white shadow-sm">
-              <div className="border-b border-border/40 bg-surface/50 px-8 py-5">
-                <h3 className="font-serif text-lg font-bold text-text">Referensi Harga Hari Ini</h3>
-                <p className="mt-0.5 text-xs text-text-muted">Acuan perhitungan kalkulator</p>
+            <div className="overflow-hidden rounded-2xl border border-border/60 bg-white shadow-lg shadow-gold/10">
+              <div className="relative overflow-hidden gold-gradient-bg px-6 py-5">
+                <div className="bg-diamond absolute inset-0 opacity-20" />
+                <div className="relative">
+                  <h3 className="font-serif text-lg font-bold text-white">Referensi Harga Hari Ini</h3>
+                  <p className="mt-0.5 text-xs text-white/70">Acuan perhitungan kalkulator</p>
+                </div>
               </div>
               <div className="divide-y divide-border/30 p-6">
                 {hasData ? (

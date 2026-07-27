@@ -47,6 +47,16 @@ export default function PriceChart() {
   const [period, setPeriod] = useState(7);
   const data = generateMockData(period, 1245000);
 
+  const makeGradient = (ctx: import("chart.js").ScriptableContext<"line">, color: string) => {
+    const chart = ctx.chart;
+    const { ctx: c, chartArea } = chart;
+    if (!chartArea) return color;
+    const gradient = c.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
+    gradient.addColorStop(0, color);
+    gradient.addColorStop(1, "rgba(255,255,255,0)");
+    return gradient;
+  };
+
   const chartData = {
     labels: data.labels,
     datasets: [
@@ -54,31 +64,43 @@ export default function PriceChart() {
         label: "Antam",
         data: data.antam,
         borderColor: "#c89116",
-        backgroundColor: "rgba(200, 145, 22, 0.08)",
+        backgroundColor: (ctx: import("chart.js").ScriptableContext<"line">) => makeGradient(ctx, "rgba(200, 145, 22, 0.25)"),
         fill: true,
         tension: 0.4,
         pointRadius: 0,
-        borderWidth: 2,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: "#c89116",
+        pointHoverBorderColor: "#fff",
+        pointHoverBorderWidth: 2,
+        borderWidth: 2.5,
       },
       {
         label: "UBS",
         data: data.ubs,
         borderColor: "#b8860b",
-        backgroundColor: "rgba(184, 134, 11, 0.06)",
+        backgroundColor: (ctx: import("chart.js").ScriptableContext<"line">) => makeGradient(ctx, "rgba(184, 134, 11, 0.15)"),
         fill: true,
         tension: 0.4,
         pointRadius: 0,
-        borderWidth: 2,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: "#b8860b",
+        pointHoverBorderColor: "#fff",
+        pointHoverBorderWidth: 2,
+        borderWidth: 2.5,
       },
       {
         label: "Perhiasan 24K",
         data: data.perhiasan,
         borderColor: "#d4a76a",
-        backgroundColor: "rgba(212, 167, 106, 0.05)",
+        backgroundColor: (ctx: import("chart.js").ScriptableContext<"line">) => makeGradient(ctx, "rgba(212, 167, 106, 0.12)"),
         fill: true,
         tension: 0.4,
         pointRadius: 0,
-        borderWidth: 2,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: "#d4a76a",
+        pointHoverBorderColor: "#fff",
+        pointHoverBorderWidth: 2,
+        borderWidth: 2.5,
       },
     ],
   };
