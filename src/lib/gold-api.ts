@@ -20,6 +20,18 @@ export function setSetting(key: string, value: string) {
   ).run(key, value, value);
 }
 
+export function getMarketInfo() {
+  const usdIdrRate = parseFloat(getSetting("usd_idr_rate")) || 16300;
+  const lastUpdate = getSetting("last_price_update");
+  // Estimate international price from Antam base price if available
+  const todayPrices = getTodayPrices();
+  const antam = todayPrices.find((p) => p.gold_type_id === "antam-100");
+  const xauUsdPerOz = antam
+    ? Math.round((antam.base_price * GOLD_OUNCE_TO_GRAM) / usdIdrRate)
+    : 0;
+  return { usdIdrRate, xauUsdPerOz, lastUpdate };
+}
+
 export function getAllGoldTypes(): GoldTypeRow[] {
   const db = getDb();
   return db.prepare("SELECT * FROM gold_types ORDER BY category, karat DESC").all() as GoldTypeRow[];

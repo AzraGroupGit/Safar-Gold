@@ -1,15 +1,15 @@
 ▲ Next.js 16.2.12 (Turbopack)
 
   Creating an optimized production build ...
-✓ Compiled successfully in 15.4s
+✓ Compiled successfully in 15.8s
   Running TypeScript ...
-  Finished TypeScript in 11.3s ...
+  Finished TypeScript in 15.9s ...
   Collecting page data using 3 workers ...
-  Generating static pages using 3 workers (0/13) ...
-  Generating static pages using 3 workers (3/13) 
-  Generating static pages using 3 workers (6/13) 
-  Generating static pages using 3 workers (9/13) 
-✓ Generating static pages using 3 workers (13/13) in 1587ms
+  Generating static pages using 3 workers (0/14) ...
+  Generating static pages using 3 workers (3/14) 
+  Generating static pages using 3 workers (6/14) 
+  Generating static pages using 3 workers (10/14) 
+✓ Generating static pages using 3 workers (14/14) in 1718ms
   Finalizing page optimization ...
 
 Route (app)
@@ -20,6 +20,7 @@ Route (app)
 ├ ○ /admin/konten
 ├ ○ /admin/pengaturan
 ├ ƒ /api/admin/update-gold-types
+├ ƒ /api/admin/update-konten
 ├ ƒ /api/admin/update-settings
 ├ ƒ /api/cron/update-prices
 ├ ○ /harga

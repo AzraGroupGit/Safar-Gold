@@ -4,23 +4,14 @@ import { getDb } from "@/lib/db";
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    if (!Array.isArray(body)) {
-      return NextResponse.json({ error: "Invalid body" }, { status: 400 });
-    }
-
     const db = getDb();
-    const update = db.prepare(
-      "UPDATE gold_types SET is_auto = ?, manual_buy = ?, manual_sell = ? WHERE id = ?"
-    );
+    const upsert = db.prepare("INSERT INTO app_settings (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value = ?");
 
     const tx = db.transaction(() => {
-      for (const item of body) {
-        update.run(
-          item.isAuto ? 1 : 0,
-          item.manualBuy ?? null,
-          item.manualSell ?? null,
-          item.id
-        );
+      if (body.hero) {
+        upsert.run("hero_headline", body.hero.headline, body.hero.headline);
+        upsert.run("hero_subheadline", body.hero.subheadline, body.hero.subheadline);
+        upsert.run("hero_cta", body.hero.ctaText, body.hero.ctaText);
       }
     });
     tx();
