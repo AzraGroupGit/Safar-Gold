@@ -1,0 +1,32 @@
+▲ Next.js 16.2.12 (Turbopack)
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 15.4s
+  Running TypeScript ...
+  Finished TypeScript in 11.3s ...
+  Collecting page data using 3 workers ...
+  Generating static pages using 3 workers (0/13) ...
+  Generating static pages using 3 workers (3/13) 
+  Generating static pages using 3 workers (6/13) 
+  Generating static pages using 3 workers (9/13) 
+✓ Generating static pages using 3 workers (13/13) in 1587ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /admin
+├ ○ /admin/harga
+├ ○ /admin/konten
+├ ○ /admin/pengaturan
+├ ƒ /api/admin/update-gold-types
+├ ƒ /api/admin/update-settings
+├ ƒ /api/cron/update-prices
+├ ○ /harga
+├ ○ /icon.png
+└ ○ /kalkulator
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
