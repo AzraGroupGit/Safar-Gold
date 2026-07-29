@@ -1,6 +1,9 @@
 import Link from "next/link";
+import { getHeroContent } from "@/lib/gold-api";
 
-export default function Hero() {
+export default async function Hero() {
+  const hero = await getHeroContent();
+
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden md:min-h-[90vh]">
       <div
@@ -15,19 +18,17 @@ export default function Hero() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold opacity-75" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-gold" />
           </span>
-          Harga Real-time — Update Setiap 06:00 WIB
+          {hero.badge}
         </div>
 
         <h1 className="mt-6 font-serif text-3xl font-bold leading-[1.15] tracking-tight text-white md:mt-8 md:text-6xl lg:text-7xl">
-          Emas Anda,{" "}
-          <span className="gold-gradient-text">Investasi</span>
-          <br />
-          <span className="gold-gradient-text">Masa Depan</span> Anda
+          {hero.headlineStart}{" "}
+          <span className="gold-gradient-text">{hero.headlineGradient}</span>
+          {hero.headlineEnd ? <> {hero.headlineEnd}</> : null}
         </h1>
 
         <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-white/70">
-          Pantau harga emas real-time, hitung transaksi dengan kalkulator cerdas,
-          dan dapatkan harga terbaik — setiap hari, otomatis.
+          {hero.subheadline}
         </p>
 
         <div className="mt-10 flex flex-wrap justify-center gap-4">
@@ -35,7 +36,7 @@ export default function Hero() {
             href="/harga"
             className="gold-gradient-bg rounded-xl px-8 py-4 text-sm font-semibold text-white shadow-xl shadow-gold/25 transition-all hover:shadow-2xl hover:shadow-gold/30 hover:scale-[1.02]"
           >
-            Cek Harga Hari Ini →
+            {hero.ctaText} →
           </Link>
           <Link
             href="/kalkulator"

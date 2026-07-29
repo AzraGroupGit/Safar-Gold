@@ -1,12 +1,16 @@
-import { getAllGoldTypes, getDb } from "@/lib/gold-api";
-import type { AppSettingRow } from "@/lib/gold-api";
+import { getAllGoldTypes } from "@/lib/gold-api";
+import { createClient } from "@/lib/supabase/server";
 import AdminPengaturanClient from "./AdminPengaturanClient";
 
-export default function AdminPengaturanPage() {
-  const goldTypes = getAllGoldTypes();
-  const db = getDb();
-  const settings = db.prepare("SELECT * FROM app_settings").all() as AppSettingRow[];
-  const settingsMap = Object.fromEntries(settings.map((s) => [s.key, s.value]));
+export const dynamic = "force-dynamic";
+
+export default async function AdminPengaturanPage() {
+  const goldTypes = await getAllGoldTypes();
+  const supabase = await createClient();
+  const { data } = await supabase.from("app_settings").select("key, value");
+  const settingsMap = Object.fromEntries(
+    (data ?? []).map((r: { key: string; value: string }) => [r.key, r.value])
+  );
 
   return <AdminPengaturanClient goldTypes={goldTypes} settings={settingsMap} />;
 }

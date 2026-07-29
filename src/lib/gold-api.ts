@@ -1,30 +1,68 @@
-import { getDb } from "./db";
-export { getDb };
-import type { GoldTypeRow, PriceHistoryRow, AppSettingRow } from "./db";
-export type { GoldTypeRow, PriceHistoryRow, AppSettingRow };
+import { createClient } from "./supabase/server";
+import { createAdminClient } from "./supabase/admin";
 
 const GOLD_OUNCE_TO_GRAM = 31.1034768;
 
-function getSetting(key: string): string {
-  const db = getDb();
-  const row = db.prepare("SELECT value FROM app_settings WHERE key = ?").get(key) as
-    | AppSettingRow
-    | undefined;
-  return row?.value ?? "0";
+// ---------- Types ----------
+export interface GoldTypeRow {
+  id: string;
+  name: string;
+  karat: number;
+  category: string;
+  margin_buy: number;
+  margin_sell: number;
+  is_auto: boolean;
+  manual_buy: number | null;
+  manual_sell: number | null;
 }
 
-export function setSetting(key: string, value: string) {
-  const db = getDb();
-  db.prepare(
-    "INSERT INTO app_settings (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value = ?"
-  ).run(key, value, value);
+export interface PriceHistoryRow {
+  id: number;
+  date: string;
+  gold_type_id: string;
+  base_price: number;
+  buy_price: number;
+  sell_price: number;
+  created_at: string;
 }
 
-export function getMarketInfo() {
-  const usdIdrRate = parseFloat(getSetting("usd_idr_rate")) || 16300;
-  const lastUpdate = getSetting("last_price_update");
-  // Estimate international price from Antam base price if available
-  const todayPrices = getTodayPrices();
+export interface AppSettingRow {
+  key: string;
+  value: string;
+}
+
+// ---------- Settings ----------
+async function getSetting(key: string): Promise<string> {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("app_settings")
+    .select("value")
+    .eq("key", key)
+    .maybeSingle();
+  return data?.value ?? "0";
+}
+
+async function getSettingOr(key: string, fallback: string): Promise<string> {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("app_settings")
+    .select("value")
+    .eq("key", key)
+    .maybeSingle();
+  return data && data.value !== "" ? data.value : fallback;
+}
+
+/** Tulis setting — pakai admin client (service role, lewati RLS). */
+export async function setSetting(key: string, value: string) {
+  const supabase = createAdminClient();
+  await supabase.from("app_settings").upsert({ key, value });
+}
+
+// ---------- Market Info ----------
+export async function getMarketInfo() {
+  const usdIdrRate = parseFloat(await getSetting("usd_idr_rate")) || 16300;
+  const lastUpdate = await getSetting("last_price_update");
+  const todayPrices = await getTodayPrices();
   const antam = todayPrices.find((p) => p.gold_type_id === "antam-100");
   const xauUsdPerOz = antam
     ? Math.round((antam.base_price * GOLD_OUNCE_TO_GRAM) / usdIdrRate)
@@ -32,55 +70,93 @@ export function getMarketInfo() {
   return { usdIdrRate, xauUsdPerOz, lastUpdate };
 }
 
-export function getAllGoldTypes(): GoldTypeRow[] {
-  const db = getDb();
-  return db.prepare("SELECT * FROM gold_types ORDER BY category, karat DESC").all() as GoldTypeRow[];
+// ---------- Hero Content ----------
+export type HeroContent = {
+  badge: string;
+  headlineStart: string;
+  headlineGradient: string;
+  headlineEnd: string;
+  subheadline: string;
+  ctaText: string;
+};
+
+export async function getHeroContent(): Promise<HeroContent> {
+  const supabase = await createClient();
+  const { data } = await supabase.from("app_settings").select("key, value");
+  const map = new Map((data ?? []).map((r) => [r.key, r.value]));
+  const or = (key: string, fallback: string) => {
+    const v = map.get(key);
+    return v && v !== "" ? v : fallback;
+  };
+
+  return {
+    badge: or("hero_badge", "Harga Real-time — Update Setiap 06:00 WIB"),
+    headlineStart: or("hero_headline_start", "Emas Anda,"),
+    headlineGradient: or("hero_headline_gradient", "Investasi Masa Depan"),
+    headlineEnd: or("hero_headline_end", "Anda"),
+    subheadline: or(
+      "hero_subheadline",
+      "Pantau harga emas real-time, hitung transaksi dengan kalkulator cerdas, dan dapatkan harga terbaik — setiap hari, otomatis."
+    ),
+    ctaText: or("hero_cta", "Cek Harga Hari Ini"),
+  };
 }
 
-export function getTodayPrices(): PriceHistoryRow[] {
-  const db = getDb();
+// ---------- Gold Types ----------
+export async function getAllGoldTypes(): Promise<GoldTypeRow[]> {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("gold_types")
+    .select("*")
+    .order("category", { ascending: true })
+    .order("karat", { ascending: false });
+  return (data ?? []) as GoldTypeRow[];
+}
+
+// ---------- Prices ----------
+export async function getTodayPrices(): Promise<PriceHistoryRow[]> {
+  const supabase = await createClient();
   const today = new Date().toISOString().split("T")[0];
-  return db
-    .prepare("SELECT * FROM price_history WHERE date = ?")
-    .all(today) as PriceHistoryRow[];
+  const { data } = await supabase
+    .from("price_history")
+    .select("*")
+    .eq("date", today);
+  return (data ?? []) as PriceHistoryRow[];
 }
 
-export function getPriceHistory(goldTypeId: string, days = 30): PriceHistoryRow[] {
-  const db = getDb();
+export async function getPriceHistory(goldTypeId: string, days = 30): Promise<PriceHistoryRow[]> {
+  const supabase = await createClient();
   const since = new Date();
   since.setDate(since.getDate() - days);
   const sinceStr = since.toISOString().split("T")[0];
-  return db
-    .prepare(
-      "SELECT * FROM price_history WHERE gold_type_id = ? AND date >= ? ORDER BY date DESC"
-    )
-    .all(goldTypeId, sinceStr) as PriceHistoryRow[];
+  const { data } = await supabase
+    .from("price_history")
+    .select("*")
+    .eq("gold_type_id", goldTypeId)
+    .gte("date", sinceStr)
+    .order("date", { ascending: false });
+  return (data ?? []) as PriceHistoryRow[];
 }
 
-export function updateGoldType(id: string, data: Partial<GoldTypeRow>) {
-  const db = getDb();
-  const fields = Object.keys(data).filter((k) => k !== "id");
-  if (fields.length === 0) return;
-  const sets = fields.map((f) => `${f} = ?`).join(", ");
-  const values = fields.map((f) => (data as Record<string, unknown>)[f]);
-  db.prepare(`UPDATE gold_types SET ${sets} WHERE id = ?`).run(...values, id);
+/** Update jenis emas — admin client. */
+export async function updateGoldType(id: string, data: Partial<GoldTypeRow>) {
+  const supabase = createAdminClient();
+  await supabase.from("gold_types").update(data).eq("id", id);
 }
 
-export function insertPriceHistory(prices: Omit<PriceHistoryRow, "id" | "created_at">[]) {
-  const db = getDb();
-  const insert = db.prepare(
-    "INSERT OR REPLACE INTO price_history (date, gold_type_id, base_price, buy_price, sell_price) VALUES (?, ?, ?, ?, ?)"
-  );
-  const tx = db.transaction(() => {
-    for (const p of prices) {
-      insert.run(p.date, p.gold_type_id, p.base_price, p.buy_price, p.sell_price);
-    }
-  });
-  tx();
+/** Insert/replace harga hari ini — admin client, upsert pada (date, gold_type_id). */
+export async function insertPriceHistory(
+  prices: Omit<PriceHistoryRow, "id" | "created_at">[]
+) {
+  const supabase = createAdminClient();
+  await supabase
+    .from("price_history")
+    .upsert(prices, { onConflict: "date,gold_type_id" });
 }
 
-export function calculatePrices(basePricePerGramIdr: number) {
-  const goldTypes = getAllGoldTypes(); // already fetches all
+// ---------- Price Calculation ----------
+export async function calculatePrices(basePricePerGramIdr: number) {
+  const goldTypes = await getAllGoldTypes();
 
   return goldTypes.map((gt) => {
     if (gt.is_auto) {
@@ -92,27 +168,26 @@ export function calculatePrices(basePricePerGramIdr: number) {
         buy_price: buyPrice,
         sell_price: sellPrice,
       };
-    } else {
-      return {
-        gold_type: gt,
-        base_price: Math.round(basePricePerGramIdr),
-        buy_price: gt.manual_buy ?? 0,
-        sell_price: gt.manual_sell ?? 0,
-      };
     }
+    return {
+      gold_type: gt,
+      base_price: Math.round(basePricePerGramIdr),
+      buy_price: gt.manual_buy ?? 0,
+      sell_price: gt.manual_sell ?? 0,
+    };
   });
 }
 
+// ---------- International Price Fetch ----------
 export async function fetchInternationalGoldPrice(): Promise<{
   xauUsdPerOz: number;
   usdIdrRate: number;
   error?: string;
 }> {
-  const apiKey = getSetting("api_key");
+  const apiKey = await getSetting("api_key");
 
-  if (!apiKey) {
-    const fallback = await fetchFallbackPrice();
-    return fallback;
+  if (!apiKey || apiKey === "0") {
+    return await fetchFallbackPrice();
   }
 
   try {
@@ -128,23 +203,21 @@ export async function fetchInternationalGoldPrice(): Promise<{
     const data = await res.json();
     const xauUsdPerOz = data.price;
 
-    let usdIdrRate = parseFloat(getSetting("usd_idr_rate"));
+    let usdIdrRate = parseFloat(await getSetting("usd_idr_rate"));
     if (!usdIdrRate || isNaN(usdIdrRate)) usdIdrRate = 16300;
 
     try {
-      const fxRes = await fetch(
-        "https://api.exchangerate-api.com/v4/latest/USD"
-      );
+      const fxRes = await fetch("https://api.exchangerate-api.com/v4/latest/USD");
       if (fxRes.ok) {
         const fxData = await fxRes.json();
         const rate = fxData.rates?.IDR;
         if (rate) {
           usdIdrRate = rate;
-          setSetting("usd_idr_rate", rate.toString());
+          await setSetting("usd_idr_rate", rate.toString());
         }
       }
     } catch {
-      // fallback to stored rate
+      // fallback ke rate tersimpan
     }
 
     return { xauUsdPerOz, usdIdrRate };
@@ -155,7 +228,7 @@ export async function fetchInternationalGoldPrice(): Promise<{
 }
 
 async function fetchFallbackPrice(): Promise<{ xauUsdPerOz: number; usdIdrRate: number }> {
-  const usdIdrRate = parseFloat(getSetting("usd_idr_rate")) || 16300;
+  const usdIdrRate = parseFloat(await getSetting("usd_idr_rate")) || 16300;
 
   try {
     const res = await fetch(
@@ -167,7 +240,7 @@ async function fetchFallbackPrice(): Promise<{ xauUsdPerOz: number; usdIdrRate: 
       if (xauUsdPerOz) return { xauUsdPerOz, usdIdrRate };
     }
   } catch {
-    // continue to static fallback
+    // lanjut ke fallback statis
   }
 
   return { xauUsdPerOz: 2400, usdIdrRate };
@@ -177,6 +250,7 @@ export function convertToIdrPerGram(usdPerOz: number, usdIdrRate: number): numbe
   return (usdPerOz * usdIdrRate) / GOLD_OUNCE_TO_GRAM;
 }
 
+// ---------- Formatted Prices ----------
 export type FormattedPrice = {
   id: string;
   goldTypeId: string;
@@ -192,11 +266,14 @@ export type FormattedPrice = {
   lastUpdated: string;
 };
 
-export function getFormattedTodayPrices(): FormattedPrice[] {
-  const todayPrices = getTodayPrices();
+export async function getFormattedTodayPrices(): Promise<FormattedPrice[]> {
+  const [todayPrices, goldTypes] = await Promise.all([
+    getTodayPrices(),
+    getAllGoldTypes(),
+  ]);
 
   if (todayPrices.length === 0) {
-    return getAllGoldTypes().map((gt) => ({
+    return goldTypes.map((gt) => ({
       id: `empty-${gt.id}`,
       goldTypeId: gt.id,
       goldName: gt.name,
@@ -213,7 +290,7 @@ export function getFormattedTodayPrices(): FormattedPrice[] {
   }
 
   return todayPrices.map((p) => {
-    const gt = getAllGoldTypes().find((g) => g.id === p.gold_type_id);
+    const gt = goldTypes.find((g) => g.id === p.gold_type_id);
     const spread = p.buy_price - p.sell_price;
     return {
       id: `p-${p.id}`,
@@ -232,6 +309,7 @@ export function getFormattedTodayPrices(): FormattedPrice[] {
   });
 }
 
+// ---------- Formatters ----------
 export function formatRupiah(amount: number): string {
   return new Intl.NumberFormat("id-ID", {
     style: "currency",

@@ -46,7 +46,7 @@ export default function Navbar() {
         <div className="flex items-center gap-3 rounded-[20px] border border-border/60 bg-white/90 px-4 py-3 shadow-lg shadow-black/[0.03] backdrop-blur-xl md:gap-6 md:rounded-[24px] md:px-8 md:py-4">
           <Link href="/" className="flex shrink-0 items-center">
             <img
-              src="/logo-1.png"
+              src="/logo-1.webp"
               alt="Safar Gold"
               className="h-8 w-auto rounded-lg object-contain md:h-11"
             />
@@ -65,6 +65,12 @@ export default function Navbar() {
               className="rounded-lg px-5 py-2.5 text-sm font-medium text-text-muted transition-all hover:bg-surface hover:text-text"
             >
               Harga
+            </Link>
+            <Link
+              href="/tentang"
+              className="rounded-lg px-5 py-2.5 text-sm font-medium text-text-muted transition-all hover:bg-surface hover:text-text"
+            >
+              Tentang Kami
             </Link>
           </div>
 
@@ -127,6 +133,13 @@ export default function Navbar() {
               className="block rounded-xl px-4 py-3 text-sm font-medium text-text transition-colors hover:bg-surface"
             >
               Harga
+            </Link>
+            <Link
+              href="/tentang"
+              onClick={() => setMenuOpen(false)}
+              className="block rounded-xl px-4 py-3 text-sm font-medium text-text transition-colors hover:bg-surface"
+            >
+              Tentang Kami
             </Link>
             <div className="my-1 border-t border-border/40" />
             <Link

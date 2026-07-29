@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
 import Calculator from "@/components/Calculator";
+import LegalNotice from "@/components/LegalNotice";
 import { getAllGoldTypes, getFormattedTodayPrices, formatRupiah } from "@/lib/gold-api";
 
 export const metadata: Metadata = {
-  title: "Kalkulator Emas",
-  description: "Hitung simulasi transaksi jual beli emas. Masukkan jenis emas dan berat untuk estimasi total.",
+  title: "Kalkulator Emas — Hitung Jual Beli Instan",
+  description: "Hitung simulasi transaksi jual beli emas secara instan. Masukkan jenis emas dan berat untuk estimasi total harga terkini.",
 };
 
-export default function KalkulatorPage() {
-  const goldTypes = getAllGoldTypes();
-  const prices = getFormattedTodayPrices();
+export default async function KalkulatorPage() {
+  const goldTypes = await getAllGoldTypes();
+  const prices = await getFormattedTodayPrices();
   const hasData = prices.length > 0 && prices[0].buyPrice > 0;
 
   return (
@@ -73,6 +74,9 @@ export default function KalkulatorPage() {
               </div>
             </div>
           </div>
+        </div>
+        <div className="mt-8">
+          <LegalNotice />
         </div>
       </div>
     </main>

@@ -11,13 +11,54 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://safargold.com"),
   title: {
-    default: "Safar Gold — Jual Beli Emas Terpercaya",
+    default: "Safar Gold — Jual Beli Emas Terpercaya, Harga Real-time",
     template: "%s | Safar Gold",
   },
   description:
-    "Harga emas terkini setiap hari. Kalkulator jual beli emas praktis, transparan, dan terpercaya. Update otomatis pukul 06:00 WIB.",
+    "Harga emas terkini setiap hari — Antam, UBS, dan perhiasan. Kalkulator jual beli emas praktis, transparan, dan terpercaya. Update otomatis pukul 06:00 WIB.",
+  keywords: [
+    "jual beli emas",
+    "harga emas hari ini",
+    "buyback emas",
+    "harga emas antam",
+    "harga emas ubs",
+    "kalkulator emas",
+    "investasi emas",
+    "safar gold",
+  ],
+  authors: [{ name: "Safar Gold" }],
+  creator: "Safar Gold",
   icons: { icon: "/favicon.png", apple: "/favicon.png" },
+  openGraph: {
+    type: "website",
+    locale: "id_ID",
+    url: "https://safargold.com",
+    siteName: "Safar Gold",
+    title: "Safar Gold — Jual Beli Emas Terpercaya, Harga Real-time",
+    description:
+      "Harga emas terkini setiap hari — Antam, UBS, dan perhiasan. Kalkulator jual beli emas praktis, transparan, dan terpercaya.",
+    images: [
+      {
+        url: "/safar-hero.webp",
+        width: 1200,
+        height: 630,
+        alt: "Safar Gold — Jual Beli Emas Terpercaya",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Safar Gold — Jual Beli Emas Terpercaya",
+    description:
+      "Harga emas terkini setiap hari. Kalkulator jual beli emas praktis, transparan, dan terpercaya.",
+    images: ["/safar-hero.webp"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

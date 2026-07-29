@@ -1,4 +1,7 @@
 import { getAllGoldTypes, getFormattedTodayPrices, formatRupiah } from "@/lib/gold-api";
+import UpdateTrigger from "./UpdateTrigger";
+
+export const dynamic = "force-dynamic";
 
 function StatCard({ label, value, sub, icon }: { label: string; value: string; sub?: string; icon: string }) {
   return (
@@ -17,9 +20,9 @@ function StatCard({ label, value, sub, icon }: { label: string; value: string; s
   );
 }
 
-export default function AdminDashboard() {
-  const goldTypes = getAllGoldTypes();
-  const prices = getFormattedTodayPrices();
+export default async function AdminDashboard() {
+  const goldTypes = await getAllGoldTypes();
+  const prices = await getFormattedTodayPrices();
   const hasData = prices.length > 0 && prices[0].buyPrice > 0;
   const autoCount = goldTypes.filter((g) => g.is_auto).length;
 
@@ -58,7 +61,6 @@ export default function AdminDashboard() {
       </div>
 
       <div className="rounded-2xl border border-border/60 bg-white p-8 shadow-sm">
-        <h3 className="mb-6 font-serif text-lg font-semibold text-text">Cara Kerja Auto Update</h3>
         <div className="grid gap-6 md:grid-cols-3">
           {[
             { step: "1", title: "Fetch Harga Internasional", desc: "Setiap 06:00 WIB, sistem mengambil harga XAU/USD dari GoldAPI atau CoinGecko (fallback)." },
@@ -74,6 +76,9 @@ export default function AdminDashboard() {
             </div>
           ))}
         </div>
+      </div>
+      <div className="mt-6 rounded-2xl border border-border/60 bg-white p-6 shadow-sm">
+        <UpdateTrigger />
       </div>
     </div>
   );

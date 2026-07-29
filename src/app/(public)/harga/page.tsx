@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
 import PriceTable from "@/components/PriceTable";
 import PriceChart from "@/components/PriceChart";
+import LegalNotice from "@/components/LegalNotice";
 import { getFormattedTodayPrices, getMarketInfo, formatRupiah } from "@/lib/gold-api";
 
 export const metadata: Metadata = {
-  title: "Harga Emas Hari Ini",
-  description: "Cek harga emas terkini: Antam, UBS, dan perhiasan. Update otomatis setiap 06:00 WIB.",
+  title: "Harga Emas Hari Ini — Antam, UBS & Perhiasan",
+  description: "Cek harga emas terkini: Antam, UBS, dan perhiasan. Update otomatis setiap 06:00 WIB. Lihat harga jual dan buyback secara transparan.",
 };
 
-export default function HargaPage() {
-  const prices = getFormattedTodayPrices();
-  const market = getMarketInfo();
+export default async function HargaPage() {
+  const prices = await getFormattedTodayPrices();
+  const market = await getMarketInfo();
   const hasData = prices.length > 0 && prices[0].buyPrice > 0;
 
   const highlightCards = [
@@ -105,6 +106,9 @@ export default function HargaPage() {
 
       <div className="mx-auto max-w-7xl px-4 pb-16 md:px-6 md:pb-20">
         <PriceTable />
+        <div className="mt-6">
+          <LegalNotice />
+        </div>
       </div>
     </main>
   );
