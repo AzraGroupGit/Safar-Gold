@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   description: "Cek harga emas terkini: Antam, UBS, dan perhiasan. Update otomatis setiap 06:00 WIB. Lihat harga jual dan buyback secara transparan.",
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function HargaPage() {
   const prices = await getFormattedTodayPrices();
   const market = await getMarketInfo();

@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   description: "Hitung simulasi transaksi jual beli emas secara instan. Masukkan jenis emas dan berat untuk estimasi total harga terkini.",
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function KalkulatorPage() {
   const goldTypes = await getAllGoldTypes();
   const prices = await getFormattedTodayPrices();
