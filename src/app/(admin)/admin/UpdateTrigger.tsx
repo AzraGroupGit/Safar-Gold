@@ -11,7 +11,7 @@ export default function UpdateTrigger() {
   async function handleUpdate() {
     setStatus({ type: "loading", message: "Mengambil harga internasional..." });
     try {
-      const res = await fetch("/api/cron/update-prices");
+      const res = await fetch("/api/admin/trigger-update", { method: "POST" });
       const data = await res.json();
       if (data.success) {
         setStatus({
