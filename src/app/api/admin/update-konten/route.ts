@@ -1,20 +1,23 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getDb } from "@/lib/db";
+import { createAdminClient } from "@/lib/supabase/admin";
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const db = getDb();
-    const upsert = db.prepare("INSERT INTO app_settings (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value = ?");
+    const admin = createAdminClient();
 
-    const tx = db.transaction(() => {
-      if (body.hero) {
-        upsert.run("hero_headline", body.hero.headline, body.hero.headline);
-        upsert.run("hero_subheadline", body.hero.subheadline, body.hero.subheadline);
-        upsert.run("hero_cta", body.hero.ctaText, body.hero.ctaText);
-      }
-    });
-    tx();
+    if (body.hero) {
+      const h = body.hero;
+      const entries: { key: string; value: string }[] = [
+        { key: "hero_badge", value: h.badge ?? "" },
+        { key: "hero_headline_start", value: h.headlineStart ?? "" },
+        { key: "hero_headline_gradient", value: h.headlineGradient ?? "" },
+        { key: "hero_headline_end", value: h.headlineEnd ?? "" },
+        { key: "hero_subheadline", value: h.subheadline ?? "" },
+        { key: "hero_cta", value: h.ctaText ?? "" },
+      ];
+      await admin.from("app_settings").upsert(entries);
+    }
 
     return NextResponse.json({ success: true });
   } catch (err) {

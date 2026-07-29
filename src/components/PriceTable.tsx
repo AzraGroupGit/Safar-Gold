@@ -6,8 +6,8 @@ const categoryStyles: Record<string, { bg: string; text: string; label: string }
   perhiasan: { bg: "bg-orange-50", text: "text-orange-700", label: "PERHIASAN" },
 };
 
-export default function PriceTable() {
-  const prices = getFormattedTodayPrices();
+export default async function PriceTable() {
+  const prices = await getFormattedTodayPrices();
   const hasData = prices.length > 0 && prices[0].buyPrice > 0;
 
   return (

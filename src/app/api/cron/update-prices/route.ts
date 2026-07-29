@@ -21,7 +21,7 @@ export async function GET(request: Request) {
     const { xauUsdPerOz, usdIdrRate, error } = await fetchInternationalGoldPrice();
     const basePricePerGramIdr = convertToIdrPerGram(xauUsdPerOz, usdIdrRate);
 
-    const calculated = calculatePrices(basePricePerGramIdr);
+    const calculated = await calculatePrices(basePricePerGramIdr);
     const today = new Date().toISOString().split("T")[0];
 
     const priceRows = calculated.map((c) => ({
@@ -32,8 +32,8 @@ export async function GET(request: Request) {
       sell_price: c.sell_price,
     }));
 
-    insertPriceHistory(priceRows);
-    setSetting("last_price_update", new Date().toISOString());
+    await insertPriceHistory(priceRows);
+    await setSetting("last_price_update", new Date().toISOString());
 
     return NextResponse.json({
       success: true,

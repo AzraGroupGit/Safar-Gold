@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getDb } from "@/lib/db";
+import { createAdminClient } from "@/lib/supabase/admin";
 
 export async function POST(request: NextRequest) {
   try {
@@ -8,22 +8,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Invalid body" }, { status: 400 });
     }
 
-    const db = getDb();
-    const update = db.prepare(
-      "UPDATE gold_types SET is_auto = ?, manual_buy = ?, manual_sell = ? WHERE id = ?"
-    );
-
-    const tx = db.transaction(() => {
-      for (const item of body) {
-        update.run(
-          item.isAuto ? 1 : 0,
-          item.manualBuy ?? null,
-          item.manualSell ?? null,
-          item.id
-        );
-      }
-    });
-    tx();
+    const admin = createAdminClient();
+    for (const item of body) {
+      await admin.from("gold_types").update({
+        is_auto: item.isAuto,
+        manual_buy: item.manualBuy ?? null,
+        manual_sell: item.manualSell ?? null,
+      }).eq("id", item.id);
+    }
 
     return NextResponse.json({ success: true });
   } catch (err) {

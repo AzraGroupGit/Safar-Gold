@@ -6,8 +6,16 @@ import Testimoni from "@/components/Testimoni";
 import KunjungiKami from "@/components/KunjungiKami";
 import FAQ from "@/components/FAQ";
 import GoldDivider from "@/components/GoldDivider";
+import LegalitasSection from "@/components/LegalitasSection";
 
-export const metadata: Metadata = { title: "Beranda" };
+export const metadata: Metadata = {
+  title: {
+    absolute: "Safar Gold — Jual Beli Emas Terpercaya, Harga Real-time",
+  },
+};
+
+// Selalu render dinamis agar konten hero terbaru dari DB langsung tampil
+export const dynamic = "force-dynamic";
 
 export default function HomePage() {
   return (
@@ -21,6 +29,8 @@ export default function HomePage() {
       <Testimoni />
       <GoldDivider />
       <KunjungiKami />
+      <GoldDivider />
+      <LegalitasSection />
       <GoldDivider />
       <FAQ />
     </main>
