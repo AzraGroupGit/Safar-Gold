@@ -14,7 +14,7 @@ const links = [
   {
     href: "/admin/harga",
     label: "Harga",
-    icon: "M12 1.5a.75.75 0 01.75.75V4.5a.75.75 0 01-1.5 0V2.25A.75.75 0 0112 1.5z",
+    icon: "M3 8l3-4h12l3 4-9 12L3 8zM12 4v.01",
   },
   {
     href: "/admin/konten",
@@ -55,21 +55,26 @@ export default function AdminSidebar({
       )}
 
       <aside
-        className={`fixed left-0 top-0 z-50 flex h-screen w-64 flex-col border-r border-border/60 bg-white transition-transform duration-300 lg:translate-x-0 ${
+        className={`fixed left-0 top-0 z-50 flex h-screen w-64 flex-col border-r border-gold/10 bg-white shadow-md shadow-black/[0.02] transition-transform duration-300 lg:translate-x-0 ${
           open ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="flex items-center gap-2.5 border-b border-border/40 px-6 py-5">
-          <img
-            src="/logo-1.webp"
-            alt="Safar Gold"
-            className="h-8 w-auto rounded-lg object-contain"
-          />
-          <span className="ml-auto rounded-md bg-gold/5 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-gold-dark">
-            Admin
-          </span>
+        {/* Header — gold gradient + diamond pattern */}
+        <div className="relative overflow-hidden gold-gradient-bg px-6 py-5">
+          <div className="bg-diamond absolute inset-0 opacity-20" />
+          <div className="relative flex items-center gap-2.5">
+            <img
+              src="/logo-1.webp"
+              alt="Safar Gold"
+              className="h-8 w-auto rounded-lg object-contain"
+            />
+            <span className="ml-auto rounded-md bg-white/20 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-white">
+              Admin
+            </span>
+          </div>
         </div>
-        <nav className="flex-1 space-y-1 px-3 py-6">
+
+        <nav className="flex-1 space-y-1.5 px-4 py-6">
           {links.map((link) => {
             const isActive = pathname === link.href;
             return (
@@ -84,8 +89,8 @@ export default function AdminSidebar({
                 }`}
               >
                 <svg
-                  className="h-5 w-5"
-                  fill="none"
+                  className="h-5 w-5 shrink-0"
+                  fill={link.href === "/admin/harga" ? "currentColor" : "none"}
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
@@ -101,13 +106,14 @@ export default function AdminSidebar({
             );
           })}
         </nav>
-        <div className="space-y-1 border-t border-border/40 px-6 py-4">
+
+        <div className="space-y-1.5 border-t border-border/40 px-5 py-4">
           <Link
             href="/"
-            className="flex items-center gap-2 text-sm text-text-muted transition-colors hover:text-gold"
+            className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-text-muted transition-colors hover:bg-surface hover:text-text"
           >
             <svg
-              className="h-4 w-4"
+              className="h-4 w-4 shrink-0"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={1.5}
@@ -123,10 +129,10 @@ export default function AdminSidebar({
           </Link>
           <button
             onClick={handleLogout}
-            className="flex w-full items-center gap-2 text-sm text-text-muted transition-colors hover:text-red-500"
+            className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-text-muted transition-colors hover:bg-red-50 hover:text-red-500"
           >
             <svg
-              className="h-4 w-4"
+              className="h-4 w-4 shrink-0"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={1.5}
