@@ -7,6 +7,7 @@ import KunjungiKami from "@/components/KunjungiKami";
 import FAQ from "@/components/FAQ";
 import GoldDivider from "@/components/GoldDivider";
 import LegalitasSection from "@/components/LegalitasSection";
+import { getPublicSettings } from "@/lib/gold-api";
 
 export const metadata: Metadata = {
   title: {
@@ -17,7 +18,9 @@ export const metadata: Metadata = {
 // Selalu render dinamis agar konten hero terbaru dari DB langsung tampil
 export const dynamic = "force-dynamic";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const settings = await getPublicSettings();
+
   return (
     <main>
       <Hero />
@@ -32,7 +35,7 @@ export default function HomePage() {
       <GoldDivider />
       <LegalitasSection />
       <GoldDivider />
-      <FAQ />
+      <FAQ phone={settings.phone} />
     </main>
   );
 }

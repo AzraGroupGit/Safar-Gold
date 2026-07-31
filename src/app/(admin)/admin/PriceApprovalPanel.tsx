@@ -31,6 +31,7 @@ export default function PriceApprovalPanel({
   const [adjBeli, setAdjBeli] = useState(initialAdjBeli);
   const [adjPerhiasan, setAdjPerhiasan] = useState(initialAdjPerhiasan);
   const [status, setStatus] = useState<{ type: "idle" | "loading" | "success" | "error"; msg: string }>({ type: "idle", msg: "" });
+  const [fetchStatus, setFetchStatus] = useState<{ type: "idle" | "loading" | "success" | "error"; msg: string }>({ type: "idle", msg: "" });
 
   async function handlePublish() {
     setStatus({ type: "loading", msg: "Memproses..." });
@@ -57,6 +58,21 @@ export default function PriceApprovalPanel({
     }
   }
 
+  async function handleFetchAcuan() {
+    setFetchStatus({ type: "loading", msg: "Fetching..." });
+    try {
+      const res = await fetch("/api/cron/update-prices");
+      const data = await res.json();
+      if (data.success) {
+        setFetchStatus({ type: "success", msg: `OK! XAU $${data.xauUsdPerOz}, JISDOR Rp ${data.usdIdrRate.toLocaleString("id-ID")}. Refresh.` });
+      } else {
+        setFetchStatus({ type: "error", msg: data.error ?? "Gagal" });
+      }
+    } catch {
+      setFetchStatus({ type: "error", msg: "Gagal fetch" });
+    }
+  }
+
   function fmt(n: string) {
     return parseInt(n || "0").toLocaleString("id-ID");
   }
@@ -75,7 +91,16 @@ export default function PriceApprovalPanel({
         <div className="grid gap-4 sm:grid-cols-3">
           <div className="rounded-xl border border-border/40 bg-surface p-4">
             <p className="text-xs font-medium uppercase tracking-wider text-text-muted">Emas Dunia</p>
-            <p className="mt-1 text-xl font-bold text-text">${xauUsd.toLocaleString("en-US")}</p>
+            <div className="flex items-center justify-between">
+              <p className="mt-1 text-xl font-bold text-text">${xauUsd.toLocaleString("en-US")}</p>
+              <button
+                onClick={handleFetchAcuan}
+                disabled={fetchStatus.type === "loading"}
+                className="rounded-lg border border-border/60 px-3 py-1 text-xs font-medium text-text-muted transition-all hover:border-gold/30 hover:text-gold-dark disabled:opacity-50"
+              >
+                {fetchStatus.type === "loading" ? "..." : "Fetch Acuan"}
+              </button>
+            </div>
             <p className="text-xs text-text-muted">/ oz</p>
           </div>
           <div className="rounded-xl border border-border/40 bg-surface p-4">

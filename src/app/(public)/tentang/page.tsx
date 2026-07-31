@@ -58,7 +58,7 @@ export default function TentangPage() {
         {/* ISI: ganti path gambar hero (foto tim/toko). Fallback: gradient gelap */}
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-footer"
-          style={{ backgroundImage: "url('/safar-hero.webp')" }}
+          style={{ backgroundImage: "url('/hero-tentangkami.webp')" }}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
         <div className="bg-diamond absolute inset-0 opacity-30" />

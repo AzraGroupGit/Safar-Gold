@@ -347,6 +347,32 @@ export function convertToIdrPerGram(usdPerOz: number, usdIdrRate: number): numbe
   return (usdPerOz * usdIdrRate) / GOLD_OUNCE_TO_GRAM;
 }
 
+// ---------- Public Settings (Kontak, Jam, dll) ----------
+export type PublicSettings = {
+  phone: string;
+  email: string;
+  address: string;
+  weekdayOpen: string;
+  weekdayClose: string;
+  saturdayOpen: string;
+  saturdayClose: string;
+};
+
+export async function getPublicSettings(): Promise<PublicSettings> {
+  const supabase = createAnonClient();
+  const { data } = await supabase.from("app_settings").select("key, value");
+  const map = new Map((data ?? []).map((r) => [r.key, r.value]));
+  return {
+    phone: map.get("phone") || "+62 812-3456-7890",
+    email: map.get("email") || "info@safargold.com",
+    address: map.get("address") || "Jl. Emas No. 1, Jakarta",
+    weekdayOpen: map.get("weekday_open") || "09:00",
+    weekdayClose: map.get("weekday_close") || "17:00",
+    saturdayOpen: map.get("saturday_open") || "09:00",
+    saturdayClose: map.get("saturday_close") || "14:00",
+  };
+}
+
 // ---------- Formatted Prices ----------
 export type FormattedPrice = {
   id: string;
