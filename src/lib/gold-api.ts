@@ -1,4 +1,4 @@
-import { createClient } from "./supabase/server";
+import { createAnonClient } from "./supabase/anon";
 import { createAdminClient } from "./supabase/admin";
 
 const GOLD_OUNCE_TO_GRAM = 31.1034768;
@@ -7,7 +7,8 @@ const GOLD_OUNCE_TO_GRAM = 31.1034768;
 export interface GoldTypeRow {
   id: string;
   name: string;
-  karat: number;
+  karat: number | null;
+  weight: number | null;
   category: string;
   margin_buy: number;
   margin_sell: number;
@@ -33,7 +34,7 @@ export interface AppSettingRow {
 
 // ---------- Settings ----------
 async function getSetting(key: string): Promise<string> {
-  const supabase = await createClient();
+  const supabase = createAnonClient();
   const { data } = await supabase
     .from("app_settings")
     .select("value")
@@ -43,7 +44,7 @@ async function getSetting(key: string): Promise<string> {
 }
 
 async function getSettingOr(key: string, fallback: string): Promise<string> {
-  const supabase = await createClient();
+  const supabase = createAnonClient();
   const { data } = await supabase
     .from("app_settings")
     .select("value")
@@ -81,7 +82,7 @@ export type HeroContent = {
 };
 
 export async function getHeroContent(): Promise<HeroContent> {
-  const supabase = await createClient();
+  const supabase = createAnonClient();
   const { data } = await supabase.from("app_settings").select("key, value");
   const map = new Map((data ?? []).map((r) => [r.key, r.value]));
   const or = (key: string, fallback: string) => {
@@ -104,18 +105,30 @@ export async function getHeroContent(): Promise<HeroContent> {
 
 // ---------- Gold Types ----------
 export async function getAllGoldTypes(): Promise<GoldTypeRow[]> {
-  const supabase = await createClient();
+  const supabase = createAnonClient();
   const { data } = await supabase
     .from("gold_types")
     .select("*")
     .order("category", { ascending: true })
+    .order("weight", { ascending: true })
+    .order("karat", { ascending: false });
+  return (data ?? []) as GoldTypeRow[];
+}
+
+export async function getGoldTypesByCategory(category: string): Promise<GoldTypeRow[]> {
+  const supabase = createAnonClient();
+  const { data } = await supabase
+    .from("gold_types")
+    .select("*")
+    .eq("category", category)
+    .order("weight", { ascending: true })
     .order("karat", { ascending: false });
   return (data ?? []) as GoldTypeRow[];
 }
 
 // ---------- Prices ----------
 export async function getTodayPrices(): Promise<PriceHistoryRow[]> {
-  const supabase = await createClient();
+  const supabase = createAnonClient();
   const today = new Date().toISOString().split("T")[0];
   const { data } = await supabase
     .from("price_history")
@@ -125,7 +138,7 @@ export async function getTodayPrices(): Promise<PriceHistoryRow[]> {
 }
 
 export async function getPriceHistory(goldTypeId: string, days = 30): Promise<PriceHistoryRow[]> {
-  const supabase = await createClient();
+  const supabase = createAnonClient();
   const since = new Date();
   since.setDate(since.getDate() - days);
   const sinceStr = since.toISOString().split("T")[0];
@@ -255,7 +268,8 @@ export type FormattedPrice = {
   id: string;
   goldTypeId: string;
   goldName: string;
-  karat: number;
+  karat: number | null;
+  weight: number | null;
   category: string;
   buyPrice: number;
   sellPrice: number;
@@ -278,6 +292,7 @@ export async function getFormattedTodayPrices(): Promise<FormattedPrice[]> {
       goldTypeId: gt.id,
       goldName: gt.name,
       karat: gt.karat,
+      weight: gt.weight,
       category: gt.category,
       buyPrice: 0,
       sellPrice: 0,
@@ -296,7 +311,8 @@ export async function getFormattedTodayPrices(): Promise<FormattedPrice[]> {
       id: `p-${p.id}`,
       goldTypeId: p.gold_type_id,
       goldName: gt?.name ?? p.gold_type_id,
-      karat: gt?.karat ?? 24,
+      karat: gt?.karat ?? null,
+      weight: gt?.weight ?? null,
       category: gt?.category ?? "",
       buyPrice: p.buy_price,
       sellPrice: p.sell_price,

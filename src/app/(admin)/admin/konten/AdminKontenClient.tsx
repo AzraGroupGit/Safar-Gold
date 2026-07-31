@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { createClient } from "@/lib/supabase/client";
 import type { HeroContent } from "@/lib/gold-api";
 
 export default function AdminKontenClient({ initial }: { initial: HeroContent }) {
