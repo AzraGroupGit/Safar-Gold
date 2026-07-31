@@ -1,11 +1,5 @@
 import { NextResponse } from "next/server";
-import {
-  fetchInternationalGoldPrice,
-  calculatePrices,
-  convertToIdrPerGram,
-  insertPriceHistory,
-  setSetting,
-} from "@/lib/gold-api";
+import { fetchInternationalGoldPrice, setSetting } from "@/lib/gold-api";
 
 export const dynamic = "force-dynamic";
 
@@ -18,34 +12,24 @@ export async function GET(request: Request) {
   }
 
   try {
-    const { xauUsdPerOz, usdIdrRate, error } = await fetchInternationalGoldPrice();
-    const basePricePerGramIdr = convertToIdrPerGram(xauUsdPerOz, usdIdrRate);
+    const { xauUsdPerOz, xagUsdPerOz, xpdUsdPerOz, usdIdrRate, error } =
+      await fetchInternationalGoldPrice();
 
-    const calculated = await calculatePrices(basePricePerGramIdr);
-    const today = new Date().toISOString().split("T")[0];
+    const now = new Date().toISOString();
 
-    const priceRows = calculated.map((c) => ({
-      date: today,
-      gold_type_id: c.gold_type.id,
-      base_price: c.base_price,
-      buy_price: c.buy_price,
-      sell_price: c.sell_price,
-    }));
-
-    await insertPriceHistory(priceRows);
-    await setSetting("last_price_update", new Date().toISOString());
+    await setSetting("last_cron_xau_usd", xauUsdPerOz.toString());
+    await setSetting("last_cron_xag_usd", xagUsdPerOz.toString());
+    await setSetting("last_cron_xpd_usd", xpdUsdPerOz.toString());
+    await setSetting("last_cron_usd_idr", usdIdrRate.toString());
+    await setSetting("last_cron_time", now);
 
     return NextResponse.json({
       success: true,
-      date: today,
-      basePricePerGramIdr,
       xauUsdPerOz,
+      xagUsdPerOz,
+      xpdUsdPerOz,
       usdIdrRate,
-      goldTypes: calculated.map((c) => ({
-        name: c.gold_type.name,
-        buy: c.buy_price,
-        sell: c.sell_price,
-      })),
+      time: now,
       ...(error && { warning: error }),
     });
   } catch (err) {

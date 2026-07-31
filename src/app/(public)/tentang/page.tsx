@@ -3,7 +3,8 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Tentang Kami — Toko Emas Terpercaya",
-  description: "Kenal lebih dekat dengan Safar Gold — cerita, tim, legalitas, dan komitmen kami dalam jual beli emas terpercaya.",
+  description:
+    "Kenal lebih dekat dengan Safar Gold — cerita, tim, legalitas, dan komitmen kami dalam jual beli emas terpercaya.",
 };
 
 /* ============================================================
@@ -28,20 +29,6 @@ const timeline: { year: string; title: string; desc: string }[] = [
     title: "Tumbuh Menjadi Partner Terpercaya",
     desc: "Berawal dari Yogyakarta, Safar Gold terus berkembang menjadi sahabat masyarakat dalam membeli, menjual, dan memahami emas dengan lebih baik.",
   },
-];
-
-// ISI: anggota tim inti (nama + jabatan + kutipan singkat + foto)
-const team: { name: string; role: string; quote: string; photo?: string }[] = [
-  { name: "", role: "", quote: "", photo: undefined },
-  { name: "", role: "", quote: "", photo: undefined },
-  { name: "", role: "", quote: "", photo: undefined },
-];
-
-// ISI: dokumen legalitas & sertifikat (judul + keterangan + gambar)
-const certificates: { title: string; caption: string; image?: string }[] = [
-  { title: "", caption: "", image: undefined },
-  { title: "", caption: "", image: undefined },
-  { title: "", caption: "", image: undefined },
 ];
 
 // Nilai inti — teks default sudah diisi, ganti bila perlu
@@ -71,7 +58,7 @@ export default function TentangPage() {
         {/* ISI: ganti path gambar hero (foto tim/toko). Fallback: gradient gelap */}
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-footer"
-          style={{ backgroundImage: "url('/tentang-hero.webp')" }}
+          style={{ backgroundImage: "url('/safar-hero.webp')" }}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
         <div className="bg-diamond absolute inset-0 opacity-30" />
@@ -90,7 +77,6 @@ export default function TentangPage() {
           </p>
         </div>
       </section>
-
       {/* ===== 2. CERITA & SEJARAH ===== */}
       <section className="relative overflow-hidden bg-surface px-4 py-16 md:px-6 md:py-24 lg:py-32">
         <div className="relative mx-auto grid max-w-7xl gap-12 lg:grid-cols-5 lg:gap-16">
@@ -104,13 +90,21 @@ export default function TentangPage() {
             </h2>
             <div className="mt-6 space-y-4 text-text-muted">
               <p className="leading-relaxed">
-                Safar Gold adalah perusahaan jual beli emas yang berdiri pada tahun 2025 di Yogyakarta, hadir untuk memberikan pengalaman transaksi emas yang lebih mudah, aman, transparan, dan sesuai prinsip syariah.
+                Safar Gold adalah perusahaan jual beli emas yang berdiri pada
+                tahun 2025 di Yogyakarta, hadir untuk memberikan pengalaman
+                transaksi emas yang lebih mudah, aman, transparan, dan sesuai
+                prinsip syariah.
               </p>
               <p className="leading-relaxed">
-                Bagi kami, emas bukan sekadar komoditas untuk diperjualbelikan. Emas adalah bagian dari perjalanan dalam menjaga nilai, mempersiapkan masa depan, hingga memenuhi kebutuhan di berbagai fase kehidupan.
+                Bagi kami, emas bukan sekadar komoditas untuk diperjualbelikan.
+                Emas adalah bagian dari perjalanan dalam menjaga nilai,
+                mempersiapkan masa depan, hingga memenuhi kebutuhan di berbagai
+                fase kehidupan.
               </p>
               <p className="leading-relaxed">
-                Berawal dari Yogyakarta, Safar Gold ingin tumbuh menjadi partner terpercaya bagi masyarakat dalam membeli, menjual, dan memahami emas dengan lebih baik.
+                Berawal dari Yogyakarta, Safar Gold ingin tumbuh menjadi partner
+                terpercaya bagi masyarakat dalam membeli, menjual, dan memahami
+                emas dengan lebih baik.
               </p>
               <p className="font-serif text-base font-semibold italic text-gold-dark">
                 Safar Gold — Sahabat Perjalanan Investasi Anda.
@@ -134,7 +128,8 @@ export default function TentangPage() {
                       {item.title || "[Judul milestone]"}
                     </h3>
                     <p className="mt-2 text-sm leading-relaxed text-text-muted">
-                      {item.desc || "[Deskripsi singkat pencapaian pada tahun ini.]"}
+                      {item.desc ||
+                        "[Deskripsi singkat pencapaian pada tahun ini.]"}
                     </p>
                   </div>
                 </div>
@@ -143,7 +138,6 @@ export default function TentangPage() {
           </div>
         </div>
       </section>
-
       {/* ===== 3. LAYANAN KAMI ===== */}
       <section className="relative overflow-hidden bg-white px-4 py-16 md:px-6 md:py-24 lg:py-32">
         <div className="relative mx-auto max-w-7xl">
@@ -155,7 +149,8 @@ export default function TentangPage() {
               Apa yang Kami Tawarkan
             </h2>
             <p className="mx-auto mt-5 max-w-xl text-text-muted">
-              Solusi lengkap untuk kebutuhan jual beli emas Anda, dengan proses yang jelas dan terpercaya.
+              Solusi lengkap untuk kebutuhan jual beli emas Anda, dengan proses
+              yang jelas dan terpercaya.
             </p>
           </div>
 
@@ -182,64 +177,25 @@ export default function TentangPage() {
                 className="group rounded-2xl border border-border/60 bg-surface p-8 shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-gold/5"
               >
                 <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl bg-gold/5 text-gold transition-all group-hover:bg-gold group-hover:text-white group-hover:shadow-lg group-hover:shadow-gold/20">
-                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" d={s.icon} />
+                  <svg
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d={s.icon}
+                    />
                   </svg>
                 </div>
-                <h3 className="mb-3 font-serif text-lg font-semibold text-text">{s.title}</h3>
-                <p className="text-sm leading-relaxed text-text-muted">{s.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== 4. TIM ===== */}
-      <section className="relative overflow-hidden bg-surface px-4 py-16 md:px-6 md:py-24 lg:py-32">
-        <div className="relative mx-auto max-w-7xl">
-          <div className="mb-12 text-center md:mb-16">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-gold-dark">
-              Tim Kami
-            </p>
-            <h2 className="font-serif text-2xl font-bold text-text md:text-4xl lg:text-5xl">
-              Orang di Balik Safar Gold
-            </h2>
-            <p className="mx-auto mt-5 max-w-xl text-text-muted">
-              {/* ISI: kalimat pengantar tim */}
-              Tim profesional yang berdedikasi memberikan layanan terbaik untuk Anda.
-            </p>
-          </div>
-
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {team.map((member, i) => (
-              <div
-                key={i}
-                className="group flex flex-col items-center rounded-2xl border border-border/60 bg-white p-8 text-center shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-gold/5"
-              >
-                <div className="h-28 w-28 overflow-hidden rounded-full bg-surface ring-4 ring-gold/10">
-                  {member.photo ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={member.photo}
-                      alt={member.name || "Anggota tim"}
-                      className="h-full w-full object-cover"
-                    />
-                  ) : (
-                    <div className="flex h-full w-full items-center justify-center text-gold/40">
-                      <svg className="h-12 w-12" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
-                      </svg>
-                    </div>
-                  )}
-                </div>
-                <h3 className="mt-5 font-serif text-lg font-semibold text-text">
-                  {member.name || "[Nama Anggota]"}
+                <h3 className="mb-3 font-serif text-lg font-semibold text-text">
+                  {s.title}
                 </h3>
-                <p className="mt-0.5 text-sm font-medium text-gold-dark">
-                  {member.role || "[Jabatan]"}
-                </p>
-                <p className="mt-4 text-sm leading-relaxed text-text-muted">
-                  {member.quote ? `\u201C${member.quote}\u201D` : "[Kutipan atau deskripsi singkat.]"}
+                <p className="text-sm leading-relaxed text-text-muted">
+                  {s.desc}
                 </p>
               </div>
             ))}
@@ -247,60 +203,7 @@ export default function TentangPage() {
         </div>
       </section>
 
-      {/* ===== 5. SERTIFIKAT & LEGALITAS ===== */}
-      <section className="relative overflow-hidden bg-white px-4 py-16 md:px-6 md:py-24 lg:py-32">
-        <div className="relative mx-auto max-w-7xl">
-          <div className="mb-12 text-center md:mb-16">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-gold-dark">
-              Legalitas
-            </p>
-            <h2 className="font-serif text-2xl font-bold text-text md:text-4xl lg:text-5xl">
-              Terdaftar &amp; Berizin Resmi
-            </h2>
-            <p className="mx-auto mt-5 max-w-xl text-text-muted">
-              {/* ISI: kalimat pengantar legalitas */}
-              Setiap transaksi didukung oleh legalitas resmi dan kemitraan tepercaya.
-            </p>
-          </div>
-
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {certificates.map((cert, i) => (
-              <div
-                key={i}
-                className="overflow-hidden rounded-2xl border border-border/60 bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-gold/5"
-              >
-                <div className="flex aspect-[4/3] items-center justify-center bg-surface-alt">
-                  {cert.image ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={cert.image}
-                      alt={cert.title || "Sertifikat"}
-                      className="h-full w-full object-cover"
-                    />
-                  ) : (
-                    <div className="flex flex-col items-center gap-3 text-gold/40">
-                      <svg className="h-14 w-14" fill="none" viewBox="0 0 24 24" strokeWidth={1.25} stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      <span className="text-xs font-medium uppercase tracking-wider">[Foto Dokumen]</span>
-                    </div>
-                  )}
-                </div>
-                <div className="p-6">
-                  <h3 className="font-serif text-base font-semibold text-text">
-                    {cert.title || "[Judul Sertifikat/Izin]"}
-                  </h3>
-                  <p className="mt-1 text-sm text-text-muted">
-                    {cert.caption || "[Keterangan singkat dokumen legalitas.]"}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== 6. KOMITMEN & NILAI ===== */}
+      {/* ===== 4. KOMITMEN & NILAI ===== */}
       <section className="relative overflow-hidden bg-surface px-4 py-16 md:px-6 md:py-24 lg:py-32">
         <div className="relative mx-auto max-w-7xl">
           <div className="mb-12 text-center md:mb-16">
@@ -319,19 +222,32 @@ export default function TentangPage() {
                 className="group rounded-2xl border border-border/60 bg-white p-8 shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl hover:shadow-gold/5"
               >
                 <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl bg-gold/5 text-gold transition-all group-hover:bg-gold group-hover:text-white group-hover:shadow-lg group-hover:shadow-gold/20">
-                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" d={v.icon} />
+                  <svg
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d={v.icon}
+                    />
                   </svg>
                 </div>
-                <h3 className="mb-3 font-serif text-lg font-semibold text-text">{v.title}</h3>
-                <p className="text-sm leading-relaxed text-text-muted">{v.desc}</p>
+                <h3 className="mb-3 font-serif text-lg font-semibold text-text">
+                  {v.title}
+                </h3>
+                <p className="text-sm leading-relaxed text-text-muted">
+                  {v.desc}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
-
-      {/* ===== 7. CTA ===== */}
+      {/* ===== 5. CTA ===== */}
       <section className="relative overflow-hidden bg-footer px-4 py-16 md:px-6 md:py-24">
         <div className="bg-diamond absolute inset-0 opacity-40" />
         <div className="relative mx-auto max-w-3xl text-center">

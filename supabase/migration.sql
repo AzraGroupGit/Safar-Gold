@@ -120,14 +120,24 @@ insert into public.gold_types (id, name, category, margin_buy, margin_sell) valu
 
 -- ---- Settings ----
 insert into public.app_settings (key, value) values
-  ('api_key',           ''),
-  ('usd_idr_rate',      '16300'),
-  ('last_price_update', ''),
-  ('phone',             '+62 812-3456-7890'),
-  ('email',             'info@safargold.com'),
-  ('address',           'Jl. Emas No. 1, Jakarta'),
-  ('weekday_open',      '09:00'),
-  ('weekday_close',     '17:00'),
-  ('saturday_open',     '09:00'),
-  ('saturday_close',    '14:00')
+  ('api_key',                    ''),
+  ('usd_idr_rate',               '16300'),
+  ('last_price_update',          ''),
+  ('harga_dasar_jual',           '0'),
+  ('acuan_buyback_lm',           '0'),
+  ('premi_pecahan',              '{"0.5":400000,"1":225000,"2":190000,"3":173333,"5":95000,"10":65000,"25":15000,"50":0,"100":0}'),
+  ('spread_buyback_lm',          '{"bb-certi-1-2":0,"bb-certi-3-5":-40000,"bb-certi-10-25":-80000,"bb-certi-50-100":-120000,"bb-non-rm":-150000,"bb-retro":-175000,"bb-merek-lain":-225000}'),
+  ('offset_perhiasan_k24s',      '320000'),
+  ('offset_perhiasan_k24',       '50000'),
+  ('dasar_perhiasan_offset',     '505000'),
+  ('adjustment_jual',            '0'),
+  ('adjustment_beli',            '0'),
+  ('adjustment_perhiasan',       '0'),
+  ('phone',                      '+62 812-3456-7890'),
+  ('email',                      'info@safargold.com'),
+  ('address',                    'Jl. Emas No. 1, Jakarta'),
+  ('weekday_open',               '09:00'),
+  ('weekday_close',              '17:00'),
+  ('saturday_open',              '09:00'),
+  ('saturday_close',             '14:00')
 on conflict (key) do nothing;

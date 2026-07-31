@@ -31,10 +31,6 @@ export async function middleware(request: NextRequest) {
 
   const { pathname } = request.nextUrl;
   const isLoginPage = pathname === "/admin/login";
-  const isAuthApi =
-    pathname === "/api/admin/login" || pathname === "/api/admin/logout";
-
-  if (isAuthApi) return response;
 
   // Already logged in but visiting login → redirect to dashboard
   if (isLoginPage) {

@@ -11,10 +11,13 @@ export const dynamic = "force-dynamic";
 
 export async function POST() {
   try {
-    const { xauUsdPerOz, usdIdrRate, error } = await fetchInternationalGoldPrice();
-    const basePricePerGramIdr = convertToIdrPerGram(xauUsdPerOz, usdIdrRate);
+    const { xauUsdPerOz, xagUsdPerOz, xpdUsdPerOz, usdIdrRate, error } =
+      await fetchInternationalGoldPrice();
+    const baseGoldIdr = convertToIdrPerGram(xauUsdPerOz, usdIdrRate);
+    const baseSilverIdr = convertToIdrPerGram(xagUsdPerOz, usdIdrRate);
+    const basePalladiumIdr = convertToIdrPerGram(xpdUsdPerOz, usdIdrRate);
 
-    const calculated = await calculatePrices(basePricePerGramIdr);
+    const calculated = await calculatePrices(baseGoldIdr, baseSilverIdr, basePalladiumIdr);
     const today = new Date().toISOString().split("T")[0];
 
     const priceRows = calculated.map((c) => ({
@@ -31,8 +34,12 @@ export async function POST() {
     return NextResponse.json({
       success: true,
       date: today,
-      basePricePerGramIdr,
+      baseGold: baseGoldIdr,
+      baseSilver: baseSilverIdr,
+      basePalladium: basePalladiumIdr,
       xauUsdPerOz,
+      xagUsdPerOz,
+      xpdUsdPerOz,
       usdIdrRate,
       goldTypes: calculated.map((c) => ({
         name: c.gold_type.name,

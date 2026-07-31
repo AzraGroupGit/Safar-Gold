@@ -62,7 +62,7 @@ export default function AdminHargaClient({ goldTypes, prices }: { goldTypes: Gol
                   </div>
                 </div>
                 {autoMode[gt.id] ? (
-                  <p className="text-xs text-text-muted">Margin: +{gt.margin_buy}% / -{gt.margin_sell}% (atur di Pengaturan)</p>
+                  <p className="text-xs text-text-muted">Harga dihitung otomatis dari acuan dashboard</p>
                 ) : (
                   <div className="grid grid-cols-2 gap-3">
                     <div>
@@ -94,9 +94,8 @@ export default function AdminHargaClient({ goldTypes, prices }: { goldTypes: Gol
             <thead>
               <tr className="border-b border-border/40 bg-surface/50 text-left text-xs font-semibold uppercase tracking-wider text-text-muted">
                 <th className="px-4 py-4 md:px-6">Jenis Emas</th>
-                <th className="px-4 py-4 md:px-6">Kateogri</th>
+                <th className="px-4 py-4 md:px-6">Kategori</th>
                 <th className="hidden px-4 py-4 sm:table-cell md:px-6">Mode</th>
-                <th className="hidden px-4 py-4 md:table-cell md:px-6">Margin</th>
                 <th className="px-4 py-4 md:px-6">Harga Jual</th>
                 <th className="px-4 py-4 md:px-6">Buyback</th>
                 <th className="hidden px-4 py-4 sm:table-cell md:px-6">Spread</th>
@@ -116,7 +115,6 @@ export default function AdminHargaClient({ goldTypes, prices }: { goldTypes: Gol
                         {gt.is_auto ? "Auto" : "Manual"}
                       </span>
                     </td>
-                    <td className="hidden px-4 py-4 text-sm text-text-muted md:table-cell md:px-6">+{gt.margin_buy}% / -{gt.margin_sell}%</td>
                     <td className="px-4 py-4 text-sm font-bold text-gold-dark md:px-6">{hasData ? formatRupiahClient(price?.buyPrice ?? 0) : "-"}</td>
                     <td className="px-4 py-4 text-sm font-medium text-text md:px-6">{hasData ? formatRupiahClient(price?.sellPrice ?? 0) : "-"}</td>
                     <td className="hidden px-4 py-4 text-sm text-text-muted sm:table-cell md:px-6">{hasData ? `${formatRupiahClient(spread)} (${sp}%)` : "-"}</td>

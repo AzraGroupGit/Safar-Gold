@@ -1,5 +1,6 @@
 import { getAllGoldTypes, getFormattedTodayPrices, formatRupiah } from "@/lib/gold-api";
-import UpdateTrigger from "./UpdateTrigger";
+import PriceApprovalPanel from "./PriceApprovalPanel";
+import { createAnonClient } from "@/lib/supabase/anon";
 
 export const dynamic = "force-dynamic";
 
@@ -25,6 +26,18 @@ export default async function AdminDashboard() {
   const prices = await getFormattedTodayPrices();
   const hasData = prices.length > 0 && prices[0].buyPrice > 0;
   const autoCount = goldTypes.filter((g) => g.is_auto).length;
+
+  const supabase = createAnonClient();
+  const { data: settings } = await supabase.from("app_settings").select("key, value");
+  const s = Object.fromEntries((settings ?? []).map((r) => [r.key, r.value]));
+
+  // Data pasar dari cron terakhir (atau fetch live kalau belum ada)
+  const xauUsd = parseFloat(s.last_cron_xau_usd || "0");
+  const usdIdr = parseFloat(s.last_cron_usd_idr || "0") || parseFloat(s.usd_idr_rate || "16300");
+  const lastCron = s.last_cron_time
+    ? new Date(s.last_cron_time).toLocaleString("id-ID", { hour: "2-digit", minute: "2-digit" })
+    : null;
+  const baseGoldIdr = xauUsd > 0 ? Math.round((xauUsd * usdIdr) / 31.1034768) : 0;
 
   return (
     <div>
@@ -60,25 +73,18 @@ export default async function AdminDashboard() {
         />
       </div>
 
-      <div className="rounded-2xl border border-border/60 bg-white p-8 shadow-sm">
-        <div className="grid gap-6 md:grid-cols-3">
-          {[
-            { step: "1", title: "Fetch Harga Internasional", desc: "Setiap 06:00 WIB, sistem mengambil harga XAU/USD dari GoldAPI atau CoinGecko (fallback)." },
-            { step: "2", title: "Konversi & Kalkulasi", desc: "Harga USD/oz dikonversi ke IDR/gram, lalu dihitung dengan margin jual & buyback per jenis emas." },
-            { step: "3", title: "Update Tampilan", desc: "Harga final disimpan ke database dan langsung tampil di website. Riwayat tersimpan untuk analisis." },
-          ].map((item) => (
-            <div key={item.step} className="rounded-xl border border-border/40 bg-surface p-5">
-              <span className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-gold/5 text-sm font-bold text-gold">
-                {item.step}
-              </span>
-              <h4 className="mb-2 font-serif text-base font-semibold text-text">{item.title}</h4>
-              <p className="text-sm leading-relaxed text-text-muted">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="mt-6 rounded-2xl border border-border/60 bg-white p-6 shadow-sm">
-        <UpdateTrigger />
+      <div className="rounded-2xl border border-border/60 bg-white p-6 shadow-sm">
+        <PriceApprovalPanel
+          initialHargaDasarJual={s.harga_dasar_jual ?? "0"}
+          initialAcuanBuyback={s.acuan_buyback_lm ?? "0"}
+          initialAdjJual={s.adjustment_jual ?? "0"}
+          initialAdjBeli={s.adjustment_beli ?? "0"}
+          initialAdjPerhiasan={s.adjustment_perhiasan ?? "0"}
+          baseGoldIdr={baseGoldIdr}
+          xauUsd={xauUsd}
+          usdIdr={usdIdr}
+          lastCronTime={lastCron}
+        />
       </div>
     </div>
   );

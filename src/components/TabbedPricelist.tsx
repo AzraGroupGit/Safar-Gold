@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import type { FormattedPrice } from "@/lib/gold-api";
-import { formatRupiah } from "@/lib/utils";
+import { formatRupiah } from "@/lib/gold-api";
 
 const CATEGORIES: { key: string; label: string }[] = [
   { key: "lm", label: "Logam Mulia" },

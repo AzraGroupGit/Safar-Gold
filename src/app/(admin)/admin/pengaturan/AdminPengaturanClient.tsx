@@ -1,16 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import type { GoldTypeRow } from "@/lib/gold-api";
 
 export default function AdminPengaturanClient({
-  goldTypes: initialGoldTypes,
   settings: initialSettings,
 }: {
-  goldTypes: GoldTypeRow[];
   settings: Record<string, string>;
 }) {
-  const [goldTypes] = useState(initialGoldTypes);
   const [settings, setSettings] = useState({
     apiKey: initialSettings.api_key ?? "",
     usdIdrRate: initialSettings.usd_idr_rate ?? "16300",
@@ -22,15 +18,10 @@ export default function AdminPengaturanClient({
     saturdayOpen: initialSettings.saturday_open ?? "09:00",
     saturdayClose: initialSettings.saturday_close ?? "14:00",
   });
-  const [margins, setMargins] = useState<Record<string, { buy: number; sell: number }>>(
-    Object.fromEntries(goldTypes.map((g) => [g.id, { buy: g.margin_buy, sell: g.margin_sell }]))
-  );
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
   const handleSettingChange = (field: string, value: string) => setSettings({ ...settings, [field]: value });
-  const handleMarginChange = (id: string, type: "buy" | "sell", value: number) =>
-    setMargins({ ...margins, [id]: { ...margins[id], [type]: value } });
 
   async function handleSave() {
     setSaving(true);
@@ -39,7 +30,6 @@ export default function AdminPengaturanClient({
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        margins,
         settings: {
           api_key: settings.apiKey,
           usd_idr_rate: settings.usdIdrRate,
@@ -130,28 +120,6 @@ export default function AdminPengaturanClient({
                 <input type="time" value={settings.saturdayClose} onChange={(e) => handleSettingChange("saturdayClose", e.target.value)} className={fieldClass} />
               </div>
             </div>
-          </div>
-        </div>
-
-        <div className="rounded-2xl border border-border/60 bg-white p-6 shadow-sm">
-          <h3 className="mb-1 font-serif text-lg font-semibold text-text">Margin per Jenis Emas (%)</h3>
-          <p className="mb-5 text-xs text-text-muted">Jual = base + marginBuy% · Buyback = base - marginSell%</p>
-          <div className="space-y-3">
-            {goldTypes.map((gt) => (
-              <div key={gt.id} className="rounded-xl border border-border/40 bg-surface p-4">
-                <p className="mb-3 text-sm font-semibold text-text">{gt.name}</p>
-                <div className="grid grid-cols-2 gap-3">
-                  <div>
-                    <label className="mb-1 block text-xs text-text-muted">Margin Jual (+%)</label>
-                    <input type="number" step="0.1" value={margins[gt.id]?.buy ?? gt.margin_buy} onChange={(e) => handleMarginChange(gt.id, "buy", parseFloat(e.target.value) || 0)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2 text-sm text-text focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/20" />
-                  </div>
-                  <div>
-                    <label className="mb-1 block text-xs text-text-muted">Margin Buyback (-%)</label>
-                    <input type="number" step="0.1" value={margins[gt.id]?.sell ?? gt.margin_sell} onChange={(e) => handleMarginChange(gt.id, "sell", parseFloat(e.target.value) || 0)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2 text-sm text-text focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/20" />
-                  </div>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </div>
