@@ -11,7 +11,8 @@ const faqs = [
   { q: "Apa perbedaan Antam, UBS, dan perhiasan?", a: "Antam adalah emas batangan produksi PT Aneka Tambang (BUMN), paling likuid. UBS adalah produk swasta dengan harga lebih kompetitif. Perhiasan memiliki nilai seni tambahan dan biasanya kadar karat lebih rendah (18K-22K)." },
 ];
 
-export default function FAQ() {
+export default function FAQ({ phone }: { phone: string }) {
+  const waNumber = phone.replace(/\D/g, "");
   const [open, setOpen] = useState<number | null>(0);
 
   return (
@@ -33,7 +34,7 @@ export default function FAQ() {
             <p className="font-serif text-lg font-semibold text-text">Masih ada pertanyaan?</p>
             <p className="mt-1 text-sm text-text-muted">Tim kami siap membantu Anda langsung.</p>
             <a
-              href="https://wa.me/6281234567890?text=Halo%20Safar%20Gold%2C%20saya%20ingin%20bertanya"
+              href={`https://wa.me/62${waNumber}?text=Halo%20Safar%20Gold%2C%20saya%20ingin%20bertanya`}
               target="_blank"
               rel="noopener noreferrer"
               className="gold-gradient-bg mt-4 inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-white shadow-md shadow-gold/20 transition-all hover:shadow-lg hover:shadow-gold/30"

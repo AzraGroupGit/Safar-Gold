@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Calculator from "@/components/Calculator";
 import LegalNotice from "@/components/LegalNotice";
-import { getAllGoldTypes, getFormattedTodayPrices, formatRupiah } from "@/lib/gold-api";
+import { getAllGoldTypes, getFormattedTodayPrices, getPublicSettings, formatRupiah } from "@/lib/gold-api";
 
 export const metadata: Metadata = {
   title: "Kalkulator Emas — Hitung Jual Beli Instan",
@@ -13,6 +13,7 @@ export const dynamic = "force-dynamic";
 export default async function KalkulatorPage() {
   const goldTypes = await getAllGoldTypes();
   const prices = await getFormattedTodayPrices();
+  const settings = await getPublicSettings();
   const hasData = prices.length > 0 && prices[0].buyPrice > 0;
 
   return (
@@ -44,7 +45,7 @@ export default async function KalkulatorPage() {
       <div className="mx-auto -mt-16 max-w-7xl px-4 pb-16 md:-mt-20 md:px-6 md:pb-20">
         <div className="grid gap-8 lg:grid-cols-5">
           <div className="lg:col-span-3">
-            <Calculator goldTypes={goldTypes} prices={prices} />
+            <Calculator goldTypes={goldTypes} prices={prices} phone={settings.phone} />
           </div>
 
           <div className="lg:col-span-2">

@@ -17,10 +17,13 @@ const quickWeights = [1, 5, 10, 25, 50, 100];
 export default function Calculator({
   goldTypes,
   prices,
+  phone,
 }: {
   goldTypes: GoldTypeRow[];
   prices: FormattedPrice[];
+  phone: string;
 }) {
+  const waNumber = phone.replace(/\D/g, "");
   const [goldTypeId, setGoldTypeId] = useState("");
   const [weight, setWeight] = useState("");
   const [txType, setTxType] = useState<"buy" | "sell">("buy");
@@ -134,7 +137,7 @@ export default function Calculator({
 
               {hasData && (
                 <a
-                  href={`https://wa.me/6281234567890?text=${waMessage}`}
+                  href={`https://wa.me/62${waNumber}?text=${waMessage}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] px-5 py-3 text-sm font-semibold text-white shadow-md transition-all hover:bg-[#20bd5a] hover:shadow-lg"
