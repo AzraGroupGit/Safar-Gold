@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import PriceTable from "@/components/PriceTable";
+import TabbedPricelist from "@/components/TabbedPricelist";
 import PriceChart from "@/components/PriceChart";
 import LegalNotice from "@/components/LegalNotice";
 import { getFormattedTodayPrices, getMarketInfo, formatRupiah } from "@/lib/gold-api";
@@ -107,7 +107,7 @@ export default async function HargaPage() {
       </div>
 
       <div className="mx-auto max-w-7xl px-4 pb-16 md:px-6 md:pb-20">
-        <PriceTable />
+        <TabbedPricelist prices={prices} />
         <div className="mt-6">
           <LegalNotice />
         </div>
