@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
+import { Suspense } from "react";
+import NavigationEvents from "@/components/NavigationEvents";
 import "./globals.css";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
@@ -67,7 +69,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="id"
       className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">
+        <Suspense><NavigationEvents /></Suspense>
+        {children}
+      </body>
     </html>
   );
 }
