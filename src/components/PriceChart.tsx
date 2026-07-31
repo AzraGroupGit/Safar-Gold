@@ -18,8 +18,8 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Filler, 
 
 function generateMockData(days: number, basePrice: number) {
   const labels: string[] = [];
-  const antam: number[] = [];
-  const ubs: number[] = [];
+  const lm: number[] = [];
+  const buyback: number[] = [];
   const perhiasan: number[] = [];
 
   const now = new Date();
@@ -29,12 +29,12 @@ function generateMockData(days: number, basePrice: number) {
     labels.push(d.toLocaleDateString("id-ID", { day: "numeric", month: "short" }));
 
     const variance = () => (Math.random() - 0.5) * basePrice * 0.02;
-    antam.push(basePrice + variance());
-    ubs.push(basePrice - 20000 + variance());
-    perhiasan.push(basePrice + 40000 + variance());
+    lm.push(basePrice + variance());
+    buyback.push(basePrice * 0.96 + variance());
+    perhiasan.push(basePrice * 0.94 + variance());
   }
 
-  return { labels, antam, ubs, perhiasan };
+  return { labels, lm, buyback, perhiasan };
 }
 
 const periods = [
@@ -61,8 +61,8 @@ export default function PriceChart() {
     labels: data.labels,
     datasets: [
       {
-        label: "Antam",
-        data: data.antam,
+        label: "Logam Mulia",
+        data: data.lm,
         borderColor: "#c89116",
         backgroundColor: (ctx: import("chart.js").ScriptableContext<"line">) => makeGradient(ctx, "rgba(200, 145, 22, 0.25)"),
         fill: true,
@@ -75,8 +75,8 @@ export default function PriceChart() {
         borderWidth: 2.5,
       },
       {
-        label: "UBS",
-        data: data.ubs,
+        label: "Buyback LM",
+        data: data.buyback,
         borderColor: "#b8860b",
         backgroundColor: (ctx: import("chart.js").ScriptableContext<"line">) => makeGradient(ctx, "rgba(184, 134, 11, 0.15)"),
         fill: true,
@@ -87,9 +87,10 @@ export default function PriceChart() {
         pointHoverBorderColor: "#fff",
         pointHoverBorderWidth: 2,
         borderWidth: 2.5,
+        borderDash: [6, 3],
       },
       {
-        label: "Perhiasan 24K",
+        label: "Perhiasan",
         data: data.perhiasan,
         borderColor: "#d4a76a",
         backgroundColor: (ctx: import("chart.js").ScriptableContext<"line">) => makeGradient(ctx, "rgba(212, 167, 106, 0.12)"),
@@ -101,6 +102,7 @@ export default function PriceChart() {
         pointHoverBorderColor: "#fff",
         pointHoverBorderWidth: 2,
         borderWidth: 2.5,
+        borderDash: [3, 3],
       },
     ],
   };

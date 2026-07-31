@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo, useEffect } from "react";
 import type { GoldTypeRow, FormattedPrice } from "@/lib/gold-api";
 
 function formatRupiahClient(amount: number): string {
@@ -21,9 +21,20 @@ export default function Calculator({
   goldTypes: GoldTypeRow[];
   prices: FormattedPrice[];
 }) {
-  const [goldTypeId, setGoldTypeId] = useState(goldTypes.length > 0 ? goldTypes[0].id : "");
+  const [goldTypeId, setGoldTypeId] = useState("");
   const [weight, setWeight] = useState("");
   const [txType, setTxType] = useState<"buy" | "sell">("buy");
+
+  // Filter: Beli → hanya Logam Mulia. Jual → hanya buyback (LM, perhiasan, logam lain)
+  const filteredTypes = useMemo(() => {
+    if (txType === "buy") return goldTypes.filter((g) => g.category === "lm");
+    return goldTypes.filter((g) => g.category.startsWith("bb-"));
+  }, [goldTypes, txType]);
+
+  // Reset pilihan saat txType berubah
+  useEffect(() => {
+    if (filteredTypes.length > 0) setGoldTypeId(filteredTypes[0].id);
+  }, [filteredTypes]);
 
   const selectedGold = goldTypes.find((g) => g.id === goldTypeId);
   const price = prices.find((p) => p.goldTypeId === goldTypeId);
@@ -73,8 +84,8 @@ export default function Calculator({
           <div>
             <label className="mb-2.5 block text-sm font-semibold text-text">Jenis Emas</label>
             <select value={goldTypeId} onChange={(e) => setGoldTypeId(e.target.value)} className="w-full rounded-xl border border-border/60 bg-white px-4 py-3 text-sm text-text focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/10">
-              {goldTypes.map((g) => (
-                <option key={g.id} value={g.id}>{g.name} ({g.karat}K)</option>
+              {filteredTypes.map((g) => (
+                <option key={g.id} value={g.id}>{g.name}{g.karat ? ` (${g.karat}K)` : ""}</option>
               ))}
             </select>
           </div>
