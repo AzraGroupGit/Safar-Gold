@@ -144,6 +144,9 @@ export default function PriceApprovalPanel({
               className="mb-2 w-full rounded-lg border border-border/60 bg-white px-4 py-2.5 text-sm font-bold text-text focus:border-gold focus:outline-none"
             />
             <p className="text-xs text-text-muted">Harga per gram untuk LM 50gr & 100gr. Pecahan lain + premi.</p>
+            <p className="mt-1 text-xs text-gold-dark">
+              Rekomendasi: Intl +3% = Rp {Math.round(baseGoldIdr * 1.03).toLocaleString("id-ID")}
+            </p>
             <div className="mt-2">
               <label className="mb-1 block text-xs font-medium text-text-muted">Adjustment Jual (±)</label>
               <div className="flex items-center gap-2">
@@ -170,6 +173,9 @@ export default function PriceApprovalPanel({
               className="mb-2 w-full rounded-lg border border-border/60 bg-white px-4 py-2.5 text-sm font-bold text-text focus:border-gold focus:outline-none"
             />
             <p className="text-xs text-text-muted">Harga buyback ANTAM Certi RM 1-2gr. Kategori lain dihitung otomatis.</p>
+            <p className="mt-1 text-xs text-gold-dark">
+              Rekomendasi: Intl −3% = Rp {Math.round(baseGoldIdr * 0.97).toLocaleString("id-ID")}
+            </p>
             <div className="mt-2 grid grid-cols-2 gap-2">
               <div>
                 <label className="mb-1 block text-xs font-medium text-text-muted">Adjustment Buyback</label>

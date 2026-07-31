@@ -39,6 +39,10 @@ export default async function AdminDashboard() {
     : null;
   const baseGoldIdr = xauUsd > 0 ? Math.round((xauUsd * usdIdr) / 31.1034768) : 0;
 
+  // Auto-fill rekomendasi jika belum di-set
+  const hargaDasarJual = parseFloat(s.harga_dasar_jual || "0") || Math.round(baseGoldIdr * 1.03);
+  const acuanBuybackLM = parseFloat(s.acuan_buyback_lm || "0") || Math.round(baseGoldIdr * 0.97);
+
   return (
     <div>
       <div className="mb-8">
@@ -75,8 +79,8 @@ export default async function AdminDashboard() {
 
       <div className="rounded-2xl border border-border/60 bg-white p-6 shadow-sm">
         <PriceApprovalPanel
-          initialHargaDasarJual={s.harga_dasar_jual ?? "0"}
-          initialAcuanBuyback={s.acuan_buyback_lm ?? "0"}
+          initialHargaDasarJual={String(hargaDasarJual)}
+          initialAcuanBuyback={String(acuanBuybackLM)}
           initialAdjJual={s.adjustment_jual ?? "0"}
           initialAdjBeli={s.adjustment_beli ?? "0"}
           initialAdjPerhiasan={s.adjustment_perhiasan ?? "0"}
