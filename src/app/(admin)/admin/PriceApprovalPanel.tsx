@@ -84,23 +84,33 @@ export default function PriceApprovalPanel({
     <div className="space-y-6">
       {/* Info internasional */}
       <div className="rounded-2xl border border-border/60 bg-white p-6 shadow-sm">
-        <h3 className="mb-1 font-serif text-lg font-semibold text-text">Informasi Pasar Hari Ini</h3>
-        <p className="mb-4 text-xs text-text-muted">
-          {lastCronTime ? `Auto-fetch terakhir: ${lastCronTime} WIB` : "Belum ada data cron — fetch manual saat publish"}
-        </p>
-        <div className="grid gap-4 sm:grid-cols-3">
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="mb-1 font-serif text-lg font-semibold text-text">Informasi Pasar Hari Ini</h3>
+            <p className="text-xs text-text-muted">
+              {lastCronTime ? `Auto-fetch terakhir: ${lastCronTime} WIB` : "Belum ada data cron — refresh manual"}
+            </p>
+          </div>
+          <button
+            onClick={handleFetchAcuan}
+            disabled={fetchStatus.type === "loading"}
+            className="flex items-center gap-2 rounded-xl border-2 border-gold/40 px-4 py-2 text-sm font-semibold text-gold-dark transition-all hover:border-gold hover:bg-gold/5 disabled:opacity-50"
+          >
+            <svg className={`h-4 w-4 ${fetchStatus.type === "loading" ? "animate-spin" : ""}`} fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.992 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182" />
+            </svg>
+            {fetchStatus.type === "loading" ? "Memuat..." : "Refresh Data Pasar"}
+          </button>
+        </div>
+        {fetchStatus.msg && (
+          <p className={`mt-2 text-xs ${fetchStatus.type === "success" ? "text-green-600" : fetchStatus.type === "error" ? "text-red-500" : ""}`}>
+            {fetchStatus.msg}
+          </p>
+        )}
+        <div className="mt-4 grid gap-4 sm:grid-cols-3">
           <div className="rounded-xl border border-border/40 bg-surface p-4">
             <p className="text-xs font-medium uppercase tracking-wider text-text-muted">Emas Dunia</p>
-            <div className="flex items-center justify-between">
-              <p className="mt-1 text-xl font-bold text-text">${xauUsd.toLocaleString("en-US")}</p>
-              <button
-                onClick={handleFetchAcuan}
-                disabled={fetchStatus.type === "loading"}
-                className="rounded-lg border border-border/60 px-3 py-1 text-xs font-medium text-text-muted transition-all hover:border-gold/30 hover:text-gold-dark disabled:opacity-50"
-              >
-                {fetchStatus.type === "loading" ? "..." : "Fetch Acuan"}
-              </button>
-            </div>
+            <p className="mt-1 text-xl font-bold text-text">${xauUsd.toLocaleString("en-US")}</p>
             <p className="text-xs text-text-muted">/ oz</p>
           </div>
           <div className="rounded-xl border border-border/40 bg-surface p-4">

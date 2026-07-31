@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import ConfirmModal from "@/components/ConfirmModal";
 
 const links = [
   {
@@ -36,6 +38,7 @@ export default function AdminSidebar({
 }) {
   const pathname = usePathname();
   const router = useRouter();
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
   async function handleLogout() {
     const supabase = createClient();
@@ -127,7 +130,7 @@ export default function AdminSidebar({
             Kembali ke Website
           </Link>
           <button
-            onClick={handleLogout}
+            onClick={() => setShowLogoutConfirm(true)}
             className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-text-muted transition-colors hover:bg-red-50 hover:text-red-500"
           >
             <svg
@@ -147,6 +150,16 @@ export default function AdminSidebar({
           </button>
         </div>
       </aside>
+
+      <ConfirmModal
+        open={showLogoutConfirm}
+        title="Yakin ingin keluar?"
+        message="Sesi admin Anda akan berakhir dan kembali ke halaman login."
+        confirmLabel="Ya, Keluar"
+        cancelLabel="Batal"
+        onConfirm={handleLogout}
+        onCancel={() => setShowLogoutConfirm(false)}
+      />
     </>
   );
 }

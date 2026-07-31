@@ -3,14 +3,7 @@ import { fetchInternationalGoldPrice, setSetting } from "@/lib/gold-api";
 
 export const dynamic = "force-dynamic";
 
-export async function GET(request: Request) {
-  const authHeader = request.headers.get("authorization");
-  const cronSecret = process.env.CRON_SECRET;
-
-  if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
+export async function GET(_request: Request) {
   try {
     const { xauUsdPerOz, xagUsdPerOz, xpdUsdPerOz, usdIdrRate, error } =
       await fetchInternationalGoldPrice();
