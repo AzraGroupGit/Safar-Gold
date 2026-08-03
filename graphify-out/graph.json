@@ -33,6 +33,83 @@
   },
   "nodes": [
     {
+      "label": "opencode.json",
+      "file_type": "code",
+      "source_file": ".opencode/opencode.json",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "opencode_opencode",
+      "community": 26,
+      "community_name": "opencode.json",
+      "norm_label": "opencode.json"
+    },
+    {
+      "label": "$schema",
+      "file_type": "code",
+      "source_file": ".opencode/opencode.json",
+      "source_location": "L2",
+      "_origin": "ast",
+      "id": "opencode_opencode_schema",
+      "community": 26,
+      "community_name": "opencode.json",
+      "norm_label": "$schema"
+    },
+    {
+      "label": "plugin",
+      "file_type": "code",
+      "source_file": ".opencode/opencode.json",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "opencode_opencode_plugin",
+      "community": 26,
+      "community_name": "opencode.json",
+      "norm_label": "plugin"
+    },
+    {
+      "label": ".opencode/plugins/graphify.js",
+      "file_type": "concept",
+      "source_file": ".opencode/opencode.json",
+      "source_location": "L3",
+      "_origin": "ast",
+      "id": "ref_opencode_plugins_graphify_js",
+      "community": 26,
+      "community_name": "opencode.json",
+      "norm_label": ".opencode/plugins/graphify.js"
+    },
+    {
+      "label": "graphify.js",
+      "file_type": "code",
+      "source_file": ".opencode/plugins/graphify.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "opencode_plugins_graphify",
+      "community": 27,
+      "community_name": "graphify.js",
+      "norm_label": "graphify.js"
+    },
+    {
+      "label": "GraphifyPlugin()",
+      "file_type": "code",
+      "source_file": ".opencode/plugins/graphify.js",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "opencode_plugins_graphify_graphifyplugin",
+      "community": 27,
+      "community_name": "graphify.js",
+      "norm_label": "graphifyplugin()"
+    },
+    {
+      "label": "IMPORTANT: keep the reminder string free of backticks and $(...) constructs.",
+      "file_type": "rationale",
+      "source_file": ".opencode/plugins/graphify.js",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "opencode_plugins_graphify_rationale_4",
+      "community": 27,
+      "community_name": "graphify.js",
+      "norm_label": "important: keep the reminder string free of backticks and $(...) constructs."
+    },
+    {
       "label": "eslint.config.mjs",
       "file_type": "code",
       "source_file": "eslint.config.mjs",
@@ -40,6 +117,7 @@
       "_origin": "ast",
       "id": "eslint_config",
       "community": 16,
+      "community_name": "eslint.config.mjs",
       "norm_label": "eslint.config.mjs"
     },
     {
@@ -50,6 +128,7 @@
       "_origin": "ast",
       "id": "eslint_config_eslintconfig",
       "community": 16,
+      "community_name": "eslint.config.mjs",
       "norm_label": "eslintconfig"
     },
     {
@@ -60,6 +139,7 @@
       "_origin": "ast",
       "id": "next_config",
       "community": 17,
+      "community_name": "next.config.ts",
       "norm_label": "next.config.ts"
     },
     {
@@ -70,6 +150,7 @@
       "_origin": "ast",
       "id": "next_config_nextconfig",
       "community": 17,
+      "community_name": "next.config.ts",
       "norm_label": "nextconfig"
     },
     {
@@ -80,6 +161,7 @@
       "_origin": "ast",
       "id": "package",
       "community": 3,
+      "community_name": "dependencies",
       "norm_label": "package.json"
     },
     {
@@ -90,6 +172,7 @@
       "_origin": "ast",
       "id": "package_name",
       "community": 3,
+      "community_name": "dependencies",
       "norm_label": "name"
     },
     {
@@ -100,6 +183,7 @@
       "_origin": "ast",
       "id": "package_version",
       "community": 3,
+      "community_name": "dependencies",
       "norm_label": "version"
     },
     {
@@ -110,6 +194,7 @@
       "_origin": "ast",
       "id": "package_private",
       "community": 3,
+      "community_name": "dependencies",
       "norm_label": "private"
     },
     {
@@ -120,6 +205,7 @@
       "_origin": "ast",
       "id": "package_scripts",
       "community": 3,
+      "community_name": "dependencies",
       "norm_label": "scripts"
     },
     {
@@ -130,6 +216,7 @@
       "_origin": "ast",
       "id": "package_scripts_dev",
       "community": 3,
+      "community_name": "dependencies",
       "norm_label": "dev"
     },
     {
@@ -140,6 +227,7 @@
       "_origin": "ast",
       "id": "package_scripts_build",
       "community": 3,
+      "community_name": "dependencies",
       "norm_label": "build"
     },
     {
@@ -150,6 +238,7 @@
       "_origin": "ast",
       "id": "package_scripts_start",
       "community": 3,
+      "community_name": "dependencies",
       "norm_label": "start"
     },
     {
@@ -160,6 +249,7 @@
       "_origin": "ast",
       "id": "package_scripts_lint",
       "community": 3,
+      "community_name": "dependencies",
       "norm_label": "lint"
     },
     {
@@ -170,6 +260,7 @@
       "_origin": "ast",
       "id": "package_dependencies",
       "community": 3,
+      "community_name": "dependencies",
       "norm_label": "dependencies"
     },
     {
@@ -180,6 +271,7 @@
       "_origin": "ast",
       "id": "package_dependencies_supabase_ssr",
       "community": 3,
+      "community_name": "dependencies",
       "norm_label": "@supabase/ssr"
     },
     {
@@ -190,6 +282,7 @@
       "_origin": "ast",
       "id": "supabase_ssr",
       "community": 3,
+      "community_name": "dependencies",
       "norm_label": "@supabase/ssr"
     },
     {
@@ -200,6 +293,7 @@
       "_origin": "ast",
       "id": "package_dependencies_supabase_supabase_js",
       "community": 3,
+      "community_name": "dependencies",
       "norm_label": "@supabase/supabase-js"
     },
     {
@@ -210,6 +304,7 @@
       "_origin": "ast",
       "id": "supabase_supabase_js",
       "community": 3,
+      "community_name": "dependencies",
       "norm_label": "@supabase/supabase-js"
     },
     {
@@ -220,6 +315,7 @@
       "_origin": "ast",
       "id": "package_dependencies_chart_js",
       "community": 3,
+      "community_name": "dependencies",
       "norm_label": "chart.js"
     },
     {
@@ -230,6 +326,7 @@
       "_origin": "ast",
       "id": "chart_js",
       "community": 3,
+      "community_name": "dependencies",
       "norm_label": "chart.js"
     },
     {
@@ -240,6 +337,7 @@
       "_origin": "ast",
       "id": "package_dependencies_next",
       "community": 3,
+      "community_name": "dependencies",
       "norm_label": "next"
     },
     {
@@ -250,6 +348,7 @@
       "_origin": "ast",
       "id": "next",
       "community": 3,
+      "community_name": "dependencies",
       "norm_label": "next"
     },
     {
@@ -260,6 +359,7 @@
       "_origin": "ast",
       "id": "package_dependencies_react",
       "community": 3,
+      "community_name": "dependencies",
       "norm_label": "react"
     },
     {
@@ -270,6 +370,7 @@
       "_origin": "ast",
       "id": "react",
       "community": 3,
+      "community_name": "dependencies",
       "norm_label": "react"
     },
     {
@@ -280,6 +381,7 @@
       "_origin": "ast",
       "id": "package_dependencies_react_chartjs_2",
       "community": 3,
+      "community_name": "dependencies",
       "norm_label": "react-chartjs-2"
     },
     {
@@ -290,6 +392,7 @@
       "_origin": "ast",
       "id": "react_chartjs_2",
       "community": 3,
+      "community_name": "dependencies",
       "norm_label": "react-chartjs-2"
     },
     {
@@ -300,6 +403,7 @@
       "_origin": "ast",
       "id": "package_dependencies_react_dom",
       "community": 3,
+      "community_name": "dependencies",
       "norm_label": "react-dom"
     },
     {
@@ -310,6 +414,7 @@
       "_origin": "ast",
       "id": "react_dom",
       "community": 3,
+      "community_name": "dependencies",
       "norm_label": "react-dom"
     },
     {
@@ -320,6 +425,7 @@
       "_origin": "ast",
       "id": "package_devdependencies",
       "community": 5,
+      "community_name": "devDependencies",
       "norm_label": "devdependencies"
     },
     {
@@ -330,6 +436,7 @@
       "_origin": "ast",
       "id": "package_devdependencies_tailwindcss_postcss",
       "community": 5,
+      "community_name": "devDependencies",
       "norm_label": "@tailwindcss/postcss"
     },
     {
@@ -340,6 +447,7 @@
       "_origin": "ast",
       "id": "tailwindcss_postcss",
       "community": 5,
+      "community_name": "devDependencies",
       "norm_label": "@tailwindcss/postcss"
     },
     {
@@ -350,6 +458,7 @@
       "_origin": "ast",
       "id": "package_devdependencies_types_node",
       "community": 5,
+      "community_name": "devDependencies",
       "norm_label": "@types/node"
     },
     {
@@ -360,6 +469,7 @@
       "_origin": "ast",
       "id": "types_node",
       "community": 5,
+      "community_name": "devDependencies",
       "norm_label": "@types/node"
     },
     {
@@ -370,6 +480,7 @@
       "_origin": "ast",
       "id": "package_devdependencies_types_react",
       "community": 5,
+      "community_name": "devDependencies",
       "norm_label": "@types/react"
     },
     {
@@ -380,6 +491,7 @@
       "_origin": "ast",
       "id": "types_react",
       "community": 5,
+      "community_name": "devDependencies",
       "norm_label": "@types/react"
     },
     {
@@ -390,6 +502,7 @@
       "_origin": "ast",
       "id": "package_devdependencies_types_react_dom",
       "community": 5,
+      "community_name": "devDependencies",
       "norm_label": "@types/react-dom"
     },
     {
@@ -400,6 +513,7 @@
       "_origin": "ast",
       "id": "types_react_dom",
       "community": 5,
+      "community_name": "devDependencies",
       "norm_label": "@types/react-dom"
     },
     {
@@ -410,6 +524,7 @@
       "_origin": "ast",
       "id": "package_devdependencies_eslint",
       "community": 5,
+      "community_name": "devDependencies",
       "norm_label": "eslint"
     },
     {
@@ -420,6 +535,7 @@
       "_origin": "ast",
       "id": "eslint",
       "community": 5,
+      "community_name": "devDependencies",
       "norm_label": "eslint"
     },
     {
@@ -430,6 +546,7 @@
       "_origin": "ast",
       "id": "package_devdependencies_eslint_config_next",
       "community": 5,
+      "community_name": "devDependencies",
       "norm_label": "eslint-config-next"
     },
     {
@@ -440,6 +557,7 @@
       "_origin": "ast",
       "id": "eslint_config_next",
       "community": 5,
+      "community_name": "devDependencies",
       "norm_label": "eslint-config-next"
     },
     {
@@ -450,6 +568,7 @@
       "_origin": "ast",
       "id": "package_devdependencies_tailwindcss",
       "community": 5,
+      "community_name": "devDependencies",
       "norm_label": "tailwindcss"
     },
     {
@@ -460,6 +579,7 @@
       "_origin": "ast",
       "id": "tailwindcss",
       "community": 5,
+      "community_name": "devDependencies",
       "norm_label": "tailwindcss"
     },
     {
@@ -470,6 +590,7 @@
       "_origin": "ast",
       "id": "package_devdependencies_typescript",
       "community": 5,
+      "community_name": "devDependencies",
       "norm_label": "typescript"
     },
     {
@@ -480,6 +601,7 @@
       "_origin": "ast",
       "id": "typescript",
       "community": 5,
+      "community_name": "devDependencies",
       "norm_label": "typescript"
     },
     {
@@ -490,6 +612,7 @@
       "_origin": "ast",
       "id": "postcss_config",
       "community": 18,
+      "community_name": "postcss.config.mjs",
       "norm_label": "postcss.config.mjs"
     },
     {
@@ -500,6 +623,7 @@
       "_origin": "ast",
       "id": "postcss_config_config",
       "community": 18,
+      "community_name": "postcss.config.mjs",
       "norm_label": "config"
     },
     {
@@ -509,27 +633,52 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_app_admin_admin_priceapprovalpanel",
-      "community": 0,
+      "community": 7,
+      "community_name": "AdminHargaClient.tsx",
       "norm_label": "priceapprovalpanel.tsx"
+    },
+    {
+      "label": "PREVIEW_TABS",
+      "file_type": "code",
+      "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "src_app_admin_admin_priceapprovalpanel_preview_tabs",
+      "community": 7,
+      "community_name": "AdminHargaClient.tsx",
+      "norm_label": "preview_tabs"
     },
     {
       "label": "Props",
       "file_type": "code",
       "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
-      "source_location": "L5",
+      "source_location": "L13",
       "_origin": "ast",
       "id": "src_app_admin_admin_priceapprovalpanel_props",
-      "community": 0,
+      "community": 7,
+      "community_name": "AdminHargaClient.tsx",
       "norm_label": "props"
+    },
+    {
+      "label": "formatRupiah()",
+      "file_type": "code",
+      "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
+      "source_location": "L33",
+      "_origin": "ast",
+      "id": "src_app_admin_admin_priceapprovalpanel_formatrupiah",
+      "community": 7,
+      "community_name": "AdminHargaClient.tsx",
+      "norm_label": "formatrupiah()"
     },
     {
       "label": "PriceApprovalPanel()",
       "file_type": "code",
       "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
-      "source_location": "L17",
+      "source_location": "L37",
       "_origin": "ast",
       "id": "src_app_admin_admin_priceapprovalpanel_priceapprovalpanel",
-      "community": 0,
+      "community": 7,
+      "community_name": "AdminHargaClient.tsx",
       "norm_label": "priceapprovalpanel()"
     },
     {
@@ -540,6 +689,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_harga_adminhargaclient",
       "community": 7,
+      "community_name": "AdminHargaClient.tsx",
       "norm_label": "adminhargaclient.tsx"
     },
     {
@@ -550,16 +700,40 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_harga_adminhargaclient_formatrupiahclient",
       "community": 7,
+      "community_name": "AdminHargaClient.tsx",
       "norm_label": "formatrupiahclient()"
+    },
+    {
+      "label": "MODE_TABS",
+      "file_type": "code",
+      "source_file": "src/app/(admin)/admin/harga/AdminHargaClient.tsx",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "src_app_admin_admin_harga_adminhargaclient_mode_tabs",
+      "community": 7,
+      "community_name": "AdminHargaClient.tsx",
+      "norm_label": "mode_tabs"
+    },
+    {
+      "label": "ModeModal()",
+      "file_type": "code",
+      "source_file": "src/app/(admin)/admin/harga/AdminHargaClient.tsx",
+      "source_location": "L17",
+      "_origin": "ast",
+      "id": "src_app_admin_admin_harga_adminhargaclient_modemodal",
+      "community": 7,
+      "community_name": "AdminHargaClient.tsx",
+      "norm_label": "modemodal()"
     },
     {
       "label": "AdminHargaClient()",
       "file_type": "code",
       "source_file": "src/app/(admin)/admin/harga/AdminHargaClient.tsx",
-      "source_location": "L10",
+      "source_location": "L149",
       "_origin": "ast",
       "id": "src_app_admin_admin_harga_adminhargaclient_adminhargaclient",
       "community": 7,
+      "community_name": "AdminHargaClient.tsx",
       "norm_label": "adminhargaclient()"
     },
     {
@@ -570,6 +744,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_harga_page",
       "community": 0,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "admin/harga/page.tsx"
     },
     {
@@ -580,6 +755,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_harga_page_dynamic",
       "community": 0,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "dynamic"
     },
     {
@@ -590,7 +766,129 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_harga_page_adminhargapage",
       "community": 0,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "adminhargapage()"
+    },
+    {
+      "label": "JenisEmasClient.tsx",
+      "file_type": "code",
+      "source_file": "src/app/(admin)/admin/jenis-emas/JenisEmasClient.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_app_admin_admin_jenis_emas_jenisemasclient",
+      "community": 8,
+      "community_name": "JenisEmasClient.tsx",
+      "norm_label": "jenisemasclient.tsx"
+    },
+    {
+      "label": "CATEGORIES",
+      "file_type": "code",
+      "source_file": "src/app/(admin)/admin/jenis-emas/JenisEmasClient.tsx",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "src_app_admin_admin_jenis_emas_jenisemasclient_categories",
+      "community": 8,
+      "community_name": "JenisEmasClient.tsx",
+      "norm_label": "categories"
+    },
+    {
+      "label": "getCategoryLabel()",
+      "file_type": "code",
+      "source_file": "src/app/(admin)/admin/jenis-emas/JenisEmasClient.tsx",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "src_app_admin_admin_jenis_emas_jenisemasclient_getcategorylabel",
+      "community": 8,
+      "community_name": "JenisEmasClient.tsx",
+      "norm_label": "getcategorylabel()"
+    },
+    {
+      "label": "nameToSlug()",
+      "file_type": "code",
+      "source_file": "src/app/(admin)/admin/jenis-emas/JenisEmasClient.tsx",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "src_app_admin_admin_jenis_emas_jenisemasclient_nametoslug",
+      "community": 8,
+      "community_name": "JenisEmasClient.tsx",
+      "norm_label": "nametoslug()"
+    },
+    {
+      "label": "FormData",
+      "file_type": "code",
+      "source_file": "src/app/(admin)/admin/jenis-emas/JenisEmasClient.tsx",
+      "source_location": "L25",
+      "_origin": "ast",
+      "id": "src_app_admin_admin_jenis_emas_jenisemasclient_formdata",
+      "community": 8,
+      "community_name": "JenisEmasClient.tsx",
+      "norm_label": "formdata"
+    },
+    {
+      "label": "emptyForm",
+      "file_type": "code",
+      "source_file": "src/app/(admin)/admin/jenis-emas/JenisEmasClient.tsx",
+      "source_location": "L33",
+      "_origin": "ast",
+      "id": "src_app_admin_admin_jenis_emas_jenisemasclient_emptyform",
+      "community": 8,
+      "community_name": "JenisEmasClient.tsx",
+      "norm_label": "emptyform"
+    },
+    {
+      "label": "FormModal()",
+      "file_type": "code",
+      "source_file": "src/app/(admin)/admin/jenis-emas/JenisEmasClient.tsx",
+      "source_location": "L35",
+      "_origin": "ast",
+      "id": "src_app_admin_admin_jenis_emas_jenisemasclient_formmodal",
+      "community": 8,
+      "community_name": "JenisEmasClient.tsx",
+      "norm_label": "formmodal()"
+    },
+    {
+      "label": "JenisEmasClient()",
+      "file_type": "code",
+      "source_file": "src/app/(admin)/admin/jenis-emas/JenisEmasClient.tsx",
+      "source_location": "L148",
+      "_origin": "ast",
+      "id": "src_app_admin_admin_jenis_emas_jenisemasclient_jenisemasclient",
+      "community": 8,
+      "community_name": "JenisEmasClient.tsx",
+      "norm_label": "jenisemasclient()"
+    },
+    {
+      "label": "jenis-emas/page.tsx",
+      "file_type": "code",
+      "source_file": "src/app/(admin)/admin/jenis-emas/page.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_app_admin_admin_jenis_emas_page",
+      "community": 8,
+      "community_name": "JenisEmasClient.tsx",
+      "norm_label": "jenis-emas/page.tsx"
+    },
+    {
+      "label": "dynamic",
+      "file_type": "code",
+      "source_file": "src/app/(admin)/admin/jenis-emas/page.tsx",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "src_app_admin_admin_jenis_emas_page_dynamic",
+      "community": 8,
+      "community_name": "JenisEmasClient.tsx",
+      "norm_label": "dynamic"
+    },
+    {
+      "label": "JenisEmasPage()",
+      "file_type": "code",
+      "source_file": "src/app/(admin)/admin/jenis-emas/page.tsx",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "src_app_admin_admin_jenis_emas_page_jenisemaspage",
+      "community": 8,
+      "community_name": "JenisEmasClient.tsx",
+      "norm_label": "jenisemaspage()"
     },
     {
       "label": "AdminKontenClient.tsx",
@@ -599,7 +897,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_app_admin_admin_konten_adminkontenclient",
-      "community": 2,
+      "community": 6,
+      "community_name": "konten/page.tsx",
       "norm_label": "adminkontenclient.tsx"
     },
     {
@@ -609,7 +908,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "src_app_admin_admin_konten_adminkontenclient_adminkontenclient",
-      "community": 2,
+      "community": 6,
+      "community_name": "konten/page.tsx",
       "norm_label": "adminkontenclient()"
     },
     {
@@ -619,7 +919,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_app_admin_admin_konten_page",
-      "community": 2,
+      "community": 6,
+      "community_name": "konten/page.tsx",
       "norm_label": "konten/page.tsx"
     },
     {
@@ -629,7 +930,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "src_app_admin_admin_konten_page_dynamic",
-      "community": 2,
+      "community": 6,
+      "community_name": "konten/page.tsx",
       "norm_label": "dynamic"
     },
     {
@@ -639,7 +941,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "src_app_admin_admin_konten_page_adminkontenpage",
-      "community": 2,
+      "community": 6,
+      "community_name": "konten/page.tsx",
       "norm_label": "adminkontenpage()"
     },
     {
@@ -650,6 +953,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_login_page",
       "community": 8,
+      "community_name": "JenisEmasClient.tsx",
       "norm_label": "login/page.tsx"
     },
     {
@@ -660,6 +964,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_login_page_adminloginpage",
       "community": 8,
+      "community_name": "JenisEmasClient.tsx",
       "norm_label": "adminloginpage()"
     },
     {
@@ -670,6 +975,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_page",
       "community": 0,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "admin/page.tsx"
     },
     {
@@ -680,6 +986,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_page_dynamic",
       "community": 0,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "dynamic"
     },
     {
@@ -690,6 +997,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_page_statcard",
       "community": 0,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "statcard()"
     },
     {
@@ -700,6 +1008,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_page_admindashboard",
       "community": 0,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "admindashboard()"
     },
     {
@@ -710,6 +1019,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_pengaturan_adminpengaturanclient",
       "community": 0,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "adminpengaturanclient.tsx"
     },
     {
@@ -720,6 +1030,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_pengaturan_adminpengaturanclient_adminpengaturanclient",
       "community": 0,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "adminpengaturanclient()"
     },
     {
@@ -730,6 +1041,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_pengaturan_page",
       "community": 0,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "pengaturan/page.tsx"
     },
     {
@@ -740,6 +1052,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_pengaturan_page_dynamic",
       "community": 0,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "dynamic"
     },
     {
@@ -750,6 +1063,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_pengaturan_page_adminpengaturanpage",
       "community": 0,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "adminpengaturanpage()"
     },
     {
@@ -760,6 +1074,7 @@
       "_origin": "ast",
       "id": "src_app_admin_layout",
       "community": 8,
+      "community_name": "JenisEmasClient.tsx",
       "norm_label": "(admin)/layout.tsx"
     },
     {
@@ -770,6 +1085,7 @@
       "_origin": "ast",
       "id": "src_app_admin_layout_adminlayout",
       "community": 8,
+      "community_name": "JenisEmasClient.tsx",
       "norm_label": "adminlayout()"
     },
     {
@@ -780,6 +1096,7 @@
       "_origin": "ast",
       "id": "src_app_public_harga_page",
       "community": 0,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "(public)/harga/page.tsx"
     },
     {
@@ -790,6 +1107,7 @@
       "_origin": "ast",
       "id": "src_app_public_harga_page_metadata",
       "community": 0,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "metadata"
     },
     {
@@ -800,6 +1118,7 @@
       "_origin": "ast",
       "id": "src_app_public_harga_page_dynamic",
       "community": 0,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "dynamic"
     },
     {
@@ -810,6 +1129,7 @@
       "_origin": "ast",
       "id": "src_app_public_harga_page_hargapage",
       "community": 0,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "hargapage()"
     },
     {
@@ -820,6 +1140,7 @@
       "_origin": "ast",
       "id": "src_app_public_kalkulator_page",
       "community": 0,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "kalkulator/page.tsx"
     },
     {
@@ -830,6 +1151,7 @@
       "_origin": "ast",
       "id": "src_app_public_kalkulator_page_metadata",
       "community": 0,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "metadata"
     },
     {
@@ -840,6 +1162,7 @@
       "_origin": "ast",
       "id": "src_app_public_kalkulator_page_dynamic",
       "community": 0,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "dynamic"
     },
     {
@@ -850,6 +1173,7 @@
       "_origin": "ast",
       "id": "src_app_public_kalkulator_page_kalkulatorpage",
       "community": 0,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "kalkulatorpage()"
     },
     {
@@ -859,7 +1183,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_app_public_layout",
-      "community": 6,
+      "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "(public)/layout.tsx"
     },
     {
@@ -869,7 +1194,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "src_app_public_layout_publiclayout",
-      "community": 6,
+      "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "publiclayout()"
     },
     {
@@ -880,6 +1206,7 @@
       "_origin": "ast",
       "id": "src_app_public_page",
       "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "(public)/page.tsx"
     },
     {
@@ -890,6 +1217,7 @@
       "_origin": "ast",
       "id": "src_app_public_page_metadata",
       "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "metadata"
     },
     {
@@ -900,6 +1228,7 @@
       "_origin": "ast",
       "id": "src_app_public_page_dynamic",
       "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "dynamic"
     },
     {
@@ -910,6 +1239,7 @@
       "_origin": "ast",
       "id": "src_app_public_page_homepage",
       "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "homepage()"
     },
     {
@@ -920,6 +1250,7 @@
       "_origin": "ast",
       "id": "src_app_public_tentang_page",
       "community": 12,
+      "community_name": "tentang/page.tsx",
       "norm_label": "tentang/page.tsx"
     },
     {
@@ -930,6 +1261,7 @@
       "_origin": "ast",
       "id": "src_app_public_tentang_page_metadata",
       "community": 12,
+      "community_name": "tentang/page.tsx",
       "norm_label": "metadata"
     },
     {
@@ -940,6 +1272,7 @@
       "_origin": "ast",
       "id": "src_app_public_tentang_page_timeline",
       "community": 12,
+      "community_name": "tentang/page.tsx",
       "norm_label": "timeline"
     },
     {
@@ -950,6 +1283,7 @@
       "_origin": "ast",
       "id": "src_app_public_tentang_page_values",
       "community": 12,
+      "community_name": "tentang/page.tsx",
       "norm_label": "values"
     },
     {
@@ -960,7 +1294,52 @@
       "_origin": "ast",
       "id": "src_app_public_tentang_page_tentangpage",
       "community": 12,
+      "community_name": "tentang/page.tsx",
       "norm_label": "tentangpage()"
+    },
+    {
+      "label": "create-gold-type/route.ts",
+      "file_type": "code",
+      "source_file": "src/app/api/admin/create-gold-type/route.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_app_api_admin_create_gold_type_route",
+      "community": 9,
+      "community_name": "createAdminClient",
+      "norm_label": "create-gold-type/route.ts"
+    },
+    {
+      "label": "POST()",
+      "file_type": "code",
+      "source_file": "src/app/api/admin/create-gold-type/route.ts",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "src_app_api_admin_create_gold_type_route_post",
+      "community": 9,
+      "community_name": "createAdminClient",
+      "norm_label": "post()"
+    },
+    {
+      "label": "delete-gold-type/route.ts",
+      "file_type": "code",
+      "source_file": "src/app/api/admin/delete-gold-type/route.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_app_api_admin_delete_gold_type_route",
+      "community": 4,
+      "community_name": "gold-api.ts",
+      "norm_label": "delete-gold-type/route.ts"
+    },
+    {
+      "label": "DELETE()",
+      "file_type": "code",
+      "source_file": "src/app/api/admin/delete-gold-type/route.ts",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "src_app_api_admin_delete_gold_type_route_delete",
+      "community": 4,
+      "community_name": "gold-api.ts",
+      "norm_label": "delete()"
     },
     {
       "label": "publish-prices/route.ts",
@@ -970,6 +1349,7 @@
       "_origin": "ast",
       "id": "src_app_api_admin_publish_prices_route",
       "community": 4,
+      "community_name": "gold-api.ts",
       "norm_label": "publish-prices/route.ts"
     },
     {
@@ -980,6 +1360,7 @@
       "_origin": "ast",
       "id": "src_app_api_admin_publish_prices_route_dynamic",
       "community": 4,
+      "community_name": "gold-api.ts",
       "norm_label": "dynamic"
     },
     {
@@ -990,6 +1371,7 @@
       "_origin": "ast",
       "id": "src_app_api_admin_publish_prices_route_post",
       "community": 4,
+      "community_name": "gold-api.ts",
       "norm_label": "post()"
     },
     {
@@ -1000,6 +1382,7 @@
       "_origin": "ast",
       "id": "src_app_api_admin_trigger_update_route",
       "community": 4,
+      "community_name": "gold-api.ts",
       "norm_label": "trigger-update/route.ts"
     },
     {
@@ -1010,6 +1393,7 @@
       "_origin": "ast",
       "id": "src_app_api_admin_trigger_update_route_dynamic",
       "community": 4,
+      "community_name": "gold-api.ts",
       "norm_label": "dynamic"
     },
     {
@@ -1020,7 +1404,30 @@
       "_origin": "ast",
       "id": "src_app_api_admin_trigger_update_route_post",
       "community": 4,
+      "community_name": "gold-api.ts",
       "norm_label": "post()"
+    },
+    {
+      "label": "update-gold-type/route.ts",
+      "file_type": "code",
+      "source_file": "src/app/api/admin/update-gold-type/route.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_app_api_admin_update_gold_type_route",
+      "community": 9,
+      "community_name": "createAdminClient",
+      "norm_label": "update-gold-type/route.ts"
+    },
+    {
+      "label": "PUT()",
+      "file_type": "code",
+      "source_file": "src/app/api/admin/update-gold-type/route.ts",
+      "source_location": "L4",
+      "_origin": "ast",
+      "id": "src_app_api_admin_update_gold_type_route_put",
+      "community": 9,
+      "community_name": "createAdminClient",
+      "norm_label": "put()"
     },
     {
       "label": "update-gold-types/route.ts",
@@ -1030,6 +1437,7 @@
       "_origin": "ast",
       "id": "src_app_api_admin_update_gold_types_route",
       "community": 9,
+      "community_name": "createAdminClient",
       "norm_label": "update-gold-types/route.ts"
     },
     {
@@ -1040,6 +1448,7 @@
       "_origin": "ast",
       "id": "src_app_api_admin_update_gold_types_route_post",
       "community": 9,
+      "community_name": "createAdminClient",
       "norm_label": "post()"
     },
     {
@@ -1050,6 +1459,7 @@
       "_origin": "ast",
       "id": "src_app_api_admin_update_konten_route",
       "community": 9,
+      "community_name": "createAdminClient",
       "norm_label": "update-konten/route.ts"
     },
     {
@@ -1060,6 +1470,7 @@
       "_origin": "ast",
       "id": "src_app_api_admin_update_konten_route_post",
       "community": 9,
+      "community_name": "createAdminClient",
       "norm_label": "post()"
     },
     {
@@ -1070,6 +1481,7 @@
       "_origin": "ast",
       "id": "src_app_api_admin_update_settings_route",
       "community": 9,
+      "community_name": "createAdminClient",
       "norm_label": "update-settings/route.ts"
     },
     {
@@ -1080,6 +1492,7 @@
       "_origin": "ast",
       "id": "src_app_api_admin_update_settings_route_post",
       "community": 9,
+      "community_name": "createAdminClient",
       "norm_label": "post()"
     },
     {
@@ -1090,6 +1503,7 @@
       "_origin": "ast",
       "id": "src_app_api_cron_update_prices_route",
       "community": 4,
+      "community_name": "gold-api.ts",
       "norm_label": "update-prices/route.ts"
     },
     {
@@ -1100,6 +1514,7 @@
       "_origin": "ast",
       "id": "src_app_api_cron_update_prices_route_dynamic",
       "community": 4,
+      "community_name": "gold-api.ts",
       "norm_label": "dynamic"
     },
     {
@@ -1110,6 +1525,7 @@
       "_origin": "ast",
       "id": "src_app_api_cron_update_prices_route_get",
       "community": 4,
+      "community_name": "gold-api.ts",
       "norm_label": "get()"
     },
     {
@@ -1120,6 +1536,7 @@
       "_origin": "ast",
       "id": "src_app_layout",
       "community": 10,
+      "community_name": "app/layout.tsx",
       "norm_label": "app/layout.tsx"
     },
     {
@@ -1130,6 +1547,7 @@
       "_origin": "ast",
       "id": "src_app_layout_geistsans",
       "community": 10,
+      "community_name": "app/layout.tsx",
       "norm_label": "geistsans"
     },
     {
@@ -1140,6 +1558,7 @@
       "_origin": "ast",
       "id": "src_app_layout_geistmono",
       "community": 10,
+      "community_name": "app/layout.tsx",
       "norm_label": "geistmono"
     },
     {
@@ -1150,6 +1569,7 @@
       "_origin": "ast",
       "id": "src_app_layout_playfair",
       "community": 10,
+      "community_name": "app/layout.tsx",
       "norm_label": "playfair"
     },
     {
@@ -1160,6 +1580,7 @@
       "_origin": "ast",
       "id": "src_app_layout_metadata",
       "community": 10,
+      "community_name": "app/layout.tsx",
       "norm_label": "metadata"
     },
     {
@@ -1170,6 +1591,7 @@
       "_origin": "ast",
       "id": "src_app_layout_rootlayout",
       "community": 10,
+      "community_name": "app/layout.tsx",
       "norm_label": "rootlayout()"
     },
     {
@@ -1179,7 +1601,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_backtotop",
-      "community": 6,
+      "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "backtotop.tsx"
     },
     {
@@ -1189,7 +1612,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "src_components_backtotop_backtotop",
-      "community": 6,
+      "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "backtotop()"
     },
     {
@@ -1200,6 +1624,7 @@
       "_origin": "ast",
       "id": "src_components_calculator",
       "community": 7,
+      "community_name": "AdminHargaClient.tsx",
       "norm_label": "calculator.tsx"
     },
     {
@@ -1210,6 +1635,7 @@
       "_origin": "ast",
       "id": "src_components_calculator_formatrupiahclient",
       "community": 7,
+      "community_name": "AdminHargaClient.tsx",
       "norm_label": "formatrupiahclient()"
     },
     {
@@ -1220,6 +1646,7 @@
       "_origin": "ast",
       "id": "src_components_calculator_quickweights",
       "community": 7,
+      "community_name": "AdminHargaClient.tsx",
       "norm_label": "quickweights"
     },
     {
@@ -1230,6 +1657,7 @@
       "_origin": "ast",
       "id": "src_components_calculator_calculator",
       "community": 7,
+      "community_name": "AdminHargaClient.tsx",
       "norm_label": "calculator()"
     },
     {
@@ -1240,6 +1668,7 @@
       "_origin": "ast",
       "id": "src_components_caratransaksi",
       "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "caratransaksi.tsx"
     },
     {
@@ -1250,6 +1679,7 @@
       "_origin": "ast",
       "id": "src_components_caratransaksi_caratransaksi",
       "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "caratransaksi()"
     },
     {
@@ -1260,6 +1690,7 @@
       "_origin": "ast",
       "id": "src_components_confirmmodal",
       "community": 8,
+      "community_name": "JenisEmasClient.tsx",
       "norm_label": "confirmmodal.tsx"
     },
     {
@@ -1270,6 +1701,7 @@
       "_origin": "ast",
       "id": "src_components_confirmmodal_props",
       "community": 8,
+      "community_name": "JenisEmasClient.tsx",
       "norm_label": "props"
     },
     {
@@ -1280,6 +1712,7 @@
       "_origin": "ast",
       "id": "src_components_confirmmodal_confirmmodal",
       "community": 8,
+      "community_name": "JenisEmasClient.tsx",
       "norm_label": "confirmmodal()"
     },
     {
@@ -1290,6 +1723,7 @@
       "_origin": "ast",
       "id": "src_components_faq",
       "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "faq.tsx"
     },
     {
@@ -1300,6 +1734,7 @@
       "_origin": "ast",
       "id": "src_components_faq_faqs",
       "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "faqs"
     },
     {
@@ -1310,6 +1745,7 @@
       "_origin": "ast",
       "id": "src_components_faq_faq",
       "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "faq()"
     },
     {
@@ -1319,7 +1755,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_footer",
-      "community": 6,
+      "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "footer.tsx"
     },
     {
@@ -1329,7 +1766,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "src_components_footer_footer",
-      "community": 6,
+      "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "footer()"
     },
     {
@@ -1340,6 +1778,7 @@
       "_origin": "ast",
       "id": "src_components_golddivider",
       "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "golddivider.tsx"
     },
     {
@@ -1350,6 +1789,7 @@
       "_origin": "ast",
       "id": "src_components_golddivider_golddivider",
       "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "golddivider()"
     },
     {
@@ -1359,7 +1799,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_hero",
-      "community": 2,
+      "community": 6,
+      "community_name": "konten/page.tsx",
       "norm_label": "hero.tsx"
     },
     {
@@ -1369,7 +1810,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "src_components_hero_hero",
-      "community": 2,
+      "community": 6,
+      "community_name": "konten/page.tsx",
       "norm_label": "hero()"
     },
     {
@@ -1380,6 +1822,7 @@
       "_origin": "ast",
       "id": "src_components_keunggulan",
       "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "keunggulan.tsx"
     },
     {
@@ -1390,6 +1833,7 @@
       "_origin": "ast",
       "id": "src_components_keunggulan_keunggulan",
       "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "keunggulan()"
     },
     {
@@ -1399,7 +1843,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_kunjungikami",
-      "community": 6,
+      "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "kunjungikami.tsx"
     },
     {
@@ -1409,7 +1854,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "src_components_kunjungikami_kunjungikami",
-      "community": 6,
+      "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "kunjungikami()"
     },
     {
@@ -1420,6 +1866,7 @@
       "_origin": "ast",
       "id": "src_components_legalnotice",
       "community": 0,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "legalnotice.tsx"
     },
     {
@@ -1430,6 +1877,7 @@
       "_origin": "ast",
       "id": "src_components_legalnotice_legalnotice",
       "community": 0,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "legalnotice()"
     },
     {
@@ -1440,6 +1888,7 @@
       "_origin": "ast",
       "id": "src_components_legalitassection",
       "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "legalitassection.tsx"
     },
     {
@@ -1450,6 +1899,7 @@
       "_origin": "ast",
       "id": "src_components_legalitassection_legalitassection",
       "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "legalitassection()"
     },
     {
@@ -1459,7 +1909,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_navbar",
-      "community": 6,
+      "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "navbar.tsx"
     },
     {
@@ -1469,7 +1920,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "src_components_navbar_navbar",
-      "community": 6,
+      "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "navbar()"
     },
     {
@@ -1480,6 +1932,7 @@
       "_origin": "ast",
       "id": "src_components_navigationevents",
       "community": 10,
+      "community_name": "app/layout.tsx",
       "norm_label": "navigationevents.tsx"
     },
     {
@@ -1490,6 +1943,7 @@
       "_origin": "ast",
       "id": "src_components_navigationevents_navigationevents",
       "community": 10,
+      "community_name": "app/layout.tsx",
       "norm_label": "navigationevents()"
     },
     {
@@ -1500,6 +1954,7 @@
       "_origin": "ast",
       "id": "src_components_pricechart",
       "community": 11,
+      "community_name": "PriceChart.tsx",
       "norm_label": "pricechart.tsx"
     },
     {
@@ -1510,6 +1965,7 @@
       "_origin": "ast",
       "id": "src_components_pricechart_generatemockdata",
       "community": 11,
+      "community_name": "PriceChart.tsx",
       "norm_label": "generatemockdata()"
     },
     {
@@ -1520,6 +1976,7 @@
       "_origin": "ast",
       "id": "src_components_pricechart_periods",
       "community": 11,
+      "community_name": "PriceChart.tsx",
       "norm_label": "periods"
     },
     {
@@ -1530,6 +1987,7 @@
       "_origin": "ast",
       "id": "src_components_pricechart_pricechart",
       "community": 11,
+      "community_name": "PriceChart.tsx",
       "norm_label": "pricechart()"
     },
     {
@@ -1540,6 +1998,7 @@
       "_origin": "ast",
       "id": "src_components_pricechart_chartdata",
       "community": 11,
+      "community_name": "PriceChart.tsx",
       "norm_label": "chartdata"
     },
     {
@@ -1550,6 +2009,7 @@
       "_origin": "ast",
       "id": "src_components_pricechart_options",
       "community": 11,
+      "community_name": "PriceChart.tsx",
       "norm_label": "options"
     },
     {
@@ -1559,7 +2019,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_tabbedpricelist",
-      "community": 7,
+      "community": 0,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "tabbedpricelist.tsx"
     },
     {
@@ -1569,7 +2030,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "src_components_tabbedpricelist_categories",
-      "community": 7,
+      "community": 0,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "categories"
     },
     {
@@ -1579,7 +2041,8 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "src_components_tabbedpricelist_tabbedpricelist",
-      "community": 7,
+      "community": 0,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "tabbedpricelist()"
     },
     {
@@ -1590,6 +2053,7 @@
       "_origin": "ast",
       "id": "src_components_testimoni",
       "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "testimoni.tsx"
     },
     {
@@ -1600,6 +2064,7 @@
       "_origin": "ast",
       "id": "src_components_testimoni_testimoni",
       "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "testimoni()"
     },
     {
@@ -1609,7 +2074,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_whatsappbutton",
-      "community": 6,
+      "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "whatsappbutton.tsx"
     },
     {
@@ -1619,7 +2085,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_whatsappbutton_whatsappbutton",
-      "community": 6,
+      "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "whatsappbutton()"
     },
     {
@@ -1630,26 +2097,40 @@
       "_origin": "ast",
       "id": "src_components_admin_adminsidebar",
       "community": 8,
+      "community_name": "JenisEmasClient.tsx",
       "norm_label": "adminsidebar.tsx"
+    },
+    {
+      "label": "fillIcons",
+      "file_type": "code",
+      "source_file": "src/components/admin/AdminSidebar.tsx",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "src_components_admin_adminsidebar_fillicons",
+      "community": 8,
+      "community_name": "JenisEmasClient.tsx",
+      "norm_label": "fillicons"
     },
     {
       "label": "links",
       "file_type": "code",
       "source_file": "src/components/admin/AdminSidebar.tsx",
-      "source_location": "L9",
+      "source_location": "L11",
       "_origin": "ast",
       "id": "src_components_admin_adminsidebar_links",
       "community": 8,
+      "community_name": "JenisEmasClient.tsx",
       "norm_label": "links"
     },
     {
       "label": "AdminSidebar()",
       "file_type": "code",
       "source_file": "src/components/admin/AdminSidebar.tsx",
-      "source_location": "L32",
+      "source_location": "L39",
       "_origin": "ast",
       "id": "src_components_admin_adminsidebar_adminsidebar",
       "community": 8,
+      "community_name": "JenisEmasClient.tsx",
       "norm_label": "adminsidebar()"
     },
     {
@@ -1660,6 +2141,7 @@
       "_origin": "ast",
       "id": "src_lib_gold_api",
       "community": 4,
+      "community_name": "gold-api.ts",
       "norm_label": "gold-api.ts"
     },
     {
@@ -1670,6 +2152,7 @@
       "_origin": "ast",
       "id": "src_lib_gold_api_goldtyperow",
       "community": 7,
+      "community_name": "AdminHargaClient.tsx",
       "norm_label": "goldtyperow"
     },
     {
@@ -1680,6 +2163,7 @@
       "_origin": "ast",
       "id": "src_lib_gold_api_pricehistoryrow",
       "community": 4,
+      "community_name": "gold-api.ts",
       "norm_label": "pricehistoryrow"
     },
     {
@@ -1690,6 +2174,7 @@
       "_origin": "ast",
       "id": "src_lib_gold_api_appsettingrow",
       "community": 4,
+      "community_name": "gold-api.ts",
       "norm_label": "appsettingrow"
     },
     {
@@ -1700,6 +2185,7 @@
       "_origin": "ast",
       "id": "src_lib_gold_api_getsetting",
       "community": 4,
+      "community_name": "gold-api.ts",
       "norm_label": "getsetting()"
     },
     {
@@ -1710,6 +2196,7 @@
       "_origin": "ast",
       "id": "src_lib_gold_api_setsetting",
       "community": 4,
+      "community_name": "gold-api.ts",
       "norm_label": "setsetting()"
     },
     {
@@ -1720,156 +2207,205 @@
       "_origin": "ast",
       "id": "src_lib_gold_api_getmarketinfo",
       "community": 0,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "getmarketinfo()"
     },
     {
       "label": "HeroContent",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L65",
+      "source_location": "L70",
       "_origin": "ast",
       "id": "src_lib_gold_api_herocontent",
-      "community": 2,
+      "community": 6,
+      "community_name": "konten/page.tsx",
       "norm_label": "herocontent"
     },
     {
       "label": "getHeroContent()",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L74",
+      "source_location": "L79",
       "_origin": "ast",
       "id": "src_lib_gold_api_getherocontent",
-      "community": 2,
+      "community": 6,
+      "community_name": "konten/page.tsx",
       "norm_label": "getherocontent()"
     },
     {
       "label": "getAllGoldTypes()",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L97",
+      "source_location": "L102",
       "_origin": "ast",
       "id": "src_lib_gold_api_getallgoldtypes",
       "community": 0,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "getallgoldtypes()"
+    },
+    {
+      "label": "createGoldType()",
+      "file_type": "code",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L113",
+      "_origin": "ast",
+      "id": "src_lib_gold_api_creategoldtype",
+      "community": 9,
+      "community_name": "createAdminClient",
+      "norm_label": "creategoldtype()"
+    },
+    {
+      "label": "updateGoldType()",
+      "file_type": "code",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L118",
+      "_origin": "ast",
+      "id": "src_lib_gold_api_updategoldtype",
+      "community": 9,
+      "community_name": "createAdminClient",
+      "norm_label": "updategoldtype()"
+    },
+    {
+      "label": "deleteGoldType()",
+      "file_type": "code",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L123",
+      "_origin": "ast",
+      "id": "src_lib_gold_api_deletegoldtype",
+      "community": 4,
+      "community_name": "gold-api.ts",
+      "norm_label": "deletegoldtype()"
     },
     {
       "label": "getTodayPrices()",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L109",
+      "source_location": "L129",
       "_origin": "ast",
       "id": "src_lib_gold_api_gettodayprices",
       "community": 0,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "gettodayprices()"
     },
     {
       "label": "insertPriceHistory()",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L120",
+      "source_location": "L155",
       "_origin": "ast",
       "id": "src_lib_gold_api_insertpricehistory",
       "community": 4,
+      "community_name": "gold-api.ts",
       "norm_label": "insertpricehistory()"
     },
     {
       "label": "calculatePrices()",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L130",
+      "source_location": "L165",
       "_origin": "ast",
       "id": "src_lib_gold_api_calculateprices",
       "community": 4,
+      "community_name": "gold-api.ts",
       "norm_label": "calculateprices()"
     },
     {
       "label": "fetchInternationalGoldPrice()",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L230",
+      "source_location": "L265",
       "_origin": "ast",
       "id": "src_lib_gold_api_fetchinternationalgoldprice",
       "community": 4,
+      "community_name": "gold-api.ts",
       "norm_label": "fetchinternationalgoldprice()"
     },
     {
       "label": "fetchAllFallbackPrices()",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L324",
+      "source_location": "L391",
       "_origin": "ast",
       "id": "src_lib_gold_api_fetchallfallbackprices",
       "community": 4,
+      "community_name": "gold-api.ts",
       "norm_label": "fetchallfallbackprices()"
     },
     {
       "label": "convertToIdrPerGram()",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L346",
+      "source_location": "L419",
       "_origin": "ast",
       "id": "src_lib_gold_api_converttoidrpergram",
       "community": 4,
+      "community_name": "gold-api.ts",
       "norm_label": "converttoidrpergram()"
     },
     {
       "label": "PublicSettings",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L351",
+      "source_location": "L424",
       "_origin": "ast",
       "id": "src_lib_gold_api_publicsettings",
       "community": 4,
+      "community_name": "gold-api.ts",
       "norm_label": "publicsettings"
     },
     {
       "label": "getPublicSettings()",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L361",
+      "source_location": "L434",
       "_origin": "ast",
       "id": "src_lib_gold_api_getpublicsettings",
-      "community": 6,
+      "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "getpublicsettings()"
     },
     {
       "label": "FormattedPrice",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L377",
+      "source_location": "L450",
       "_origin": "ast",
       "id": "src_lib_gold_api_formattedprice",
       "community": 7,
+      "community_name": "AdminHargaClient.tsx",
       "norm_label": "formattedprice"
     },
     {
       "label": "getFormattedTodayPrices()",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L393",
+      "source_location": "L466",
       "_origin": "ast",
       "id": "src_lib_gold_api_getformattedtodayprices",
       "community": 0,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "getformattedtodayprices()"
     },
     {
       "label": "formatRupiah()",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L439",
+      "source_location": "L536",
       "_origin": "ast",
       "id": "src_lib_gold_api_formatrupiah",
       "community": 0,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "formatrupiah()"
     },
     {
       "label": "formatDate()",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L448",
+      "source_location": "L545",
       "_origin": "ast",
       "id": "src_lib_gold_api_formatdate",
       "community": 4,
+      "community_name": "gold-api.ts",
       "norm_label": "formatdate()"
     },
     {
@@ -1880,6 +2416,7 @@
       "_origin": "ast",
       "id": "src_lib_supabase_admin",
       "community": 9,
+      "community_name": "createAdminClient",
       "norm_label": "admin.ts"
     },
     {
@@ -1890,6 +2427,7 @@
       "_origin": "ast",
       "id": "src_lib_supabase_admin_createadminclient",
       "community": 9,
+      "community_name": "createAdminClient",
       "norm_label": "createadminclient()"
     },
     {
@@ -1900,6 +2438,7 @@
       "_origin": "ast",
       "id": "src_lib_supabase_anon",
       "community": 0,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "anon.ts"
     },
     {
@@ -1910,6 +2449,7 @@
       "_origin": "ast",
       "id": "src_lib_supabase_anon_createanonclient",
       "community": 0,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "createanonclient()"
     },
     {
@@ -1920,6 +2460,7 @@
       "_origin": "ast",
       "id": "src_lib_supabase_client",
       "community": 8,
+      "community_name": "JenisEmasClient.tsx",
       "norm_label": "client.ts"
     },
     {
@@ -1930,6 +2471,7 @@
       "_origin": "ast",
       "id": "src_lib_supabase_client_createclient",
       "community": 8,
+      "community_name": "JenisEmasClient.tsx",
       "norm_label": "createclient()"
     },
     {
@@ -1940,6 +2482,7 @@
       "_origin": "ast",
       "id": "src_lib_supabase_server",
       "community": 19,
+      "community_name": "server.ts",
       "norm_label": "server.ts"
     },
     {
@@ -1950,6 +2493,7 @@
       "_origin": "ast",
       "id": "src_lib_supabase_server_createclient",
       "community": 19,
+      "community_name": "server.ts",
       "norm_label": "createclient()"
     },
     {
@@ -1960,6 +2504,7 @@
       "_origin": "ast",
       "id": "src_middleware",
       "community": 15,
+      "community_name": "middleware.ts",
       "norm_label": "middleware.ts"
     },
     {
@@ -1970,6 +2515,7 @@
       "_origin": "ast",
       "id": "src_middleware_middleware",
       "community": 15,
+      "community_name": "middleware.ts",
       "norm_label": "middleware()"
     },
     {
@@ -1980,6 +2526,7 @@
       "_origin": "ast",
       "id": "src_middleware_config",
       "community": 15,
+      "community_name": "middleware.ts",
       "norm_label": "config"
     },
     {
@@ -1990,6 +2537,7 @@
       "_origin": "ast",
       "id": "tsconfig",
       "community": 1,
+      "community_name": "compilerOptions",
       "norm_label": "tsconfig.json"
     },
     {
@@ -2000,6 +2548,7 @@
       "_origin": "ast",
       "id": "tsconfig_compileroptions",
       "community": 1,
+      "community_name": "compilerOptions",
       "norm_label": "compileroptions"
     },
     {
@@ -2010,6 +2559,7 @@
       "_origin": "ast",
       "id": "tsconfig_compileroptions_target",
       "community": 1,
+      "community_name": "compilerOptions",
       "norm_label": "target"
     },
     {
@@ -2020,6 +2570,7 @@
       "_origin": "ast",
       "id": "tsconfig_compileroptions_lib",
       "community": 1,
+      "community_name": "compilerOptions",
       "norm_label": "lib"
     },
     {
@@ -2030,6 +2581,7 @@
       "_origin": "ast",
       "id": "ref_dom",
       "community": 1,
+      "community_name": "compilerOptions",
       "norm_label": "dom"
     },
     {
@@ -2040,6 +2592,7 @@
       "_origin": "ast",
       "id": "ref_dom_iterable",
       "community": 1,
+      "community_name": "compilerOptions",
       "norm_label": "dom.iterable"
     },
     {
@@ -2050,6 +2603,7 @@
       "_origin": "ast",
       "id": "ref_esnext",
       "community": 1,
+      "community_name": "compilerOptions",
       "norm_label": "esnext"
     },
     {
@@ -2060,6 +2614,7 @@
       "_origin": "ast",
       "id": "tsconfig_compileroptions_allowjs",
       "community": 1,
+      "community_name": "compilerOptions",
       "norm_label": "allowjs"
     },
     {
@@ -2070,6 +2625,7 @@
       "_origin": "ast",
       "id": "tsconfig_compileroptions_skiplibcheck",
       "community": 1,
+      "community_name": "compilerOptions",
       "norm_label": "skiplibcheck"
     },
     {
@@ -2080,6 +2636,7 @@
       "_origin": "ast",
       "id": "tsconfig_compileroptions_strict",
       "community": 1,
+      "community_name": "compilerOptions",
       "norm_label": "strict"
     },
     {
@@ -2090,6 +2647,7 @@
       "_origin": "ast",
       "id": "tsconfig_compileroptions_noemit",
       "community": 1,
+      "community_name": "compilerOptions",
       "norm_label": "noemit"
     },
     {
@@ -2100,6 +2658,7 @@
       "_origin": "ast",
       "id": "tsconfig_compileroptions_esmoduleinterop",
       "community": 1,
+      "community_name": "compilerOptions",
       "norm_label": "esmoduleinterop"
     },
     {
@@ -2110,6 +2669,7 @@
       "_origin": "ast",
       "id": "tsconfig_compileroptions_module",
       "community": 1,
+      "community_name": "compilerOptions",
       "norm_label": "module"
     },
     {
@@ -2120,6 +2680,7 @@
       "_origin": "ast",
       "id": "tsconfig_compileroptions_moduleresolution",
       "community": 1,
+      "community_name": "compilerOptions",
       "norm_label": "moduleresolution"
     },
     {
@@ -2130,6 +2691,7 @@
       "_origin": "ast",
       "id": "tsconfig_compileroptions_resolvejsonmodule",
       "community": 1,
+      "community_name": "compilerOptions",
       "norm_label": "resolvejsonmodule"
     },
     {
@@ -2140,6 +2702,7 @@
       "_origin": "ast",
       "id": "tsconfig_compileroptions_isolatedmodules",
       "community": 1,
+      "community_name": "compilerOptions",
       "norm_label": "isolatedmodules"
     },
     {
@@ -2150,6 +2713,7 @@
       "_origin": "ast",
       "id": "tsconfig_compileroptions_jsx",
       "community": 1,
+      "community_name": "compilerOptions",
       "norm_label": "jsx"
     },
     {
@@ -2160,6 +2724,7 @@
       "_origin": "ast",
       "id": "tsconfig_compileroptions_incremental",
       "community": 1,
+      "community_name": "compilerOptions",
       "norm_label": "incremental"
     },
     {
@@ -2170,6 +2735,7 @@
       "_origin": "ast",
       "id": "tsconfig_compileroptions_plugins",
       "community": 1,
+      "community_name": "compilerOptions",
       "norm_label": "plugins"
     },
     {
@@ -2180,6 +2746,7 @@
       "_origin": "ast",
       "id": "tsconfig_compileroptions_paths",
       "community": 1,
+      "community_name": "compilerOptions",
       "norm_label": "paths"
     },
     {
@@ -2190,6 +2757,7 @@
       "_origin": "ast",
       "id": "tsconfig_include",
       "community": 1,
+      "community_name": "compilerOptions",
       "norm_label": "include"
     },
     {
@@ -2200,6 +2768,7 @@
       "_origin": "ast",
       "id": "ref_next_env_d_ts",
       "community": 1,
+      "community_name": "compilerOptions",
       "norm_label": "next-env.d.ts"
     },
     {
@@ -2210,6 +2779,7 @@
       "_origin": "ast",
       "id": "ref_ts",
       "community": 1,
+      "community_name": "compilerOptions",
       "norm_label": "**/*.ts"
     },
     {
@@ -2220,6 +2790,7 @@
       "_origin": "ast",
       "id": "ref_tsx",
       "community": 1,
+      "community_name": "compilerOptions",
       "norm_label": "**/*.tsx"
     },
     {
@@ -2230,6 +2801,7 @@
       "_origin": "ast",
       "id": "ref_next_types_ts",
       "community": 1,
+      "community_name": "compilerOptions",
       "norm_label": ".next/types/**/*.ts"
     },
     {
@@ -2240,6 +2812,7 @@
       "_origin": "ast",
       "id": "ref_next_dev_types_ts",
       "community": 1,
+      "community_name": "compilerOptions",
       "norm_label": ".next/dev/types/**/*.ts"
     },
     {
@@ -2250,6 +2823,7 @@
       "_origin": "ast",
       "id": "ref_mts",
       "community": 1,
+      "community_name": "compilerOptions",
       "norm_label": "**/*.mts"
     },
     {
@@ -2260,6 +2834,7 @@
       "_origin": "ast",
       "id": "tsconfig_exclude",
       "community": 1,
+      "community_name": "compilerOptions",
       "norm_label": "exclude"
     },
     {
@@ -2270,6 +2845,7 @@
       "_origin": "ast",
       "id": "ref_node_modules",
       "community": 1,
+      "community_name": "compilerOptions",
       "norm_label": "node_modules"
     },
     {
@@ -2280,6 +2856,7 @@
       "_origin": "ast",
       "id": "vercel",
       "community": 25,
+      "community_name": "vercel.json",
       "norm_label": "vercel.json"
     },
     {
@@ -2287,111 +2864,180 @@
       "file_type": "document",
       "source_file": "README.md",
       "source_location": null,
+      "community": 13,
+      "norm_label": "readme.md",
+      "_origin": "semantic",
       "id": "readme",
-      "community": 13,
-      "norm_label": "readme.md"
-    },
-    {
-      "label": "app/page.tsx",
-      "file_type": "code",
-      "source_file": "app/page.tsx",
-      "source_location": null,
-      "id": "app_page",
-      "community": 13,
-      "norm_label": "app/page.tsx"
+      "community_name": "README.md"
     },
     {
       "label": "file.svg",
       "file_type": "code",
       "source_file": "public/file.svg",
       "source_location": null,
-      "id": "public_file_svg",
       "community": 20,
-      "norm_label": "file.svg"
+      "norm_label": "file.svg",
+      "_origin": "semantic",
+      "id": "public_file_svg",
+      "community_name": "file.svg"
     },
     {
       "label": "globe.svg",
       "file_type": "code",
       "source_file": "public/globe.svg",
       "source_location": null,
-      "id": "public_globe_svg",
       "community": 21,
-      "norm_label": "globe.svg"
+      "norm_label": "globe.svg",
+      "_origin": "semantic",
+      "id": "public_globe_svg",
+      "community_name": "globe.svg"
     },
     {
       "label": "next.svg",
       "file_type": "code",
       "source_file": "public/next.svg",
       "source_location": null,
-      "id": "public_next_svg",
       "community": 13,
-      "norm_label": "next.svg"
+      "norm_label": "next.svg",
+      "_origin": "semantic",
+      "id": "public_next_svg",
+      "community_name": "README.md"
     },
     {
       "label": "vercel.svg",
       "file_type": "code",
       "source_file": "public/vercel.svg",
       "source_location": null,
-      "id": "public_vercel_svg",
       "community": 13,
-      "norm_label": "vercel.svg"
+      "norm_label": "vercel.svg",
+      "_origin": "semantic",
+      "id": "public_vercel_svg",
+      "community_name": "README.md"
     },
     {
       "label": "window.svg",
       "file_type": "code",
       "source_file": "public/window.svg",
       "source_location": null,
-      "id": "public_window_svg",
       "community": 24,
-      "norm_label": "window.svg"
+      "norm_label": "window.svg",
+      "_origin": "semantic",
+      "id": "public_window_svg",
+      "community_name": "window.svg"
     },
     {
       "label": "Favicon Logo",
       "file_type": "image",
       "source_file": "public/favicon.png",
       "source_location": null,
-      "id": "public_favicon_png",
       "community": 14,
-      "norm_label": "favicon logo"
+      "norm_label": "favicon logo",
+      "_origin": "semantic",
+      "id": "public_favicon_png",
+      "community_name": "App Icon"
     },
     {
       "label": "About Us Hero Image",
       "file_type": "image",
       "source_file": "public/hero-tentangkami.webp",
       "source_location": null,
-      "id": "public_hero_tentangkami_webp",
       "community": 22,
-      "norm_label": "about us hero image"
+      "norm_label": "about us hero image",
+      "_origin": "semantic",
+      "id": "public_hero_tentangkami_webp",
+      "community_name": "About Us Hero Image"
     },
     {
       "label": "Safar Gold Logo",
       "file_type": "image",
       "source_file": "public/logo-1.webp",
       "source_location": null,
-      "id": "public_logo_1_webp",
       "community": 14,
-      "norm_label": "safar gold logo"
+      "norm_label": "safar gold logo",
+      "_origin": "semantic",
+      "id": "public_logo_1_webp",
+      "community_name": "App Icon"
     },
     {
       "label": "Safar Gold Store Interior Hero",
       "file_type": "image",
       "source_file": "public/safar-hero.webp",
       "source_location": null,
-      "id": "public_safar_hero_webp",
       "community": 23,
-      "norm_label": "safar gold store interior hero"
+      "norm_label": "safar gold store interior hero",
+      "_origin": "semantic",
+      "id": "public_safar_hero_webp",
+      "community_name": "Safar Gold Store Interior Hero"
     },
     {
       "label": "App Icon",
       "file_type": "image",
       "source_file": "src/app/icon.png",
       "source_location": null,
-      "id": "src_app_icon_png",
       "community": 14,
-      "norm_label": "app icon"
+      "norm_label": "app icon",
+      "_origin": "semantic",
+      "id": "src_app_icon_png",
+      "community_name": "App Icon"
     }
   ],
   "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".opencode/opencode.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "opencode_opencode",
+      "target": "opencode_opencode_plugin",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".opencode/opencode.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "opencode_opencode",
+      "target": "opencode_opencode_schema",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": ".opencode/opencode.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "context": "import",
+      "_origin": "ast",
+      "source": "opencode_opencode_plugin",
+      "target": "ref_opencode_plugins_graphify_js",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".opencode/plugins/graphify.js",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "opencode_plugins_graphify",
+      "target": "opencode_plugins_graphify_graphifyplugin",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": ".opencode/plugins/graphify.js",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "opencode_plugins_graphify_rationale_4",
+      "target": "opencode_plugins_graphify",
+      "confidence_score": 1.0
+    },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
@@ -2896,7 +3542,29 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
-      "source_location": "L17",
+      "source_location": "L33",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_admin_admin_priceapprovalpanel",
+      "target": "src_app_admin_admin_priceapprovalpanel_formatrupiah",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_admin_admin_priceapprovalpanel",
+      "target": "src_app_admin_admin_priceapprovalpanel_preview_tabs",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
+      "source_location": "L37",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_app_admin_admin_priceapprovalpanel",
@@ -2907,11 +3575,59 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
-      "source_location": "L5",
+      "source_location": "L13",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_app_admin_admin_priceapprovalpanel",
       "target": "src_app_admin_admin_priceapprovalpanel_props",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_admin_admin_priceapprovalpanel",
+      "target": "src_lib_gold_api",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_admin_admin_priceapprovalpanel",
+      "target": "src_lib_gold_api_goldtyperow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_admin_admin_priceapprovalpanel_props",
+      "target": "src_lib_gold_api_goldtyperow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
+      "source_location": "L297",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_admin_admin_priceapprovalpanel_priceapprovalpanel",
+      "target": "src_app_admin_admin_priceapprovalpanel_formatrupiah",
       "confidence_score": 1.0
     },
     {
@@ -2930,7 +3646,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/app/(admin)/admin/harga/AdminHargaClient.tsx",
-      "source_location": "L10",
+      "source_location": "L149",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_app_admin_admin_harga_adminhargaclient",
@@ -2946,6 +3662,28 @@
       "_origin": "ast",
       "source": "src_app_admin_admin_harga_adminhargaclient",
       "target": "src_app_admin_admin_harga_adminhargaclient_formatrupiahclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/(admin)/admin/harga/AdminHargaClient.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_admin_admin_harga_adminhargaclient",
+      "target": "src_app_admin_admin_harga_adminhargaclient_mode_tabs",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/(admin)/admin/harga/AdminHargaClient.tsx",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_admin_admin_harga_adminhargaclient",
+      "target": "src_app_admin_admin_harga_adminhargaclient_modemodal",
       "confidence_score": 1.0
     },
     {
@@ -3001,7 +3739,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/app/(admin)/admin/harga/AdminHargaClient.tsx",
-      "source_location": "L118",
+      "source_location": "L248",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_app_admin_admin_harga_adminhargaclient_adminhargaclient",
@@ -3101,6 +3839,237 @@
       "_origin": "ast",
       "source": "src_app_admin_admin_harga_page_adminhargapage",
       "target": "src_lib_gold_api_getformattedtodayprices"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/(admin)/admin/jenis-emas/JenisEmasClient.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_admin_admin_jenis_emas_jenisemasclient",
+      "target": "src_app_admin_admin_jenis_emas_jenisemasclient_categories",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/(admin)/admin/jenis-emas/JenisEmasClient.tsx",
+      "source_location": "L33",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_admin_admin_jenis_emas_jenisemasclient",
+      "target": "src_app_admin_admin_jenis_emas_jenisemasclient_emptyform",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/(admin)/admin/jenis-emas/JenisEmasClient.tsx",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_admin_admin_jenis_emas_jenisemasclient",
+      "target": "src_app_admin_admin_jenis_emas_jenisemasclient_formdata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/(admin)/admin/jenis-emas/JenisEmasClient.tsx",
+      "source_location": "L35",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_admin_admin_jenis_emas_jenisemasclient",
+      "target": "src_app_admin_admin_jenis_emas_jenisemasclient_formmodal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/(admin)/admin/jenis-emas/JenisEmasClient.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_admin_admin_jenis_emas_jenisemasclient",
+      "target": "src_app_admin_admin_jenis_emas_jenisemasclient_getcategorylabel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/(admin)/admin/jenis-emas/JenisEmasClient.tsx",
+      "source_location": "L148",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_admin_admin_jenis_emas_jenisemasclient",
+      "target": "src_app_admin_admin_jenis_emas_jenisemasclient_jenisemasclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/(admin)/admin/jenis-emas/JenisEmasClient.tsx",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_admin_admin_jenis_emas_jenisemasclient",
+      "target": "src_app_admin_admin_jenis_emas_jenisemasclient_nametoslug",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/(admin)/admin/jenis-emas/JenisEmasClient.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_admin_admin_jenis_emas_jenisemasclient",
+      "target": "src_components_confirmmodal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/(admin)/admin/jenis-emas/JenisEmasClient.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_admin_admin_jenis_emas_jenisemasclient",
+      "target": "src_components_confirmmodal_confirmmodal",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/(admin)/admin/jenis-emas/JenisEmasClient.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_admin_admin_jenis_emas_jenisemasclient",
+      "target": "src_lib_gold_api",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/(admin)/admin/jenis-emas/JenisEmasClient.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_admin_admin_jenis_emas_jenisemasclient",
+      "target": "src_lib_gold_api_goldtyperow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/(admin)/admin/jenis-emas/page.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_admin_admin_jenis_emas_page",
+      "target": "src_app_admin_admin_jenis_emas_jenisemasclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/(admin)/admin/jenis-emas/JenisEmasClient.tsx",
+      "source_location": "L226",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_admin_admin_jenis_emas_jenisemasclient_jenisemasclient",
+      "target": "src_app_admin_admin_jenis_emas_jenisemasclient_getcategorylabel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/(admin)/admin/jenis-emas/JenisEmasClient.tsx",
+      "source_location": "L88",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_admin_admin_jenis_emas_jenisemasclient_formmodal",
+      "target": "src_app_admin_admin_jenis_emas_jenisemasclient_nametoslug",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/(admin)/admin/jenis-emas/page.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_admin_admin_jenis_emas_page",
+      "target": "src_app_admin_admin_jenis_emas_jenisemasclient_jenisemasclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/(admin)/admin/jenis-emas/page.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_admin_admin_jenis_emas_page",
+      "target": "src_app_admin_admin_jenis_emas_page_dynamic",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/(admin)/admin/jenis-emas/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_admin_admin_jenis_emas_page",
+      "target": "src_app_admin_admin_jenis_emas_page_jenisemaspage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/(admin)/admin/jenis-emas/page.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_admin_admin_jenis_emas_page",
+      "target": "src_lib_gold_api",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/(admin)/admin/jenis-emas/page.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_admin_admin_jenis_emas_page",
+      "target": "src_lib_gold_api_getallgoldtypes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/(admin)/admin/jenis-emas/page.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_admin_admin_jenis_emas_page_jenisemaspage",
+      "target": "src_lib_gold_api_getallgoldtypes"
     },
     {
       "relation": "contains",
@@ -3365,7 +4334,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/(admin)/admin/page.tsx",
-      "source_location": "L68",
+      "source_location": "L70",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_app_admin_admin_page_admindashboard",
@@ -4364,6 +5333,100 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "src/app/api/admin/create-gold-type/route.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_api_admin_create_gold_type_route",
+      "target": "src_app_api_admin_create_gold_type_route_post",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/admin/create-gold-type/route.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_api_admin_create_gold_type_route",
+      "target": "src_lib_gold_api",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/admin/create-gold-type/route.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_api_admin_create_gold_type_route",
+      "target": "src_lib_gold_api_creategoldtype",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/api/admin/create-gold-type/route.ts",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_api_admin_create_gold_type_route_post",
+      "target": "src_lib_gold_api_creategoldtype"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/admin/delete-gold-type/route.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_api_admin_delete_gold_type_route",
+      "target": "src_app_api_admin_delete_gold_type_route_delete",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/admin/delete-gold-type/route.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_api_admin_delete_gold_type_route",
+      "target": "src_lib_gold_api",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/admin/delete-gold-type/route.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_api_admin_delete_gold_type_route",
+      "target": "src_lib_gold_api_deletegoldtype",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/api/admin/delete-gold-type/route.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_api_admin_delete_gold_type_route_delete",
+      "target": "src_lib_gold_api_deletegoldtype"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "src/app/api/admin/publish-prices/route.ts",
       "source_location": "L5",
       "weight": 1.0,
@@ -4461,7 +5524,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/api/admin/publish-prices/route.ts",
-      "source_location": "L27",
+      "source_location": "L24",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_app_api_admin_publish_prices_route_post",
@@ -4473,7 +5536,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/api/admin/publish-prices/route.ts",
-      "source_location": "L22",
+      "source_location": "L20",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_app_api_admin_publish_prices_route_post",
@@ -4485,7 +5548,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/api/admin/publish-prices/route.ts",
-      "source_location": "L21",
+      "source_location": "L19",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_app_api_admin_publish_prices_route_post",
@@ -4497,7 +5560,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/api/admin/publish-prices/route.ts",
-      "source_location": "L38",
+      "source_location": "L35",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_app_api_admin_publish_prices_route_post",
@@ -4509,7 +5572,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/api/admin/publish-prices/route.ts",
-      "source_location": "L13",
+      "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_app_api_admin_publish_prices_route_post",
@@ -4668,6 +5731,53 @@
       "_origin": "ast",
       "source": "src_app_api_admin_trigger_update_route_post",
       "target": "src_lib_gold_api_setsetting"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/admin/update-gold-type/route.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_api_admin_update_gold_type_route",
+      "target": "src_app_api_admin_update_gold_type_route_put",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/admin/update-gold-type/route.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_api_admin_update_gold_type_route",
+      "target": "src_lib_gold_api",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/admin/update-gold-type/route.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_api_admin_update_gold_type_route",
+      "target": "src_lib_gold_api_updategoldtype",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/api/admin/update-gold-type/route.ts",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_api_admin_update_gold_type_route_put",
+      "target": "src_lib_gold_api_updategoldtype"
     },
     {
       "relation": "contains",
@@ -4886,7 +5996,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/api/cron/update-prices/route.ts",
-      "source_location": "L13",
+      "source_location": "L15",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_app_api_cron_update_prices_route_get",
@@ -5512,7 +6622,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/admin/AdminSidebar.tsx",
-      "source_location": "L32",
+      "source_location": "L39",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_admin_adminsidebar",
@@ -5524,6 +6634,17 @@
       "confidence": "EXTRACTED",
       "source_file": "src/components/admin/AdminSidebar.tsx",
       "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_admin_adminsidebar",
+      "target": "src_components_admin_adminsidebar_fillicons",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/admin/AdminSidebar.tsx",
+      "source_location": "L11",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_admin_adminsidebar",
@@ -5569,7 +6690,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L130",
+      "source_location": "L165",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -5580,7 +6701,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L346",
+      "source_location": "L419",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -5591,7 +6712,29 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L324",
+      "source_location": "L113",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_lib_gold_api",
+      "target": "src_lib_gold_api_creategoldtype",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L123",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_lib_gold_api",
+      "target": "src_lib_gold_api_deletegoldtype",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L391",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -5602,7 +6745,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L230",
+      "source_location": "L265",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -5613,7 +6756,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L448",
+      "source_location": "L545",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -5624,7 +6767,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L439",
+      "source_location": "L536",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -5635,7 +6778,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L377",
+      "source_location": "L450",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -5646,7 +6789,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L97",
+      "source_location": "L102",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -5657,7 +6800,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L393",
+      "source_location": "L466",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -5668,7 +6811,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L74",
+      "source_location": "L79",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -5690,7 +6833,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L361",
+      "source_location": "L434",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -5712,7 +6855,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L109",
+      "source_location": "L129",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -5734,7 +6877,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L65",
+      "source_location": "L70",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -5745,7 +6888,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L120",
+      "source_location": "L155",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -5767,7 +6910,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L351",
+      "source_location": "L424",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -5783,6 +6926,17 @@
       "_origin": "ast",
       "source": "src_lib_gold_api",
       "target": "src_lib_gold_api_setsetting",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L118",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_lib_gold_api",
+      "target": "src_lib_gold_api_updategoldtype",
       "confidence_score": 1.0
     },
     {
@@ -5838,7 +6992,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L138",
+      "source_location": "L173",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_calculateprices",
@@ -5850,7 +7004,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L330",
+      "source_location": "L397",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_fetchallfallbackprices",
@@ -5862,7 +7016,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L237",
+      "source_location": "L273",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_fetchinternationalgoldprice",
@@ -5898,7 +7052,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L302",
+      "source_location": "L369",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_fetchinternationalgoldprice",
@@ -5921,21 +7075,9 @@
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
-      "source_file": "src/lib/gold-api.ts",
-      "source_location": "L56",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "src_lib_gold_api_getmarketinfo",
-      "target": "src_lib_gold_api_gettodayprices",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L75",
+      "source_location": "L80",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_getherocontent",
@@ -5946,7 +7088,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L135",
+      "source_location": "L170",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_calculateprices",
@@ -5959,7 +7101,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L98",
+      "source_location": "L103",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_getallgoldtypes",
@@ -5970,7 +7112,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L396",
+      "source_location": "L469",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_getformattedtodayprices",
@@ -5981,8 +7123,44 @@
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L395",
+      "source_location": "L114",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_lib_gold_api_creategoldtype",
+      "target": "src_lib_supabase_admin_createadminclient"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L119",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_lib_gold_api_updategoldtype",
+      "target": "src_lib_supabase_admin_createadminclient"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L124",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_lib_gold_api_deletegoldtype",
+      "target": "src_lib_supabase_admin_createadminclient"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L468",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_getformattedtodayprices",
@@ -5995,7 +7173,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L110",
+      "source_location": "L130",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_gettodayprices",
@@ -6007,7 +7185,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L123",
+      "source_location": "L158",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_insertpricehistory",
@@ -6018,7 +7196,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L238",
+      "source_location": "L274",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_fetchinternationalgoldprice",
@@ -6031,7 +7209,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L362",
+      "source_location": "L435",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_getpublicsettings",
@@ -6422,18 +7600,11 @@
       "confidence_score": 1.0
     },
     {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source": "readme",
-      "target": "app_page"
-    },
-    {
       "relation": "conceptually_related_to",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "README.md",
+      "_origin": "semantic",
       "source": "readme",
       "target": "public_next_svg"
     },
@@ -6442,6 +7613,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "README.md",
+      "_origin": "semantic",
       "source": "readme",
       "target": "public_vercel_svg"
     },
@@ -6450,6 +7622,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.9,
       "source_file": "public/favicon.png",
+      "_origin": "semantic",
       "source": "public_favicon_png",
       "target": "src_app_icon_png"
     },
@@ -6458,6 +7631,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.9,
       "source_file": "public/logo-1.webp",
+      "_origin": "semantic",
       "source": "public_logo_1_webp",
       "target": "src_app_icon_png"
     }
@@ -6490,5 +7664,5 @@
       "source_file": "README.md"
     }
   ],
-  "built_at_commit": "69ba18a4317da7c46de90a0603de85b18d252892"
+  "built_at_commit": "cca28fb98f3b385a318597005d09035ec7d159c1"
 }
