@@ -61,7 +61,9 @@ export async function getMarketInfo() {
       ? Math.round((baseGoldIdr * GOLD_OUNCE_TO_GRAM) / usdIdrRate)
       : 0;
   }
-  return { usdIdrRate, xauUsdPerOz, lastUpdate };
+  const xagUsdPerOz = parseFloat(await getSetting("last_cron_xag_usd")) || 0;
+  const xpdUsdPerOz = parseFloat(await getSetting("last_cron_xpd_usd")) || 0;
+  return { usdIdrRate, xauUsdPerOz, xagUsdPerOz, xpdUsdPerOz, lastUpdate };
 }
 
 // ---------- Hero Content ----------
@@ -108,6 +110,21 @@ export async function getAllGoldTypes(): Promise<GoldTypeRow[]> {
   return (data ?? []) as GoldTypeRow[];
 }
 
+export async function createGoldType(gt: Omit<GoldTypeRow, "is_auto" | "manual_buy" | "manual_sell">) {
+  const supabase = createAdminClient();
+  await supabase.from("gold_types").insert({ ...gt, is_auto: true });
+}
+
+export async function updateGoldType(id: string, updates: Partial<Omit<GoldTypeRow, "id">>) {
+  const supabase = createAdminClient();
+  await supabase.from("gold_types").update(updates).eq("id", id);
+}
+
+export async function deleteGoldType(id: string) {
+  const supabase = createAdminClient();
+  await supabase.from("gold_types").delete().eq("id", id);
+}
+
 // ---------- Prices ----------
 export async function getTodayPrices(): Promise<PriceHistoryRow[]> {
   const supabase = createAnonClient();
@@ -116,7 +133,22 @@ export async function getTodayPrices(): Promise<PriceHistoryRow[]> {
     .from("price_history")
     .select("*")
     .eq("date", today);
-  return (data ?? []) as PriceHistoryRow[];
+  if (data && data.length > 0) return data as PriceHistoryRow[];
+
+  const { data: latestDates } = await supabase
+    .from("price_history")
+    .select("date")
+    .order("date", { ascending: false })
+    .limit(1);
+  if (latestDates && latestDates.length > 0) {
+    const { data: fallback } = await supabase
+      .from("price_history")
+      .select("*")
+      .eq("date", latestDates[0].date);
+    return (fallback ?? []) as PriceHistoryRow[];
+  }
+
+  return [];
 }
 
 /** Insert/replace harga hari ini — admin client, upsert pada (date, gold_type_id). */
@@ -363,15 +395,21 @@ async function fetchAllFallbackPrices(): Promise<{
   usdIdrRate: number;
 }> {
   const usdIdrRate = parseFloat(await getSetting("usd_idr_rate")) || 16300;
-  let xau = 2400, xag = 30, xpd = 1000;
+  const DEFAULT_XAU = 2400;
+  const DEFAULT_XAG = 30;
+  const DEFAULT_XPD = 1000;
+
+  let xau = DEFAULT_XAU;
+  let xag = DEFAULT_XAG;
+  let xpd = DEFAULT_XPD;
 
   try {
-    const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=gold%2Csilver%2Cpalladium&vs_currencies=usd");
+    const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=gold,silver,palladium&vs_currencies=usd");
     if (res.ok) {
       const data = await res.json();
-      if (data.gold?.usd) xau = data.gold.usd;
-      if (data.silver?.usd) xag = data.silver.usd;
-      if (data.palladium?.usd) xpd = data.palladium.usd;
+      if (typeof data.gold?.usd === "number" && data.gold.usd > 200) xau = data.gold.usd;
+      if (typeof data.silver?.usd === "number" && data.silver.usd > 10) xag = data.silver.usd;
+      if (typeof data.palladium?.usd === "number" && data.palladium.usd > 100) xpd = data.palladium.usd;
     }
   } catch (e) { console.error("CoinGecko fetch failed:", e); }
 
@@ -449,22 +487,46 @@ export async function getFormattedTodayPrices(): Promise<FormattedPrice[]> {
     }));
   }
 
+  const todayMap = new Map(todayPrices.map((p) => [p.gold_type_id, p]));
+
+  const lmRef = todayMap.get("antam-100");
+  const bbRef = todayMap.get("bb-certi-1-2");
+  const phRef = todayMap.get("ph-k24s");
+
+  function getRef(category: string) {
+    if (category === "lm") return lmRef;
+    if (category === "bb-lm") return bbRef;
+    if (category === "bb-perhiasan") return phRef;
+    return null;
+  }
+
   return todayPrices.map((p) => {
     const gt = goldTypes.find((g) => g.id === p.gold_type_id);
-    const spread = Math.abs(p.buy_price - p.sell_price);
+    const category = gt?.category ?? "";
+    const ref = getRef(category);
+
+    let spread = 0;
+    if (ref && category === "lm") {
+      spread = p.buy_price - ref.buy_price;
+    } else if (ref && p.gold_type_id !== ref.gold_type_id) {
+      spread = ref.sell_price - p.sell_price;
+    }
+
     return {
       id: `p-${p.id}`,
       goldTypeId: p.gold_type_id,
       goldName: gt?.name ?? p.gold_type_id,
       karat: gt?.karat ?? null,
       weight: gt?.weight ?? null,
-      category: gt?.category ?? "",
+      category,
       buyPrice: p.buy_price,
       sellPrice: p.sell_price,
       basePrice: p.base_price,
       date: p.date,
       spread,
-      spreadPercent: p.buy_price > 0 ? ((spread / p.buy_price) * 100).toFixed(1) : "0.0",
+      spreadPercent: ref && category === "lm" && ref.buy_price > 0
+        ? ((spread / ref.buy_price) * 100).toFixed(1)
+        : "0.0",
       lastUpdated: p.created_at,
     };
   });

@@ -6,6 +6,8 @@ import { usePathname, useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import ConfirmModal from "@/components/ConfirmModal";
 
+const fillIcons = new Set(["/admin/harga", "/admin/jenis-emas"]);
+
 const links = [
   {
     href: "/admin",
@@ -16,6 +18,11 @@ const links = [
     href: "/admin/harga",
     label: "Harga",
     icon: "M3 8l3-4h12l3 4-9 12L3 8zM12 4v.01",
+  },
+  {
+    href: "/admin/jenis-emas",
+    label: "Jenis Emas",
+    icon: "M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0l-3-3m3 3l3-3M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z",
   },
   {
     href: "/admin/konten",
@@ -92,7 +99,7 @@ export default function AdminSidebar({
               >
                 <svg
                   className="h-5 w-5 shrink-0"
-                  fill={link.href === "/admin/harga" ? "currentColor" : "none"}
+                  fill={fillIcons.has(link.href) ? "currentColor" : "none"}
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
