@@ -17,7 +17,9 @@ export default function TabbedPricelist({
   prices: FormattedPrice[];
 }) {
   const [active, setActive] = useState("lm");
-  const filtered = prices.filter((p) => p.category === active);
+  const filtered = prices
+    .filter((p) => p.category === active)
+    .sort((a, b) => active === "bb-perhiasan" ? (b.karat ?? 0) - (a.karat ?? 0) : 0);
   const hasData = filtered.length > 0 && (filtered[0].buyPrice > 0 || filtered[0].sellPrice > 0);
 
   const isLM = active === "lm";
