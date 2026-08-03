@@ -53,11 +53,14 @@ export async function setSetting(key: string, value: string) {
 export async function getMarketInfo() {
   const usdIdrRate = parseFloat(await getSetting("usd_idr_rate")) || 16300;
   const lastUpdate = await getSetting("last_price_update");
-  const todayPrices = await getTodayPrices();
-  const antam = todayPrices.find((p) => p.gold_type_id === "antam-100");
-  const xauUsdPerOz = antam
-    ? Math.round((antam.base_price * GOLD_OUNCE_TO_GRAM) / usdIdrRate)
-    : 0;
+  const xauUsdPerOzRaw = parseFloat(await getSetting("last_cron_xau_usd")) || 0;
+  let xauUsdPerOz = xauUsdPerOzRaw;
+  if (xauUsdPerOz <= 0) {
+    const baseGoldIdr = parseFloat(await getSetting("harga_dasar_jual")) || 0;
+    xauUsdPerOz = baseGoldIdr > 0
+      ? Math.round((baseGoldIdr * GOLD_OUNCE_TO_GRAM) / usdIdrRate)
+      : 0;
+  }
   return { usdIdrRate, xauUsdPerOz, lastUpdate };
 }
 
@@ -233,6 +236,7 @@ export async function fetchInternationalGoldPrice(): Promise<{
   xpdUsdPerOz: number;
   usdIdrRate: number;
   error?: string;
+  warning?: string;
 }> {
   const apiKey = await getSetting("api_key");
   const fallback = await fetchAllFallbackPrices();
@@ -242,6 +246,7 @@ export async function fetchInternationalGoldPrice(): Promise<{
   let xagUsdPerOz = fallback.xagUsdPerOz;
   let xpdUsdPerOz = fallback.xpdUsdPerOz;
   let apiError: string | undefined;
+  const warnings: string[] = [];
 
   const validApi = apiKey && apiKey !== "0" && apiKey !== "";
 
@@ -252,7 +257,11 @@ export async function fetchInternationalGoldPrice(): Promise<{
       });
       if (res.ok) {
         const data = await res.json();
-        xauUsdPerOz = data.price;
+        if (typeof data.price === "number" && data.price > 0) {
+          xauUsdPerOz = data.price;
+        } else {
+          apiError = "GoldAPI XAU: invalid price in response";
+        }
       } else {
         apiError = `GoldAPI XAU error: ${res.status}`;
       }
@@ -268,9 +277,18 @@ export async function fetchInternationalGoldPrice(): Promise<{
       });
       if (res.ok) {
         const data = await res.json();
-        xagUsdPerOz = data.price;
+        if (typeof data.price === "number" && data.price > 0) {
+          xagUsdPerOz = data.price;
+        } else {
+          warnings.push("GoldAPI XAG: invalid price, using fallback");
+        }
+      } else {
+        warnings.push(`GoldAPI XAG error: ${res.status}, using fallback`);
       }
-    } catch (e) { console.error("GoldAPI XAG fetch failed:", e); }
+    } catch (e) {
+      console.error("GoldAPI XAG fetch failed:", e);
+      warnings.push("GoldAPI XAG network error, using fallback");
+    }
 
     // Fetch XPD/USD (Palladium)
     try {
@@ -279,14 +297,31 @@ export async function fetchInternationalGoldPrice(): Promise<{
       });
       if (res.ok) {
         const data = await res.json();
-        xpdUsdPerOz = data.price;
+        if (typeof data.price === "number" && data.price > 0) {
+          xpdUsdPerOz = data.price;
+        } else {
+          warnings.push("GoldAPI XPD: invalid price, using fallback");
+        }
+      } else {
+        warnings.push(`GoldAPI XPD error: ${res.status}, using fallback`);
       }
-    } catch (e) { console.error("GoldAPI XPD fetch failed:", e); }
+    } catch (e) {
+      console.error("GoldAPI XPD fetch failed:", e);
+      warnings.push("GoldAPI XPD network error, using fallback");
+    }
   }
 
   // Jika XAU gagal → full fallback
   if (!xauUsdPerOz) {
     return { ...fallback, error: apiError };
+  }
+
+  // Jika XAG/XPD gagal → fallback ke CoinGecko untuk metal tersebut saja
+  if (xagUsdPerOz === fallback.xagUsdPerOz && warnings.some(w => w.includes("XAG"))) {
+    console.warn("XAG using fallback value:", xagUsdPerOz);
+  }
+  if (xpdUsdPerOz === fallback.xpdUsdPerOz && warnings.some(w => w.includes("XPD"))) {
+    console.warn("XPD using fallback value:", xpdUsdPerOz);
   }
 
   // Kurs USD/IDR — JISDOR (frankfurter.app) → fallback exchangerate-api
@@ -318,7 +353,7 @@ export async function fetchInternationalGoldPrice(): Promise<{
     } catch (e2) { console.error("exchangerate-api also failed:", e2); }
   }
 
-  return { xauUsdPerOz, xagUsdPerOz, xpdUsdPerOz, usdIdrRate };
+  return { xauUsdPerOz, xagUsdPerOz, xpdUsdPerOz, usdIdrRate, ...(warnings.length > 0 && { warning: warnings.join("; ") }) };
 }
 
 async function fetchAllFallbackPrices(): Promise<{
@@ -416,7 +451,7 @@ export async function getFormattedTodayPrices(): Promise<FormattedPrice[]> {
 
   return todayPrices.map((p) => {
     const gt = goldTypes.find((g) => g.id === p.gold_type_id);
-    const spread = p.buy_price - p.sell_price;
+    const spread = Math.abs(p.buy_price - p.sell_price);
     return {
       id: `p-${p.id}`,
       goldTypeId: p.gold_type_id,

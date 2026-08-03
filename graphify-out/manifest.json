@@ -1,0 +1,327 @@
+{
+  "eslint.config.mjs": {
+    "mtime": 1785229881.8050842,
+    "ast_hash": "dfa1f5f6a7037bf39dc510f30b180002",
+    "semantic_hash": "dfa1f5f6a7037bf39dc510f30b180002"
+  },
+  "next.config.ts": {
+    "mtime": 1785229881.8071892,
+    "ast_hash": "9b77af189a21a7a64e4bd7a426f64176",
+    "semantic_hash": "9b77af189a21a7a64e4bd7a426f64176"
+  },
+  "package.json": {
+    "mtime": 1785479551.1897404,
+    "ast_hash": "370d3749eb8d4d4400aed02e05006dea",
+    "semantic_hash": "370d3749eb8d4d4400aed02e05006dea"
+  },
+  "postcss.config.mjs": {
+    "mtime": 1785229881.8224854,
+    "ast_hash": "239f3ebf717465dc636818a1a619398d",
+    "semantic_hash": "239f3ebf717465dc636818a1a619398d"
+  },
+  "src/app/(admin)/admin/PriceApprovalPanel.tsx": {
+    "mtime": 1785492492.9888382,
+    "ast_hash": "67bcde51742c557300c9acb66e7db9e7",
+    "semantic_hash": "67bcde51742c557300c9acb66e7db9e7"
+  },
+  "src/app/(admin)/admin/harga/AdminHargaClient.tsx": {
+    "mtime": 1785479363.0653532,
+    "ast_hash": "c0909cebb2c89279d8882bd1dc0d3947",
+    "semantic_hash": "c0909cebb2c89279d8882bd1dc0d3947"
+  },
+  "src/app/(admin)/admin/harga/page.tsx": {
+    "mtime": 1785297799.7653337,
+    "ast_hash": "21fe99f3cf64a6b9422594228f3eca6f",
+    "semantic_hash": "21fe99f3cf64a6b9422594228f3eca6f"
+  },
+  "src/app/(admin)/admin/konten/AdminKontenClient.tsx": {
+    "mtime": 1785463042.002341,
+    "ast_hash": "563c620d612b49b06313d2a31385b11d",
+    "semantic_hash": "563c620d612b49b06313d2a31385b11d"
+  },
+  "src/app/(admin)/admin/konten/page.tsx": {
+    "mtime": 1785463207.8224337,
+    "ast_hash": "3911ec0778d50c88d3e8ce07196a9618",
+    "semantic_hash": "3911ec0778d50c88d3e8ce07196a9618"
+  },
+  "src/app/(admin)/admin/login/page.tsx": {
+    "mtime": 1785298257.9918504,
+    "ast_hash": "1064753654b8a8ea5fe75b4e1996fec0",
+    "semantic_hash": "1064753654b8a8ea5fe75b4e1996fec0"
+  },
+  "src/app/(admin)/admin/page.tsx": {
+    "mtime": 1785492455.9989667,
+    "ast_hash": "7677899effbfea0ba957f4ec43ef1bab",
+    "semantic_hash": "7677899effbfea0ba957f4ec43ef1bab"
+  },
+  "src/app/(admin)/admin/pengaturan/AdminPengaturanClient.tsx": {
+    "mtime": 1785479474.0588775,
+    "ast_hash": "98334ed0f2f556fc9872d7ada4ccfce7",
+    "semantic_hash": "98334ed0f2f556fc9872d7ada4ccfce7"
+  },
+  "src/app/(admin)/admin/pengaturan/page.tsx": {
+    "mtime": 1785469744.9781454,
+    "ast_hash": "028ebcb327c2ca95614140affd93274a",
+    "semantic_hash": "028ebcb327c2ca95614140affd93274a"
+  },
+  "src/app/(admin)/layout.tsx": {
+    "mtime": 1785231417.7785535,
+    "ast_hash": "b2e33d33a906034fcde29351506999ed",
+    "semantic_hash": "b2e33d33a906034fcde29351506999ed"
+  },
+  "src/app/(public)/harga/page.tsx": {
+    "mtime": 1785464794.1830845,
+    "ast_hash": "91c9ac98c28b7267ab111b315413d230",
+    "semantic_hash": "91c9ac98c28b7267ab111b315413d230"
+  },
+  "src/app/(public)/kalkulator/page.tsx": {
+    "mtime": 1785482235.9624803,
+    "ast_hash": "c065bf611b7980cbcb4e4f03ab61c7f0",
+    "semantic_hash": "c065bf611b7980cbcb4e4f03ab61c7f0"
+  },
+  "src/app/(public)/layout.tsx": {
+    "mtime": 1785481946.16772,
+    "ast_hash": "e214e19691198479e4c2295a4e067c32",
+    "semantic_hash": "e214e19691198479e4c2295a4e067c32"
+  },
+  "src/app/(public)/page.tsx": {
+    "mtime": 1785482153.3322084,
+    "ast_hash": "0d0e02e78a10bb5adcf450e6a7c2027a",
+    "semantic_hash": "0d0e02e78a10bb5adcf450e6a7c2027a"
+  },
+  "src/app/(public)/tentang/page.tsx": {
+    "mtime": 1785482972.8060486,
+    "ast_hash": "7ba334811058bffb407738d04d379e3b",
+    "semantic_hash": "7ba334811058bffb407738d04d379e3b"
+  },
+  "src/app/api/admin/publish-prices/route.ts": {
+    "mtime": 1785470400.664675,
+    "ast_hash": "96f79bfb5f783129e718a374292dce91",
+    "semantic_hash": "96f79bfb5f783129e718a374292dce91"
+  },
+  "src/app/api/admin/trigger-update/route.ts": {
+    "mtime": 1785468841.4999804,
+    "ast_hash": "f632f3a47504117f3b1d750f24395fb2",
+    "semantic_hash": "f632f3a47504117f3b1d750f24395fb2"
+  },
+  "src/app/api/admin/update-gold-types/route.ts": {
+    "mtime": 1785298242.113503,
+    "ast_hash": "ade9b3a981692a2fd57df75b87e27062",
+    "semantic_hash": "ade9b3a981692a2fd57df75b87e27062"
+  },
+  "src/app/api/admin/update-konten/route.ts": {
+    "mtime": 1785298236.978121,
+    "ast_hash": "aeb24005471b7fdcb2165a6fb7a0be50",
+    "semantic_hash": "aeb24005471b7fdcb2165a6fb7a0be50"
+  },
+  "src/app/api/admin/update-settings/route.ts": {
+    "mtime": 1785469767.926398,
+    "ast_hash": "f5c6aa7f2377bd37879cf7be97e00cd4",
+    "semantic_hash": "f5c6aa7f2377bd37879cf7be97e00cd4"
+  },
+  "src/app/api/cron/update-prices/route.ts": {
+    "mtime": 1785490739.8285477,
+    "ast_hash": "43e81fc6106dfa5bab236faff0c94a3e",
+    "semantic_hash": "43e81fc6106dfa5bab236faff0c94a3e"
+  },
+  "src/app/layout.tsx": {
+    "mtime": 1785491188.6850276,
+    "ast_hash": "737f7d37c409e204021a863219c21ca0",
+    "semantic_hash": "737f7d37c409e204021a863219c21ca0"
+  },
+  "src/components/BackToTop.tsx": {
+    "mtime": 1785229882.048596,
+    "ast_hash": "1c247c8faba59f7aba6c27eb01d74776",
+    "semantic_hash": "1c247c8faba59f7aba6c27eb01d74776"
+  },
+  "src/components/Calculator.tsx": {
+    "mtime": 1785482069.3028054,
+    "ast_hash": "9bdfeb5fdf1476f91ce373fadaee7a32",
+    "semantic_hash": "9bdfeb5fdf1476f91ce373fadaee7a32"
+  },
+  "src/components/CaraTransaksi.tsx": {
+    "mtime": 1785229882.0534136,
+    "ast_hash": "1d28edd46715b91744c3724a8857aee6",
+    "semantic_hash": "1d28edd46715b91744c3724a8857aee6"
+  },
+  "src/components/ConfirmModal.tsx": {
+    "mtime": 1785491151.243446,
+    "ast_hash": "49d3aee3f8c76e429ab186afa0ba08f4",
+    "semantic_hash": "49d3aee3f8c76e429ab186afa0ba08f4"
+  },
+  "src/components/FAQ.tsx": {
+    "mtime": 1785481993.6537893,
+    "ast_hash": "5c983c1abb9401e9e7619108a0b55834",
+    "semantic_hash": "5c983c1abb9401e9e7619108a0b55834"
+  },
+  "src/components/Footer.tsx": {
+    "mtime": 1785481857.1761005,
+    "ast_hash": "8487bd58904a7fe45ae9da32586c21c5",
+    "semantic_hash": "8487bd58904a7fe45ae9da32586c21c5"
+  },
+  "src/components/GoldDivider.tsx": {
+    "mtime": 1785229882.0604172,
+    "ast_hash": "341345b4606b8e51ae8aa3a17a893d4b",
+    "semantic_hash": "341345b4606b8e51ae8aa3a17a893d4b"
+  },
+  "src/components/Hero.tsx": {
+    "mtime": 1785483539.5365784,
+    "ast_hash": "d3543a6cd9798b4c5b70df2968332a75",
+    "semantic_hash": "d3543a6cd9798b4c5b70df2968332a75"
+  },
+  "src/components/Keunggulan.tsx": {
+    "mtime": 1785229882.068417,
+    "ast_hash": "3f95f3ee57fcf0eff0b60e7147819767",
+    "semantic_hash": "3f95f3ee57fcf0eff0b60e7147819767"
+  },
+  "src/components/KunjungiKami.tsx": {
+    "mtime": 1785481898.3343172,
+    "ast_hash": "7e3f1f02cc3370910ac395a5493ee4bb",
+    "semantic_hash": "7e3f1f02cc3370910ac395a5493ee4bb"
+  },
+  "src/components/LegalNotice.tsx": {
+    "mtime": 1785229882.0714478,
+    "ast_hash": "990998f13adbfc109af1ad67c2016c0b",
+    "semantic_hash": "990998f13adbfc109af1ad67c2016c0b"
+  },
+  "src/components/LegalitasSection.tsx": {
+    "mtime": 1785229882.0714478,
+    "ast_hash": "f14af068a58586be1e6b609e393f5a30",
+    "semantic_hash": "f14af068a58586be1e6b609e393f5a30"
+  },
+  "src/components/Navbar.tsx": {
+    "mtime": 1785229882.0714478,
+    "ast_hash": "84dfea65662e378c8953ec7c64e10d11",
+    "semantic_hash": "84dfea65662e378c8953ec7c64e10d11"
+  },
+  "src/components/NavigationEvents.tsx": {
+    "mtime": 1785491434.830755,
+    "ast_hash": "4f2c0e91b2027a02ca1c7d846d4da93c",
+    "semantic_hash": "4f2c0e91b2027a02ca1c7d846d4da93c"
+  },
+  "src/components/PriceChart.tsx": {
+    "mtime": 1785466027.7224605,
+    "ast_hash": "12c4d458eac77ad20bcc362ca027f56d",
+    "semantic_hash": "12c4d458eac77ad20bcc362ca027f56d"
+  },
+  "src/components/TabbedPricelist.tsx": {
+    "mtime": 1785480673.0227256,
+    "ast_hash": "15baf29e179724bc841615127f38018b",
+    "semantic_hash": "15baf29e179724bc841615127f38018b"
+  },
+  "src/components/Testimoni.tsx": {
+    "mtime": 1785229882.0949342,
+    "ast_hash": "bc301d63da1cc67a3c28e804171706ee",
+    "semantic_hash": "bc301d63da1cc67a3c28e804171706ee"
+  },
+  "src/components/WhatsAppButton.tsx": {
+    "mtime": 1785481926.558062,
+    "ast_hash": "9c053a36b4879d9529a0ea4dad852dda",
+    "semantic_hash": "9c053a36b4879d9529a0ea4dad852dda"
+  },
+  "src/components/admin/AdminSidebar.tsx": {
+    "mtime": 1785491302.4236343,
+    "ast_hash": "9d7b0d197324af59369671abc220c159",
+    "semantic_hash": "9d7b0d197324af59369671abc220c159"
+  },
+  "src/lib/gold-api.ts": {
+    "mtime": 1785481802.0386329,
+    "ast_hash": "9061258ae1e06cda61d6774aec4472b8",
+    "semantic_hash": "9061258ae1e06cda61d6774aec4472b8"
+  },
+  "src/lib/supabase/admin.ts": {
+    "mtime": 1785300011.5465834,
+    "ast_hash": "60506e925378c526ba10d4906751536e",
+    "semantic_hash": "60506e925378c526ba10d4906751536e"
+  },
+  "src/lib/supabase/anon.ts": {
+    "mtime": 1785463589.8990245,
+    "ast_hash": "28029717846ceafb0515f6b6ca3b1ccf",
+    "semantic_hash": "28029717846ceafb0515f6b6ca3b1ccf"
+  },
+  "src/lib/supabase/client.ts": {
+    "mtime": 1785299893.6913543,
+    "ast_hash": "0f1af0c1d3558de00accbde722be895e",
+    "semantic_hash": "0f1af0c1d3558de00accbde722be895e"
+  },
+  "src/lib/supabase/server.ts": {
+    "mtime": 1785299893.622545,
+    "ast_hash": "a80879c4056050ad587317b5cceb75c0",
+    "semantic_hash": "a80879c4056050ad587317b5cceb75c0"
+  },
+  "src/middleware.ts": {
+    "mtime": 1785479322.9394815,
+    "ast_hash": "a7d35ed700ae069770098cb6a45c820e",
+    "semantic_hash": "a7d35ed700ae069770098cb6a45c820e"
+  },
+  "supabase/migration.sql": {
+    "mtime": 1785470319.9492385,
+    "ast_hash": "5b117c730d0330b6838a8520eb8e7091",
+    "semantic_hash": "5b117c730d0330b6838a8520eb8e7091"
+  },
+  "tsconfig.json": {
+    "mtime": 1785229882.1105607,
+    "ast_hash": "ee17fd1c97c735e9f3564e3f5251f125",
+    "semantic_hash": "ee17fd1c97c735e9f3564e3f5251f125"
+  },
+  "vercel.json": {
+    "mtime": 1785484987.2116168,
+    "ast_hash": "99914b932bd37a50b983c5e7c90ae93b",
+    "semantic_hash": "99914b932bd37a50b983c5e7c90ae93b"
+  },
+  "README.md": {
+    "mtime": 1785229881.4204774,
+    "ast_hash": "f15aaa42d5d299d091b1171097ea56ad",
+    "semantic_hash": "f15aaa42d5d299d091b1171097ea56ad"
+  },
+  "public/favicon.png": {
+    "mtime": 1785229881.827487,
+    "ast_hash": "d16552a943cc1664a45bfb250367d37a",
+    "semantic_hash": "d16552a943cc1664a45bfb250367d37a"
+  },
+  "public/file.svg": {
+    "mtime": 1785229881.8332663,
+    "ast_hash": "d09f95206c3fa0bb9bd9fefabfd0ea71",
+    "semantic_hash": "d09f95206c3fa0bb9bd9fefabfd0ea71"
+  },
+  "public/globe.svg": {
+    "mtime": 1785229881.8362641,
+    "ast_hash": "2aaafa6a49b6563925fe440891e32717",
+    "semantic_hash": "2aaafa6a49b6563925fe440891e32717"
+  },
+  "public/hero-tentangkami.webp": {
+    "mtime": 1785482741.5197084,
+    "ast_hash": "9149cac98de3f228d7e2d964549398a9",
+    "semantic_hash": "9149cac98de3f228d7e2d964549398a9"
+  },
+  "public/logo-1.webp": {
+    "mtime": 1785229881.839265,
+    "ast_hash": "9470ccf2cca71cbcbd09dc9375d8f783",
+    "semantic_hash": "9470ccf2cca71cbcbd09dc9375d8f783"
+  },
+  "public/next.svg": {
+    "mtime": 1785229881.842266,
+    "ast_hash": "8e061864f388b47f33a1c3780831193e",
+    "semantic_hash": "8e061864f388b47f33a1c3780831193e"
+  },
+  "public/safar-hero.webp": {
+    "mtime": 1785229881.849929,
+    "ast_hash": "2a4f3fed7a0be7af5de78c89a395937b",
+    "semantic_hash": "2a4f3fed7a0be7af5de78c89a395937b"
+  },
+  "public/vercel.svg": {
+    "mtime": 1785229881.852932,
+    "ast_hash": "c0af2f507b369b085b35ef4bbe3bcf1e",
+    "semantic_hash": "c0af2f507b369b085b35ef4bbe3bcf1e"
+  },
+  "public/window.svg": {
+    "mtime": 1785229881.8547041,
+    "ast_hash": "a2760511c65806022ad20adf74370ff3",
+    "semantic_hash": "a2760511c65806022ad20adf74370ff3"
+  },
+  "src/app/icon.png": {
+    "mtime": 1785229882.043596,
+    "ast_hash": "d931ceb2e1adbf83a1f4c2d828d1e72f",
+    "semantic_hash": "d931ceb2e1adbf83a1f4c2d828d1e72f"
+  }
+}

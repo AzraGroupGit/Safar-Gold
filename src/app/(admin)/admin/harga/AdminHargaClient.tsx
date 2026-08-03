@@ -15,7 +15,7 @@ export default function AdminHargaClient({ goldTypes, prices }: { goldTypes: Gol
   );
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
-  const hasData = prices.length > 0 && prices[0].buyPrice > 0;
+  const hasData = prices.length > 0 && prices.some(p => p.buyPrice > 0 || p.sellPrice > 0);
 
   async function handleSave() {
     setSaving(true);
@@ -104,7 +104,7 @@ export default function AdminHargaClient({ goldTypes, prices }: { goldTypes: Gol
             <tbody className="divide-y divide-border/30">
               {goldTypes.map((gt) => {
                 const price = prices.find((p) => p.goldTypeId === gt.id);
-                const spread = (price?.buyPrice ?? 0) - (price?.sellPrice ?? 0);
+                const spread = Math.abs((price?.buyPrice ?? 0) - (price?.sellPrice ?? 0));
                 const sp = (price?.buyPrice ?? 0) > 0 ? ((spread / (price!.buyPrice)) * 100).toFixed(1) : "0.0";
                 return (
                   <tr key={gt.id} className="transition-colors hover:bg-surface/50">

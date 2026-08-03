@@ -18,7 +18,7 @@ export default function TabbedPricelist({
 }) {
   const [active, setActive] = useState("lm");
   const filtered = prices.filter((p) => p.category === active);
-  const hasData = filtered.length > 0 && filtered[0].buyPrice > 0;
+  const hasData = filtered.length > 0 && (filtered[0].buyPrice > 0 || filtered[0].sellPrice > 0);
 
   const isLM = active === "lm";
   const isBuyback = active.startsWith("bb-");
