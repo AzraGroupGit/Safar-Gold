@@ -44,10 +44,12 @@ export default function Calculator({
   const weightNum = parseFloat(weight) || 0;
   const pricePerGram = txType === "buy" ? price?.buyPrice ?? 0 : price?.sellPrice ?? 0;
   const total = pricePerGram * weightNum;
-  const hasData = price && price.buyPrice > 0;
+  const displayPricePerGram = Math.round(pricePerGram / 1000) * 1000;
+  const displayTotal = Math.round(total / 1000) * 1000;
+  const hasData = price && (txType === "buy" ? price.buyPrice > 0 : price.sellPrice > 0);
 
   const waMessage = encodeURIComponent(
-    `Halo Safar Gold, saya ingin ${txType === "buy" ? "membeli" : "menjual"} ${selectedGold?.name ?? "emas"} seberat ${weightNum} gram.\n\nEstimasi total: ${formatRupiahClient(total)}\n\nMohon info lebih lanjut.`
+    `Halo Safar Gold, saya ingin ${txType === "buy" ? "membeli" : "menjual"} ${selectedGold?.name ?? "emas"} seberat ${weightNum} gram.\n\nEstimasi total: ${formatRupiahClient(displayTotal)}\n\nMohon info lebih lanjut.`
   );
 
   return (
@@ -121,7 +123,7 @@ export default function Calculator({
               <div className="space-y-3">
                 <div className="flex justify-between text-sm">
                   <span className="text-text-muted">Harga {txType === "buy" ? "Jual" : "Buyback"} / Gram</span>
-                  <span className="font-semibold text-text">{hasData ? formatRupiahClient(pricePerGram) : "-"}</span>
+                  <span className="font-semibold text-text">{hasData ? formatRupiahClient(displayPricePerGram) : "-"}</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-text-muted">Berat</span>
@@ -130,7 +132,7 @@ export default function Calculator({
                 <div className="border-t border-gold/20 pt-3">
                   <div className="flex items-end justify-between">
                     <span className="text-sm font-semibold text-text">Total Estimasi</span>
-                    <span className="font-serif text-2xl font-bold text-gold-dark">{hasData ? formatRupiahClient(total) : "-"}</span>
+                    <span className="font-serif text-2xl font-bold text-gold-dark">{hasData ? formatRupiahClient(displayTotal) : "-"}</span>
                   </div>
                 </div>
               </div>
