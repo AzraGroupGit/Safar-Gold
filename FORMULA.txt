@@ -1,0 +1,204 @@
+RUMUS HARGA SAFAR GOLD
+Panduan untuk Tim Operasional & Admin
+Terakhir diperbarui: Agustus 2026
+
+================================================================================
+BAGIAN 1 — HARGA JUAL LOGAM MULIA (EMAS BATANGAN)
+================================================================================
+
+1A. Menentukan Harga Dasar Jual
+
+   Harga Dasar Jual Hari Ini = Harga Dasar Jual Kemarin
+                             + Kenaikan/Penurunan Harga ANTAM Hari Ini
+                             + Penyesuaian Admin
+
+   Harga dasar ini berlaku untuk pecahan 50 gram dan 100 gram.
+   Pecahan yang lebih kecil mendapat tambahan premi (lihat 1C).
+
+1B. Rumus Harga per Gram
+
+   Harga per Gram = Harga Dasar Jual + Premi Pecahan + Penyesuaian Admin
+
+1C. Daftar Premi per Pecahan
+
+   Pecahan    Tambahan dari Harga Dasar
+   ───────    ─────────────────────────
+   0,5 gram   + Rp 400.000  per gram
+   1 gram     + Rp 225.000  per gram
+   2 gram     + Rp 190.000  per gram
+   3 gram     + Rp 173.333  per gram
+   5 gram     + Rp  95.000  per gram
+   10 gram    + Rp  65.000  per gram
+   25 gram    + Rp  15.000  per gram
+   50 gram    + Rp       0  (harga dasar)
+   100 gram   + Rp       0  (harga dasar)
+
+1D. Rumus Harga per Produk
+
+   Harga per Produk = Berat Produk × Harga per Gram
+
+   Contoh:
+   Harga 1 gram = 1 × (Rp 2.588.000 + Rp 225.000) = Rp 2.813.000
+   Harga 10 gram = 10 × (Rp 2.588.000 + Rp 65.000) = Rp 26.530.000
+
+1E. Arti Angka Spread di Tabel
+
+   Spread = Selisih harga pecahan ini dibandingkan dengan harga 100 gram.
+
+   Contoh: Antam 1gr spread +Rp 225.000 artinya
+   "harga per gram Antam 1gr lebih mahal Rp 225.000 dari Antam 100gr"
+
+================================================================================
+BAGIAN 2 — HARGA BUYBACK LOGAM MULIA (EMAS BEKAS)
+================================================================================
+
+2A. Menentukan Acuan Buyback
+
+   Acuan Buyback = Harga Buyback ANTAM Hari Ini
+                 + Premium Kompetitif Safar Gold
+                 + Penyesuaian Admin
+
+   Angka ini menjadi acuan untuk kategori ANTAM Certi RM 1-2 gram.
+   Kategori lain di bawahnya dihitung otomatis dengan potongan tetap.
+
+2B. Daftar Harga per Kategori
+
+   Kategori                       Diskon dari Acuan
+   ────────                       ─────────────────
+   ANTAM Certi 1-2 gram           Rp       0  (ACUAN)
+   ANTAM Certi 3-5 gram           Rp  40.000  lebih murah dari acuan
+   ANTAM Certi 10-25 gram         Rp  80.000  lebih murah dari acuan
+   ANTAM Certi 50-100 gram        Rp 120.000  lebih murah dari acuan
+   ANTAM Non-RM                   Rp 150.000  lebih murah dari acuan
+   ANTAM Retro                    Rp 175.000  lebih murah dari acuan
+   Merek Lain                     Rp 225.000  lebih murah dari acuan
+
+   Contoh (acuan = Rp 2.455.000):
+   ANTAM Retro = Rp 2.455.000 − Rp 175.000 = Rp 2.280.000
+
+2C. Arti Angka Spread di Tabel
+
+   Spread = Potongan harga kategori ini dibandingkan ANTAM Certi 1-2 gram.
+
+   Contoh: ANTAM Retro spread +Rp 175.000 artinya
+   "harga ANTAM Retro lebih murah Rp 175.000 dari ANTAM Certi 1-2gr"
+
+================================================================================
+BAGIAN 3 — HARGA BUYBACK PERHIASAN
+================================================================================
+
+3A. K24* (Emas Kuning Murni) dan K24
+
+   K24* = Acuan Buyback LM − Rp 320.000 + Penyesuaian Perhiasan
+   K24  = K24* − Rp 50.000
+
+   Contoh (acuan = Rp 2.455.000):
+   K24* = Rp 2.455.000 − Rp 320.000 = Rp 2.135.000
+   K24  = Rp 2.135.000 − Rp 50.000  = Rp 2.085.000
+
+3B. Dasar Perhiasan Reguler (untuk K6 sampai K22)
+
+   Dasar Perhiasan = Acuan Buyback LM − Rp 505.000 + Penyesuaian Perhiasan
+
+   Contoh: Rp 2.455.000 − Rp 505.000 = Rp 1.950.000
+
+3C. Rumus K6 sampai K22
+
+   Harga per Gram = Dasar Perhiasan × (Kadar ÷ 24)
+
+   Contoh:
+   K18 = Rp 1.950.000 × (18 ÷ 24) = Rp 1.950.000 × 75%   = Rp 1.462.500
+   K10 = Rp 1.950.000 × (10 ÷ 24) = Rp 1.950.000 × 41,7% = Rp   812.500
+
+   Daftar kadar:
+   K22 = 91,67%    K21 = 87,50%    K20 = 83,33%
+   K19 = 79,17%    K18 = 75,00%    ...sampai...
+   K6  = 25,00%
+
+3D. Khusus K23
+
+   K23 = (Dasar Perhiasan × 95,83%) + Rp 100.000
+
+3E. Arti Angka Spread di Tabel
+
+   Spread = Potongan harga kadar ini dibandingkan dengan K24*.
+
+   Contoh: K18 spread +Rp 630.307 artinya
+   "harga K18 lebih murah Rp 630.307 dari K24*"
+
+================================================================================
+BAGIAN 4 — LOGAM LAIN (PERAK & PALLADIUM)
+================================================================================
+
+4A. Harga Perak per Gram
+
+   Harga Perak = (Harga Perak Dunia × Kurs USD/IDR) ÷ 31,1
+
+4B. Harga Palladium per Gram
+
+   Harga Palladium = (Harga Palladium Dunia × Kurs USD/IDR) ÷ 31,1
+
+   Tidak ada spread khusus — hanya satu harga per jenis logam.
+
+================================================================================
+BAGIAN 5 — DATA PASAR (DIAMBIL OTOMATIS)
+================================================================================
+
+5A. Sumber Data
+
+   Harga Emas Dunia      = Dari API GoldAPI.io (jika ada kunci API)
+                           atau data cadangan
+
+   Harga Perak Dunia     = Dari API GoldAPI.io (jika ada kunci API)
+                           atau data cadangan
+
+   Harga Palladium Dunia = Dari API GoldAPI.io (jika ada kunci API)
+                           atau data cadangan
+
+   Kurs USD ke IDR       = Dari Bank Indonesia via API frankfurter.app
+                           atau exchangerate-api.com
+                           atau angka manual Rp 16.300
+
+5B. Konversi ke per Gram
+
+   Harga per Gram = (Harga Dunia per Oz × Kurs USD/IDR) ÷ 31,1
+
+   (1 troy ounce = 31,1 gram)
+
+================================================================================
+BAGIAN 6 — CARA KERJA DASHBOARD ADMIN
+================================================================================
+
+6A. Angka Rekomendasi (sebelum Publikasi)
+
+   Rekomendasi Harga Jual    = Harga Dasar Emas × 1,03  (markup 3%)
+   Rekomendasi Acuan Buyback = Harga Dasar Emas × 0,97  (diskon 3%)
+
+   Admin boleh:
+   - Menerima rekomendasi
+   - Menambah/mengurangi adjustment
+   - Mengetik ulang angka secara manual
+
+6B. Tombol dan Fungsinya
+
+   "Refresh Data Pasar" = Ambil harga emas, perak, palladium, dan kurs
+                          terkini dari internet
+
+   "Publikasikan"       = Simpan semua harga ke database dan tampilkan
+                          ke website publik
+
+================================================================================
+BAGIAN 7 — TAMPILAN DI WEBSITE PUBLIK
+================================================================================
+
+   Halaman Harga:
+   - Tab Logam Mulia     = Harga jual per pecahan (0,5gr - 100gr)
+   - Tab Buyback LM      = Harga buyback per kategori
+   - Tab Perhiasan       = Harga buyback per kadar (K24* sampai K6)
+   - Tab Logam Lain      = Harga perak & palladium
+
+   Kartu Ringkasan:
+   - Antam 1gr           = Harga jual per gram pecahan 1 gram
+   - Buyback 24K         = Harga buyback perhiasan K24
+   - Emas Dunia          = Harga XAU/USD per ounce
+   - Update Terakhir     = Tanggal publikasi terakhir

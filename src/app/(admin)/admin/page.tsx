@@ -1,6 +1,9 @@
+'use client';
+
 import { getAllGoldTypes, getFormattedTodayPrices, formatRupiah } from "@/lib/gold-api";
 import PriceApprovalPanel from "./PriceApprovalPanel";
 import { createAnonClient } from "@/lib/supabase/anon";
+import { useState, useEffect } from "react";
 
 export const dynamic = "force-dynamic";
 
@@ -21,17 +24,46 @@ function StatCard({ label, value, sub, icon }: { label: string; value: string; s
   );
 }
 
-export default async function AdminDashboard() {
-  const goldTypes = await getAllGoldTypes();
-  const prices = await getFormattedTodayPrices();
-  const hasData = prices.length > 0 && prices.some(p => p.buyPrice > 0 || p.sellPrice > 0);
-  const autoCount = goldTypes.filter((g) => g.is_auto).length;
+export default function AdminDashboard() {
+  const [goldTypes, setGoldTypes] = useState<Array<any>>([]);
+  const [prices, setPrices] = useState<Array<any>>([]);
+  const [hasData, setHasData] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [settings, setSettings] = useState<any>(null);
 
-  const supabase = createAnonClient();
-  const { data: settings } = await supabase.from("app_settings").select("key, value");
-  const s = Object.fromEntries((settings ?? []).map((r) => [r.key, r.value]));
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [gt, pr] = await Promise.all([
+          getAllGoldTypes(),
+          getFormattedTodayPrices()
+        ]);
+        setGoldTypes(gt);
+        setPrices(pr);
+        setHasData(pr.length > 0 && pr.some(p => p.buyPrice > 0 || p.sellPrice > 0));
+      } catch (err) {
+        console.error("Failed to fetch dashboard data:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
 
-  // Data pasar dari cron terakhir (atau fetch live kalau belum ada)
+  useEffect(() => {
+    const fetchSettings = async () => {
+      const supabase = createAnonClient();
+      const { data } = await supabase.from("app_settings").select("key, value");
+      setSettings(Object.fromEntries((data ?? []).map((r: any) => [r.key, r.value])));
+    };
+    fetchSettings();
+  }, []);
+
+  if (loading || !settings) {
+    return <div className="p-8 text-center">Memuat...</div>;
+  }
+
+  const s = settings;
   const xauUsd = parseFloat(s.last_cron_xau_usd || "0");
   const xagUsd = parseFloat(s.last_cron_xag_usd || "0");
   const xpdUsd = parseFloat(s.last_cron_xpd_usd || "0");
@@ -41,7 +73,6 @@ export default async function AdminDashboard() {
     : null;
   const baseGoldIdr = xauUsd > 0 ? Math.round((xauUsd * usdIdr) / 31.1034768) : 0;
 
-  // Auto-fill rekomendasi jika belum di-set
   const hargaDasarJual = parseFloat(s.harga_dasar_jual || "0") || Math.round(baseGoldIdr * 1.03);
   const acuanBuybackLM = parseFloat(s.acuan_buyback_lm || "0") || Math.round(baseGoldIdr * 0.97);
 
@@ -56,7 +87,7 @@ export default async function AdminDashboard() {
         <StatCard
           label="Jenis Emas"
           value={`${goldTypes.length}`}
-          sub={`${autoCount} auto, ${goldTypes.length - autoCount} manual`}
+          sub={`${goldTypes.filter((g: any) => g.is_auto).length} auto, ${goldTypes.length - goldTypes.filter((g: any) => g.is_auto).length} manual`}
           icon="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z"
         />
         <StatCard
@@ -67,7 +98,7 @@ export default async function AdminDashboard() {
         />
         <StatCard
           label="Antam 100gr"
-          value={hasData ? formatRupiah(prices.find((p) => p.goldTypeId === "antam-100")?.buyPrice ?? 0) : "-"}
+          value={hasData ? formatRupiah(prices.find((p: any) => p.goldTypeId === "antam-100")?.buyPrice ?? 0) : "-"}
           sub="harga jual / gram"
           icon="M12 1.5a.75.75 0 01.75.75V4.5a.75.75 0 01-1.5 0V2.25A.75.75 0 0112 1.5z"
         />

@@ -2,13 +2,7 @@
 
 import { useState, useMemo } from "react";
 import type { GoldTypeRow } from "@/lib/gold-api";
-
-const PREVIEW_TABS = [
-  { key: "lm", label: "Logam Mulia" },
-  { key: "bb-lm", label: "Buyback LM" },
-  { key: "bb-perhiasan", label: "Perhiasan" },
-  { key: "bb-logam", label: "Logam Lain" },
-];
+import PricePreviewModal from "@/components/PricePreviewModal";
 
 interface Props {
   goldTypes: GoldTypeRow[];
@@ -58,7 +52,7 @@ export default function PriceApprovalPanel({
   const [adjJual, setAdjJual] = useState(initialAdjJual);
   const [adjBeli, setAdjBeli] = useState(initialAdjBeli);
   const [adjPerhiasan, setAdjPerhiasan] = useState(initialAdjPerhiasan);
-  const [previewTab, setPreviewTab] = useState("lm");
+  const [showPreviewModal, setShowPreviewModal] = useState(false);
   const [status, setStatus] = useState<{ type: "idle" | "loading" | "success" | "error"; msg: string }>({ type: "idle", msg: "" });
   const [fetchStatus, setFetchStatus] = useState<{ type: "idle" | "loading" | "success" | "error"; msg: string }>({ type: "idle", msg: "" });
 
@@ -110,8 +104,6 @@ export default function PriceApprovalPanel({
       return { id: gt.id, name: gt.name, category: gt.category, price: 0, weight: gt.weight, karat: gt.karat };
     });
   }, [hargaDasar, acuanBuyback, adjJual, adjBeli, adjPerhiasan, xagUsd, xpdUsd, usdIdr, premiPecahan, spreadBuybackLM, goldTypes, offsetK24s, offsetK24, dasarPerhiasanOffset]);
-
-  const previewItems = preview.filter((p) => p.category === previewTab);
 
   async function handlePublish() {
     setStatus({ type: "loading", msg: "Memproses..." });
@@ -268,44 +260,13 @@ export default function PriceApprovalPanel({
           </div>
         </div>
 
-        <div className="mt-5 rounded-xl border border-gold/20 bg-gradient-to-br from-gold/3 to-transparent p-4">
-          <p className="mb-3 text-sm font-semibold text-text">Preview Harga (sebelum publikasi)</p>
-
-          <div className="mb-3 flex gap-1 overflow-x-auto">
-            {PREVIEW_TABS.map((t) => {
-              const count = goldTypes.filter((g) => g.category === t.key).length;
-              return (
-                <button
-                  key={t.key}
-                  onClick={() => setPreviewTab(t.key)}
-                  className={`shrink-0 rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors ${
-                    previewTab === t.key ? "bg-gold/10 text-gold-dark" : "text-text-muted hover:text-text"
-                  }`}
-                >
-                  {t.label} ({count})
-                </button>
-              );
-            })}
-          </div>
-
-          <div className="grid gap-1.5 sm:grid-cols-2 lg:grid-cols-3">
-            {previewItems.map((item) => (
-              <div key={item.id} className="rounded-lg bg-white/60 px-3 py-2">
-                <div className="flex items-baseline justify-between gap-2">
-                  <span className="truncate text-xs text-text-muted">{item.name}</span>
-                  <span className="shrink-0 text-sm font-bold text-gold-dark">
-                    {item.price > 0 ? `Rp ${formatRupiah(item.price)}` : "-"}
-                  </span>
-                </div>
-              </div>
-            ))}
-            {previewItems.length === 0 && (
-              <p className="col-span-full py-3 text-center text-xs text-text-muted">Tidak ada data di kategori ini.</p>
-            )}
-          </div>
-        </div>
-
         <div className="mt-6 flex items-center gap-4">
+          <button
+            onClick={() => setShowPreviewModal(true)}
+            className="rounded-xl border-2 border-gold/40 px-6 py-3 text-sm font-semibold text-gold-dark transition-all hover:border-gold hover:bg-gold/5"
+          >
+            Preview Harga
+          </button>
           <button
             onClick={handlePublish}
             disabled={status.type === "loading"}
@@ -323,6 +284,12 @@ export default function PriceApprovalPanel({
           )}
         </div>
       </div>
+
+      <PricePreviewModal
+        open={showPreviewModal}
+        onClose={() => setShowPreviewModal(false)}
+        items={preview}
+      />
     </div>
   );
 }
