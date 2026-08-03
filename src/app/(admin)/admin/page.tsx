@@ -24,7 +24,7 @@ function StatCard({ label, value, sub, icon }: { label: string; value: string; s
 export default async function AdminDashboard() {
   const goldTypes = await getAllGoldTypes();
   const prices = await getFormattedTodayPrices();
-  const hasData = prices.length > 0 && prices[0].buyPrice > 0;
+  const hasData = prices.length > 0 && prices.some(p => p.buyPrice > 0 || p.sellPrice > 0);
   const autoCount = goldTypes.filter((g) => g.is_auto).length;
 
   const supabase = createAnonClient();

@@ -5,15 +5,30 @@ export const dynamic = "force-dynamic";
 
 export async function GET(_request: Request) {
   try {
-    const { xauUsdPerOz, xagUsdPerOz, xpdUsdPerOz, usdIdrRate, error } =
+    const { xauUsdPerOz, xagUsdPerOz, xpdUsdPerOz, usdIdrRate, error, warning } =
       await fetchInternationalGoldPrice();
 
     const now = new Date().toISOString();
+    const warnings: string[] = [];
 
-    await setSetting("last_cron_xau_usd", xauUsdPerOz.toString());
-    await setSetting("last_cron_xag_usd", xagUsdPerOz.toString());
-    await setSetting("last_cron_xpd_usd", xpdUsdPerOz.toString());
-    await setSetting("last_cron_usd_idr", usdIdrRate.toString());
+    if (xauUsdPerOz > 0) {
+      await setSetting("last_cron_xau_usd", xauUsdPerOz.toString());
+    } else {
+      warnings.push("XAU price is 0, not saved");
+    }
+    if (xagUsdPerOz > 0) {
+      await setSetting("last_cron_xag_usd", xagUsdPerOz.toString());
+    } else {
+      warnings.push("XAG price is 0, not saved");
+    }
+    if (xpdUsdPerOz > 0) {
+      await setSetting("last_cron_xpd_usd", xpdUsdPerOz.toString());
+    } else {
+      warnings.push("XPD price is 0, not saved");
+    }
+    if (usdIdrRate > 0) {
+      await setSetting("last_cron_usd_idr", usdIdrRate.toString());
+    }
     await setSetting("last_cron_time", now);
 
     return NextResponse.json({
@@ -23,7 +38,9 @@ export async function GET(_request: Request) {
       xpdUsdPerOz,
       usdIdrRate,
       time: now,
-      ...(error && { warning: error }),
+      ...(error && { error }),
+      ...(warning && { warning }),
+      ...(warnings.length > 0 && { save_warnings: warnings }),
     });
   } catch (err) {
     return NextResponse.json(
