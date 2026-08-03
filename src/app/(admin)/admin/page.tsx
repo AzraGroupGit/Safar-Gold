@@ -33,6 +33,8 @@ export default async function AdminDashboard() {
 
   // Data pasar dari cron terakhir (atau fetch live kalau belum ada)
   const xauUsd = parseFloat(s.last_cron_xau_usd || "0");
+  const xagUsd = parseFloat(s.last_cron_xag_usd || "0");
+  const xpdUsd = parseFloat(s.last_cron_xpd_usd || "0");
   const usdIdr = parseFloat(s.last_cron_usd_idr || "0") || parseFloat(s.usd_idr_rate || "16300");
   const lastCron = s.last_cron_time
     ? new Date(s.last_cron_time).toLocaleString("id-ID", { hour: "2-digit", minute: "2-digit" })
@@ -79,13 +81,21 @@ export default async function AdminDashboard() {
 
       <div className="rounded-2xl border border-border/60 bg-white p-6 shadow-sm">
         <PriceApprovalPanel
+          goldTypes={goldTypes}
           initialHargaDasarJual={String(hargaDasarJual)}
           initialAcuanBuyback={String(acuanBuybackLM)}
           initialAdjJual={s.adjustment_jual ?? "0"}
           initialAdjBeli={s.adjustment_beli ?? "0"}
           initialAdjPerhiasan={s.adjustment_perhiasan ?? "0"}
+          premiPecahan={s.premi_pecahan ?? "{}"}
+          spreadBuybackLM={s.spread_buyback_lm ?? "{}"}
+          offsetK24s={parseFloat(s.offset_perhiasan_k24s || "320000")}
+          offsetK24={parseFloat(s.offset_perhiasan_k24 || "50000")}
+          dasarPerhiasanOffset={parseFloat(s.dasar_perhiasan_offset || "505000")}
           baseGoldIdr={baseGoldIdr}
           xauUsd={xauUsd}
+          xagUsd={xagUsd}
+          xpdUsd={xpdUsd}
           usdIdr={usdIdr}
           lastCronTime={lastCron}
         />
