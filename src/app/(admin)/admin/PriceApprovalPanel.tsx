@@ -149,6 +149,16 @@ export default function PriceApprovalPanel({
     return parseInt(n || "0").toLocaleString("id-ID");
   }
 
+  function addDots(n: string) {
+    const clean = n.replace(/\D/g, "");
+    if (!clean) return "";
+    return parseInt(clean, 10).toLocaleString("id-ID");
+  }
+
+  function cleanNumber(n: string) {
+    return n.replace(/\D/g, "");
+  }
+
   return (
     <div className="space-y-6">
       <div className="rounded-2xl border border-border/60 bg-white p-6 shadow-sm">
@@ -204,20 +214,32 @@ export default function PriceApprovalPanel({
               Harga Dasar Jual LM (Rp/gram)
             </label>
             <input
-              type="number"
-              value={hargaDasar}
-              onChange={(e) => setHargaDasar(e.target.value)}
+              type="text"
+              inputMode="numeric"
+              value={addDots(hargaDasar)}
+              onChange={(e) => setHargaDasar(cleanNumber(e.target.value))}
               className="mb-2 w-full rounded-lg border border-border/60 bg-white px-4 py-2.5 text-sm font-bold text-text focus:border-gold focus:outline-none"
             />
             <p className="text-xs text-text-muted">Harga per gram untuk LM 50gr & 100gr. Pecahan lain + premi.</p>
-            <p className="mt-1 text-xs text-gold-dark">
-              Rekomendasi: Intl +3% = Rp {Math.round(baseGoldIdr * 1.03).toLocaleString("id-ID")}
+            <p className="mt-1 flex items-center gap-2 text-xs text-gold-dark">
+              <span>Rekomendasi: Intl +3% = Rp {Math.round(baseGoldIdr * 1.03).toLocaleString("id-ID")}</span>
+              {parseInt(hargaDasar) !== Math.round(baseGoldIdr * 1.03) && (
+                <button
+                  onClick={() => setHargaDasar(String(Math.round(baseGoldIdr * 1.03)))}
+                  className="inline-flex items-center justify-center rounded-md border border-gold/30 p-0.5 text-gold-dark hover:bg-gold/10"
+                  title="Kembali ke rekomendasi"
+                >
+                  <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.992 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182" />
+                  </svg>
+                </button>
+              )}
             </p>
             <div className="mt-2">
               <label className="mb-1 block text-xs font-medium text-text-muted">Adjustment Jual (±)</label>
               <div className="flex items-center gap-2">
                 <input
-                  type="range" min="-50000" max="50000" step="1000"
+                  type="range" min="-100000" max="100000" step="1000"
                   value={adjJual}
                   onChange={(e) => setAdjJual(e.target.value)}
                   className="flex-1 accent-gold"
@@ -232,27 +254,39 @@ export default function PriceApprovalPanel({
               Acuan Buyback LM (Rp/gr, RM 1-2)
             </label>
             <input
-              type="number"
-              value={acuanBuyback}
-              onChange={(e) => setAcuanBuyback(e.target.value)}
+              type="text"
+              inputMode="numeric"
+              value={addDots(acuanBuyback)}
+              onChange={(e) => setAcuanBuyback(cleanNumber(e.target.value))}
               className="mb-2 w-full rounded-lg border border-border/60 bg-white px-4 py-2.5 text-sm font-bold text-text focus:border-gold focus:outline-none"
             />
             <p className="text-xs text-text-muted">Harga buyback ANTAM Certi RM 1-2gr. Kategori lain dihitung otomatis.</p>
-            <p className="mt-1 text-xs text-gold-dark">
-              Rekomendasi: Intl −3% = Rp {Math.round(baseGoldIdr * 0.97).toLocaleString("id-ID")}
+            <p className="mt-1 flex items-center gap-2 text-xs text-gold-dark">
+              <span>Rekomendasi: Intl −3% = Rp {Math.round(baseGoldIdr * 0.97).toLocaleString("id-ID")}</span>
+              {parseInt(acuanBuyback) !== Math.round(baseGoldIdr * 0.97) && (
+                <button
+                  onClick={() => setAcuanBuyback(String(Math.round(baseGoldIdr * 0.97)))}
+                  className="inline-flex items-center justify-center rounded-md border border-gold/30 p-0.5 text-gold-dark hover:bg-gold/10"
+                  title="Kembali ke rekomendasi"
+                >
+                  <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.992 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182" />
+                  </svg>
+                </button>
+              )}
             </p>
             <div className="mt-2 grid grid-cols-2 gap-2">
               <div>
                 <label className="mb-1 block text-xs font-medium text-text-muted">Adjustment Buyback</label>
                 <div className="flex items-center gap-2">
-                  <input type="range" min="-50000" max="50000" step="1000" value={adjBeli} onChange={(e) => setAdjBeli(e.target.value)} className="flex-1 accent-gold" />
+                  <input type="range" min="-100000" max="100000" step="1000" value={adjBeli} onChange={(e) => setAdjBeli(e.target.value)} className="flex-1 accent-gold" />
                   <span className="w-20 text-right text-sm font-semibold text-gold-dark">{fmt(adjBeli)}</span>
                 </div>
               </div>
               <div>
                 <label className="mb-1 block text-xs font-medium text-text-muted">Adj. Perhiasan</label>
                 <div className="flex items-center gap-2">
-                  <input type="range" min="-50000" max="50000" step="1000" value={adjPerhiasan} onChange={(e) => setAdjPerhiasan(e.target.value)} className="flex-1 accent-gold" />
+                  <input type="range" min="-100000" max="100000" step="1000" value={adjPerhiasan} onChange={(e) => setAdjPerhiasan(e.target.value)} className="flex-1 accent-gold" />
                   <span className="w-20 text-right text-sm font-semibold text-gold-dark">{fmt(adjPerhiasan)}</span>
                 </div>
               </div>
