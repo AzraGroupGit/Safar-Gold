@@ -43,7 +43,7 @@ export default function Navbar() {
             : "-translate-y-[130px] opacity-0"
         }`}
       >
-        <div className="flex items-center gap-3 rounded-[20px] border border-border/60 bg-white/90 px-4 py-3 shadow-lg shadow-black/[0.03] backdrop-blur-xl md:gap-6 md:rounded-[24px] md:px-8 md:py-4">
+        <div className="flex items-center gap-3 rounded-[20px] border border-border/60 bg-white/70 px-4 py-3 shadow-lg shadow-black/[0.03] backdrop-blur-md md:gap-6 md:rounded-[24px] md:px-8 md:py-4">
           <Link href="/" className="flex shrink-0 items-center">
             <img
               src="/logo-1.webp"

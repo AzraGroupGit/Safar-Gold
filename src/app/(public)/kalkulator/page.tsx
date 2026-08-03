@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Calculator from "@/components/Calculator";
 import LegalNotice from "@/components/LegalNotice";
 import { getAllGoldTypes, getFormattedTodayPrices, getPublicSettings, formatRupiah } from "@/lib/gold-api";
@@ -14,7 +15,17 @@ export default async function KalkulatorPage() {
   const goldTypes = await getAllGoldTypes();
   const prices = await getFormattedTodayPrices();
   const settings = await getPublicSettings();
-  const hasData = prices.length > 0 && prices[0].buyPrice > 0;
+  const hasData = prices.length > 0 && prices.some(p => p.buyPrice > 0 || p.sellPrice > 0);
+
+  const highlights = [
+    { id: "antam-1", label: "Antam 1gr (Jual)", key: "buyPrice" as const },
+    { id: "ph-k24s", label: "Buyback 24K", key: "sellPrice" as const },
+    { id: "bb-certi-1-2", label: "Buyback Certi 1-2gr", key: "sellPrice" as const },
+    { id: "ll-perak", label: "Perak / Gram", key: "sellPrice" as const },
+  ].map((h) => {
+    const match = prices.find((p) => p.goldTypeId === h.id);
+    return { ...h, price: match?.[h.key] ?? 0, found: !!match && match[h.key] > 0 };
+  });
 
   return (
     <main className="bg-white">
@@ -59,18 +70,27 @@ export default async function KalkulatorPage() {
               </div>
               <div className="divide-y divide-border/30 p-6">
                 {hasData ? (
-                  prices.map((price) => (
-                    <div key={price.id} className="flex items-center justify-between py-3 first:pt-0 last:pb-0">
-                      <div>
-                        <p className="text-sm font-medium text-text">{price.goldName}</p>
-                        <p className="text-xs text-text-muted">{price.karat}K · {price.category}</p>
+                  <>
+                    {highlights.map((h) => (
+                      <div key={h.id} className="flex items-center justify-between py-3 first:pt-0">
+                        <p className="text-sm font-medium text-text">{h.label}</p>
+                        <p className="text-sm font-bold text-gold-dark">
+                          {h.found ? formatRupiah(h.price) : "-"}
+                        </p>
                       </div>
-                      <div className="text-right">
-                        <p className="text-sm font-bold text-gold-dark">{formatRupiah(price.buyPrice)}</p>
-                        <p className="text-xs text-text-muted">Beli: {formatRupiah(price.sellPrice)}</p>
-                      </div>
+                    ))}
+                    <div className="pt-4">
+                      <Link
+                        href="/harga"
+                        className="flex items-center justify-center gap-1.5 rounded-xl border border-gold/40 px-4 py-2.5 text-sm font-semibold text-gold-dark transition-all hover:border-gold hover:bg-gold/5"
+                      >
+                        Lihat Harga Lengkap
+                        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                        </svg>
+                      </Link>
                     </div>
-                  ))
+                  </>
                 ) : (
                   <p className="py-8 text-center text-sm text-text-muted">Belum ada data harga hari ini.</p>
                 )}
