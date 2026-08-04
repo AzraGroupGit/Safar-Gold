@@ -2,6 +2,7 @@
 
 import { getAllGoldTypes, getFormattedTodayPrices, formatRupiah } from "@/lib/gold-api";
 import PriceApprovalPanel from "./PriceApprovalPanel";
+import AdminSkeleton from "@/components/admin/AdminSkeleton";
 import { createAnonClient } from "@/lib/supabase/anon";
 import { useState, useEffect } from "react";
 
@@ -60,7 +61,7 @@ export default function AdminDashboard() {
   }, []);
 
   if (loading || !settings) {
-    return <div className="p-8 text-center">Memuat...</div>;
+    return <AdminSkeleton />;
   }
 
   const s = settings;

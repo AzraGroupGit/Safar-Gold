@@ -59,7 +59,6 @@ export default function TabbedPricelist({
                 {isBuyback && <th className="px-5 py-4 md:px-8">Karat</th>}
                 <th className="px-5 py-4 md:px-8">Harga / Gram</th>
                 {isLM && <th className="px-5 py-4 md:px-8">Total</th>}
-                {!isLM && <th className="px-5 py-4 md:px-8">Spread</th>}
               </tr>
             </thead>
             <tbody className="divide-y divide-border/30">
@@ -100,16 +99,6 @@ export default function TabbedPricelist({
                       <span className="text-sm font-bold text-gold-dark">
                         {formatRupiah(price.buyPrice * price.weight)}
                       </span>
-                    </td>
-                  )}
-                  {!isLM && (
-                    <td className="px-5 py-4 md:px-8">
-                      <p className="text-sm text-text-muted">
-                        {formatRupiah(price.spread)}
-                      </p>
-                      <p className="text-xs text-text-light">
-                        {price.spreadPercent}%
-                      </p>
                     </td>
                   )}
                 </tr>
