@@ -133,7 +133,7 @@ export default function PriceApprovalPanel({
   async function handleFetchAcuan() {
     setFetchStatus({ type: "loading", msg: "Fetching..." });
     try {
-      const res = await fetch("/api/cron/update-prices");
+      const res = await fetch("/api/cron/update-prices?force=true");
       const data = await res.json();
       if (data.success) {
         setFetchStatus({ type: "success", msg: `OK! XAU $${data.xauUsdPerOz}, JISDOR Rp ${data.usdIdrRate.toLocaleString("id-ID")}. Refresh.` });

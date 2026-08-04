@@ -1,10 +1,35 @@
 import { NextResponse } from "next/server";
 import { fetchInternationalGoldPrice, setSetting } from "@/lib/gold-api";
+import { createAnonClient } from "@/lib/supabase/anon";
 
 export const dynamic = "force-dynamic";
 
-export async function GET(_request: Request) {
+export async function GET(request: Request) {
   try {
+    const { searchParams } = new URL(request.url);
+    const isForced = searchParams.get("force") === "true";
+    const today = new Date().toISOString().split("T")[0];
+
+    if (!isForced) {
+      const supabase = createAnonClient();
+      const { data: lastCron } = await supabase
+        .from("app_settings")
+        .select("value")
+        .eq("key", "last_cron_time")
+        .single();
+
+      if (lastCron?.value) {
+        const lastDate = lastCron.value.split("T")[0];
+        if (lastDate === today) {
+          return NextResponse.json({
+            success: true,
+            skipped: true,
+            message: `Already fetched today (${today}). Skipping.`,
+            last_cron: lastCron.value,
+          });
+        }
+      }
+    }
     const { xauUsdPerOz, xagUsdPerOz, xpdUsdPerOz, usdIdrRate, error, warning } =
       await fetchInternationalGoldPrice();
 
