@@ -67,10 +67,10 @@ export default function AdminPengaturanClient({
           <p className="mb-5 text-xs text-text-muted">Terakhir update: {lastUpdate} · Cron: 06:00 WIB</p>
           <div className="space-y-4">
             <div>
-              <label className="mb-2 block text-sm font-semibold text-text">GoldAPI Key</label>
-              <input type="password" value={settings.apiKey} onChange={(e) => handleSettingChange("apiKey", e.target.value)} placeholder="goldapi-xxxxxxxxxxxx" className={fieldClass} />
+              <label className="mb-2 block text-sm font-semibold text-text">MetalpriceAPI Key</label>
+              <input type="password" value={settings.apiKey} onChange={(e) => handleSettingChange("apiKey", e.target.value)} placeholder="xxxxxxxxxxxxxxxxxxxx" className={fieldClass} />
               <p className="mt-1.5 text-xs text-text-light">
-                Daftar gratis di <a href="https://www.goldapi.io" className="text-gold hover:underline" target="_blank" rel="noopener">goldapi.io</a>. Kosongkan untuk fallback CoinGecko.
+                Daftar gratis di <a href="https://metalpriceapi.com" className="text-gold hover:underline" target="_blank" rel="noopener">metalpriceapi.com</a>. Mendukung XAU, XAG, XPD, dan IDR dalam 1 call.
               </p>
             </div>
             <div>
