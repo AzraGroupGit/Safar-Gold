@@ -159,7 +159,11 @@ export default function AdminHargaClient({ goldTypes, prices }: { goldTypes: Gol
   function isBuyable(category: string) { return category === "lm"; }
   function getPrice(gt: GoldTypeRow, price: FormattedPrice | undefined) {
     if (!hasData || !price) return null;
-    if (isBuyable(gt.category)) return price.buyPrice > 0 ? price.buyPrice : null;
+    if (isBuyable(gt.category)) {
+      const perGram = price.buyPrice;
+      if (perGram <= 0) return null;
+      return gt.weight ? Math.round(perGram * gt.weight) : perGram;
+    }
     return price.sellPrice > 0 ? price.sellPrice : null;
   }
   function getPriceLabel(category: string) { return isBuyable(category) ? "Harga Jual" : "Harga Buyback"; }
