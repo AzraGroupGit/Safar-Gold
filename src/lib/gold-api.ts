@@ -509,6 +509,79 @@ export async function getFormattedTodayPrices(): Promise<FormattedPrice[]> {
   });
 }
 
+// ---------- Median Factors for Auto-Suggest ----------
+export async function getMedianFactors(): Promise<{
+  faktorJual: number | null;
+  faktorBuyback: number | null;
+  suggestedJual: number | null;
+  suggestedBuyback: number | null;
+}> {
+  const supabase = createAnonClient();
+  const days = 30;
+
+  const { data } = await supabase
+    .from("price_history")
+    .select("date, gold_type_id, buy_price, sell_price, base_price")
+    .in("gold_type_id", ["antam-100", "bb-certi-1-2"])
+    .order("date", { ascending: false })
+    .limit(days * 2);
+
+  if (!data || data.length === 0) {
+    return { faktorJual: null, faktorBuyback: null, suggestedJual: null, suggestedBuyback: null };
+  }
+
+  const faktorJualList: number[] = [];
+  const faktorBuybackList: number[] = [];
+
+  const byDate: Record<string, { jualBase: number; bbBase: number }> = {};
+  for (const row of data) {
+    if (!byDate[row.date]) byDate[row.date] = { jualBase: 0, bbBase: 0 };
+    if (row.gold_type_id === "antam-100" && row.buy_price > 0 && row.base_price > 0) {
+      byDate[row.date]!.jualBase = row.buy_price / row.base_price;
+    }
+    if (row.gold_type_id === "bb-certi-1-2" && row.sell_price > 0 && row.base_price > 0) {
+      byDate[row.date]!.bbBase = row.sell_price / row.base_price;
+    }
+  }
+
+  for (const date of Object.keys(byDate).sort().reverse()) {
+    const entry = byDate[date]!;
+    if (entry.jualBase > 0) faktorJualList.push(entry.jualBase);
+    if (entry.bbBase > 0) faktorBuybackList.push(entry.bbBase);
+    if (faktorJualList.length >= days && faktorBuybackList.length >= days) break;
+  }
+
+  if (faktorJualList.length === 0 && faktorBuybackList.length === 0) {
+    return { faktorJual: null, faktorBuyback: null, suggestedJual: null, suggestedBuyback: null };
+  }
+
+  const medianJual = faktorJualList.length > 0 ? median(faktorJualList) : null;
+  const medianBB = faktorBuybackList.length > 0 ? median(faktorBuybackList) : null;
+
+  const settings = await getSetting("last_cron_xau_usd");
+  const xauUsd = parseFloat(settings || "0");
+  const usdIdrRate = parseFloat(await getSetting("last_cron_usd_idr") || await getSetting("usd_idr_rate") || "16300");
+
+  if (!xauUsd || xauUsd <= 0) {
+    return { faktorJual: medianJual, faktorBuyback: medianBB, suggestedJual: null, suggestedBuyback: null };
+  }
+
+  const baseGoldIdr = (xauUsd * usdIdrRate) / 31.1034768;
+
+  return {
+    faktorJual: medianJual,
+    faktorBuyback: medianBB,
+    suggestedJual: medianJual ? Math.round(baseGoldIdr * medianJual) : null,
+    suggestedBuyback: medianBB ? Math.round(baseGoldIdr * medianBB) : null,
+  };
+}
+
+function median(arr: number[]): number {
+  const sorted = [...arr].sort((a, b) => a - b);
+  const mid = Math.floor(sorted.length / 2);
+  return sorted.length % 2 === 0 ? (sorted[mid - 1]! + sorted[mid]!) / 2 : sorted[mid]!;
+}
+
 // ---------- Formatters ----------
 export function formatRupiah(amount: number): string {
   return new Intl.NumberFormat("id-ID", {
