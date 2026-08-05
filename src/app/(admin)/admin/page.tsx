@@ -1,6 +1,6 @@
 'use client';
 
-import { getAllGoldTypes, getFormattedTodayPrices, formatRupiah } from "@/lib/gold-api";
+import { getAllGoldTypes, getFormattedTodayPrices, getMedianFactors, formatRupiah } from "@/lib/gold-api";
 import PriceApprovalPanel from "./PriceApprovalPanel";
 import AdminSkeleton from "@/components/admin/AdminSkeleton";
 import { createAnonClient } from "@/lib/supabase/anon";
@@ -31,17 +31,20 @@ export default function AdminDashboard() {
   const [hasData, setHasData] = useState(false);
   const [loading, setLoading] = useState(true);
   const [settings, setSettings] = useState<any>(null);
+  const [medianFactors, setMedianFactors] = useState<any>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [gt, pr] = await Promise.all([
+        const [gt, pr, mf] = await Promise.all([
           getAllGoldTypes(),
-          getFormattedTodayPrices()
+          getFormattedTodayPrices(),
+          getMedianFactors(),
         ]);
         setGoldTypes(gt);
         setPrices(pr);
         setHasData(pr.length > 0 && pr.some(p => p.buyPrice > 0 || p.sellPrice > 0));
+        setMedianFactors(mf);
       } catch (err) {
         console.error("Failed to fetch dashboard data:", err);
       } finally {
@@ -130,6 +133,8 @@ export default function AdminDashboard() {
           xpdUsd={xpdUsd}
           usdIdr={usdIdr}
           lastCronTime={lastCron}
+          suggestedJual={medianFactors?.suggestedJual ?? null}
+          suggestedBuyback={medianFactors?.suggestedBuyback ?? null}
         />
       </div>
     </div>
