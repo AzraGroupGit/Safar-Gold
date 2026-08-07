@@ -1,5 +1,5 @@
 import { getSetting } from "@/lib/gold-api";
-import TestimoniCarouselWrapper from "@/components/TestimoniCarouselWrapper";
+import FeaturableWidget from "@/components/FeaturableWidget";
 
 export default async function Testimoni() {
   const widgetId = (await getSetting("google_reviews_widget_id")) || "example";
@@ -15,7 +15,7 @@ export default async function Testimoni() {
           <h2 className="font-serif text-2xl font-bold text-text md:text-4xl lg:text-5xl">Dipercaya Pelanggan</h2>
           <p className="mx-auto mt-5 max-w-xl text-text-muted">Review asli dari pelanggan kami di Google Maps.</p>
         </div>
-        <TestimoniCarouselWrapper widgetId={widgetId} />
+        <FeaturableWidget widgetId={widgetId} />
       </div>
     </section>
   );
