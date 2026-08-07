@@ -41,6 +41,12 @@ yarn-error.log*
 next-env.d.ts
 
 # agent & build artifacts
+/.opencode
+/.claude
 AGENTS.md
 CLAUDE.md
 build-output.txt
+
+# local files
+FORMULA.txt
+Historis_Pricelist_15Jul-4Aug2026.xlsx

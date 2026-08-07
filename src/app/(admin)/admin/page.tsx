@@ -133,6 +133,9 @@ export default function AdminDashboard() {
           xpdUsd={xpdUsd}
           usdIdr={usdIdr}
           lastCronTime={lastCron}
+          initialAntamPrice={s.antam_price ?? ""}
+          initialGlobalGoldPrice={s.global_gold_price ?? ""}
+          initialGoogleReviewsWidgetId={s.google_reviews_widget_id ?? ""}
           suggestedJual={medianFactors?.suggestedJual ?? null}
           suggestedBuyback={medianFactors?.suggestedBuyback ?? null}
         />

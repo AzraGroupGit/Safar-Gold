@@ -10,9 +10,9 @@
     "semantic_hash": "9b77af189a21a7a64e4bd7a426f64176"
   },
   "package.json": {
-    "mtime": 1786083422.711169,
-    "ast_hash": "d83aa572ac00e1dee76e600b3b2bfc71",
-    "semantic_hash": ""
+    "mtime": 1785479551.1897404,
+    "ast_hash": "370d3749eb8d4d4400aed02e05006dea",
+    "semantic_hash": "370d3749eb8d4d4400aed02e05006dea"
   },
   "postcss.config.mjs": {
     "mtime": 1785229881.8224854,
@@ -20,8 +20,8 @@
     "semantic_hash": "239f3ebf717465dc636818a1a619398d"
   },
   "src/app/(admin)/admin/PriceApprovalPanel.tsx": {
-    "mtime": 1786083654.2068737,
-    "ast_hash": "ece171cd122af43de05ae1590ffe72c6",
+    "mtime": 1786077008.385744,
+    "ast_hash": "9fc54f8c4a09f6f3afc27fa44c08f5d6",
     "semantic_hash": ""
   },
   "src/app/(admin)/admin/harga/AdminHargaClient.tsx": {
@@ -50,8 +50,8 @@
     "semantic_hash": "1064753654b8a8ea5fe75b4e1996fec0"
   },
   "src/app/(admin)/admin/page.tsx": {
-    "mtime": 1786083685.5803294,
-    "ast_hash": "c262b366fce08063ab57445e0155a386",
+    "mtime": 1786077033.6498473,
+    "ast_hash": "0062a20444b6de4335f8f7d7ba4d6be4",
     "semantic_hash": ""
   },
   "src/app/(admin)/admin/pengaturan/AdminPengaturanClient.tsx": {
@@ -210,9 +210,9 @@
     "semantic_hash": "3027c3f624d4d7dd40ea214586b76a67"
   },
   "src/components/Testimoni.tsx": {
-    "mtime": 1786083492.7582788,
-    "ast_hash": "d547ebc1d390d03dedd4d912523e8ee3",
-    "semantic_hash": ""
+    "mtime": 1785229882.0949342,
+    "ast_hash": "bc301d63da1cc67a3c28e804171706ee",
+    "semantic_hash": "bc301d63da1cc67a3c28e804171706ee"
   },
   "src/components/WhatsAppButton.tsx": {
     "mtime": 1785481926.558062,
@@ -362,11 +362,6 @@
   "src/components/LivePriceBand.tsx": {
     "mtime": 1786076891.1250618,
     "ast_hash": "b29d16e5c125a7430dd45055c575c3cf",
-    "semantic_hash": ""
-  },
-  "src/components/ReviewsCarousel.tsx": {
-    "mtime": 1786083476.2215621,
-    "ast_hash": "36969b98b967eacec0cb07675d94286c",
     "semantic_hash": ""
   }
 }

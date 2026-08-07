@@ -1,0 +1,28 @@
+# graphify exclusions — gitignore syntax, applied on top of .gitignore.
+# Goal: keep config-key noise out of the graph so community cohesion
+# scores reflect real code coupling instead of JSON key soup.
+
+# Dependency lockfile — duplicates every entry already in package.json,
+# which is why the "dependencies" community showed chart.js/next twice.
+package-lock.json
+
+# TypeScript config — parses into ~28 nodes ("dom", "esnext", path globs)
+# that form the lowest-cohesion community (0.07) and connect to nothing.
+tsconfig.json
+
+# Agent/editor local state — no architectural meaning.
+# .claude/settings.local.json is the file that produced zero nodes.
+.claude/
+
+# Deployment + tool manifests: single-key JSON, isolated nodes only.
+vercel.json
+opencode.json
+
+# graphify's own output (graph.json is ~240 KB of serialized graph).
+graphify-out/
+
+# Deliberately NOT ignored:
+#   package.json    — keeps the tech stack visible; the lockfile was the noise
+#   next.config.ts, eslint.config.mjs, postcss.config.mjs — real TS/JS,
+#                     parsed as code rather than as config keys
+#   supabase/*.sql  — now parseable via the tree-sitter-sql extra

@@ -24,6 +24,9 @@ interface Props {
   lastCronTime: string | null;
   suggestedJual: number | null;
   suggestedBuyback: number | null;
+  initialAntamPrice: string;
+  initialGlobalGoldPrice: string;
+  initialGoogleReviewsWidgetId: string;
 }
 
 function formatRupiah(n: number): string {
@@ -50,6 +53,9 @@ export default function PriceApprovalPanel({
   lastCronTime,
   suggestedJual,
   suggestedBuyback,
+  initialAntamPrice,
+  initialGlobalGoldPrice,
+  initialGoogleReviewsWidgetId,
 }: Props) {
   const [hargaDasar, setHargaDasar] = useState(initialHargaDasarJual);
   const [acuanBuyback, setAcuanBuyback] = useState(initialAcuanBuyback);
@@ -59,6 +65,14 @@ export default function PriceApprovalPanel({
   const [showPreviewModal, setShowPreviewModal] = useState(false);
   const [status, setStatus] = useState<{ type: "idle" | "loading" | "success" | "error"; msg: string }>({ type: "idle", msg: "" });
   const [fetchStatus, setFetchStatus] = useState<{ type: "idle" | "loading" | "success" | "error"; msg: string }>({ type: "idle", msg: "" });
+  const [antamPrice, setAntamPrice] = useState(initialAntamPrice);
+  const [globalGoldPrice, setGlobalGoldPrice] = useState(initialGlobalGoldPrice);
+  const [prevAntamPrice, setPrevAntamPrice] = useState(initialAntamPrice);
+  const [prevGlobalGoldPrice, setPrevGlobalGoldPrice] = useState(initialGlobalGoldPrice);
+  const [antamSaveStatus, setAntamSaveStatus] = useState<"idle" | "saving" | "saved">("idle");
+  const [globalSaveStatus, setGlobalSaveStatus] = useState<"idle" | "saving" | "saved">("idle");
+  const [reviewsWidgetId, setReviewsWidgetId] = useState(initialGoogleReviewsWidgetId);
+  const [reviewsSaveStatus, setReviewsSaveStatus] = useState<"idle" | "saving" | "saved">("idle");
 
   const preview = useMemo(() => {
     const hd = parseInt(hargaDasar) || 0;
@@ -149,8 +163,65 @@ export default function PriceApprovalPanel({
     }
   }
 
-  function fmt(n: string) {
-    return parseInt(n || "0").toLocaleString("id-ID");
+  async function handleSaveAntamPrice(value: string) {
+    const cleaned = cleanNumber(value);
+    if (cleaned === cleanNumber(prevAntamPrice)) return;
+    setAntamSaveStatus("saving");
+    try {
+      await fetch("/api/admin/update-settings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          settings: {
+            antam_price_prev: cleanNumber(prevAntamPrice),
+            antam_price: cleaned,
+          },
+        }),
+      });
+      setPrevAntamPrice(cleaned);
+      setAntamSaveStatus("saved");
+      setTimeout(() => setAntamSaveStatus("idle"), 2000);
+    } catch {
+      setAntamSaveStatus("idle");
+    }
+  }
+
+  async function handleSaveGlobalGoldPrice(value: string) {
+    const cleaned = cleanNumber(value);
+    if (cleaned === cleanNumber(prevGlobalGoldPrice)) return;
+    setGlobalSaveStatus("saving");
+    try {
+      await fetch("/api/admin/update-settings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          settings: {
+            global_gold_price_prev: cleanNumber(prevGlobalGoldPrice),
+            global_gold_price: cleaned,
+          },
+        }),
+      });
+      setPrevGlobalGoldPrice(cleaned);
+      setGlobalSaveStatus("saved");
+      setTimeout(() => setGlobalSaveStatus("idle"), 2000);
+    } catch {
+      setGlobalSaveStatus("idle");
+    }
+  }
+
+  async function handleSaveReviewsWidgetId(value: string) {
+    setReviewsSaveStatus("saving");
+    try {
+      await fetch("/api/admin/update-settings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ settings: { google_reviews_widget_id: value.trim() } }),
+      });
+      setReviewsSaveStatus("saved");
+      setTimeout(() => setReviewsSaveStatus("idle"), 2000);
+    } catch {
+      setReviewsSaveStatus("idle");
+    }
   }
 
   function addDots(n: string) {
@@ -161,6 +232,21 @@ export default function PriceApprovalPanel({
 
   function cleanNumber(n: string) {
     return n.replace(/\D/g, "");
+  }
+
+  // Signed variants for ± adjustment fields (allow a leading minus).
+  function cleanSigned(n: string) {
+    const neg = n.trim().startsWith("-");
+    const digits = n.replace(/\D/g, "");
+    if (!digits) return neg ? "-" : "";
+    return (neg ? "-" : "") + digits;
+  }
+
+  function addDotsSigned(n: string) {
+    const neg = n.trim().startsWith("-");
+    const digits = n.replace(/\D/g, "");
+    if (!digits) return neg ? "-" : "";
+    return (neg ? "-" : "") + parseInt(digits, 10).toLocaleString("id-ID");
   }
 
   return (
@@ -259,15 +345,13 @@ export default function PriceApprovalPanel({
             </div>
             <div className="mt-2">
               <label className="mb-1 block text-xs font-medium text-text-muted">Adjustment Jual (±)</label>
-              <div className="flex items-center gap-2">
-                <input
-                  type="range" min="-100000" max="100000" step="1000"
-                  value={adjJual}
-                  onChange={(e) => setAdjJual(e.target.value)}
-                  className="flex-1 accent-gold"
-                />
-                <span className="w-24 text-right text-sm font-semibold text-gold-dark">{fmt(adjJual)}</span>
-              </div>
+              <input
+                type="text"
+                inputMode="numeric"
+                value={addDotsSigned(adjJual)}
+                onChange={(e) => setAdjJual(cleanSigned(e.target.value))}
+                className="w-full rounded-lg border border-border/60 bg-white px-4 py-2.5 text-sm font-semibold text-gold-dark focus:border-gold focus:outline-none"
+              />
             </div>
           </div>
 
@@ -318,45 +402,134 @@ export default function PriceApprovalPanel({
             <div className="mt-2 grid grid-cols-2 gap-2">
               <div>
                 <label className="mb-1 block text-xs font-medium text-text-muted">Adjustment Buyback</label>
-                <div className="flex items-center gap-2">
-                  <input type="range" min="-100000" max="100000" step="1000" value={adjBeli} onChange={(e) => setAdjBeli(e.target.value)} className="flex-1 accent-gold" />
-                  <span className="w-20 text-right text-sm font-semibold text-gold-dark">{fmt(adjBeli)}</span>
-                </div>
+                <input
+                  type="text"
+                  inputMode="numeric"
+                  value={addDotsSigned(adjBeli)}
+                  onChange={(e) => setAdjBeli(cleanSigned(e.target.value))}
+                  className="w-full rounded-lg border border-border/60 bg-white px-4 py-2.5 text-sm font-semibold text-gold-dark focus:border-gold focus:outline-none"
+                />
               </div>
               <div>
                 <label className="mb-1 block text-xs font-medium text-text-muted">Adj. Perhiasan</label>
-                <div className="flex items-center gap-2">
-                  <input type="range" min="-100000" max="100000" step="1000" value={adjPerhiasan} onChange={(e) => setAdjPerhiasan(e.target.value)} className="flex-1 accent-gold" />
-                  <span className="w-20 text-right text-sm font-semibold text-gold-dark">{fmt(adjPerhiasan)}</span>
-                </div>
-              </div>
+                <input
+                  type="text"
+                  inputMode="numeric"
+                  value={addDotsSigned(adjPerhiasan)}
+                  onChange={(e) => setAdjPerhiasan(cleanSigned(e.target.value))}
+                  className="w-full rounded-lg border border-border/60 bg-white px-4 py-2.5 text-sm font-semibold text-gold-dark focus:border-gold focus:outline-none"
+                />
             </div>
           </div>
         </div>
 
-        <div className="mt-6 flex items-center gap-4">
-          <button
-            onClick={() => setShowPreviewModal(true)}
-            className="rounded-xl border-2 border-gold/40 px-6 py-3 text-sm font-semibold text-gold-dark transition-all hover:border-gold hover:bg-gold/5"
-          >
-            Preview Harga
-          </button>
-          <button
-            onClick={handlePublish}
-            disabled={status.type === "loading"}
-            className="gold-gradient-bg rounded-xl px-8 py-3 text-sm font-semibold text-white shadow-lg shadow-gold/25 transition-all hover:shadow-xl hover:shadow-gold/30 disabled:opacity-60"
-          >
-            {status.type === "loading" ? "Memproses..." : "Publikasikan"}
-          </button>
-          {status.msg && (
-            <span className={`text-sm font-medium ${status.type === "success" ? "text-green-600" : status.type === "error" ? "text-red-500" : "text-text-muted"}`}>
-              {status.type === "loading" && (
-                <span className="mr-1 inline-block h-3 w-3 animate-spin rounded-full border-2 border-gold border-t-transparent" />
-              )}
-              {status.msg}
-            </span>
-          )}
+        <div className="mt-4 border-t border-border/30 pt-4">
+          <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-text-muted">
+            Google Reviews Widget ID
+          </label>
+          <p className="mb-1 text-[11px] text-text-muted">
+            Dari Featurable dashboard → Embed → API
+          </p>
+          <div className="flex gap-2">
+            <input
+              type="text"
+              value={reviewsWidgetId}
+              onChange={(e) => setReviewsWidgetId(e.target.value)}
+              onBlur={(e) => handleSaveReviewsWidgetId(e.target.value)}
+              placeholder="example"
+              className="flex-1 rounded-lg border border-border/60 bg-white px-3 py-2 text-sm text-text focus:border-gold focus:outline-none font-mono"
+            />
+            <button
+              onClick={() => handleSaveReviewsWidgetId(reviewsWidgetId)}
+              disabled={reviewsSaveStatus === "saving"}
+              className="rounded-lg border-2 border-gold/40 px-4 py-2 text-sm font-semibold text-gold-dark transition-all hover:border-gold hover:bg-gold/5 disabled:opacity-50"
+            >
+              {reviewsSaveStatus === "saving" ? "..." : reviewsSaveStatus === "saved" ? "✓" : "Simpan"}
+            </button>
+          </div>
         </div>
+      </div>
+      </div>
+
+      <div className="rounded-2xl border border-border/60 bg-white p-6 shadow-sm">
+        <h3 className="mb-1 font-serif text-lg font-semibold text-text">Tampilan Harga di Homepage</h3>
+        <p className="mb-5 text-xs text-text-muted">
+          Harga yang muncul di kartu bagian bawah Hero. Tidak memengaruhi perhitungan harga jual/buyback.
+        </p>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div className="rounded-xl border border-border/40 bg-surface p-4">
+            <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-text-muted">
+              Emas Dunia (Rp/gram)
+            </label>
+            <p className="mb-1 text-[11px] text-text-muted">
+              Biarkan kosong untuk gunakan harga otomatis dari data live
+            </p>
+            <div className="relative">
+              <input
+                type="text"
+                inputMode="numeric"
+                value={addDots(globalGoldPrice)}
+                onChange={(e) => setGlobalGoldPrice(cleanNumber(e.target.value))}
+                onBlur={(e) => handleSaveGlobalGoldPrice(e.target.value)}
+                placeholder="Kosong = auto"
+                className="w-full rounded-lg border border-border/60 bg-white px-3 py-2 text-sm font-bold text-text focus:border-gold focus:outline-none"
+              />
+              {globalSaveStatus !== "idle" && (
+                <span className="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-green-600">
+                  {globalSaveStatus === "saving" ? "..." : "✓"}
+                </span>
+              )}
+            </div>
+          </div>
+          <div className="rounded-xl border border-border/40 bg-surface p-4">
+            <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-text-muted">
+              Logam Mulia Antam (Rp/gram)
+            </label>
+            <p className="mb-1 text-[11px] text-text-muted">
+              Diambil dari logammulia.com
+            </p>
+            <div className="relative">
+              <input
+                type="text"
+                inputMode="numeric"
+                value={addDots(antamPrice)}
+                onChange={(e) => setAntamPrice(cleanNumber(e.target.value))}
+                onBlur={(e) => handleSaveAntamPrice(e.target.value)}
+                placeholder="Masukkan harga"
+                className="w-full rounded-lg border border-border/60 bg-white px-3 py-2 text-sm font-bold text-text focus:border-gold focus:outline-none"
+              />
+              {antamSaveStatus !== "idle" && (
+                <span className="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-green-600">
+                  {antamSaveStatus === "saving" ? "..." : "✓"}
+                </span>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex items-center gap-4">
+        <button
+          onClick={() => setShowPreviewModal(true)}
+          className="rounded-xl border-2 border-gold/40 px-6 py-3 text-sm font-semibold text-gold-dark transition-all hover:border-gold hover:bg-gold/5"
+        >
+          Preview Harga
+        </button>
+        <button
+          onClick={handlePublish}
+          disabled={status.type === "loading"}
+          className="gold-gradient-bg rounded-xl px-8 py-3 text-sm font-semibold text-white shadow-lg shadow-gold/25 transition-all hover:shadow-xl hover:shadow-gold/30 disabled:opacity-60"
+        >
+          {status.type === "loading" ? "Memproses..." : "Publikasikan"}
+        </button>
+        {status.msg && (
+          <span className={`text-sm font-medium ${status.type === "success" ? "text-green-600" : status.type === "error" ? "text-red-500" : "text-text-muted"}`}>
+            {status.type === "loading" && (
+              <span className="mr-1 inline-block h-3 w-3 animate-spin rounded-full border-2 border-gold border-t-transparent" />
+            )}
+            {status.msg}
+          </span>
+        )}
       </div>
 
       <PricePreviewModal

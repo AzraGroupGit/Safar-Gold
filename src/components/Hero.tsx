@@ -1,8 +1,49 @@
 import Link from "next/link";
-import { getHeroContent } from "@/lib/gold-api";
+import { getHeroContent, getMarketInfo } from "@/lib/gold-api";
 
 export default async function Hero() {
-  const hero = await getHeroContent();
+  const [hero, market] = await Promise.all([getHeroContent(), getMarketInfo()]);
+
+  const lastUpdate = market.lastUpdate
+    ? new Date(market.lastUpdate).toLocaleDateString("id-ID", { day: "numeric", month: "short" })
+    : "-";
+
+  const stats = [
+    {
+      label: "Update Terakhir",
+      value: lastUpdate,
+      hint: "06:00 WIB",
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+          <rect x="3" y="5" width="18" height="16" rx="2" />
+          <path d="M8 3v4M16 3v4M3 10h18" />
+        </svg>
+      ),
+    },
+    {
+      label: "Buyback Diterima",
+      value: "6K – 24K",
+      hint: "Semua kadar perhiasan",
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+          <path d="M20 12a8 8 0 0 1-8 8 8 8 0 0 1-6.9-4" />
+          <path d="M4 12a8 8 0 0 1 8-8 8 8 0 0 1 6.9 4" />
+          <path d="M18.9 4.5V8h-3.5M5.1 19.5V16h3.5" />
+        </svg>
+      ),
+    },
+    {
+      label: "Emas Ready",
+      value: "0.5 – 100 gr",
+      hint: "Antam & Logam Mulia",
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+          <path d="M6.5 10h11l2.5 8H4z" />
+          <path d="M9 6h6l1.5 4h-9z" />
+        </svg>
+      ),
+    },
+  ];
 
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden md:min-h-[90vh]">
@@ -46,15 +87,24 @@ export default async function Hero() {
           </Link>
         </div>
 
-        <div className="mt-14 flex items-center justify-center gap-12">
-          {[
-            { label: "Update", value: "06:00" },
-            { label: "Spread", value: "~2-5%" },
-            { label: "Jenis", value: "8+" },
-          ].map((s) => (
-            <div key={s.label}>
-              <p className="text-xl font-bold text-white md:text-3xl">{s.value}</p>
-              <p className="text-xs text-white/50">{s.label}</p>
+        <div className="mt-12 grid gap-3 sm:grid-cols-3 sm:gap-4 md:mt-14">
+          {stats.map((s) => (
+            <div
+              key={s.label}
+              className="group flex items-center justify-between gap-4 rounded-2xl border border-gold/25 bg-white/[0.06] px-4 py-3.5 backdrop-blur-md transition-all hover:-translate-y-0.5 hover:border-gold/50 hover:bg-white/[0.1] sm:block sm:px-5 sm:py-4 sm:text-left"
+            >
+              <div className="flex items-center gap-2 text-gold/70 transition-colors group-hover:text-gold">
+                <span className="[&>svg]:h-4 [&>svg]:w-4">{s.icon}</span>
+                <p className="text-[10px] font-semibold uppercase tracking-wider md:text-xs">
+                  {s.label}
+                </p>
+              </div>
+              <div className="text-right sm:mt-2.5 sm:text-left">
+                <p className="gold-gradient-text font-serif text-xl font-bold leading-none md:text-2xl">
+                  {s.value}
+                </p>
+                <p className="mt-1 text-[11px] text-white/45">{s.hint}</p>
+              </div>
             </div>
           ))}
         </div>

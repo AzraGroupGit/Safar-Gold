@@ -33,7 +33,7 @@ export interface AppSettingRow {
 }
 
 // ---------- Settings ----------
-async function getSetting(key: string): Promise<string> {
+export async function getSetting(key: string): Promise<string> {
   const supabase = createAnonClient();
   const { data } = await supabase
     .from("app_settings")
