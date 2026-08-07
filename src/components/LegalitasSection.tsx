@@ -39,11 +39,24 @@ export default function LegalitasSection() {
             <p className="mt-5 leading-relaxed text-footer-text">
               Safar Gold berkomitmen penuh untuk menjaga integritas setiap transaksi. Kami tidak menerima, memproses, atau memperjualbelikan emas yang berasal dari sumber ilegal, hasil kejahatan, atau tidak dapat diverifikasi asal-usulnya.
             </p>
-            <div className="mt-6 inline-flex items-center gap-2 rounded-xl border border-gold/20 bg-gold/5 px-4 py-3 text-sm font-medium text-gold">
-              <svg className="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
-              </svg>
-              Pelanggaran akan dilaporkan kepada pihak berwajib
+            <div
+              role="alert"
+              className="mt-6 flex overflow-hidden rounded-xl border border-red-500/30 bg-red-500/10"
+            >
+              <div className="w-1 shrink-0 bg-red-500" aria-hidden="true" />
+              <div className="flex items-start gap-3 px-4 py-3.5">
+                <svg className="mt-0.5 h-5 w-5 shrink-0 animate-pulse text-red-400" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                </svg>
+                <div>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-red-400/80">
+                    Peringatan
+                  </p>
+                  <p className="mt-1 text-sm font-semibold leading-relaxed text-red-400">
+                    Pelanggaran akan dilaporkan kepada pihak berwajib
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
 
