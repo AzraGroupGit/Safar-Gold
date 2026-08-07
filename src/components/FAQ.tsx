@@ -3,12 +3,16 @@
 import { useState } from "react";
 
 const faqs = [
-  { q: "Apa itu harga buyback?", a: "Harga buyback adalah harga saat kami membeli emas dari Anda. Ini selalu lebih rendah dari harga jual karena kami perlu menutup biaya operasional dan margin. Selisih ini disebut spread." },
-  { q: "Berapa spread untuk jual beli emas di Safar Gold?", a: "Spread kami berkisar 2-5% tergantung jenis emas. Antam dan UBS biasanya 2-3%, perhiasan 3-5%. Spread paling kompetitif di pasaran." },
-  { q: "Apakah harga di website selalu ter-update?", a: "Ya, harga di-update otomatis setiap hari pukul 06:00 WIB dari harga emas internasional. Anda selalu mendapatkan harga terkini setiap harinya." },
-  { q: "Bagaimana cara transaksi jual beli emas?", a: "Datang langsung ke toko kami di alamat yang tertera, atau hubungi via WhatsApp untuk konsultasi. Bawa KTP dan emas yang ingin dijual / uang untuk pembelian." },
-  { q: "Apakah emas dijamin keasliannya?", a: "Ya, semua emas yang kami jual (Antam, UBS) bersertifikat resmi. Untuk buyback, kami melakukan pengecekan kadar karat di tempat dengan alat yang akurat." },
-  { q: "Apa perbedaan Antam, UBS, dan perhiasan?", a: "Antam adalah emas batangan produksi PT Aneka Tambang (BUMN), paling likuid. UBS adalah produk swasta dengan harga lebih kompetitif. Perhiasan memiliki nilai seni tambahan dan biasanya kadar karat lebih rendah (18K-22K)." },
+  { q: "Apakah emas tanpa surat bisa dijual?", a: "Bisa. Emas tanpa surat tetap dapat dilakukan pengecekan untuk mengetahui kadar dan berat emas sebelum diberikan penawaran harga." },
+  { q: "Apakah menerima perhiasan emas yang rusak atau patah?", a: "Ya. Perhiasan patah, rusak, penyok, putus, atau sudah tidak terpakai tetap dapat dinilai berdasarkan kandungan emasnya." },
+  { q: "Apakah emas warisan bisa dijual?", a: "Bisa. Emas lama maupun emas warisan dapat dilakukan pengecekan kadar dan berat terlebih dahulu sebelum transaksi." },
+  { q: "Apakah menerima emas dari toko atau brand lain?", a: "Bisa. Penilaian emas dilakukan berdasarkan hasil pengecekan kadar, berat, dan kondisi barang, bukan hanya berdasarkan tempat emas tersebut dibeli." },
+  { q: "Apakah menerima semua kadar emas?", a: "Kami dapat melakukan pengecekan berbagai kadar emas. Nilai pembelian akan menyesuaikan kadar emas yang terdeteksi saat proses pengecekan." },
+  { q: "Bagaimana proses pengecekan emas?", a: "Barang akan ditimbang dan diperiksa kadar emasnya menggunakan metode atau alat pengecekan yang tersedia. Hasil pengecekan kemudian digunakan sebagai dasar perhitungan harga." },
+  { q: "Apakah pengecekan emas merusak perhiasan?", a: "Jika menggunakan metode pengecekan non-destruktif seperti XRF, kadar logam dapat dianalisis tanpa harus merusak bentuk utama perhiasan." },
+  { q: "Apakah customer bisa melihat proses pengecekannya?", a: "Kami menyarankan proses pengecekan dilakukan secara transparan sehingga customer dapat mengetahui berat, kadar, dan dasar perhitungan harga barangnya." },
+  { q: "Mengapa kadar hasil pengecekan bisa berbeda dengan tulisan di surat?", a: "Surat dapat memberikan informasi awal mengenai barang, tetapi kondisi aktual emas tetap perlu diverifikasi. Hasil pengecekan fisik digunakan untuk mengetahui kadar emas pada saat transaksi." },
+  { q: "Apakah batu atau berlian ikut dihitung sebagai berat emas?", a: "Tidak. Untuk penilaian berdasarkan kandungan emas, komponen non-emas seperti batu biasanya dipisahkan dari perhitungan berat emas bersih." },
 ];
 
 export default function FAQ({ phone }: { phone: string }) {
