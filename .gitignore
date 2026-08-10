@@ -43,6 +43,7 @@ next-env.d.ts
 # agent & build artifacts
 /.opencode
 /.claude
+/.impeccable
 AGENTS.md
 CLAUDE.md
 build-output.txt
