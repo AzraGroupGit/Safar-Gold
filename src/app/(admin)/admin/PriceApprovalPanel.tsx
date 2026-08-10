@@ -73,6 +73,8 @@ export default function PriceApprovalPanel({
   const [globalSaveStatus, setGlobalSaveStatus] = useState<"idle" | "saving" | "saved">("idle");
   const [reviewsWidgetId, setReviewsWidgetId] = useState(initialGoogleReviewsWidgetId);
   const [reviewsSaveStatus, setReviewsSaveStatus] = useState<"idle" | "saving" | "saved">("idle");
+  const [scraping, setScraping] = useState(false);
+  const [scrapeError, setScrapeError] = useState("");
 
   const preview = useMemo(() => {
     const hd = parseInt(hargaDasar) || 0;
@@ -183,6 +185,25 @@ export default function PriceApprovalPanel({
       setTimeout(() => setAntamSaveStatus("idle"), 2000);
     } catch {
       setAntamSaveStatus("idle");
+    }
+  }
+
+  async function handleScrapeAntam() {
+    setScraping(true);
+    setScrapeError("");
+    try {
+      const res = await fetch("/api/cron/scrape-antam", { method: "POST" });
+      const data = await res.json();
+      if (data.success && data.antamPrice > 0) {
+        setAntamPrice(String(data.antamPrice));
+        handleSaveAntamPrice(String(data.antamPrice));
+      } else {
+        setScrapeError(data.error ?? "Gagal scrape");
+      }
+    } catch {
+      setScrapeError("Gagal menghubungi server");
+    } finally {
+      setScraping(false);
     }
   }
 
@@ -486,7 +507,7 @@ export default function PriceApprovalPanel({
               Logam Mulia Antam (Rp/gram)
             </label>
             <p className="mb-1 text-[11px] text-text-muted">
-              Diambil dari logammulia.com
+              Biarkan kosong untuk gunakan harga otomatis dari logammulia.com (scrape tiap 06:00)
             </p>
             <div className="relative">
               <input
@@ -496,14 +517,30 @@ export default function PriceApprovalPanel({
                 onChange={(e) => setAntamPrice(cleanNumber(e.target.value))}
                 onBlur={(e) => handleSaveAntamPrice(e.target.value)}
                 placeholder="Masukkan harga"
-                className="w-full rounded-lg border border-border/60 bg-white px-3 py-2 text-sm font-bold text-text focus:border-gold focus:outline-none"
+                className="w-full rounded-lg border border-border/60 bg-white px-3 py-2 pr-10 text-sm font-bold text-text focus:border-gold focus:outline-none"
               />
-              {antamSaveStatus !== "idle" && (
-                <span className="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-green-600">
-                  {antamSaveStatus === "saving" ? "..." : "✓"}
-                </span>
-              )}
+              <button
+                type="button"
+                onClick={handleScrapeAntam}
+                disabled={scraping}
+                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-md p-1 text-text-muted transition-colors hover:text-gold-dark disabled:opacity-50"
+                title="Scrape dari logammulia.com"
+              >
+                {scraping ? (
+                  <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                  </svg>
+                ) : antamSaveStatus !== "idle" ? (
+                  <span className="text-xs text-green-600">✓</span>
+                ) : (
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.992 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182" />
+                  </svg>
+                )}
+              </button>
             </div>
+            {scrapeError && <p className="mt-1 text-[11px] text-red-500">{scrapeError}</p>}
           </div>
         </div>
       </div>

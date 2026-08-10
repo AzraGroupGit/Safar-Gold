@@ -141,3 +141,65 @@ insert into public.app_settings (key, value) values
   ('saturday_open',              '09:00'),
   ('saturday_close',             '14:00')
 on conflict (key) do nothing;
+
+-- ============================================================
+-- v3: Order & Stock Management
+-- ============================================================
+
+create table if not exists public.orders (
+  id             uuid primary key default gen_random_uuid(),
+  order_number   text not null unique,
+  type           text not null check (type in ('sell', 'buyback')),
+  customer_name  text not null,
+  customer_phone text not null,
+  subtotal       integer not null default 0,
+  total          integer not null default 0,
+  notes          text,
+  status         text not null default 'completed' check (status in ('completed', 'cancelled')),
+  created_by     uuid not null,
+  created_at     timestamptz not null default now()
+);
+
+create table if not exists public.order_items (
+  id             uuid primary key default gen_random_uuid(),
+  order_id       uuid not null references public.orders(id) on delete cascade,
+  gold_type_id   text references public.gold_types(id),
+  item_name      text not null,
+  weight         numeric not null default 0,
+  karat          integer,
+  qty            integer not null default 1,
+  price_per_gram integer not null default 0,
+  price_total    integer not null default 0
+);
+
+create table if not exists public.stock (
+  gold_type_id   text primary key references public.gold_types(id),
+  qty            integer not null default 0,
+  min_qty        integer not null default 1,
+  updated_at     timestamptz not null default now()
+);
+
+create table if not exists public.stock_movements (
+  id             uuid primary key default gen_random_uuid(),
+  gold_type_id   text not null references public.gold_types(id),
+  order_id       uuid references public.orders(id) on delete set null,
+  type           text not null check (type in ('in', 'out')),
+  qty            integer not null,
+  notes          text,
+  created_at     timestamptz not null default now()
+);
+
+alter table public.orders         enable row level security;
+alter table public.order_items    enable row level security;
+alter table public.stock          enable row level security;
+alter table public.stock_movements enable row level security;
+
+create policy "public read orders"          on public.orders          for select using (true);
+create policy "public read order_items"     on public.order_items     for select using (true);
+create policy "public read stock"           on public.stock           for select using (true);
+create policy "public read stock_movements" on public.stock_movements for select using (true);
+
+-- Seed initial stock for LM products
+insert into public.stock (gold_type_id, qty, min_qty)
+select id, 0, 1 from public.gold_types where category = 'lm'
+on conflict (gold_type_id) do nothing;
