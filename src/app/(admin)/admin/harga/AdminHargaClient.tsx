@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import type { GoldTypeRow, FormattedPrice } from "@/lib/gold-api";
+import { createClient } from "@/lib/supabase/client";
 
 function formatRupiahClient(amount: number): string {
   return new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(amount);
@@ -154,7 +155,17 @@ export default function AdminHargaClient({ goldTypes, prices }: { goldTypes: Gol
   );
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [role, setRole] = useState<string>("admin");
   const hasData = prices.length > 0 && prices.some(p => p.buyPrice > 0 || p.sellPrice > 0);
+
+  useEffect(() => {
+    async function fetchRole() {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) setRole(user.user_metadata?.role ?? "admin");
+    }
+    fetchRole();
+  }, []);
 
   function isBuyable(category: string) { return category === "lm"; }
   function getPrice(gt: GoldTypeRow, price: FormattedPrice | undefined) {
@@ -199,9 +210,11 @@ export default function AdminHargaClient({ goldTypes, prices }: { goldTypes: Gol
           <h1 className="font-serif text-2xl font-bold text-text">Manajemen Harga</h1>
           <p className="mt-1 text-sm text-text-muted">Atur mode & harga per jenis emas</p>
         </div>
-        <button onClick={() => setShowModal(true)} className="rounded-xl border border-border/60 bg-white px-5 py-2.5 text-sm font-semibold text-text shadow-sm transition-all hover:border-gold/30 hover:text-gold-dark hover:shadow-md">
-          Atur Mode Harga
-        </button>
+        {role !== "cs" && (
+          <button onClick={() => setShowModal(true)} className="rounded-xl border border-border/60 bg-white px-5 py-2.5 text-sm font-semibold text-text shadow-sm transition-all hover:border-gold/30 hover:text-gold-dark hover:shadow-md">
+            Atur Mode Harga
+          </button>
+        )}
       </div>
 
       <ModeModal

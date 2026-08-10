@@ -56,6 +56,15 @@ export async function GET(request: Request) {
     }
     await setSetting("last_cron_time", now);
 
+    // Fire-and-forget: scrape Antam price from logammulia.com via Firecrawl
+    try {
+      fetch(new URL("/api/cron/scrape-antam", request.url), {
+        method: "POST",
+      }).catch(() => {});
+    } catch {
+      // ignore errors — Antam scrape is best-effort
+    }
+
     return NextResponse.json({
       success: true,
       xauUsdPerOz,
@@ -70,7 +79,7 @@ export async function GET(request: Request) {
   } catch (err) {
     return NextResponse.json(
       { success: false, error: String(err) },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

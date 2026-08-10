@@ -1,6 +1,18 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 
+const CS_RESTRICTED_PAGES = ["/admin/jenis-emas", "/admin/konten", "/admin/pengaturan", "/admin/users"];
+const CS_RESTRICTED_API = [
+  "/api/admin/publish-prices",
+  "/api/admin/update-settings",
+  "/api/admin/update-konten",
+  "/api/admin/update-gold-types",
+  "/api/admin/update-gold-type",
+  "/api/admin/create-gold-type",
+  "/api/admin/delete-gold-type",
+  "/api/admin/trigger-update",
+];
+
 export async function middleware(request: NextRequest) {
   let response = NextResponse.next({ request });
 
@@ -32,18 +44,27 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const isLoginPage = pathname === "/admin/login";
 
-  // Already logged in but visiting login → redirect to dashboard
   if (isLoginPage) {
     if (user) return NextResponse.redirect(new URL("/admin", request.url));
     return response;
   }
 
-  // Not logged in → reject
   if (!user) {
     if (pathname.startsWith("/api/")) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
     return NextResponse.redirect(new URL("/admin/login", request.url));
+  }
+
+  const role = user.user_metadata?.role ?? "admin";
+
+  if (role === "cs") {
+    if (CS_RESTRICTED_API.some((p) => pathname.startsWith(p))) {
+      return NextResponse.json({ error: "Forbidden — hanya Admin" }, { status: 403 });
+    }
+    if (CS_RESTRICTED_PAGES.some((p) => pathname.startsWith(p))) {
+      return NextResponse.redirect(new URL("/admin", request.url));
+    }
   }
 
   return response;

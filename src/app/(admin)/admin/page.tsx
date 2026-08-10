@@ -4,6 +4,7 @@ import { getAllGoldTypes, getFormattedTodayPrices, getMedianFactors, formatRupia
 import PriceApprovalPanel from "./PriceApprovalPanel";
 import AdminSkeleton from "@/components/admin/AdminSkeleton";
 import { createAnonClient } from "@/lib/supabase/anon";
+import { createClient } from "@/lib/supabase/client";
 import { useState, useEffect } from "react";
 
 export const dynamic = "force-dynamic";
@@ -32,10 +33,15 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
   const [settings, setSettings] = useState<any>(null);
   const [medianFactors, setMedianFactors] = useState<any>(null);
+  const [role, setRole] = useState<string>("admin");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const supabase = createClient();
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) setRole(user.user_metadata?.role ?? "admin");
+
         const [gt, pr, mf] = await Promise.all([
           getAllGoldTypes(),
           getFormattedTodayPrices(),
@@ -114,32 +120,43 @@ export default function AdminDashboard() {
         />
       </div>
 
-      <div className="rounded-2xl border border-border/60 bg-white p-6 shadow-sm">
-        <PriceApprovalPanel
-          goldTypes={goldTypes}
-          initialHargaDasarJual={String(hargaDasarJual)}
-          initialAcuanBuyback={String(acuanBuybackLM)}
-          initialAdjJual={s.adjustment_jual ?? "0"}
-          initialAdjBeli={s.adjustment_beli ?? "0"}
-          initialAdjPerhiasan={s.adjustment_perhiasan ?? "0"}
-          premiPecahan={s.premi_pecahan ?? "{}"}
-          spreadBuybackLM={s.spread_buyback_lm ?? "{}"}
-          offsetK24s={parseFloat(s.offset_perhiasan_k24s || "320000")}
-          offsetK24={parseFloat(s.offset_perhiasan_k24 || "50000")}
-          dasarPerhiasanOffset={parseFloat(s.dasar_perhiasan_offset || "505000")}
-          baseGoldIdr={baseGoldIdr}
-          xauUsd={xauUsd}
-          xagUsd={xagUsd}
-          xpdUsd={xpdUsd}
-          usdIdr={usdIdr}
-          lastCronTime={lastCron}
-          initialAntamPrice={s.antam_price ?? ""}
-          initialGlobalGoldPrice={s.global_gold_price ?? ""}
-          initialGoogleReviewsWidgetId={s.google_reviews_widget_id ?? ""}
-          suggestedJual={medianFactors?.suggestedJual ?? null}
-          suggestedBuyback={medianFactors?.suggestedBuyback ?? null}
-        />
-      </div>
+      {role !== "cs" && (
+        <div className="rounded-2xl border border-border/60 bg-white p-6 shadow-sm">
+          <PriceApprovalPanel
+            goldTypes={goldTypes}
+            initialHargaDasarJual={String(hargaDasarJual)}
+            initialAcuanBuyback={String(acuanBuybackLM)}
+            initialAdjJual={s.adjustment_jual ?? "0"}
+            initialAdjBeli={s.adjustment_beli ?? "0"}
+            initialAdjPerhiasan={s.adjustment_perhiasan ?? "0"}
+            premiPecahan={s.premi_pecahan ?? "{}"}
+            spreadBuybackLM={s.spread_buyback_lm ?? "{}"}
+            offsetK24s={parseFloat(s.offset_perhiasan_k24s || "320000")}
+            offsetK24={parseFloat(s.offset_perhiasan_k24 || "50000")}
+            dasarPerhiasanOffset={parseFloat(s.dasar_perhiasan_offset || "505000")}
+            baseGoldIdr={baseGoldIdr}
+            xauUsd={xauUsd}
+            xagUsd={xagUsd}
+            xpdUsd={xpdUsd}
+            usdIdr={usdIdr}
+            lastCronTime={lastCron}
+            initialAntamPrice={s.antam_price ?? ""}
+            initialGlobalGoldPrice={s.global_gold_price ?? ""}
+            initialGoogleReviewsWidgetId={s.google_reviews_widget_id ?? ""}
+            suggestedJual={medianFactors?.suggestedJual ?? null}
+            suggestedBuyback={medianFactors?.suggestedBuyback ?? null}
+          />
+        </div>
+      )}
+      {role === "cs" && (
+        <div className="rounded-2xl border border-border/60 bg-white p-6 text-center shadow-sm">
+          <svg className="mx-auto h-12 w-12 text-text-muted/40" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+          </svg>
+          <p className="mt-4 font-serif text-lg font-semibold text-text">Akses Terbatas</p>
+          <p className="mt-1 text-sm text-text-muted">Halaman ini hanya dapat dilihat. Pengaturan harga hanya untuk Admin.</p>
+        </div>
+      )}
     </div>
   );
 }
