@@ -85,8 +85,8 @@
     "semantic_hash": "e214e19691198479e4c2295a4e067c32"
   },
   "src/app/(public)/page.tsx": {
-    "mtime": 1786509547.0296903,
-    "ast_hash": "b428afa56eca993cdde9232c1b26e127",
+    "mtime": 1786508591.5113776,
+    "ast_hash": "e06762a839c9142b070698077d3836af",
     "semantic_hash": ""
   },
   "src/app/(public)/tentang/page.tsx": {
@@ -455,23 +455,23 @@
     "semantic_hash": ""
   },
   "src/components/MesinPresisi.tsx": {
-    "mtime": 1786509535.4994588,
-    "ast_hash": "ac9c7625b9f1861ec534b6d57f42dde9",
+    "mtime": 1786508963.605023,
+    "ast_hash": "3e093dd438c2c5d8c0f62f37876ce091",
     "semantic_hash": ""
   },
-  "public/mesin-1.png": {
-    "mtime": 1786508093.1708057,
-    "ast_hash": "9a400f44e37bb8c1e42588ceb900315e",
+  "public/CKS 300.png": {
+    "mtime": 1786508138.6604726,
+    "ast_hash": "27fdd65c953b16bc59e1ead64d1e7fed",
     "semantic_hash": ""
   },
-  "public/mesin-2.png": {
+  "public/Glory GFB.png": {
     "mtime": 1786508119.4247532,
     "ast_hash": "9e659d164121a253fdd2634453b683d5",
     "semantic_hash": ""
   },
-  "public/mesin-3.png": {
-    "mtime": 1786508138.6604726,
-    "ast_hash": "27fdd65c953b16bc59e1ead64d1e7fed",
+  "public/VantaGX.png": {
+    "mtime": 1786508093.1708057,
+    "ast_hash": "9a400f44e37bb8c1e42588ceb900315e",
     "semantic_hash": ""
   }
 }

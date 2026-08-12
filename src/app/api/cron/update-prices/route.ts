@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
-import { fetchInternationalGoldPrice, setSetting } from "@/lib/gold-api";
+import { fetchInternationalGoldPrice, getSetting, setSetting } from "@/lib/gold-api";
 import { createAnonClient } from "@/lib/supabase/anon";
 
 export const dynamic = "force-dynamic";
+
+const GOLD_OZ = 31.1034768;
 
 export async function GET(request: Request) {
   try {
@@ -35,6 +37,21 @@ export async function GET(request: Request) {
 
     const now = new Date().toISOString();
     const warnings: string[] = [];
+
+    // Roll prev Emas Dunia sebelum data baru menimpa: prev = harga manual jika ada,
+    // jika tidak = hitung dari data internasional terakhir (kemarin)
+    if (xauUsdPerOz > 0) {
+      const manualGlobal = parseInt(await getSetting("global_gold_price")) || 0;
+      const prevXau = parseFloat(await getSetting("last_cron_xau_usd")) || 0;
+      const prevUsd = parseFloat(await getSetting("last_cron_usd_idr")) || 0;
+      let prevGlobal = manualGlobal;
+      if (prevGlobal <= 0 && prevXau > 0 && prevUsd > 0) {
+        prevGlobal = Math.round((prevXau * prevUsd) / GOLD_OZ);
+      }
+      if (prevGlobal > 0) {
+        await setSetting("global_gold_price_prev", String(prevGlobal));
+      }
+    }
 
     if (xauUsdPerOz > 0) {
       await setSetting("last_cron_xau_usd", xauUsdPerOz.toString());
