@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Hero from "@/components/Hero";
 import LivePriceBand from "@/components/LivePriceBand";
 import Keunggulan from "@/components/Keunggulan";
+import MesinPresisi from "@/components/MesinPresisi";
 import CaraTransaksi from "@/components/CaraTransaksi";
 import Testimoni from "@/components/Testimoni";
 import KunjungiKami from "@/components/KunjungiKami";
@@ -28,6 +29,8 @@ export default async function HomePage() {
       <LivePriceBand />
       <GoldDivider />
       <Keunggulan />
+      <GoldDivider />
+      <MesinPresisi />
       <GoldDivider />
       <CaraTransaksi />
       <GoldDivider />

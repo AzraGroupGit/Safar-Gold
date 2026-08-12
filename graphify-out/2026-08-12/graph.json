@@ -602,7 +602,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_priceapprovalpanel",
       "community": 4,
-      "community_name": "admin/page.tsx",
+      "community_name": "PriceApprovalPanel.tsx",
       "norm_label": "priceapprovalpanel.tsx"
     },
     {
@@ -614,8 +614,8 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "src_app_admin_admin_priceapprovalpanel_props",
-      "community": 29,
-      "community_name": "OrdersClient.tsx",
+      "community": 4,
+      "community_name": "PriceApprovalPanel.tsx",
       "norm_label": "props"
     },
     {
@@ -627,7 +627,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_priceapprovalpanel_formatrupiah",
       "community": 4,
-      "community_name": "admin/page.tsx",
+      "community_name": "PriceApprovalPanel.tsx",
       "norm_label": "formatrupiah()"
     },
     {
@@ -639,7 +639,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_priceapprovalpanel_priceapprovalpanel",
       "community": 4,
-      "community_name": "admin/page.tsx",
+      "community_name": "PriceApprovalPanel.tsx",
       "norm_label": "priceapprovalpanel()"
     },
     {
@@ -649,8 +649,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_app_admin_admin_harga_adminhargaclient",
-      "community": 29,
-      "community_name": "OrdersClient.tsx",
+      "community": 11,
+      "community_name": "admin/page.tsx",
       "norm_label": "adminhargaclient.tsx"
     },
     {
@@ -661,8 +661,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_app_admin_admin_harga_adminhargaclient_formatrupiahclient",
-      "community": 29,
-      "community_name": "OrdersClient.tsx",
+      "community": 11,
+      "community_name": "admin/page.tsx",
       "norm_label": "formatrupiahclient()"
     },
     {
@@ -672,8 +672,8 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "src_app_admin_admin_harga_adminhargaclient_mode_tabs",
-      "community": 29,
-      "community_name": "OrdersClient.tsx",
+      "community": 11,
+      "community_name": "admin/page.tsx",
       "norm_label": "mode_tabs"
     },
     {
@@ -684,8 +684,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_app_admin_admin_harga_adminhargaclient_modemodal",
-      "community": 29,
-      "community_name": "OrdersClient.tsx",
+      "community": 11,
+      "community_name": "admin/page.tsx",
       "norm_label": "modemodal()"
     },
     {
@@ -696,8 +696,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_app_admin_admin_harga_adminhargaclient_adminhargaclient",
-      "community": 29,
-      "community_name": "OrdersClient.tsx",
+      "community": 11,
+      "community_name": "admin/page.tsx",
       "norm_label": "adminhargaclient()"
     },
     {
@@ -708,7 +708,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_harga_page",
       "community": 11,
-      "community_name": "formatRupiah",
+      "community_name": "admin/page.tsx",
       "norm_label": "admin/harga/page.tsx"
     },
     {
@@ -719,7 +719,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_harga_page_dynamic",
       "community": 11,
-      "community_name": "formatRupiah",
+      "community_name": "admin/page.tsx",
       "norm_label": "dynamic"
     },
     {
@@ -731,7 +731,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_harga_page_adminhargapage",
       "community": 11,
-      "community_name": "formatRupiah",
+      "community_name": "admin/page.tsx",
       "norm_label": "adminhargapage()"
     },
     {
@@ -1033,7 +1033,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_app_admin_admin_loading",
-      "community": 4,
+      "community": 11,
       "community_name": "admin/page.tsx",
       "norm_label": "loading.tsx"
     },
@@ -1045,7 +1045,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_app_admin_admin_loading_adminloading",
-      "community": 4,
+      "community": 11,
       "community_name": "admin/page.tsx",
       "norm_label": "adminloading()"
     },
@@ -1056,8 +1056,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_app_admin_admin_login_page",
-      "community": 29,
-      "community_name": "OrdersClient.tsx",
+      "community": 11,
+      "community_name": "admin/page.tsx",
       "norm_label": "login/page.tsx"
     },
     {
@@ -1068,8 +1068,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_app_admin_admin_login_page_adminloginpage",
-      "community": 29,
-      "community_name": "OrdersClient.tsx",
+      "community": 11,
+      "community_name": "admin/page.tsx",
       "norm_label": "adminloginpage()"
     },
     {
@@ -1079,8 +1079,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_app_admin_admin_orders_ordersclient",
-      "community": 29,
-      "community_name": "OrdersClient.tsx",
+      "community": 11,
+      "community_name": "admin/page.tsx",
       "norm_label": "ordersclient.tsx"
     },
     {
@@ -1092,8 +1092,8 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "src_app_admin_admin_orders_ordersclient_order",
-      "community": 29,
-      "community_name": "OrdersClient.tsx",
+      "community": 11,
+      "community_name": "admin/page.tsx",
       "norm_label": "order"
     },
     {
@@ -1105,8 +1105,8 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "src_app_admin_admin_orders_ordersclient_orderdetail",
-      "community": 29,
-      "community_name": "OrdersClient.tsx",
+      "community": 11,
+      "community_name": "admin/page.tsx",
       "norm_label": "orderdetail"
     },
     {
@@ -1118,8 +1118,8 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "src_app_admin_admin_orders_ordersclient_cartitem",
-      "community": 29,
-      "community_name": "OrdersClient.tsx",
+      "community": 11,
+      "community_name": "admin/page.tsx",
       "norm_label": "cartitem"
     },
     {
@@ -1129,8 +1129,8 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "src_app_admin_admin_orders_ordersclient_lm_products",
-      "community": 29,
-      "community_name": "OrdersClient.tsx",
+      "community": 11,
+      "community_name": "admin/page.tsx",
       "norm_label": "lm_products"
     },
     {
@@ -1142,7 +1142,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_orders_ordersclient_ordersclient",
       "community": 11,
-      "community_name": "formatRupiah",
+      "community_name": "admin/page.tsx",
       "norm_label": "ordersclient()"
     },
     {
@@ -1153,7 +1153,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_orders_page",
       "community": 11,
-      "community_name": "formatRupiah",
+      "community_name": "admin/page.tsx",
       "norm_label": "orders/page.tsx"
     },
     {
@@ -1164,7 +1164,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_orders_page_dynamic",
       "community": 11,
-      "community_name": "formatRupiah",
+      "community_name": "admin/page.tsx",
       "norm_label": "dynamic"
     },
     {
@@ -1175,7 +1175,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_orders_page_metadata",
       "community": 11,
-      "community_name": "formatRupiah",
+      "community_name": "admin/page.tsx",
       "norm_label": "metadata"
     },
     {
@@ -1187,7 +1187,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_orders_page_orderspage",
       "community": 11,
-      "community_name": "formatRupiah",
+      "community_name": "admin/page.tsx",
       "norm_label": "orderspage()"
     },
     {
@@ -1197,7 +1197,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_app_admin_admin_page",
-      "community": 4,
+      "community": 11,
       "community_name": "admin/page.tsx",
       "norm_label": "admin/page.tsx"
     },
@@ -1208,7 +1208,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "src_app_admin_admin_page_dynamic",
-      "community": 4,
+      "community": 11,
       "community_name": "admin/page.tsx",
       "norm_label": "dynamic"
     },
@@ -1220,7 +1220,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_app_admin_admin_page_statcard",
-      "community": 4,
+      "community": 11,
       "community_name": "admin/page.tsx",
       "norm_label": "statcard()"
     },
@@ -1233,7 +1233,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_page_admindashboard",
       "community": 11,
-      "community_name": "formatRupiah",
+      "community_name": "admin/page.tsx",
       "norm_label": "admindashboard()"
     },
     {
@@ -1475,8 +1475,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_app_admin_layout",
-      "community": 29,
-      "community_name": "OrdersClient.tsx",
+      "community": 7,
+      "community_name": "JenisEmasClient.tsx",
       "norm_label": "(admin)/layout.tsx"
     },
     {
@@ -1487,8 +1487,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_app_admin_layout_adminlayout",
-      "community": 29,
-      "community_name": "OrdersClient.tsx",
+      "community": 7,
+      "community_name": "JenisEmasClient.tsx",
       "norm_label": "adminlayout()"
     },
     {
@@ -1499,7 +1499,7 @@
       "_origin": "ast",
       "id": "src_app_public_harga_page",
       "community": 11,
-      "community_name": "formatRupiah",
+      "community_name": "admin/page.tsx",
       "norm_label": "(public)/harga/page.tsx"
     },
     {
@@ -1510,7 +1510,7 @@
       "_origin": "ast",
       "id": "src_app_public_harga_page_metadata",
       "community": 11,
-      "community_name": "formatRupiah",
+      "community_name": "admin/page.tsx",
       "norm_label": "metadata"
     },
     {
@@ -1521,7 +1521,7 @@
       "_origin": "ast",
       "id": "src_app_public_harga_page_dynamic",
       "community": 11,
-      "community_name": "formatRupiah",
+      "community_name": "admin/page.tsx",
       "norm_label": "dynamic"
     },
     {
@@ -1533,7 +1533,7 @@
       "_origin": "ast",
       "id": "src_app_public_harga_page_hargapage",
       "community": 11,
-      "community_name": "formatRupiah",
+      "community_name": "admin/page.tsx",
       "norm_label": "hargapage()"
     },
     {
@@ -1544,7 +1544,7 @@
       "_origin": "ast",
       "id": "src_app_public_kalkulator_page",
       "community": 11,
-      "community_name": "formatRupiah",
+      "community_name": "admin/page.tsx",
       "norm_label": "kalkulator/page.tsx"
     },
     {
@@ -1555,7 +1555,7 @@
       "_origin": "ast",
       "id": "src_app_public_kalkulator_page_metadata",
       "community": 11,
-      "community_name": "formatRupiah",
+      "community_name": "admin/page.tsx",
       "norm_label": "metadata"
     },
     {
@@ -1566,7 +1566,7 @@
       "_origin": "ast",
       "id": "src_app_public_kalkulator_page_dynamic",
       "community": 11,
-      "community_name": "formatRupiah",
+      "community_name": "admin/page.tsx",
       "norm_label": "dynamic"
     },
     {
@@ -1578,7 +1578,7 @@
       "_origin": "ast",
       "id": "src_app_public_kalkulator_page_kalkulatorpage",
       "community": 11,
-      "community_name": "formatRupiah",
+      "community_name": "admin/page.tsx",
       "norm_label": "kalkulatorpage()"
     },
     {
@@ -2420,8 +2420,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_calculator",
-      "community": 29,
-      "community_name": "OrdersClient.tsx",
+      "community": 11,
+      "community_name": "admin/page.tsx",
       "norm_label": "calculator.tsx"
     },
     {
@@ -2432,8 +2432,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_components_calculator_formatrupiahclient",
-      "community": 29,
-      "community_name": "OrdersClient.tsx",
+      "community": 11,
+      "community_name": "admin/page.tsx",
       "norm_label": "formatrupiahclient()"
     },
     {
@@ -2443,8 +2443,8 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "src_components_calculator_quickweights",
-      "community": 29,
-      "community_name": "OrdersClient.tsx",
+      "community": 11,
+      "community_name": "admin/page.tsx",
       "norm_label": "quickweights"
     },
     {
@@ -2455,8 +2455,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_components_calculator_calculator",
-      "community": 29,
-      "community_name": "OrdersClient.tsx",
+      "community": 11,
+      "community_name": "admin/page.tsx",
       "norm_label": "calculator()"
     },
     {
@@ -2698,7 +2698,7 @@
       "_origin": "ast",
       "id": "src_components_legalnotice",
       "community": 11,
-      "community_name": "formatRupiah",
+      "community_name": "admin/page.tsx",
       "norm_label": "legalnotice.tsx"
     },
     {
@@ -2710,7 +2710,7 @@
       "_origin": "ast",
       "id": "src_components_legalnotice_legalnotice",
       "community": 11,
-      "community_name": "formatRupiah",
+      "community_name": "admin/page.tsx",
       "norm_label": "legalnotice()"
     },
     {
@@ -2831,10 +2831,22 @@
       "norm_label": "machinephoto()"
     },
     {
-      "label": "MesinPresisi()",
+      "label": "MachineCaption()",
       "file_type": "code",
       "source_file": "src/components/MesinPresisi.tsx",
       "source_location": "L61",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_components_mesinpresisi_machinecaption",
+      "community": 2,
+      "community_name": "(public)/page.tsx",
+      "norm_label": "machinecaption()"
+    },
+    {
+      "label": "MesinPresisi()",
+      "file_type": "code",
+      "source_file": "src/components/MesinPresisi.tsx",
+      "source_location": "L80",
       "_callable": true,
       "_origin": "ast",
       "id": "src_components_mesinpresisi_mesinpresisi",
@@ -2895,8 +2907,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_pricechart",
-      "community": 11,
-      "community_name": "formatRupiah",
+      "community": 29,
+      "community_name": "PriceChart.tsx",
       "norm_label": "pricechart.tsx"
     },
     {
@@ -2907,8 +2919,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_components_pricechart_generatemockdata",
-      "community": 11,
-      "community_name": "formatRupiah",
+      "community": 29,
+      "community_name": "PriceChart.tsx",
       "norm_label": "generatemockdata()"
     },
     {
@@ -2918,8 +2930,8 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "src_components_pricechart_periods",
-      "community": 11,
-      "community_name": "formatRupiah",
+      "community": 29,
+      "community_name": "PriceChart.tsx",
       "norm_label": "periods"
     },
     {
@@ -2930,8 +2942,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_components_pricechart_pricechart",
-      "community": 11,
-      "community_name": "formatRupiah",
+      "community": 29,
+      "community_name": "PriceChart.tsx",
       "norm_label": "pricechart()"
     },
     {
@@ -2941,8 +2953,8 @@
       "source_location": "L60",
       "_origin": "ast",
       "id": "src_components_pricechart_chartdata",
-      "community": 11,
-      "community_name": "formatRupiah",
+      "community": 29,
+      "community_name": "PriceChart.tsx",
       "norm_label": "chartdata"
     },
     {
@@ -2952,8 +2964,8 @@
       "source_location": "L110",
       "_origin": "ast",
       "id": "src_components_pricechart_options",
-      "community": 11,
-      "community_name": "formatRupiah",
+      "community": 29,
+      "community_name": "PriceChart.tsx",
       "norm_label": "options"
     },
     {
@@ -2964,7 +2976,7 @@
       "_origin": "ast",
       "id": "src_components_pricepreviewmodal",
       "community": 4,
-      "community_name": "admin/page.tsx",
+      "community_name": "PriceApprovalPanel.tsx",
       "norm_label": "pricepreviewmodal.tsx"
     },
     {
@@ -2977,7 +2989,7 @@
       "_origin": "ast",
       "id": "src_components_pricepreviewmodal_previewitem",
       "community": 4,
-      "community_name": "admin/page.tsx",
+      "community_name": "PriceApprovalPanel.tsx",
       "norm_label": "previewitem"
     },
     {
@@ -2990,7 +3002,7 @@
       "_origin": "ast",
       "id": "src_components_pricepreviewmodal_pricepreviewmodalprops",
       "community": 4,
-      "community_name": "admin/page.tsx",
+      "community_name": "PriceApprovalPanel.tsx",
       "norm_label": "pricepreviewmodalprops"
     },
     {
@@ -3001,7 +3013,7 @@
       "_origin": "ast",
       "id": "src_components_pricepreviewmodal_category_labels",
       "community": 4,
-      "community_name": "admin/page.tsx",
+      "community_name": "PriceApprovalPanel.tsx",
       "norm_label": "category_labels"
     },
     {
@@ -3013,7 +3025,7 @@
       "_origin": "ast",
       "id": "src_components_pricepreviewmodal_formatrupiah",
       "community": 4,
-      "community_name": "admin/page.tsx",
+      "community_name": "PriceApprovalPanel.tsx",
       "norm_label": "formatrupiah()"
     },
     {
@@ -3025,7 +3037,7 @@
       "_origin": "ast",
       "id": "src_components_pricepreviewmodal_roundtonearest",
       "community": 4,
-      "community_name": "admin/page.tsx",
+      "community_name": "PriceApprovalPanel.tsx",
       "norm_label": "roundtonearest()"
     },
     {
@@ -3037,7 +3049,7 @@
       "_origin": "ast",
       "id": "src_components_pricepreviewmodal_pricepreviewmodal",
       "community": 4,
-      "community_name": "admin/page.tsx",
+      "community_name": "PriceApprovalPanel.tsx",
       "norm_label": "pricepreviewmodal()"
     },
     {
@@ -3048,7 +3060,7 @@
       "_origin": "ast",
       "id": "src_components_tabbedpricelist",
       "community": 11,
-      "community_name": "formatRupiah",
+      "community_name": "admin/page.tsx",
       "norm_label": "tabbedpricelist.tsx"
     },
     {
@@ -3059,7 +3071,7 @@
       "_origin": "ast",
       "id": "src_components_tabbedpricelist_categories",
       "community": 11,
-      "community_name": "formatRupiah",
+      "community_name": "admin/page.tsx",
       "norm_label": "categories"
     },
     {
@@ -3071,7 +3083,7 @@
       "_origin": "ast",
       "id": "src_components_tabbedpricelist_tabbedpricelist",
       "community": 11,
-      "community_name": "formatRupiah",
+      "community_name": "admin/page.tsx",
       "norm_label": "tabbedpricelist()"
     },
     {
@@ -3127,8 +3139,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_admin_adminsidebar",
-      "community": 29,
-      "community_name": "OrdersClient.tsx",
+      "community": 7,
+      "community_name": "JenisEmasClient.tsx",
       "norm_label": "adminsidebar.tsx"
     },
     {
@@ -3138,8 +3150,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "src_components_admin_adminsidebar_links",
-      "community": 29,
-      "community_name": "OrdersClient.tsx",
+      "community": 7,
+      "community_name": "JenisEmasClient.tsx",
       "norm_label": "links"
     },
     {
@@ -3150,8 +3162,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_components_admin_adminsidebar_adminsidebar",
-      "community": 29,
-      "community_name": "OrdersClient.tsx",
+      "community": 7,
+      "community_name": "JenisEmasClient.tsx",
       "norm_label": "adminsidebar()"
     },
     {
@@ -3161,7 +3173,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_admin_adminskeleton",
-      "community": 4,
+      "community": 11,
       "community_name": "admin/page.tsx",
       "norm_label": "adminskeleton.tsx"
     },
@@ -3173,7 +3185,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_components_admin_adminskeleton_adminskeleton",
-      "community": 4,
+      "community": 11,
       "community_name": "admin/page.tsx",
       "norm_label": "adminskeleton()"
     },
@@ -3197,8 +3209,8 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "src_lib_gold_api_goldtyperow",
-      "community": 29,
-      "community_name": "OrdersClient.tsx",
+      "community": 4,
+      "community_name": "PriceApprovalPanel.tsx",
       "norm_label": "goldtyperow"
     },
     {
@@ -3297,7 +3309,7 @@
       "_origin": "ast",
       "id": "src_lib_gold_api_getallgoldtypes",
       "community": 11,
-      "community_name": "formatRupiah",
+      "community_name": "admin/page.tsx",
       "norm_label": "getallgoldtypes()"
     },
     {
@@ -3442,8 +3454,8 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "src_lib_gold_api_formattedprice",
-      "community": 29,
-      "community_name": "OrdersClient.tsx",
+      "community": 11,
+      "community_name": "admin/page.tsx",
       "norm_label": "formattedprice"
     },
     {
@@ -3455,7 +3467,7 @@
       "_origin": "ast",
       "id": "src_lib_gold_api_getformattedtodayprices",
       "community": 11,
-      "community_name": "formatRupiah",
+      "community_name": "admin/page.tsx",
       "norm_label": "getformattedtodayprices()"
     },
     {
@@ -3491,7 +3503,7 @@
       "_origin": "ast",
       "id": "src_lib_gold_api_formatrupiah",
       "community": 11,
-      "community_name": "formatRupiah",
+      "community_name": "admin/page.tsx",
       "norm_label": "formatrupiah()"
     },
     {
@@ -3559,8 +3571,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_lib_supabase_client",
-      "community": 29,
-      "community_name": "OrdersClient.tsx",
+      "community": 11,
+      "community_name": "admin/page.tsx",
       "norm_label": "client.ts"
     },
     {
@@ -3571,8 +3583,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_lib_supabase_client_createclient",
-      "community": 29,
-      "community_name": "OrdersClient.tsx",
+      "community": 11,
+      "community_name": "admin/page.tsx",
       "norm_label": "createclient()"
     },
     {
@@ -9021,6 +9033,17 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/MesinPresisi.tsx",
+      "source_location": "L61",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_mesinpresisi",
+      "target": "src_components_mesinpresisi_machinecaption",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MesinPresisi.tsx",
       "source_location": "L38",
       "weight": 1.0,
       "_origin": "ast",
@@ -9043,7 +9066,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/MesinPresisi.tsx",
-      "source_location": "L61",
+      "source_location": "L80",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_mesinpresisi",

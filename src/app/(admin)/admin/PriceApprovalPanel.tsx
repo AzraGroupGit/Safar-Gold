@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef } from "react";
 import type { GoldTypeRow } from "@/lib/gold-api";
 import PricePreviewModal from "@/components/PricePreviewModal";
 
@@ -25,7 +25,9 @@ interface Props {
   suggestedJual: number | null;
   suggestedBuyback: number | null;
   initialAntamPrice: string;
+  initialAntamPricePrev: string;
   initialGlobalGoldPrice: string;
+  initialGlobalGoldPricePrev: string;
   initialGoogleReviewsWidgetId: string;
 }
 
@@ -54,7 +56,9 @@ export default function PriceApprovalPanel({
   suggestedJual,
   suggestedBuyback,
   initialAntamPrice,
+  initialAntamPricePrev,
   initialGlobalGoldPrice,
+  initialGlobalGoldPricePrev,
   initialGoogleReviewsWidgetId,
 }: Props) {
   const [hargaDasar, setHargaDasar] = useState(initialHargaDasarJual);
@@ -67,8 +71,10 @@ export default function PriceApprovalPanel({
   const [fetchStatus, setFetchStatus] = useState<{ type: "idle" | "loading" | "success" | "error"; msg: string }>({ type: "idle", msg: "" });
   const [antamPrice, setAntamPrice] = useState(initialAntamPrice);
   const [globalGoldPrice, setGlobalGoldPrice] = useState(initialGlobalGoldPrice);
-  const [prevAntamPrice, setPrevAntamPrice] = useState(initialAntamPrice);
-  const [prevGlobalGoldPrice, setPrevGlobalGoldPrice] = useState(initialGlobalGoldPrice);
+  const savedAntamRef = useRef(initialAntamPrice);
+  const prevAntamRef = useRef(initialAntamPricePrev);
+  const savedGlobalRef = useRef(initialGlobalGoldPrice);
+  const prevGlobalRef = useRef(initialGlobalGoldPricePrev);
   const [antamSaveStatus, setAntamSaveStatus] = useState<"idle" | "saving" | "saved">("idle");
   const [globalSaveStatus, setGlobalSaveStatus] = useState<"idle" | "saving" | "saved">("idle");
   const [reviewsWidgetId, setReviewsWidgetId] = useState(initialGoogleReviewsWidgetId);
@@ -167,7 +173,9 @@ export default function PriceApprovalPanel({
 
   async function handleSaveAntamPrice(value: string) {
     const cleaned = cleanNumber(value);
-    if (cleaned === cleanNumber(prevAntamPrice)) return;
+    if (cleaned === savedAntamRef.current) return;
+    let prevValue = parseInt(cleanNumber(prevAntamRef.current)) || 0;
+    if (prevValue <= 0) prevValue = parseInt(savedAntamRef.current) || 0;
     setAntamSaveStatus("saving");
     try {
       await fetch("/api/admin/update-settings", {
@@ -175,12 +183,13 @@ export default function PriceApprovalPanel({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           settings: {
-            antam_price_prev: cleanNumber(prevAntamPrice),
+            antam_price_prev: String(prevValue),
             antam_price: cleaned,
           },
         }),
       });
-      setPrevAntamPrice(cleaned);
+      savedAntamRef.current = cleaned;
+      prevAntamRef.current = String(prevValue);
       setAntamSaveStatus("saved");
       setTimeout(() => setAntamSaveStatus("idle"), 2000);
     } catch {
@@ -209,7 +218,10 @@ export default function PriceApprovalPanel({
 
   async function handleSaveGlobalGoldPrice(value: string) {
     const cleaned = cleanNumber(value);
-    if (cleaned === cleanNumber(prevGlobalGoldPrice)) return;
+    if (cleaned === savedGlobalRef.current) return;
+    let prevValue = parseInt(cleanNumber(prevGlobalRef.current)) || 0;
+    if (prevValue <= 0) prevValue = parseInt(savedGlobalRef.current) || 0;
+    if (prevValue <= 0 && baseGoldIdr > 0) prevValue = Math.round(baseGoldIdr);
     setGlobalSaveStatus("saving");
     try {
       await fetch("/api/admin/update-settings", {
@@ -217,12 +229,13 @@ export default function PriceApprovalPanel({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           settings: {
-            global_gold_price_prev: cleanNumber(prevGlobalGoldPrice),
+            global_gold_price_prev: String(prevValue),
             global_gold_price: cleaned,
           },
         }),
       });
-      setPrevGlobalGoldPrice(cleaned);
+      savedGlobalRef.current = cleaned;
+      prevGlobalRef.current = String(prevValue);
       setGlobalSaveStatus("saved");
       setTimeout(() => setGlobalSaveStatus("idle"), 2000);
     } catch {
