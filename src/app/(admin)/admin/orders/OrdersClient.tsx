@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
-import Link from "next/link";
+import { useState, useEffect, useMemo, useCallback, useRef } from "react";
 import type { GoldTypeRow, FormattedPrice } from "@/lib/gold-api";
 import { formatRupiah } from "@/lib/gold-api";
 import { createClient } from "@/lib/supabase/client";
+import OrderInvoice, { type InvoiceOrder, type InvoiceSettings } from "@/components/OrderInvoice";
 
 type Order = { id: string; order_number: string; type: string; customer_name: string; customer_phone: string; total: number; status: string; created_at: string };
 type OrderDetail = Order & { order_items: { id?: string; item_name: string; weight: number; karat: number | null; qty: number; price_per_gram: number; price_total: number; gold_type_id?: string | null }[] };
@@ -12,8 +12,11 @@ type CartItem = { goldTypeId: string | null; itemName: string; weight: number; k
 
 const LM_PRODUCTS = ["antam-0.5", "antam-1", "antam-2", "antam-3", "antam-5", "antam-10", "antam-25", "antam-50", "antam-100"];
 const PER_PAGE = 20;
+const SOURCE_OPTIONS = ["Instagram", "Google", "Teman/Keluarga", "TikTok", "Facebook", "Lainnya"];
+const BUYBACK_CATEGORIES = ["Anting", "Kalung", "Cincin", "Liontin", "Gelang"];
+type RegionOption = { id: string; name: string };
 
-export default function OrdersClient({ prices, goldTypes }: { prices: FormattedPrice[]; goldTypes: GoldTypeRow[] }) {
+export default function OrdersClient({ prices, goldTypes, settings }: { prices: FormattedPrice[]; goldTypes: GoldTypeRow[]; settings: InvoiceSettings }) {
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
@@ -25,6 +28,7 @@ export default function OrdersClient({ prices, goldTypes }: { prices: FormattedP
   const [showModal, setShowModal] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [viewOrder, setViewOrder] = useState<OrderDetail | null>(null);
+  const [printOrder, setPrintOrder] = useState<OrderDetail | null>(null);
   const [deleteConfirm, setDeleteConfirm] = useState<Order | null>(null);
 
   // Form
@@ -41,6 +45,32 @@ export default function OrdersClient({ prices, goldTypes }: { prices: FormattedP
   const [bbWeight, setBbWeight] = useState("");
   const [bbKarat, setBbKarat] = useState("24");
   const [bbItemName, setBbItemName] = useState("");
+  const [bbCategoryName, setBbCategoryName] = useState("");
+  const [bbCustomName, setBbCustomName] = useState("");
+
+  // Customer baru
+  const [source, setSource] = useState("");
+  const [nik, setNik] = useState("");
+  const [address, setAddress] = useState("");
+  const [instagram, setInstagram] = useState("");
+
+  // Region cascade
+  const [provinces, setProvinces] = useState<RegionOption[]>([]);
+  const [regencies, setRegencies] = useState<RegionOption[]>([]);
+  const [districts, setDistricts] = useState<RegionOption[]>([]);
+  const [villages, setVillages] = useState<RegionOption[]>([]);
+  const [regionLoading, setRegionLoading] = useState({ regency: false, district: false, village: false });
+  const [provinceId, setProvinceId] = useState("");
+  const [regencyId, setRegencyId] = useState("");
+  const [districtId, setDistrictId] = useState("");
+  const [provinsi, setProvinsi] = useState("");
+  const [kabupaten, setKabupaten] = useState("");
+  const [kecamatan, setKecamatan] = useState("");
+  const [kelurahan, setKelurahan] = useState("");
+
+  // Customer lookup (repeat order autofill)
+  const [lookup, setLookup] = useState<any>(null);
+  const lookupTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const priceMap = new Map(prices.map(p => [p.goldTypeId, p]));
   const bbGoldTypes = goldTypes.filter(g => g.category === bbCategory || (bbCategory === "bb-perhiasan" && g.category === "bb-perhiasan") || (bbCategory === "bb-logam" && g.category === "bb-logam") || (bbCategory === "bb-lm" && g.category === "bb-lm"));
@@ -51,7 +81,77 @@ export default function OrdersClient({ prices, goldTypes }: { prices: FormattedP
   function resetForm() {
     setType("sell"); setCustomerName(""); setCustomerPhone(""); setItems([]); setEditingId(null);
     setError(""); setSellProduct("antam-1"); setSellQty(1);
-    setBbCategory("bb-lm"); setBbGoldType("bb-certi-1-2"); setBbWeight(""); setBbKarat("24"); setBbItemName("");
+    setBbCategory("bb-lm"); setBbGoldType("bb-certi-1-2"); setBbWeight(""); setBbKarat("24"); setBbItemName(""); setBbCategoryName(""); setBbCustomName("");
+    setSource(""); setNik(""); setAddress(""); setInstagram("");
+    setProvinsi(""); setProvinceId(""); setKabupaten(""); setRegencyId(""); setKecamatan(""); setDistrictId(""); setKelurahan("");
+    setRegencies([]); setDistricts([]); setVillages([]);
+    setLookup(null);
+  }
+
+  function handlePhoneChange(v: string) {
+    setCustomerPhone(v);
+    const digits = v.replace(/\D/g, "");
+    if (lookupTimer.current) clearTimeout(lookupTimer.current);
+    setLookup(null);
+    if (digits.length >= 8) {
+      lookupTimer.current = setTimeout(async () => {
+        const res = await fetch(`/api/admin/customers/lookup?phone=${encodeURIComponent(digits)}`);
+        const data = await res.json();
+        setLookup(data.customer ?? null);
+      }, 400);
+    }
+  }
+
+  function applyLookup() {
+    if (!lookup) return;
+    const c = lookup;
+    setCustomerName(c.name ?? "");
+    setSource(c.source ?? "");
+    setNik(c.nik ?? "");
+    setAddress(c.address ?? "");
+    setKelurahan(c.kelurahan ?? "");
+    setKecamatan(c.kecamatan ?? "");
+    setKabupaten(c.kabupaten ?? "");
+    setProvinsi(c.provinsi ?? "");
+    setInstagram(c.instagram ?? "");
+  }
+
+  const fetchRegion = useCallback(async (url: string) => {
+    const res = await fetch(url); if (!res.ok) return [];
+    return (await res.json()) as RegionOption[];
+  }, []);
+
+  const loadProvinces = useCallback(async () => {
+    const data = await fetchRegion("/api/regions");
+    setProvinces(data);
+  }, [fetchRegion]);
+
+  async function onProvinceChange(id: string, name: string) {
+    setProvinsi(name); setProvinceId(id); setRegencyId(""); setDistrictId("");
+    setKabupaten(""); setKecamatan(""); setKelurahan("");
+    setRegencies([]); setDistricts([]); setVillages([]);
+    if (!id) return;
+    setRegionLoading(r => ({ ...r, regency: true }));
+    const data = await fetchRegion(`/api/regions?type=regency&parent=${id}`);
+    setRegencies(data); setRegionLoading(r => ({ ...r, regency: false }));
+  }
+  async function onRegencyChange(id: string, name: string) {
+    setKabupaten(name); setRegencyId(id); setDistrictId("");
+    setKecamatan(""); setKelurahan("");
+    setDistricts([]); setVillages([]);
+    if (!id) return;
+    setRegionLoading(r => ({ ...r, district: true }));
+    const data = await fetchRegion(`/api/regions?type=district&parent=${id}`);
+    setDistricts(data); setRegionLoading(r => ({ ...r, district: false }));
+  }
+  async function onDistrictChange(id: string, name: string) {
+    setKecamatan(name); setDistrictId(id);
+    setKelurahan("");
+    setVillages([]);
+    if (!id) return;
+    setRegionLoading(r => ({ ...r, village: true }));
+    const data = await fetchRegion(`/api/regions?type=village&parent=${id}`);
+    setVillages(data); setRegionLoading(r => ({ ...r, village: false }));
   }
 
   async function openEdit(o: Order) {
@@ -64,11 +164,23 @@ export default function OrdersClient({ prices, goldTypes }: { prices: FormattedP
     setCustomerName(order.customer_name);
     setCustomerPhone(order.customer_phone);
     setItems(order.order_items.map(it => ({ goldTypeId: it.gold_type_id ?? null, itemName: it.item_name, weight: it.weight, karat: it.karat, qty: it.qty, pricePerGram: it.price_per_gram, priceTotal: it.price_total })));
+    setSource((order as any).source ?? "");
+    setNik((order as any).nik ?? "");
+    setAddress((order as any).address ?? "");
+    setInstagram((order as any).instagram ?? "");
+    setProvinsi((order as any).provinsi ?? "");
+    setKabupaten((order as any).kabupaten ?? "");
+    setKecamatan((order as any).kecamatan ?? "");
+    setKelurahan((order as any).kelurahan ?? "");
     setShowModal(true);
   }
 
   function openView(o: Order) {
     fetch(`/api/admin/orders/${o.id}`).then(r => r.json()).then(d => setViewOrder(d.order ?? null));
+  }
+
+  function openPrint(o: Order) {
+    fetch(`/api/admin/orders/${o.id}`).then(r => r.json()).then(d => setPrintOrder(d.order ?? null));
   }
 
   function addSellItem() {
@@ -81,7 +193,11 @@ export default function OrdersClient({ prices, goldTypes }: { prices: FormattedP
     const w = parseFloat(bbWeight) || 0; if (w <= 0) return;
     const p = priceMap.get(bbGoldType); const ppg = p?.sellPrice ?? 0;
     const gt = bbGoldTypes.find(g => g.id === bbGoldType);
-    const name = bbItemName || gt?.name || bbGoldType;
+    let name = bbItemName || gt?.name || bbGoldType;
+    if (bbCategory === "bb-perhiasan") {
+      name = bbCategoryName === "Lainnya" ? bbCustomName : bbCategoryName;
+      if (!name) name = gt?.name || bbGoldType;
+    }
     const karatVal = bbCategory === "bb-perhiasan" ? parseInt(bbKarat) || null : bbCategory === "bb-lm" ? 24 : null;
     setItems([...items, { goldTypeId: bbGoldType, itemName: name, weight: w, karat: karatVal, qty: 1, pricePerGram: ppg, priceTotal: Math.round(ppg * w) }]);
   }
@@ -97,13 +213,13 @@ export default function OrdersClient({ prices, goldTypes }: { prices: FormattedP
     if (editingId) {
       const res = await fetch(`/api/admin/orders/${editingId}`, {
         method: "PUT", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ customerName, customerPhone, type, items }),
+        body: JSON.stringify({ customerName, customerPhone, type, items, source: source || null, nik: nik || null, address: address || null, kelurahan: kelurahan || null, kecamatan: kecamatan || null, kabupaten: kabupaten || null, provinsi: provinsi || null, instagram: instagram || null }),
       });
       const data = await res.json();
       if (data.success) { setShowModal(false); resetForm(); fetchOrders(); } else { setError(data.error ?? "Gagal"); setSaving(false); }
     } else {
       const supabase = createClient(); const { data: { user } } = await supabase.auth.getUser();
-      const res = await fetch("/api/admin/orders", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type, customerName, customerPhone, items, createdBy: user?.id }) });
+      const res = await fetch("/api/admin/orders", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type, customerName, customerPhone, items, createdBy: user?.id, source: source || null, nik: nik || null, address: address || null, kelurahan: kelurahan || null, kecamatan: kecamatan || null, kabupaten: kabupaten || null, provinsi: provinsi || null, instagram: instagram || null }) });
       const data = await res.json();
       if (data.success) { setShowModal(false); resetForm(); fetchOrders(); } else { setError(data.error ?? "Gagal"); setSaving(false); }
     }
@@ -169,6 +285,7 @@ export default function OrdersClient({ prices, goldTypes }: { prices: FormattedP
                 <td className="px-4 py-3.5 text-center md:px-6">
                   <div className="flex items-center justify-center gap-1">
                     <button onClick={() => openView(o)} className="rounded-lg p-1.5 text-text-muted transition-colors hover:bg-surface hover:text-gold-dark" title="Lihat"><svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg></button>
+                    <button onClick={() => openPrint(o)} className="rounded-lg p-1.5 text-text-muted transition-colors hover:bg-surface hover:text-gold-dark" title="Cetak"><svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z" /></svg></button>
                     {o.status !== "cancelled" && (
                       <>
                         <button onClick={() => openEdit(o)} className="rounded-lg p-1.5 text-text-muted transition-colors hover:bg-surface hover:text-gold-dark" title="Edit"><svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" /></svg></button>
@@ -192,14 +309,17 @@ export default function OrdersClient({ prices, goldTypes }: { prices: FormattedP
         </div>
       )}
 
-      {/* View Modal */}
+      {/* Detail Order Modal */}
       {viewOrder && (
         <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto pt-[8vh] pb-10">
           <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" onClick={()=>setViewOrder(null)} />
           <div className="relative w-full max-w-2xl rounded-2xl border border-border/60 bg-white shadow-2xl">
             <div className="flex items-center justify-between border-b border-border/40 px-6 py-4">
               <div><h3 className="font-serif text-lg font-semibold text-text">{viewOrder.order_number}</h3><p className="text-xs text-text-muted">{new Date(viewOrder.created_at).toLocaleDateString("id-ID",{weekday:"long",day:"numeric",month:"long",year:"numeric",hour:"2-digit",minute:"2-digit"})}</p></div>
-              <div className="flex items-center gap-2"><span className={`rounded-full px-3 py-1 text-xs font-semibold ${viewOrder.type==="sell"?"bg-emerald-50 text-emerald-700":"bg-amber-50 text-amber-700"}`}>{viewOrder.type==="sell"?"Jual":"Buyback"}</span><button onClick={()=>setViewOrder(null)} className="rounded-lg p-1 text-text-muted hover:bg-surface hover:text-text">&times;</button></div>
+              <div className="flex items-center gap-2">
+                <span className={`rounded-full px-3 py-1 text-xs font-semibold ${viewOrder.type==="sell"?"bg-emerald-50 text-emerald-700":"bg-amber-50 text-amber-700"}`}>{viewOrder.type==="sell"?"Jual":"Buyback"}</span>
+                <button onClick={()=>setViewOrder(null)} className="rounded-lg p-1 text-text-muted hover:bg-surface hover:text-text">&times;</button>
+              </div>
             </div>
             <div className="p-6 space-y-5">
               <div className="grid gap-4 sm:grid-cols-2">
@@ -214,9 +334,30 @@ export default function OrdersClient({ prices, goldTypes }: { prices: FormattedP
                 </table>
               </div>
             </div>
-            <div className="flex gap-3 border-t border-border/40 bg-surface/30 px-6 py-4 rounded-b-2xl">
-              <button onClick={()=>window.print()} className="flex-1 rounded-xl border border-border/60 px-4 py-2.5 text-sm font-medium text-text-muted transition-colors hover:bg-white">Cetak</button>
-              <button onClick={()=>setViewOrder(null)} className="gold-gradient-bg flex-1 rounded-xl px-4 py-2.5 text-sm font-semibold text-white shadow-sm">Tutup</button>
+            <div className="flex justify-end gap-3 border-t border-border/40 bg-surface/30 px-6 py-4 rounded-b-2xl">
+              <button onClick={()=>setViewOrder(null)} className="rounded-xl border border-border/60 px-5 py-2.5 text-sm font-medium text-text-muted transition-colors hover:bg-white">Tutup</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Invoice Modal */}
+      {printOrder && (
+        <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto pt-[8vh] pb-10">
+          <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" onClick={()=>setPrintOrder(null)} />
+          <div className="relative w-full max-w-2xl rounded-2xl border border-border/60 bg-white shadow-2xl">
+            <div className="flex items-center justify-between border-b border-border/40 px-6 py-4">
+              <div><h3 className="font-serif text-lg font-semibold text-text">{printOrder.order_number}</h3><p className="text-xs text-text-muted">Preview Invoice</p></div>
+              <div className="flex items-center gap-2">
+                <span className={`rounded-full px-3 py-1 text-xs font-semibold ${printOrder.type==="sell"?"bg-emerald-50 text-emerald-700":"bg-amber-50 text-amber-700"}`}>{printOrder.type==="sell"?"Jual":"Buyback"}</span>
+                <button onClick={()=>setPrintOrder(null)} className="rounded-lg p-1 text-text-muted hover:bg-surface hover:text-text">&times;</button>
+              </div>
+            </div>
+            <div className="max-h-[70vh] overflow-y-auto">
+              <OrderInvoice order={printOrder as InvoiceOrder} settings={settings} />
+            </div>
+            <div className="flex justify-end gap-3 border-t border-border/40 bg-surface/30 px-6 py-4 rounded-b-2xl">
+              <button onClick={()=>setPrintOrder(null)} className="rounded-xl border border-border/60 px-5 py-2.5 text-sm font-medium text-text-muted transition-colors hover:bg-white">Tutup</button>
             </div>
           </div>
         </div>
@@ -254,12 +395,127 @@ export default function OrdersClient({ prices, goldTypes }: { prices: FormattedP
                 ):(
                   <div className="space-y-3">
                     <div className="flex flex-wrap gap-3"><div className="w-40"><label className="mb-1 block text-xs text-text-muted">Kategori</label><select value={bbCategory} onChange={e=>{setBbCategory(e.target.value);const f=goldTypes.filter(g=>g.category===e.target.value)[0];if(f)setBbGoldType(f.id);}} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm"><option value="bb-lm">LM (Antam)</option><option value="bb-perhiasan">Perhiasan</option><option value="bb-logam">Logam Lain</option></select></div><div className="flex-1 min-w-[180px]"><label className="mb-1 block text-xs text-text-muted">Jenis</label><select value={bbGoldType} onChange={e=>setBbGoldType(e.target.value)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm">{bbGoldTypes.map(g=>{const p=priceMap.get(g.id);return <option key={g.id} value={g.id}>{g.name} {p?`— ${formatRupiah(p.sellPrice)}/g`:""}</option>;})}</select></div></div>
-                    <div className="flex flex-wrap gap-3 items-end">{bbCategory==="bb-perhiasan"&&<div className="w-24"><label className="mb-1 block text-xs text-text-muted">Karat</label><select value={bbKarat} onChange={e=>setBbKarat(e.target.value)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm">{["24","23","22","21","20","19","18","17","16","15","14","13","12","11","10","9","8","7","6"].map(k=><option key={k} value={k}>{k}K</option>)}</select></div>}<div className="w-32"><label className="mb-1 block text-xs text-text-muted">Berat (g)</label><input type="number" step="0.01" min="0.01" value={bbWeight} onChange={e=>setBbWeight(e.target.value)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm" placeholder="0.00" /></div><div className="flex-1 min-w-[150px]"><label className="mb-1 block text-xs text-text-muted">Nama (opsional)</label><input type="text" value={bbItemName} onChange={e=>setBbItemName(e.target.value)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm" placeholder="Cincin, kalung, dll" /></div><button onClick={addBuybackItem} className="rounded-lg border border-gold/40 px-4 py-2.5 text-sm font-semibold text-gold-dark hover:bg-gold/5">+ Tambah</button></div>
+                    <div className="flex flex-wrap gap-3 items-end">{bbCategory==="bb-perhiasan"&&<div className="w-24"><label className="mb-1 block text-xs text-text-muted">Karat</label><select value={bbKarat} onChange={e=>setBbKarat(e.target.value)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm">{["24","23","22","21","20","19","18","17","16","15","14","13","12","11","10","9","8","7","6"].map(k=><option key={k} value={k}>{k}K</option>)}</select></div>}<div className="w-32"><label className="mb-1 block text-xs text-text-muted">Berat (g)</label><input type="number" step="0.01" min="0.01" value={bbWeight} onChange={e=>setBbWeight(e.target.value)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm" placeholder="0.00" /></div>
+                    {bbCategory === "bb-perhiasan" ? (
+                      <div className="flex-1 min-w-[180px]">
+                        <label className="mb-1 block text-xs text-text-muted">Kategori</label>
+                        <select
+                          value={bbCategoryName}
+                          onChange={e => {
+                            setBbCategoryName(e.target.value);
+                            if (e.target.value !== "Lainnya") setBbCustomName("");
+                          }}
+                          className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm"
+                        >
+                          <option value="">Pilih kategori...</option>
+                          {BUYBACK_CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
+                          <option value="Lainnya">Lainnya...</option>
+                        </select>
+                        {bbCategoryName === "Lainnya" && (
+                          <input type="text" value={bbCustomName} onChange={e=>setBbCustomName(e.target.value)} className="mt-2 w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm" placeholder="Tulis nama item..." />
+                        )}
+                      </div>
+                    ) : (
+                      <div className="flex-1 min-w-[150px]"><label className="mb-1 block text-xs text-text-muted">Nama (opsional)</label><input type="text" value={bbItemName} onChange={e=>setBbItemName(e.target.value)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm" placeholder="Contoh: Retro, Merek Lain" /></div>
+                    )}<button onClick={addBuybackItem} className="rounded-lg border border-gold/40 px-4 py-2.5 text-sm font-semibold text-gold-dark hover:bg-gold/5">+ Tambah</button></div>
                   </div>
                 )}
               </div>
               {items.length>0&&(<div className="rounded-xl border border-border/40 bg-surface overflow-hidden"><table className="w-full text-sm"><thead><tr className="border-b border-border/30 text-left text-xs text-text-muted"><th className="px-4 py-2">Item</th><th className="px-4 py-2">Berat/Karat</th><th className="px-4 py-2">Qty</th><th className="px-4 py-2 text-right">Harga/g</th><th className="px-4 py-2 text-right">Total</th><th className="px-4 py-2"></th></tr></thead><tbody className="divide-y divide-border/20">{items.map((it,i)=>(<tr key={i}><td className="px-4 py-2.5 font-medium text-text">{it.itemName}</td><td className="px-4 py-2.5 text-text-muted">{it.weight}g{it.karat?` — ${it.karat}K`:""}</td><td className="px-4 py-2.5">{it.qty}</td><td className="px-4 py-2.5 text-right">{formatRupiah(it.pricePerGram)}</td><td className="px-4 py-2.5 text-right font-semibold">{formatRupiah(it.priceTotal)}</td><td className="px-4 py-2.5 text-center"><button onClick={()=>removeItem(i)} className="text-red-400 hover:text-red-600">&times;</button></td></tr>))}</tbody></table></div>)}
-              <div className="rounded-xl border border-border/40 bg-surface p-4"><p className="mb-3 text-xs font-semibold uppercase tracking-wider text-text-muted">Data Customer</p><div className="grid gap-4 sm:grid-cols-2"><div><label className="mb-1 block text-xs text-text-muted">Nama <span className="text-red-400">*</span></label><input type="text" value={customerName} onChange={e=>setCustomerName(e.target.value)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm" placeholder="Nama lengkap" /></div><div><label className="mb-1 block text-xs text-text-muted">No. HP <span className="text-red-400">*</span></label><input type="tel" value={customerPhone} onChange={e=>setCustomerPhone(e.target.value)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm" placeholder="0812-3456-7890" /></div></div></div>
+              <div className="rounded-xl border border-border/40 bg-surface p-4">
+                <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-text-muted">Data Customer</p>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div><label className="mb-1 block text-xs text-text-muted">Nama <span className="text-red-400">*</span></label><input type="text" value={customerName} onChange={e=>setCustomerName(e.target.value)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm" placeholder="Nama lengkap" /></div>
+                  <div><label className="mb-1 block text-xs text-text-muted">No. WA <span className="text-red-400">*</span></label><input type="tel" value={customerPhone} onChange={e=>handlePhoneChange(e.target.value)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm" placeholder="0812-3456-7890" /></div>
+                  {lookup && (
+                    <div className="sm:col-span-2 -mt-2 flex items-center justify-between gap-3 rounded-lg border border-gold/40 bg-gold/5 px-3 py-2.5">
+                      <div className="flex items-center gap-2 text-sm">
+                        <span className="font-medium text-text">{lookup.name}</span>
+                        {lookup.order_count > 1 && <span className="rounded-full bg-amber-100 px-2 py-0.5 text-[11px] font-semibold text-amber-700">Repeat · {lookup.order_count}x</span>}
+                      </div>
+                      <button type="button" onClick={applyLookup} className="shrink-0 rounded-lg border border-gold/40 px-3 py-1.5 text-xs font-semibold text-gold-dark transition-colors hover:bg-gold/10">Gunakan data ini</button>
+                    </div>
+                  )}
+                  <div><label className="mb-1 block text-xs text-text-muted">Tau Safargold dari mana?</label><select value={source} onChange={e=>setSource(e.target.value)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm"><option value="">Pilih...</option>{SOURCE_OPTIONS.map(s=><option key={s} value={s}>{s}</option>)}</select></div>
+                  <div><label className="mb-1 block text-xs text-text-muted">Instagram</label><input type="text" value={instagram} onChange={e=>setInstagram(e.target.value)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm" placeholder="@username" /></div>
+                  <div className="sm:col-span-2"><label className="mb-1 block text-xs text-text-muted">NIK</label><input type="text" value={nik} onChange={e=>setNik(e.target.value)} maxLength={16} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm" placeholder="16 digit NIK KTP" /></div>
+                </div>
+                <div className="mt-4 border-t border-border/30 pt-4">
+                  <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-text-muted">Alamat</p>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <div className="sm:col-span-2">
+                      <label className="mb-1 block text-xs text-text-muted">Provinsi</label>
+                      <select
+                        value={provinceId}
+                        onChange={e => {
+                          const sel = e.target.selectedOptions[0];
+                          onProvinceChange(e.target.value, sel?.textContent ?? "");
+                        }}
+                        onFocus={() => { if (provinces.length === 0) loadProvinces(); }}
+                        className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm"
+                      >
+                        <option value="">Pilih provinsi...</option>
+                        {provinces.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
+                      </select>
+                    </div>
+                    <div className="sm:col-span-2">
+                      <label className="mb-1 block text-xs text-text-muted">Kabupaten / Kota</label>
+                      <div className="relative">
+                        <select
+                          value={regencyId}
+                          onChange={e => {
+                            const sel = e.target.selectedOptions[0];
+                            onRegencyChange(e.target.value, sel?.textContent ?? "");
+                          }}
+                          disabled={!provinceId || regionLoading.regency}
+                          className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm disabled:bg-surface"
+                        >
+                          <option value="">Pilih kabupaten...</option>
+                          {regencies.map(r => <option key={r.id} value={r.id}>{r.name}</option>)}
+                        </select>
+                        {regionLoading.regency && <span className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 animate-spin rounded-full border-2 border-gold border-t-transparent" />}
+                      </div>
+                    </div>
+                    <div>
+                      <label className="mb-1 block text-xs text-text-muted">Kecamatan</label>
+                      <div className="relative">
+                        <select
+                          value={districtId}
+                          onChange={e => {
+                            const sel = e.target.selectedOptions[0];
+                            onDistrictChange(e.target.value, sel?.textContent ?? "");
+                          }}
+                          disabled={!regencyId || regionLoading.district}
+                          className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm disabled:bg-surface"
+                        >
+                          <option value="">Pilih...</option>
+                          {districts.map(d => <option key={d.id} value={d.id}>{d.name}</option>)}
+                        </select>
+                        {regionLoading.district && <span className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 animate-spin rounded-full border-2 border-gold border-t-transparent" />}
+                      </div>
+                    </div>
+                    <div className="relative">
+                      <label className="mb-1 block text-xs text-text-muted">Kelurahan</label>
+                      <div className="relative">
+                        <select
+                          value={""}
+                          onChange={e => {
+                            const sel = e.target.selectedOptions[0];
+                            setKelurahan(sel?.textContent ?? "");
+                          }}
+                          disabled={!districtId || regionLoading.village}
+                          className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm disabled:bg-surface"
+                        >
+                          <option value="">{villages.length === 0 && !regionLoading.village ? "Pilih kecamatan dulu" : "Pilih..."}</option>
+                          {villages.map(v => <option key={v.id} value={v.id}>{v.name}</option>)}
+                        </select>
+                        {regionLoading.village && <span className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 animate-spin rounded-full border-2 border-gold border-t-transparent" />}
+                      </div>
+                    </div>
+                    <div className="sm:col-span-2"><label className="mb-1 block text-xs text-text-muted">Alamat (Jalan/RT/RW)</label><input type="text" value={address} onChange={e=>setAddress(e.target.value)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm" placeholder="Jl. Emas No. 1, RT 02/03" /></div>
+                  </div>
+                </div>
+              </div>
             </div>
             <div className="flex items-center justify-between border-t border-border/40 bg-surface/30 px-6 py-4 rounded-b-2xl"><div><p className="text-xs text-text-muted">Total</p><p className="text-xl font-bold text-gold-dark">{formatRupiah(total)}</p></div><div className="flex gap-3"><button onClick={()=>{setShowModal(false);resetForm();}} className="rounded-xl border border-border/60 px-5 py-2.5 text-sm font-medium text-text-muted hover:bg-white">Batal</button><button onClick={handleSubmit} disabled={saving||items.length===0} className="gold-gradient-bg rounded-xl px-6 py-2.5 text-sm font-semibold text-white shadow-md disabled:opacity-60">{saving?"Menyimpan...":editingId?"Update Order":"Simpan Order"}</button></div></div>
           </div>

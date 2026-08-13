@@ -1,5 +1,7 @@
 "use client";
 
+import { BB_LM_ORDER } from "@/lib/gold-api";
+
 interface PreviewItem {
   id: string;
   name: string;
@@ -38,6 +40,18 @@ export default function PricePreviewModal({ open, onClose, items }: PricePreview
     acc[item.category]!.push(item);
     return acc;
   }, {});
+
+  // Urutkan bb-lm secara logis (certi 1-2 → ... → merek lain)
+  if (grouped["bb-lm"]) {
+    grouped["bb-lm"].sort((a, b) => {
+      const ia = BB_LM_ORDER.indexOf(a.id);
+      const ib = BB_LM_ORDER.indexOf(b.id);
+      if (ia === -1 && ib === -1) return 0;
+      if (ia === -1) return 1;
+      if (ib === -1) return -1;
+      return ia - ib;
+    });
+  }
 
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto pt-[6vh] pb-10">

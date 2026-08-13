@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { fetchInternationalGoldPrice, getSetting, setSetting } from "@/lib/gold-api";
+import { fetchInternationalGoldPrice, getSetting, setSetting, scrapeAntamPrice } from "@/lib/gold-api";
 import { createAnonClient } from "@/lib/supabase/anon";
 
 export const dynamic = "force-dynamic";
@@ -73,13 +73,14 @@ export async function GET(request: Request) {
     }
     await setSetting("last_cron_time", now);
 
-    // Fire-and-forget: scrape Antam price from logammulia.com via Firecrawl
+    // Scrape Antam price — await agar tidak ter-kill di serverless
+    let antamScraped = false;
     try {
-      fetch(new URL("/api/cron/scrape-antam", request.url), {
-        method: "POST",
-      }).catch(() => {});
+      const antamRes = await scrapeAntamPrice();
+      antamScraped = antamRes.success;
+      if (!antamRes.success) warnings.push(`Antam scrape: ${antamRes.error}`);
     } catch {
-      // ignore errors — Antam scrape is best-effort
+      warnings.push("Antam scrape failed");
     }
 
     return NextResponse.json({
@@ -88,6 +89,7 @@ export async function GET(request: Request) {
       xagUsdPerOz,
       xpdUsdPerOz,
       usdIdrRate,
+      antamScraped,
       time: now,
       ...(error && { error }),
       ...(warning && { warning }),

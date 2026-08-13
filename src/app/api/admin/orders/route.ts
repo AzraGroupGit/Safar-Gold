@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { upsertCustomerByPhone } from "@/lib/gold-api";
 
 export const dynamic = "force-dynamic";
 
@@ -21,7 +22,7 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { type, customerName, customerPhone, items, notes, createdBy } = body;
+    const { type, customerName, customerPhone, items, notes, createdBy, source, nik, address, kelurahan, kecamatan, kabupaten, provinsi, instagram } = body;
 
     if (!type || !customerName || !customerPhone || !items?.length) {
       return NextResponse.json({ error: "Data tidak lengkap" }, { status: 400 });
@@ -49,6 +50,14 @@ export async function POST(request: Request) {
         subtotal,
         total: subtotal,
         notes: notes ?? null,
+        source: source ?? null,
+        nik: nik ?? null,
+        address: address ?? null,
+        kelurahan: kelurahan ?? null,
+        kecamatan: kecamatan ?? null,
+        kabupaten: kabupaten ?? null,
+        provinsi: provinsi ?? null,
+        instagram: instagram ?? null,
         created_by: createdBy,
       })
       .select("id")
@@ -56,6 +65,16 @@ export async function POST(request: Request) {
 
     if (orderErr || !order) {
       return NextResponse.json({ error: orderErr?.message ?? "Gagal membuat order" }, { status: 500 });
+    }
+
+    // Upsert customer master + link
+    const customerId = await upsertCustomerByPhone({
+      name: customerName,
+      phone: customerPhone,
+      nik, source, address, kelurahan, kecamatan, kabupaten, provinsi, instagram,
+    });
+    if (customerId) {
+      await adm.from("orders").update({ customer_id: customerId }).eq("id", order.id);
     }
 
     const orderItems = items.map((item: any) => ({
@@ -90,6 +109,15 @@ export async function POST(request: Request) {
         await adm.from("stock_movements").insert({ gold_type_id: item.goldTypeId, order_id: order.id, type: "in", qty, notes: `Order ${orderNumber} — Buyback` });
       }
     }
+
+    // Generate invoice
+    const invPrefix = type === "sell" ? "J" : "BB";
+    const invPattern = `${invPrefix}-${today.replace(/-/g, "")}-%`;
+    const { count: invCount } = await adm.from("orders").select("*", { count: "exact", head: true }).like("invoice_number", invPattern);
+    const invSeq = String((invCount ?? 0) + 1).padStart(3, "0");
+    const invoiceNumber = `${invPrefix}-${today.replace(/-/g, "")}-${invSeq}`;
+    const invoiceType = type === "sell" ? "jual" : "buyback";
+    await adm.from("orders").update({ invoice_number: invoiceNumber, invoice_type: invoiceType }).eq("id", order.id);
 
     const { data: fullOrder } = await adm.from("orders").select("*, order_items(*)").eq("id", order.id).single();
 

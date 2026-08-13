@@ -517,7 +517,7 @@ export default function PriceApprovalPanel({
           </div>
           <div className="rounded-xl border border-border/40 bg-surface p-4">
             <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-text-muted">
-              Logam Mulia Antam (Rp/gram)
+              Emas Antam (Rp/gram)
             </label>
             <p className="mb-1 text-[11px] text-text-muted">
               Biarkan kosong untuk gunakan harga otomatis dari logammulia.com (scrape tiap 06:00)
