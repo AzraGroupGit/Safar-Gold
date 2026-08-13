@@ -3,6 +3,17 @@ import { createAdminClient } from "./supabase/admin";
 
 const GOLD_OUNCE_TO_GRAM = 31.1034768;
 
+// Urutan tampilan Buyback Logam Mulia — dari certi terkecil ke merek lain
+export const BB_LM_ORDER = [
+  "bb-certi-1-2",
+  "bb-certi-3-5",
+  "bb-certi-10-25",
+  "bb-certi-50-100",
+  "bb-non-rm",
+  "bb-retro",
+  "bb-merek-lain",
+];
+
 // ---------- Types ----------
 export interface GoldTypeRow {
   id: string;
@@ -395,6 +406,131 @@ async function fetchAllFallbackPrices(): Promise<{
 
 export function convertToIdrPerGram(usdPerOz: number, usdIdrRate: number): number {
   return (usdPerOz * usdIdrRate) / GOLD_OUNCE_TO_GRAM;
+}
+
+// ---------- Scrape Harga Antam (Logam Mulia) ----------
+export type ScrapeAntamResult = {
+  success: boolean;
+  antamPrice?: number;
+  previousPrice?: number;
+  error?: string;
+};
+
+/** Scrape harga emas Antam dari logammulia.com via Firecrawl (force fresh). */
+export async function scrapeAntamPrice(): Promise<ScrapeAntamResult> {
+  const apiKey = process.env.FIRECRAWL_API_KEY;
+  if (!apiKey) {
+    return { success: false, error: "FIRECRAWL_API_KEY not configured" };
+  }
+
+  const res = await fetch("https://api.firecrawl.dev/v2/scrape", {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      url: "https://www.logammulia.com",
+      formats: ["markdown"],
+      onlyMainContent: true,
+      maxAge: 0,
+      storeInCache: false,
+    }),
+  });
+
+  const data = await res.json();
+  if (!data.success) {
+    return { success: false, error: "Firecrawl scrape failed", detail: data } as any;
+  }
+
+  const markdown: string = data.data?.markdown ?? "";
+
+  // Parse: "Emas\nHarga/gram Rp2.700.000,00..."
+  const emasSection = markdown.match(/Emas\s*\n\s*Harga\/gram\s+Rp([\d.]+)/i);
+  let price = 0;
+
+  if (emasSection?.[1]) {
+    price = parseInt(emasSection[1].replace(/\./g, ""), 10);
+  } else {
+    // Fallback: "Harga Terakhir: Rp2.680.000,00"
+    const lastPrice = markdown.match(/Harga Terakhir:\s*Rp([\d.]+)/i);
+    if (lastPrice?.[1]) {
+      price = parseInt(lastPrice[1].replace(/\./g, ""), 10);
+    }
+  }
+
+  if (price <= 0) {
+    return { success: false, error: "Could not parse gold price", detail: markdown.substring(0, 500) } as any;
+  }
+
+  const prevRaw = await getSetting("antam_price");
+  const prevPrice = prevRaw ? parseInt(prevRaw, 10) || 0 : 0;
+
+  await setSetting("antam_price_prev", String(prevPrice));
+  await setSetting("antam_price", String(price));
+
+  return { success: true, antamPrice: price, previousPrice: prevPrice };
+}
+
+// ---------- Customers ----------
+export function normalizePhone(phone: string): string {
+  let d = (phone ?? "").replace(/\D/g, "");
+  if (d.startsWith("62")) d = "0" + d.slice(2);
+  return d;
+}
+
+export type CustomerInput = {
+  name: string;
+  phone: string;
+  nik?: string | null;
+  source?: string | null;
+  address?: string | null;
+  kelurahan?: string | null;
+  kecamatan?: string | null;
+  kabupaten?: string | null;
+  provinsi?: string | null;
+  instagram?: string | null;
+};
+
+/** Upsert customer master by phone (normalized). Returns customer id. */
+export async function upsertCustomerByPhone(input: CustomerInput): Promise<string | null> {
+  const supabase = createAdminClient();
+  const phone = normalizePhone(input.phone);
+  if (!phone) return null;
+
+  const fields = {
+    name: input.name,
+    phone,
+    nik: input.nik ?? null,
+    source: input.source ?? null,
+    address: input.address ?? null,
+    kelurahan: input.kelurahan ?? null,
+    kecamatan: input.kecamatan ?? null,
+    kabupaten: input.kabupaten ?? null,
+    provinsi: input.provinsi ?? null,
+    instagram: input.instagram ?? null,
+  };
+
+  const { data: existing } = await supabase
+    .from("customers")
+    .select("id")
+    .eq("phone", phone)
+    .maybeSingle();
+
+  if (existing) {
+    await supabase
+      .from("customers")
+      .update({ ...fields, updated_at: new Date().toISOString() })
+      .eq("id", existing.id);
+    return existing.id;
+  }
+
+  const { data: created } = await supabase
+    .from("customers")
+    .insert(fields)
+    .select("id")
+    .single();
+  return created?.id ?? null;
 }
 
 // ---------- Public Settings (Kontak, Jam, dll) ----------

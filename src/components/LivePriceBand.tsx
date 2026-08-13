@@ -98,7 +98,7 @@ export default async function LivePriceBand() {
             <div className="bg-diamond absolute inset-0 opacity-20" />
             <div className="relative">
               <p className="text-xs font-medium uppercase tracking-wider text-white/70">
-                Logam Mulia Antam
+                Emas Antam
               </p>
               <p className="mt-1 text-3xl font-bold text-white md:text-4xl">
                 {antamPrice > 0 ? formatRupiah(antamPrice) : "-"}

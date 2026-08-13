@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { upsertCustomerByPhone } from "@/lib/gold-api";
 
 export const dynamic = "force-dynamic";
 
@@ -21,7 +22,7 @@ export async function DELETE(_req: Request, { params }: { params: Promise<{ id: 
 
 export async function PUT(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const { customerName, customerPhone, type, items } = await request.json();
+  const { customerName, customerPhone, type, items, source, nik, address, kelurahan, kecamatan, kabupaten, provinsi, instagram } = await request.json();
 
   if (!customerName || !customerPhone || !items?.length) {
     return NextResponse.json({ error: "Data tidak lengkap" }, { status: 400 });
@@ -46,7 +47,21 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
 
   // Update order
   const subtotal = items.reduce((s: number, it: any) => s + (it.priceTotal ?? 0), 0);
-  await adm.from("orders").update({ customer_name: customerName, customer_phone: customerPhone, type, subtotal, total: subtotal }).eq("id", id);
+  await adm.from("orders").update({
+    customer_name: customerName,
+    customer_phone: customerPhone,
+    type,
+    subtotal,
+    total: subtotal,
+    source: source ?? null,
+    nik: nik ?? null,
+    address: address ?? null,
+    kelurahan: kelurahan ?? null,
+    kecamatan: kecamatan ?? null,
+    kabupaten: kabupaten ?? null,
+    provinsi: provinsi ?? null,
+    instagram: instagram ?? null,
+  }).eq("id", id);
 
   // Replace items
   await adm.from("order_items").delete().eq("order_id", id);
@@ -79,5 +94,37 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
   }
 
   const { data: updated } = await adm.from("orders").select("*, order_items(*)").eq("id", id).single();
+
+  // Upsert customer master + relink; bersihkan customer yatim jika phone berubah
+  const customerId = await upsertCustomerByPhone({
+    name: customerName,
+    phone: customerPhone,
+    nik, source, address, kelurahan, kecamatan, kabupaten, provinsi, instagram,
+  });
+  if (customerId) {
+    const oldCustomerId = oldOrder.customer_id ?? null;
+    if (oldCustomerId && oldCustomerId !== customerId) {
+      const { count } = await adm.from("orders").select("*", { count: "exact", head: true }).eq("customer_id", oldCustomerId);
+      if ((count ?? 0) === 0) {
+        await adm.from("customers").delete().eq("id", oldCustomerId);
+      }
+    }
+    await adm.from("orders").update({ customer_id: customerId }).eq("id", id);
+  }
+
+  // Pastikan invoice_number terisi (misalnya order lama sebelum fitur invoice ada)
+  if (updated && !updated.invoice_number) {
+    const today = new Date().toISOString().split("T")[0];
+    const invPrefix = updated.type === "sell" ? "J" : "BB";
+    const invPattern = `${invPrefix}-${today.replace(/-/g, "")}-%`;
+    const { count: invCount } = await adm.from("orders").select("*", { count: "exact", head: true }).like("invoice_number", invPattern);
+    const invSeq = String((invCount ?? 0) + 1).padStart(3, "0");
+    const invoiceNumber = `${invPrefix}-${today.replace(/-/g, "")}-${invSeq}`;
+    const invoiceType = updated.type === "sell" ? "jual" : "buyback";
+    await adm.from("orders").update({ invoice_number: invoiceNumber, invoice_type: invoiceType }).eq("id", id);
+    updated.invoice_number = invoiceNumber;
+    updated.invoice_type = invoiceType;
+  }
+
   return NextResponse.json({ success: true, order: updated });
 }

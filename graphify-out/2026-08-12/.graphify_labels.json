@@ -5,12 +5,12 @@
   "3": "dependencies",
   "4": "PriceApprovalPanel.tsx",
   "5": "devDependencies",
-  "6": "getSetting",
+  "6": "gold-api.ts",
   "7": "JenisEmasClient.tsx",
   "8": "stock/page.tsx",
-  "9": "gold-api.ts",
+  "9": "loading.tsx",
   "10": "app/layout.tsx",
-  "11": "admin/page.tsx",
+  "11": "PriceChart.tsx",
   "12": "tentang/page.tsx",
   "13": "migration.sql",
   "14": "graphify.js",
@@ -28,5 +28,7 @@
   "26": "Safar Gold Store Interior Hero",
   "27": "window.svg",
   "28": "users/page.tsx",
-  "29": "PriceChart.tsx"
+  "29": "formatRupiah",
+  "30": "getPublicSettings",
+  "31": "regions/route.ts"
 }
