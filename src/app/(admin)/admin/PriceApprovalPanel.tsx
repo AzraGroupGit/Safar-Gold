@@ -110,8 +110,7 @@ export default function PriceApprovalPanel({
           return { id: gt.id, name: gt.name, category: gt.category, price: Math.round(merekLain - 100000 - 75000), weight: gt.weight, karat: gt.karat };
         }
         if (karat >= 23) {
-          const dasar = ac - dasarPerhiasanOffset + ap;
-          return { id: gt.id, name: gt.name, category: gt.category, price: Math.round(dasar * (karat / 24) + 100000), weight: gt.weight, karat: gt.karat };
+          return { id: gt.id, name: gt.name, category: gt.category, price: Math.round(merekLain - 175000 - 110000), weight: gt.weight, karat: gt.karat };
         }
         const dasar = ac - dasarPerhiasanOffset + ap;
         return { id: gt.id, name: gt.name, category: gt.category, price: Math.round(dasar * (karat / 24)), weight: gt.weight, karat: gt.karat };

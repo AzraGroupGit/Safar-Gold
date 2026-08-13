@@ -83,8 +83,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "package",
-      "community": 5,
-      "community_name": "devDependencies",
+      "community": 3,
+      "community_name": "dependencies",
       "norm_label": "package.json"
     },
     {
@@ -94,8 +94,8 @@
       "source_location": "L2",
       "_origin": "ast",
       "id": "package_name",
-      "community": 5,
-      "community_name": "devDependencies",
+      "community": 3,
+      "community_name": "dependencies",
       "norm_label": "name"
     },
     {
@@ -105,8 +105,8 @@
       "source_location": "L3",
       "_origin": "ast",
       "id": "package_version",
-      "community": 5,
-      "community_name": "devDependencies",
+      "community": 3,
+      "community_name": "dependencies",
       "norm_label": "version"
     },
     {
@@ -116,8 +116,8 @@
       "source_location": "L4",
       "_origin": "ast",
       "id": "package_private",
-      "community": 5,
-      "community_name": "devDependencies",
+      "community": 3,
+      "community_name": "dependencies",
       "norm_label": "private"
     },
     {
@@ -127,8 +127,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "package_scripts",
-      "community": 5,
-      "community_name": "devDependencies",
+      "community": 3,
+      "community_name": "dependencies",
       "norm_label": "scripts"
     },
     {
@@ -138,8 +138,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "package_scripts_dev",
-      "community": 5,
-      "community_name": "devDependencies",
+      "community": 3,
+      "community_name": "dependencies",
       "norm_label": "dev"
     },
     {
@@ -149,8 +149,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "package_scripts_build",
-      "community": 5,
-      "community_name": "devDependencies",
+      "community": 3,
+      "community_name": "dependencies",
       "norm_label": "build"
     },
     {
@@ -160,8 +160,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "package_scripts_start",
-      "community": 5,
-      "community_name": "devDependencies",
+      "community": 3,
+      "community_name": "dependencies",
       "norm_label": "start"
     },
     {
@@ -171,8 +171,8 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "package_scripts_lint",
-      "community": 5,
-      "community_name": "devDependencies",
+      "community": 3,
+      "community_name": "dependencies",
       "norm_label": "lint"
     },
     {
@@ -601,7 +601,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_app_admin_admin_priceapprovalpanel",
-      "community": 11,
+      "community": 7,
       "community_name": "admin/page.tsx",
       "norm_label": "priceapprovalpanel.tsx"
     },
@@ -614,7 +614,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "id": "src_app_admin_admin_priceapprovalpanel_props",
-      "community": 11,
+      "community": 7,
       "community_name": "admin/page.tsx",
       "norm_label": "props"
     },
@@ -626,7 +626,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_app_admin_admin_priceapprovalpanel_formatrupiah",
-      "community": 11,
+      "community": 7,
       "community_name": "admin/page.tsx",
       "norm_label": "formatrupiah()"
     },
@@ -638,7 +638,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_app_admin_admin_priceapprovalpanel_priceapprovalpanel",
-      "community": 11,
+      "community": 7,
       "community_name": "admin/page.tsx",
       "norm_label": "priceapprovalpanel()"
     },
@@ -650,54 +650,54 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_harga_adminhargaclient",
       "community": 11,
-      "community_name": "admin/page.tsx",
+      "community_name": "getAllGoldTypes",
       "norm_label": "adminhargaclient.tsx"
     },
     {
       "label": "formatRupiahClient()",
       "file_type": "code",
       "source_file": "src/app/(admin)/admin/harga/AdminHargaClient.tsx",
-      "source_location": "L7",
+      "source_location": "L8",
       "_callable": true,
       "_origin": "ast",
       "id": "src_app_admin_admin_harga_adminhargaclient_formatrupiahclient",
       "community": 11,
-      "community_name": "admin/page.tsx",
+      "community_name": "getAllGoldTypes",
       "norm_label": "formatrupiahclient()"
     },
     {
       "label": "MODE_TABS",
       "file_type": "code",
       "source_file": "src/app/(admin)/admin/harga/AdminHargaClient.tsx",
-      "source_location": "L11",
+      "source_location": "L12",
       "_origin": "ast",
       "id": "src_app_admin_admin_harga_adminhargaclient_mode_tabs",
       "community": 11,
-      "community_name": "admin/page.tsx",
+      "community_name": "getAllGoldTypes",
       "norm_label": "mode_tabs"
     },
     {
       "label": "ModeModal()",
       "file_type": "code",
       "source_file": "src/app/(admin)/admin/harga/AdminHargaClient.tsx",
-      "source_location": "L18",
+      "source_location": "L19",
       "_callable": true,
       "_origin": "ast",
       "id": "src_app_admin_admin_harga_adminhargaclient_modemodal",
       "community": 11,
-      "community_name": "admin/page.tsx",
+      "community_name": "getAllGoldTypes",
       "norm_label": "modemodal()"
     },
     {
       "label": "AdminHargaClient()",
       "file_type": "code",
       "source_file": "src/app/(admin)/admin/harga/AdminHargaClient.tsx",
-      "source_location": "L150",
+      "source_location": "L151",
       "_callable": true,
       "_origin": "ast",
       "id": "src_app_admin_admin_harga_adminhargaclient_adminhargaclient",
       "community": 11,
-      "community_name": "admin/page.tsx",
+      "community_name": "getAllGoldTypes",
       "norm_label": "adminhargaclient()"
     },
     {
@@ -708,7 +708,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_harga_page",
       "community": 11,
-      "community_name": "admin/page.tsx",
+      "community_name": "getAllGoldTypes",
       "norm_label": "admin/harga/page.tsx"
     },
     {
@@ -719,7 +719,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_harga_page_dynamic",
       "community": 11,
-      "community_name": "admin/page.tsx",
+      "community_name": "getAllGoldTypes",
       "norm_label": "dynamic"
     },
     {
@@ -731,7 +731,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_harga_page_adminhargapage",
       "community": 11,
-      "community_name": "admin/page.tsx",
+      "community_name": "getAllGoldTypes",
       "norm_label": "adminhargapage()"
     },
     {
@@ -742,7 +742,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_jenis_emas_jenisemasclient",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "admin/page.tsx",
       "norm_label": "jenisemasclient.tsx"
     },
     {
@@ -753,7 +753,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_jenis_emas_jenisemasclient_categories",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "admin/page.tsx",
       "norm_label": "categories"
     },
     {
@@ -765,7 +765,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_jenis_emas_jenisemasclient_getcategorylabel",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "admin/page.tsx",
       "norm_label": "getcategorylabel()"
     },
     {
@@ -777,7 +777,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_jenis_emas_jenisemasclient_nametoslug",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "admin/page.tsx",
       "norm_label": "nametoslug()"
     },
     {
@@ -790,7 +790,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_jenis_emas_jenisemasclient_formdata",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "admin/page.tsx",
       "norm_label": "formdata"
     },
     {
@@ -801,7 +801,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_jenis_emas_jenisemasclient_emptyform",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "admin/page.tsx",
       "norm_label": "emptyform"
     },
     {
@@ -813,7 +813,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_jenis_emas_jenisemasclient_formmodal",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "admin/page.tsx",
       "norm_label": "formmodal()"
     },
     {
@@ -825,7 +825,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_jenis_emas_jenisemasclient_jenisemasclient",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "admin/page.tsx",
       "norm_label": "jenisemasclient()"
     },
     {
@@ -836,7 +836,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_jenis_emas_page",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "admin/page.tsx",
       "norm_label": "jenis-emas/page.tsx"
     },
     {
@@ -847,7 +847,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_jenis_emas_page_dynamic",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "admin/page.tsx",
       "norm_label": "dynamic"
     },
     {
@@ -859,7 +859,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_jenis_emas_page_jenisemaspage",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "admin/page.tsx",
       "norm_label": "jenisemaspage()"
     },
     {
@@ -1033,7 +1033,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_app_admin_admin_loading",
-      "community": 11,
+      "community": 7,
       "community_name": "admin/page.tsx",
       "norm_label": "loading.tsx"
     },
@@ -1045,7 +1045,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_app_admin_admin_loading_adminloading",
-      "community": 11,
+      "community": 7,
       "community_name": "admin/page.tsx",
       "norm_label": "adminloading()"
     },
@@ -1056,7 +1056,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_app_admin_admin_login_page",
-      "community": 11,
+      "community": 7,
       "community_name": "admin/page.tsx",
       "norm_label": "login/page.tsx"
     },
@@ -1068,7 +1068,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_app_admin_admin_login_page_adminloginpage",
-      "community": 11,
+      "community": 7,
       "community_name": "admin/page.tsx",
       "norm_label": "adminloginpage()"
     },
@@ -1210,8 +1210,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_app_admin_admin_orders_id_invoice_page_invoicepage",
-      "community": 29,
-      "community_name": "getPublicSettings",
+      "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "invoicepage()"
     },
     {
@@ -1221,8 +1221,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_app_admin_admin_orders_page",
-      "community": 6,
-      "community_name": "OrdersClient.tsx",
+      "community": 11,
+      "community_name": "getAllGoldTypes",
       "norm_label": "orders/page.tsx"
     },
     {
@@ -1232,8 +1232,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "src_app_admin_admin_orders_page_dynamic",
-      "community": 6,
-      "community_name": "OrdersClient.tsx",
+      "community": 11,
+      "community_name": "getAllGoldTypes",
       "norm_label": "dynamic"
     },
     {
@@ -1243,8 +1243,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "src_app_admin_admin_orders_page_metadata",
-      "community": 6,
-      "community_name": "OrdersClient.tsx",
+      "community": 11,
+      "community_name": "getAllGoldTypes",
       "norm_label": "metadata"
     },
     {
@@ -1256,7 +1256,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_orders_page_orderspage",
       "community": 11,
-      "community_name": "admin/page.tsx",
+      "community_name": "getAllGoldTypes",
       "norm_label": "orderspage()"
     },
     {
@@ -1266,7 +1266,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_app_admin_admin_page",
-      "community": 11,
+      "community": 7,
       "community_name": "admin/page.tsx",
       "norm_label": "admin/page.tsx"
     },
@@ -1277,7 +1277,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "src_app_admin_admin_page_dynamic",
-      "community": 11,
+      "community": 7,
       "community_name": "admin/page.tsx",
       "norm_label": "dynamic"
     },
@@ -1289,7 +1289,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_app_admin_admin_page_statcard",
-      "community": 11,
+      "community": 7,
       "community_name": "admin/page.tsx",
       "norm_label": "statcard()"
     },
@@ -1302,7 +1302,7 @@
       "_origin": "ast",
       "id": "src_app_admin_admin_page_admindashboard",
       "community": 11,
-      "community_name": "admin/page.tsx",
+      "community_name": "getAllGoldTypes",
       "norm_label": "admindashboard()"
     },
     {
@@ -1361,8 +1361,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_app_admin_admin_pelanggan_page",
-      "community": 29,
-      "community_name": "getPublicSettings",
+      "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "pelanggan/page.tsx"
     },
     {
@@ -1372,8 +1372,8 @@
       "source_location": "L5",
       "_origin": "ast",
       "id": "src_app_admin_admin_pelanggan_page_dynamic",
-      "community": 29,
-      "community_name": "getPublicSettings",
+      "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "dynamic"
     },
     {
@@ -1383,8 +1383,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "src_app_admin_admin_pelanggan_page_metadata",
-      "community": 29,
-      "community_name": "getPublicSettings",
+      "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "metadata"
     },
     {
@@ -1395,8 +1395,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_app_admin_admin_pelanggan_page_pelangganpage",
-      "community": 29,
-      "community_name": "getPublicSettings",
+      "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "pelangganpage()"
     },
     {
@@ -1639,7 +1639,7 @@
       "_origin": "ast",
       "id": "src_app_admin_layout",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "admin/page.tsx",
       "norm_label": "(admin)/layout.tsx"
     },
     {
@@ -1651,7 +1651,7 @@
       "_origin": "ast",
       "id": "src_app_admin_layout_adminlayout",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "admin/page.tsx",
       "norm_label": "adminlayout()"
     },
     {
@@ -1661,8 +1661,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_app_public_harga_page",
-      "community": 11,
-      "community_name": "admin/page.tsx",
+      "community": 4,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "(public)/harga/page.tsx"
     },
     {
@@ -1672,8 +1672,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "src_app_public_harga_page_metadata",
-      "community": 11,
-      "community_name": "admin/page.tsx",
+      "community": 4,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "metadata"
     },
     {
@@ -1683,8 +1683,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "src_app_public_harga_page_dynamic",
-      "community": 11,
-      "community_name": "admin/page.tsx",
+      "community": 4,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "dynamic"
     },
     {
@@ -1695,8 +1695,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_app_public_harga_page_hargapage",
-      "community": 11,
-      "community_name": "admin/page.tsx",
+      "community": 4,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "hargapage()"
     },
     {
@@ -1707,7 +1707,7 @@
       "_origin": "ast",
       "id": "src_app_public_kalkulator_page",
       "community": 11,
-      "community_name": "admin/page.tsx",
+      "community_name": "getAllGoldTypes",
       "norm_label": "kalkulator/page.tsx"
     },
     {
@@ -1718,7 +1718,7 @@
       "_origin": "ast",
       "id": "src_app_public_kalkulator_page_metadata",
       "community": 11,
-      "community_name": "admin/page.tsx",
+      "community_name": "getAllGoldTypes",
       "norm_label": "metadata"
     },
     {
@@ -1729,7 +1729,7 @@
       "_origin": "ast",
       "id": "src_app_public_kalkulator_page_dynamic",
       "community": 11,
-      "community_name": "admin/page.tsx",
+      "community_name": "getAllGoldTypes",
       "norm_label": "dynamic"
     },
     {
@@ -1741,7 +1741,7 @@
       "_origin": "ast",
       "id": "src_app_public_kalkulator_page_kalkulatorpage",
       "community": 11,
-      "community_name": "admin/page.tsx",
+      "community_name": "getAllGoldTypes",
       "norm_label": "kalkulatorpage()"
     },
     {
@@ -1751,8 +1751,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_app_public_layout",
-      "community": 29,
-      "community_name": "getPublicSettings",
+      "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "(public)/layout.tsx"
     },
     {
@@ -1763,8 +1763,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_app_public_layout_publiclayout",
-      "community": 29,
-      "community_name": "getPublicSettings",
+      "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "publiclayout()"
     },
     {
@@ -1808,8 +1808,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_app_public_page_homepage",
-      "community": 29,
-      "community_name": "getPublicSettings",
+      "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "homepage()"
     },
     {
@@ -2708,8 +2708,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_backtotop",
-      "community": 29,
-      "community_name": "getPublicSettings",
+      "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "backtotop.tsx"
     },
     {
@@ -2720,8 +2720,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_components_backtotop_backtotop",
-      "community": 29,
-      "community_name": "getPublicSettings",
+      "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "backtotop()"
     },
     {
@@ -2732,42 +2732,75 @@
       "_origin": "ast",
       "id": "src_components_calculator",
       "community": 11,
-      "community_name": "admin/page.tsx",
+      "community_name": "getAllGoldTypes",
       "norm_label": "calculator.tsx"
     },
     {
       "label": "formatRupiahClient()",
       "file_type": "code",
       "source_file": "src/components/Calculator.tsx",
-      "source_location": "L6",
+      "source_location": "L7",
       "_callable": true,
       "_origin": "ast",
       "id": "src_components_calculator_formatrupiahclient",
       "community": 11,
-      "community_name": "admin/page.tsx",
+      "community_name": "getAllGoldTypes",
       "norm_label": "formatrupiahclient()"
     },
     {
       "label": "quickWeights",
       "file_type": "code",
       "source_file": "src/components/Calculator.tsx",
-      "source_location": "L15",
+      "source_location": "L16",
       "_origin": "ast",
       "id": "src_components_calculator_quickweights",
       "community": 11,
-      "community_name": "admin/page.tsx",
+      "community_name": "getAllGoldTypes",
       "norm_label": "quickweights"
+    },
+    {
+      "label": "quickQty",
+      "file_type": "code",
+      "source_file": "src/components/Calculator.tsx",
+      "source_location": "L17",
+      "_origin": "ast",
+      "id": "src_components_calculator_quickqty",
+      "community": 11,
+      "community_name": "getAllGoldTypes",
+      "norm_label": "quickqty"
+    },
+    {
+      "label": "SELL_CATEGORY_ORDER",
+      "file_type": "code",
+      "source_file": "src/components/Calculator.tsx",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "src_components_calculator_sell_category_order",
+      "community": 11,
+      "community_name": "getAllGoldTypes",
+      "norm_label": "sell_category_order"
+    },
+    {
+      "label": "CATEGORY_LABELS",
+      "file_type": "code",
+      "source_file": "src/components/Calculator.tsx",
+      "source_location": "L20",
+      "_origin": "ast",
+      "id": "src_components_calculator_category_labels",
+      "community": 11,
+      "community_name": "getAllGoldTypes",
+      "norm_label": "category_labels"
     },
     {
       "label": "Calculator()",
       "file_type": "code",
       "source_file": "src/components/Calculator.tsx",
-      "source_location": "L17",
+      "source_location": "L26",
       "_callable": true,
       "_origin": "ast",
       "id": "src_components_calculator_calculator",
       "community": 11,
-      "community_name": "admin/page.tsx",
+      "community_name": "getAllGoldTypes",
       "norm_label": "calculator()"
     },
     {
@@ -2801,7 +2834,7 @@
       "_origin": "ast",
       "id": "src_components_confirmmodal",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "admin/page.tsx",
       "norm_label": "confirmmodal.tsx"
     },
     {
@@ -2814,7 +2847,7 @@
       "_origin": "ast",
       "id": "src_components_confirmmodal_props",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "admin/page.tsx",
       "norm_label": "props"
     },
     {
@@ -2826,7 +2859,7 @@
       "_origin": "ast",
       "id": "src_components_confirmmodal_confirmmodal",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "admin/page.tsx",
       "norm_label": "confirmmodal()"
     },
     {
@@ -2893,8 +2926,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_footer",
-      "community": 29,
-      "community_name": "getPublicSettings",
+      "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "footer.tsx"
     },
     {
@@ -2905,8 +2938,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_components_footer_footer",
-      "community": 29,
-      "community_name": "getPublicSettings",
+      "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "footer()"
     },
     {
@@ -2939,8 +2972,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_hero",
-      "community": 2,
-      "community_name": "(public)/page.tsx",
+      "community": 9,
+      "community_name": "gold-api.ts",
       "norm_label": "hero.tsx"
     },
     {
@@ -2951,8 +2984,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_components_hero_hero",
-      "community": 2,
-      "community_name": "(public)/page.tsx",
+      "community": 9,
+      "community_name": "gold-api.ts",
       "norm_label": "hero()"
     },
     {
@@ -2985,8 +3018,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_kunjungikami",
-      "community": 29,
-      "community_name": "getPublicSettings",
+      "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "kunjungikami.tsx"
     },
     {
@@ -2997,8 +3030,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_components_kunjungikami_kunjungikami",
-      "community": 29,
-      "community_name": "getPublicSettings",
+      "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "kunjungikami()"
     },
     {
@@ -3008,8 +3041,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_legalnotice",
-      "community": 11,
-      "community_name": "admin/page.tsx",
+      "community": 4,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "legalnotice.tsx"
     },
     {
@@ -3020,8 +3053,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_components_legalnotice_legalnotice",
-      "community": 11,
-      "community_name": "admin/page.tsx",
+      "community": 4,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "legalnotice()"
     },
     {
@@ -3054,8 +3087,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_livepriceband",
-      "community": 2,
-      "community_name": "(public)/page.tsx",
+      "community": 9,
+      "community_name": "gold-api.ts",
       "norm_label": "livepriceband.tsx"
     },
     {
@@ -3066,8 +3099,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_components_livepriceband_fluctuationbadge",
-      "community": 2,
-      "community_name": "(public)/page.tsx",
+      "community": 9,
+      "community_name": "gold-api.ts",
       "norm_label": "fluctuationbadge()"
     },
     {
@@ -3078,8 +3111,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_components_livepriceband_livepriceband",
-      "community": 2,
-      "community_name": "(public)/page.tsx",
+      "community": 9,
+      "community_name": "gold-api.ts",
       "norm_label": "livepriceband()"
     },
     {
@@ -3160,8 +3193,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_navbar",
-      "community": 29,
-      "community_name": "getPublicSettings",
+      "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "navbar.tsx"
     },
     {
@@ -3172,8 +3205,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_components_navbar_navbar",
-      "community": 29,
-      "community_name": "getPublicSettings",
+      "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "navbar()"
     },
     {
@@ -3267,8 +3300,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_pricechart",
-      "community": 1,
-      "community_name": "PriceChart.tsx",
+      "community": 4,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "pricechart.tsx"
     },
     {
@@ -3279,8 +3312,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_components_pricechart_generatemockdata",
-      "community": 1,
-      "community_name": "PriceChart.tsx",
+      "community": 4,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "generatemockdata()"
     },
     {
@@ -3290,8 +3323,8 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "src_components_pricechart_periods",
-      "community": 1,
-      "community_name": "PriceChart.tsx",
+      "community": 4,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "periods"
     },
     {
@@ -3302,8 +3335,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_components_pricechart_pricechart",
-      "community": 1,
-      "community_name": "PriceChart.tsx",
+      "community": 4,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "pricechart()"
     },
     {
@@ -3313,8 +3346,8 @@
       "source_location": "L60",
       "_origin": "ast",
       "id": "src_components_pricechart_chartdata",
-      "community": 1,
-      "community_name": "PriceChart.tsx",
+      "community": 4,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "chartdata"
     },
     {
@@ -3324,8 +3357,8 @@
       "source_location": "L110",
       "_origin": "ast",
       "id": "src_components_pricechart_options",
-      "community": 1,
-      "community_name": "PriceChart.tsx",
+      "community": 4,
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "options"
     },
     {
@@ -3336,7 +3369,7 @@
       "_origin": "ast",
       "id": "src_components_pricepreviewmodal",
       "community": 4,
-      "community_name": "PricePreviewModal.tsx",
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "pricepreviewmodal.tsx"
     },
     {
@@ -3349,7 +3382,7 @@
       "_origin": "ast",
       "id": "src_components_pricepreviewmodal_previewitem",
       "community": 4,
-      "community_name": "PricePreviewModal.tsx",
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "previewitem"
     },
     {
@@ -3362,7 +3395,7 @@
       "_origin": "ast",
       "id": "src_components_pricepreviewmodal_pricepreviewmodalprops",
       "community": 4,
-      "community_name": "PricePreviewModal.tsx",
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "pricepreviewmodalprops"
     },
     {
@@ -3373,7 +3406,7 @@
       "_origin": "ast",
       "id": "src_components_pricepreviewmodal_category_labels",
       "community": 4,
-      "community_name": "PricePreviewModal.tsx",
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "category_labels"
     },
     {
@@ -3385,7 +3418,7 @@
       "_origin": "ast",
       "id": "src_components_pricepreviewmodal_formatrupiah",
       "community": 4,
-      "community_name": "PricePreviewModal.tsx",
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "formatrupiah()"
     },
     {
@@ -3397,7 +3430,7 @@
       "_origin": "ast",
       "id": "src_components_pricepreviewmodal_roundtonearest",
       "community": 4,
-      "community_name": "PricePreviewModal.tsx",
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "roundtonearest()"
     },
     {
@@ -3409,7 +3442,7 @@
       "_origin": "ast",
       "id": "src_components_pricepreviewmodal_pricepreviewmodal",
       "community": 4,
-      "community_name": "PricePreviewModal.tsx",
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "pricepreviewmodal()"
     },
     {
@@ -3420,7 +3453,7 @@
       "_origin": "ast",
       "id": "src_components_tabbedpricelist",
       "community": 4,
-      "community_name": "PricePreviewModal.tsx",
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "tabbedpricelist.tsx"
     },
     {
@@ -3431,7 +3464,7 @@
       "_origin": "ast",
       "id": "src_components_tabbedpricelist_categories",
       "community": 4,
-      "community_name": "PricePreviewModal.tsx",
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "categories"
     },
     {
@@ -3443,7 +3476,7 @@
       "_origin": "ast",
       "id": "src_components_tabbedpricelist_tabbedpricelist",
       "community": 4,
-      "community_name": "PricePreviewModal.tsx",
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "tabbedpricelist()"
     },
     {
@@ -3476,8 +3509,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_whatsappbutton",
-      "community": 29,
-      "community_name": "getPublicSettings",
+      "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "whatsappbutton.tsx"
     },
     {
@@ -3488,8 +3521,8 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_components_whatsappbutton_whatsappbutton",
-      "community": 29,
-      "community_name": "getPublicSettings",
+      "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "whatsappbutton()"
     },
     {
@@ -3500,7 +3533,7 @@
       "_origin": "ast",
       "id": "src_components_admin_adminsidebar",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "admin/page.tsx",
       "norm_label": "adminsidebar.tsx"
     },
     {
@@ -3511,7 +3544,7 @@
       "_origin": "ast",
       "id": "src_components_admin_adminsidebar_links",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "admin/page.tsx",
       "norm_label": "links"
     },
     {
@@ -3523,7 +3556,7 @@
       "_origin": "ast",
       "id": "src_components_admin_adminsidebar_adminsidebar",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "admin/page.tsx",
       "norm_label": "adminsidebar()"
     },
     {
@@ -3533,7 +3566,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_admin_adminskeleton",
-      "community": 11,
+      "community": 7,
       "community_name": "admin/page.tsx",
       "norm_label": "adminskeleton.tsx"
     },
@@ -3545,7 +3578,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_components_admin_adminskeleton_adminskeleton",
-      "community": 11,
+      "community": 7,
       "community_name": "admin/page.tsx",
       "norm_label": "adminskeleton()"
     },
@@ -3568,19 +3601,66 @@
       "_origin": "ast",
       "id": "src_lib_gold_api_bb_lm_order",
       "community": 4,
-      "community_name": "PricePreviewModal.tsx",
+      "community_name": "(public)/harga/page.tsx",
       "norm_label": "bb_lm_order"
+    },
+    {
+      "label": "perhiasanRank()",
+      "file_type": "code",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L18",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_lib_gold_api_perhiasanrank",
+      "community": 4,
+      "community_name": "(public)/harga/page.tsx",
+      "norm_label": "perhiasanrank()"
+    },
+    {
+      "label": "BB_LOGAM_ORDER",
+      "file_type": "code",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L25",
+      "_origin": "ast",
+      "id": "src_lib_gold_api_bb_logam_order",
+      "community": 9,
+      "community_name": "gold-api.ts",
+      "norm_label": "bb_logam_order"
+    },
+    {
+      "label": "orderIndex()",
+      "file_type": "code",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L27",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_lib_gold_api_orderindex",
+      "community": 11,
+      "community_name": "getAllGoldTypes",
+      "norm_label": "orderindex()"
+    },
+    {
+      "label": "sortGoldTypes()",
+      "file_type": "code",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L33",
+      "_callable": true,
+      "_origin": "ast",
+      "id": "src_lib_gold_api_sortgoldtypes",
+      "community": 11,
+      "community_name": "getAllGoldTypes",
+      "norm_label": "sortgoldtypes()"
     },
     {
       "label": "GoldTypeRow",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L18",
+      "source_location": "L48",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "id": "src_lib_gold_api_goldtyperow",
-      "community": 11,
+      "community": 7,
       "community_name": "admin/page.tsx",
       "norm_label": "goldtyperow"
     },
@@ -3588,7 +3668,7 @@
       "label": "PriceHistoryRow",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L31",
+      "source_location": "L61",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
@@ -3601,7 +3681,7 @@
       "label": "AppSettingRow",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L41",
+      "source_location": "L71",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
@@ -3614,7 +3694,7 @@
       "label": "getSetting()",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L47",
+      "source_location": "L77",
       "_callable": true,
       "_origin": "ast",
       "id": "src_lib_gold_api_getsetting",
@@ -3626,7 +3706,7 @@
       "label": "setSetting()",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L58",
+      "source_location": "L88",
       "_callable": true,
       "_origin": "ast",
       "id": "src_lib_gold_api_setsetting",
@@ -3638,19 +3718,19 @@
       "label": "getMarketInfo()",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L64",
+      "source_location": "L94",
       "_callable": true,
       "_origin": "ast",
       "id": "src_lib_gold_api_getmarketinfo",
-      "community": 2,
-      "community_name": "(public)/page.tsx",
+      "community": 9,
+      "community_name": "gold-api.ts",
       "norm_label": "getmarketinfo()"
     },
     {
       "label": "HeroContent",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L81",
+      "source_location": "L111",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
@@ -3663,7 +3743,7 @@
       "label": "getHeroContent()",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L90",
+      "source_location": "L120",
       "_callable": true,
       "_origin": "ast",
       "id": "src_lib_gold_api_getherocontent",
@@ -3675,19 +3755,19 @@
       "label": "getAllGoldTypes()",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L113",
+      "source_location": "L143",
       "_callable": true,
       "_origin": "ast",
       "id": "src_lib_gold_api_getallgoldtypes",
       "community": 11,
-      "community_name": "admin/page.tsx",
+      "community_name": "getAllGoldTypes",
       "norm_label": "getallgoldtypes()"
     },
     {
       "label": "createGoldType()",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L124",
+      "source_location": "L154",
       "_callable": true,
       "_origin": "ast",
       "id": "src_lib_gold_api_creategoldtype",
@@ -3699,7 +3779,7 @@
       "label": "updateGoldType()",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L129",
+      "source_location": "L159",
       "_callable": true,
       "_origin": "ast",
       "id": "src_lib_gold_api_updategoldtype",
@@ -3711,7 +3791,7 @@
       "label": "deleteGoldType()",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L134",
+      "source_location": "L164",
       "_callable": true,
       "_origin": "ast",
       "id": "src_lib_gold_api_deletegoldtype",
@@ -3723,7 +3803,7 @@
       "label": "getTodayPrices()",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L140",
+      "source_location": "L170",
       "_callable": true,
       "_origin": "ast",
       "id": "src_lib_gold_api_gettodayprices",
@@ -3735,7 +3815,7 @@
       "label": "insertPriceHistory()",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L166",
+      "source_location": "L196",
       "_callable": true,
       "_origin": "ast",
       "id": "src_lib_gold_api_insertpricehistory",
@@ -3747,7 +3827,7 @@
       "label": "calculatePrices()",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L176",
+      "source_location": "L206",
       "_callable": true,
       "_origin": "ast",
       "id": "src_lib_gold_api_calculateprices",
@@ -3759,7 +3839,7 @@
       "label": "fetchInternationalGoldPrice()",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L275",
+      "source_location": "L304",
       "_callable": true,
       "_origin": "ast",
       "id": "src_lib_gold_api_fetchinternationalgoldprice",
@@ -3771,7 +3851,7 @@
       "label": "fetchAllFallbackPrices()",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L378",
+      "source_location": "L407",
       "_callable": true,
       "_origin": "ast",
       "id": "src_lib_gold_api_fetchallfallbackprices",
@@ -3783,7 +3863,7 @@
       "label": "convertToIdrPerGram()",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L406",
+      "source_location": "L435",
       "_callable": true,
       "_origin": "ast",
       "id": "src_lib_gold_api_converttoidrpergram",
@@ -3795,7 +3875,7 @@
       "label": "ScrapeAntamResult",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L411",
+      "source_location": "L440",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
@@ -3808,7 +3888,7 @@
       "label": "scrapeAntamPrice()",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L419",
+      "source_location": "L448",
       "_callable": true,
       "_origin": "ast",
       "id": "src_lib_gold_api_scrapeantamprice",
@@ -3820,7 +3900,7 @@
       "label": "normalizePhone()",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L475",
+      "source_location": "L504",
       "_callable": true,
       "_origin": "ast",
       "id": "src_lib_gold_api_normalizephone",
@@ -3832,7 +3912,7 @@
       "label": "CustomerInput",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L481",
+      "source_location": "L510",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
@@ -3845,7 +3925,7 @@
       "label": "upsertCustomerByPhone()",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L495",
+      "source_location": "L524",
       "_callable": true,
       "_origin": "ast",
       "id": "src_lib_gold_api_upsertcustomerbyphone",
@@ -3857,7 +3937,7 @@
       "label": "PublicSettings",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L536",
+      "source_location": "L565",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
@@ -3870,44 +3950,44 @@
       "label": "getPublicSettings()",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L546",
+      "source_location": "L575",
       "_callable": true,
       "_origin": "ast",
       "id": "src_lib_gold_api_getpublicsettings",
-      "community": 29,
-      "community_name": "getPublicSettings",
+      "community": 2,
+      "community_name": "(public)/page.tsx",
       "norm_label": "getpublicsettings()"
     },
     {
       "label": "FormattedPrice",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L562",
+      "source_location": "L591",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "id": "src_lib_gold_api_formattedprice",
       "community": 11,
-      "community_name": "admin/page.tsx",
+      "community_name": "getAllGoldTypes",
       "norm_label": "formattedprice"
     },
     {
       "label": "getFormattedTodayPrices()",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L578",
+      "source_location": "L607",
       "_callable": true,
       "_origin": "ast",
       "id": "src_lib_gold_api_getformattedtodayprices",
       "community": 11,
-      "community_name": "admin/page.tsx",
+      "community_name": "getAllGoldTypes",
       "norm_label": "getformattedtodayprices()"
     },
     {
       "label": "getMedianFactors()",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L648",
+      "source_location": "L677",
       "_callable": true,
       "_origin": "ast",
       "id": "src_lib_gold_api_getmedianfactors",
@@ -3919,7 +3999,7 @@
       "label": "median()",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L691",
+      "source_location": "L720",
       "_callable": true,
       "_origin": "ast",
       "id": "src_lib_gold_api_median",
@@ -3931,7 +4011,7 @@
       "label": "formatRupiah()",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L698",
+      "source_location": "L727",
       "_callable": true,
       "_origin": "ast",
       "id": "src_lib_gold_api_formatrupiah",
@@ -3943,7 +4023,7 @@
       "label": "formatDate()",
       "file_type": "code",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L707",
+      "source_location": "L736",
       "_callable": true,
       "_origin": "ast",
       "id": "src_lib_gold_api_formatdate",
@@ -4004,7 +4084,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_lib_supabase_client",
-      "community": 11,
+      "community": 7,
       "community_name": "admin/page.tsx",
       "norm_label": "client.ts"
     },
@@ -4016,7 +4096,7 @@
       "_callable": true,
       "_origin": "ast",
       "id": "src_lib_supabase_client_createclient",
-      "community": 11,
+      "community": 7,
       "community_name": "admin/page.tsx",
       "norm_label": "createclient()"
     },
@@ -4998,7 +5078,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/app/(admin)/admin/harga/AdminHargaClient.tsx",
-      "source_location": "L150",
+      "source_location": "L151",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_app_admin_admin_harga_adminhargaclient",
@@ -5009,7 +5089,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/app/(admin)/admin/harga/AdminHargaClient.tsx",
-      "source_location": "L7",
+      "source_location": "L8",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_app_admin_admin_harga_adminhargaclient",
@@ -5020,7 +5100,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/app/(admin)/admin/harga/AdminHargaClient.tsx",
-      "source_location": "L11",
+      "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_app_admin_admin_harga_adminhargaclient",
@@ -5031,7 +5111,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/app/(admin)/admin/harga/AdminHargaClient.tsx",
-      "source_location": "L18",
+      "source_location": "L19",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_app_admin_admin_harga_adminhargaclient",
@@ -5043,7 +5123,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/app/(admin)/admin/harga/AdminHargaClient.tsx",
-      "source_location": "L4",
+      "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_app_admin_admin_harga_adminhargaclient",
@@ -5075,11 +5155,23 @@
       "confidence_score": 1.0
     },
     {
-      "relation": "imports_from",
+      "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/app/(admin)/admin/harga/AdminHargaClient.tsx",
       "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_admin_admin_harga_adminhargaclient",
+      "target": "src_lib_gold_api_sortgoldtypes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/(admin)/admin/harga/AdminHargaClient.tsx",
+      "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_app_admin_admin_harga_adminhargaclient",
@@ -5091,7 +5183,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/app/(admin)/admin/harga/AdminHargaClient.tsx",
-      "source_location": "L5",
+      "source_location": "L6",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_app_admin_admin_harga_adminhargaclient",
@@ -5115,12 +5207,36 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/app/(admin)/admin/harga/AdminHargaClient.tsx",
-      "source_location": "L265",
+      "source_location": "L266",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_app_admin_admin_harga_adminhargaclient_adminhargaclient",
       "target": "src_app_admin_admin_harga_adminhargaclient_formatrupiahclient",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/(admin)/admin/harga/AdminHargaClient.tsx",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_admin_admin_harga_adminhargaclient_modemodal",
+      "target": "src_lib_gold_api_sortgoldtypes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/(admin)/admin/harga/AdminHargaClient.tsx",
+      "source_location": "L247",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_app_admin_admin_harga_adminhargaclient_adminhargaclient",
+      "target": "src_lib_gold_api_sortgoldtypes"
     },
     {
       "relation": "imports",
@@ -9753,7 +9869,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/Calculator.tsx",
-      "source_location": "L17",
+      "source_location": "L26",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_calculator",
@@ -9764,7 +9880,18 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/Calculator.tsx",
-      "source_location": "L6",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_calculator",
+      "target": "src_components_calculator_category_labels",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Calculator.tsx",
+      "source_location": "L7",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_calculator",
@@ -9775,7 +9902,18 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/Calculator.tsx",
-      "source_location": "L15",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_calculator",
+      "target": "src_components_calculator_quickqty",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Calculator.tsx",
+      "source_location": "L16",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_calculator",
@@ -9783,11 +9921,22 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Calculator.tsx",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_calculator",
+      "target": "src_components_calculator_sell_category_order",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/components/Calculator.tsx",
-      "source_location": "L4",
+      "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_calculator",
@@ -9819,16 +9968,40 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Calculator.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_calculator",
+      "target": "src_lib_gold_api_sortgoldtypes",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/components/Calculator.tsx",
-      "source_location": "L52",
+      "source_location": "L62",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_calculator_calculator",
       "target": "src_components_calculator_formatrupiahclient",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/components/Calculator.tsx",
+      "source_location": "L43",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_calculator_calculator",
+      "target": "src_lib_gold_api_sortgoldtypes"
     },
     {
       "relation": "contains",
@@ -10598,11 +10771,23 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricePreviewModal.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_pricepreviewmodal",
+      "target": "src_lib_gold_api_perhiasanrank",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/components/PricePreviewModal.tsx",
-      "source_location": "L109",
+      "source_location": "L114",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_pricepreviewmodal_pricepreviewmodal",
@@ -10614,7 +10799,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/components/PricePreviewModal.tsx",
-      "source_location": "L109",
+      "source_location": "L114",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_pricepreviewmodal_pricepreviewmodal",
@@ -10632,6 +10817,18 @@
       "_origin": "ast",
       "source": "src_components_pricepreviewmodal_pricepreviewmodal",
       "target": "src_lib_gold_api_bb_lm_order"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/components/PricePreviewModal.tsx",
+      "source_location": "L58",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_pricepreviewmodal_pricepreviewmodal",
+      "target": "src_lib_gold_api_perhiasanrank"
     },
     {
       "relation": "contains",
@@ -10704,6 +10901,18 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/TabbedPricelist.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_tabbedpricelist",
+      "target": "src_lib_gold_api_perhiasanrank",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "references",
       "context": "call",
       "confidence": "EXTRACTED",
@@ -10726,6 +10935,18 @@
       "_origin": "ast",
       "source": "src_components_tabbedpricelist_tabbedpricelist",
       "target": "src_lib_gold_api_formatrupiah"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/components/TabbedPricelist.tsx",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_tabbedpricelist_tabbedpricelist",
+      "target": "src_lib_gold_api_perhiasanrank"
     },
     {
       "relation": "contains",
@@ -10846,7 +11067,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L41",
+      "source_location": "L71",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -10868,7 +11089,18 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L176",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_lib_gold_api",
+      "target": "src_lib_gold_api_bb_logam_order",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L206",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -10879,7 +11111,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L406",
+      "source_location": "L435",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -10890,7 +11122,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L124",
+      "source_location": "L154",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -10901,7 +11133,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L481",
+      "source_location": "L510",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -10912,7 +11144,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L134",
+      "source_location": "L164",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -10923,7 +11155,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L378",
+      "source_location": "L407",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -10934,7 +11166,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L275",
+      "source_location": "L304",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -10945,7 +11177,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L707",
+      "source_location": "L736",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -10956,7 +11188,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L698",
+      "source_location": "L727",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -10967,7 +11199,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L562",
+      "source_location": "L591",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -10978,7 +11210,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L113",
+      "source_location": "L143",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -10989,7 +11221,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L578",
+      "source_location": "L607",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -11000,7 +11232,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L90",
+      "source_location": "L120",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -11011,7 +11243,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L64",
+      "source_location": "L94",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -11022,7 +11254,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L648",
+      "source_location": "L677",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -11033,7 +11265,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L546",
+      "source_location": "L575",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -11044,7 +11276,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L47",
+      "source_location": "L77",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -11055,7 +11287,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L140",
+      "source_location": "L170",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -11066,7 +11298,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L18",
+      "source_location": "L48",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -11077,7 +11309,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L81",
+      "source_location": "L111",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -11088,7 +11320,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L166",
+      "source_location": "L196",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -11099,7 +11331,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L691",
+      "source_location": "L720",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -11110,7 +11342,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L475",
+      "source_location": "L504",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -11121,7 +11353,29 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L31",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_lib_gold_api",
+      "target": "src_lib_gold_api_orderindex",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_lib_gold_api",
+      "target": "src_lib_gold_api_perhiasanrank",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L61",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -11132,7 +11386,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L536",
+      "source_location": "L565",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -11143,7 +11397,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L419",
+      "source_location": "L448",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -11154,7 +11408,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L411",
+      "source_location": "L440",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -11165,7 +11419,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L58",
+      "source_location": "L88",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -11176,7 +11430,18 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L129",
+      "source_location": "L33",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_lib_gold_api",
+      "target": "src_lib_gold_api_sortgoldtypes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L159",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -11187,7 +11452,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L495",
+      "source_location": "L524",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api",
@@ -11247,7 +11512,31 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L184",
+      "source_location": "L41",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_lib_gold_api_sortgoldtypes",
+      "target": "src_lib_gold_api_perhiasanrank",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L40",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_lib_gold_api_sortgoldtypes",
+      "target": "src_lib_gold_api_orderindex",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L214",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_calculateprices",
@@ -11259,7 +11548,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L384",
+      "source_location": "L413",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_fetchallfallbackprices",
@@ -11271,7 +11560,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L283",
+      "source_location": "L312",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_fetchinternationalgoldprice",
@@ -11283,7 +11572,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L65",
+      "source_location": "L95",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_getmarketinfo",
@@ -11296,7 +11585,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L48",
+      "source_location": "L78",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_getsetting",
@@ -11307,7 +11596,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L465",
+      "source_location": "L494",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_scrapeantamprice",
@@ -11319,7 +11608,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L314",
+      "source_location": "L343",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_fetchinternationalgoldprice",
@@ -11331,7 +11620,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L468",
+      "source_location": "L497",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_scrapeantamprice",
@@ -11344,7 +11633,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L59",
+      "source_location": "L89",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_setsetting",
@@ -11356,7 +11645,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L91",
+      "source_location": "L121",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_getherocontent",
@@ -11367,7 +11656,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L181",
+      "source_location": "L211",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_calculateprices",
@@ -11380,7 +11669,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L114",
+      "source_location": "L144",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_getallgoldtypes",
@@ -11391,7 +11680,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L581",
+      "source_location": "L610",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_getformattedtodayprices",
@@ -11404,7 +11693,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L125",
+      "source_location": "L155",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_creategoldtype",
@@ -11416,7 +11705,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L130",
+      "source_location": "L160",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_updategoldtype",
@@ -11428,7 +11717,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L135",
+      "source_location": "L165",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_deletegoldtype",
@@ -11439,7 +11728,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L580",
+      "source_location": "L609",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_getformattedtodayprices",
@@ -11452,7 +11741,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L141",
+      "source_location": "L171",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_gettodayprices",
@@ -11464,7 +11753,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L169",
+      "source_location": "L199",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_insertpricehistory",
@@ -11475,7 +11764,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L284",
+      "source_location": "L313",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_fetchinternationalgoldprice",
@@ -11487,7 +11776,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L497",
+      "source_location": "L526",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_upsertcustomerbyphone",
@@ -11500,7 +11789,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L496",
+      "source_location": "L525",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_upsertcustomerbyphone",
@@ -11512,7 +11801,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L547",
+      "source_location": "L576",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_getpublicsettings",
@@ -11523,7 +11812,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L685",
+      "source_location": "L714",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_getmedianfactors",
@@ -11536,7 +11825,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L654",
+      "source_location": "L683",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_gold_api_getmedianfactors",
@@ -11895,5 +12184,5 @@
       "source_file": "README.md"
     }
   ],
-  "built_at_commit": "8d5055c8dad6754777a77daa61f50004526e4e93"
+  "built_at_commit": "1e3bbef56be7b060789776f0ed72d270a2ef58af"
 }

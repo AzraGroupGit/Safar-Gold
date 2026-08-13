@@ -14,6 +14,36 @@ export const BB_LM_ORDER = [
   "bb-merek-lain",
 ];
 
+// Rank perhiasan: K24* di atas K24, lalu descending karat
+export function perhiasanRank(id: string): number {
+  if (id === "ph-k24s") return 25;
+  const m = id.match(/ph-k(\d+)$/);
+  return m ? parseInt(m[1], 10) : 0;
+}
+
+// Urutan tampilan Logam Lain — Perak dulu, lalu Palladium
+export const BB_LOGAM_ORDER = ["ll-perak", "ll-palladium"];
+
+function orderIndex(arr: string[], id: string): number {
+  const i = arr.indexOf(id);
+  return i === -1 ? 999 : i;
+}
+
+// Urutan kanonik seluruh gold_types (kategori + dalam kategori)
+export function sortGoldTypes<T extends { id: string; category: string; weight?: number | null; karat?: number | null }>(gts: T[]): T[] {
+  const CATEGORY_ORDER = ["lm", "bb-lm", "bb-perhiasan", "bb-logam"];
+  return [...gts].sort((a, b) => {
+    const ca = CATEGORY_ORDER.indexOf(a.category);
+    const cb = CATEGORY_ORDER.indexOf(b.category);
+    if (ca !== cb) return ca - cb;
+    if (a.category === "lm") return (a.weight ?? 0) - (b.weight ?? 0);
+    if (a.category === "bb-lm") return orderIndex(BB_LM_ORDER, a.id) - orderIndex(BB_LM_ORDER, b.id);
+    if (a.category === "bb-perhiasan") return perhiasanRank(b.id) - perhiasanRank(a.id);
+    if (a.category === "bb-logam") return orderIndex(BB_LOGAM_ORDER, a.id) - orderIndex(BB_LOGAM_ORDER, b.id);
+    return 0;
+  });
+}
+
 // ---------- Types ----------
 export interface GoldTypeRow {
   id: string;
@@ -227,10 +257,9 @@ export async function calculatePrices(
         return { gold_type: gt, base_price: Math.round(baseGoldIdrPerGram), buy_price: 0, sell_price: Math.round(price) };
       }
       if (karat >= 23) {
-        // K23: dasar_perhiasan × karat/24 + premium 100rb (tidak berubah)
-        const dasar = acuanBuybackLM - dasarPerhiasanOffset + adjPerhiasan;
-        const karatMult = karat / 24;
-        return { gold_type: gt, base_price: Math.round(baseGoldIdrPerGram), buy_price: 0, sell_price: Math.round(dasar * karatMult + 100000) };
+        // K23 = K24 − 110.000 (K24 = merekLain − 175.000)
+        const price = merekLain - 175000 - 110000;
+        return { gold_type: gt, base_price: Math.round(baseGoldIdrPerGram), buy_price: 0, sell_price: Math.round(price) };
       }
       // K6 - K22 (tidak berubah)
       const dasar = acuanBuybackLM - dasarPerhiasanOffset + adjPerhiasan;

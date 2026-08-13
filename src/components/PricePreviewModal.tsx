@@ -1,6 +1,6 @@
 "use client";
 
-import { BB_LM_ORDER } from "@/lib/gold-api";
+import { BB_LM_ORDER, perhiasanRank } from "@/lib/gold-api";
 
 interface PreviewItem {
   id: string;
@@ -51,6 +51,11 @@ export default function PricePreviewModal({ open, onClose, items }: PricePreview
       if (ib === -1) return -1;
       return ia - ib;
     });
+  }
+
+  // Urutkan perhiasan: K24* → K24 → K23 → ... → K6
+  if (grouped["bb-perhiasan"]) {
+    grouped["bb-perhiasan"].sort((a, b) => perhiasanRank(b.id) - perhiasanRank(a.id));
   }
 
   return (
