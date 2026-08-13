@@ -117,7 +117,7 @@ insert into public.app_settings (key, value) values
   ('harga_dasar_jual',           '0'),
   ('acuan_buyback_lm',           '0'),
   ('premi_pecahan',              '{"0.5":400000,"1":225000,"2":190000,"3":173333,"5":95000,"10":65000,"25":15000,"50":0,"100":0}'),
-  ('spread_buyback_lm',          '{"bb-certi-1-2":0,"bb-certi-3-5":-40000,"bb-certi-10-25":-80000,"bb-certi-50-100":-120000,"bb-non-rm":-150000,"bb-retro":-175000,"bb-merek-lain":-225000}'),
+  ('spread_buyback_lm',          '{"bb-certi-1-2":0,"bb-certi-3-5":-50000,"bb-certi-10-25":-100000,"bb-certi-50-100":-150000,"bb-non-rm":-200000,"bb-retro":-250000,"bb-merek-lain":-300000}'),
   ('offset_perhiasan_k24s',      '320000'),
   ('offset_perhiasan_k24',       '50000'),
   ('dasar_perhiasan_offset',     '505000'),
@@ -298,3 +298,14 @@ where c.phone = (
     else regexp_replace(o.customer_phone, '[^0-9]', '', 'g')
   end
 );
+
+-- #####################################################################
+-- v7: Formula Buyback Baru — selisih RM seragam -50k
+-- #####################################################################
+-- 1. Spread buyback LM: tiap tier turun 50.000 berurutan
+update public.app_settings
+set value = '{"bb-certi-1-2":0,"bb-certi-3-5":-50000,"bb-certi-10-25":-100000,"bb-certi-50-100":-150000,"bb-non-rm":-200000,"bb-retro":-250000,"bb-merek-lain":-300000}'
+where key = 'spread_buyback_lm';
+
+-- 2. Offset perhiasan K24*/K24 tidak lagi dipakai (formula baru pakai Merek Lain − 100.000 / − 175.000).
+--    Kolom setting offset_perhiasan_k24s & offset_perhiasan_k24 dibiarkan, hanya tidak dibaca.

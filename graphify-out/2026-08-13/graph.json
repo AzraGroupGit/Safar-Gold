@@ -6634,7 +6634,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/(admin)/admin/pelanggan/PelangganClient.tsx",
-      "source_location": "L92",
+      "source_location": "L101",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_app_admin_admin_pelanggan_pelangganclient_pelangganclient",

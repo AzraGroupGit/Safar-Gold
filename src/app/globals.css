@@ -24,6 +24,19 @@ body {
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
 
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: not-allowed;
+  }
+  select:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(24px); }
   to { opacity: 1; transform: translateY(0); }
@@ -32,6 +45,13 @@ body {
 @keyframes shimmer {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
+}
+
+@keyframes glint-sweep {
+  0% { transform: translateX(-140%) skewX(-16deg); opacity: 0; }
+  25% { opacity: 0.6; }
+  75% { opacity: 0.6; }
+  100% { transform: translateX(240%) skewX(-16deg); opacity: 0; }
 }
 
 .animate-fade-up {
@@ -53,6 +73,10 @@ body {
   background: linear-gradient(90deg, #c89116, #f5d061, #c89116);
   background-size: 200% 100%;
   animation: shimmer 2s infinite;
+}
+
+.glint-sweep {
+  animation: glint-sweep 2.4s cubic-bezier(0.4, 0, 0.2, 1) 0.4s forwards;
 }
 
 .bg-diamond {
