@@ -13,8 +13,6 @@ interface Props {
   initialAdjPerhiasan: string;
   premiPecahan: string;
   spreadBuybackLM: string;
-  offsetK24s: number;
-  offsetK24: number;
   dasarPerhiasanOffset: number;
   baseGoldIdr: number;
   xauUsd: number;
@@ -44,8 +42,6 @@ export default function PriceApprovalPanel({
   initialAdjPerhiasan,
   premiPecahan,
   spreadBuybackLM,
-  offsetK24s,
-  offsetK24,
   dasarPerhiasanOffset,
   baseGoldIdr,
   xauUsd,
@@ -105,11 +101,13 @@ export default function PriceApprovalPanel({
       }
       if (gt.category === "bb-perhiasan") {
         const karat = gt.karat ?? 24;
+        // Referensi: harga Merek Lain (acuan + spread + adjBeli)
+        const merekLain = ac + (spreadBb["bb-merek-lain"] ?? 0) + ab;
         if (karat === 24 && gt.id === "ph-k24s") {
-          return { id: gt.id, name: gt.name, category: gt.category, price: Math.round(ac - offsetK24s + ap), weight: gt.weight, karat: gt.karat };
+          return { id: gt.id, name: gt.name, category: gt.category, price: Math.round(merekLain - 100000), weight: gt.weight, karat: gt.karat };
         }
         if (karat === 24 && gt.id === "ph-k24") {
-          return { id: gt.id, name: gt.name, category: gt.category, price: Math.round(ac - offsetK24s + ap - offsetK24), weight: gt.weight, karat: gt.karat };
+          return { id: gt.id, name: gt.name, category: gt.category, price: Math.round(merekLain - 100000 - 75000), weight: gt.weight, karat: gt.karat };
         }
         if (karat >= 23) {
           const dasar = ac - dasarPerhiasanOffset + ap;
@@ -129,7 +127,7 @@ export default function PriceApprovalPanel({
       }
       return { id: gt.id, name: gt.name, category: gt.category, price: 0, weight: gt.weight, karat: gt.karat };
     });
-  }, [hargaDasar, acuanBuyback, adjJual, adjBeli, adjPerhiasan, xagUsd, xpdUsd, usdIdr, premiPecahan, spreadBuybackLM, goldTypes, offsetK24s, offsetK24, dasarPerhiasanOffset]);
+  }, [hargaDasar, acuanBuyback, adjJual, adjBeli, adjPerhiasan, xagUsd, xpdUsd, usdIdr, premiPecahan, spreadBuybackLM, goldTypes, dasarPerhiasanOffset]);
 
   async function handlePublish() {
     setStatus({ type: "loading", msg: "Memproses..." });

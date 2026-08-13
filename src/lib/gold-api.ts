@@ -189,8 +189,6 @@ export async function calculatePrices(
 
   const premiStr = await getSetting("premi_pecahan");
   const spreadStr = await getSetting("spread_buyback_lm");
-  const offsetK24s = parseFloat(await getSetting("offset_perhiasan_k24s")) || 320000;
-  const offsetK24 = parseFloat(await getSetting("offset_perhiasan_k24")) || 50000;
   const dasarPerhiasanOffset = parseFloat(await getSetting("dasar_perhiasan_offset")) || 505000;
 
   let premiPecahan: Record<string, number> = {};
@@ -216,24 +214,25 @@ export async function calculatePrices(
     // ---- Perhiasan ----
     if (category === "bb-perhiasan") {
       const karat = gt.karat ?? 24;
+      // Referensi: harga Merek Lain (acuan + spread + adjBeli)
+      const merekLain = acuanBuybackLM + (spreadBuyback["bb-merek-lain"] ?? 0) + adjBeli;
       if (karat === 24 && gt.id === "ph-k24s") {
-        // K24* = acuan_buyback_lm - offset
-        const price = acuanBuybackLM - offsetK24s + adjPerhiasan;
+        // K24* = Merek Lain − 100.000
+        const price = merekLain - 100000;
         return { gold_type: gt, base_price: Math.round(baseGoldIdrPerGram), buy_price: 0, sell_price: Math.round(price) };
       }
       if (karat === 24 && gt.id === "ph-k24") {
-        // K24 = K24* - offset
-        const k24sPrice = acuanBuybackLM - offsetK24s + adjPerhiasan;
-        return { gold_type: gt, base_price: Math.round(baseGoldIdrPerGram), buy_price: 0, sell_price: Math.round(k24sPrice - offsetK24) };
+        // K24 = K24* − 75.000
+        const price = merekLain - 100000 - 75000;
+        return { gold_type: gt, base_price: Math.round(baseGoldIdrPerGram), buy_price: 0, sell_price: Math.round(price) };
       }
       if (karat >= 23) {
-        // K23: dasar_perhiasan × 95.83% + premium ~100rb
+        // K23: dasar_perhiasan × karat/24 + premium 100rb (tidak berubah)
         const dasar = acuanBuybackLM - dasarPerhiasanOffset + adjPerhiasan;
         const karatMult = karat / 24;
-        const premium = 100000; // bisa dijadikan setting nanti
-        return { gold_type: gt, base_price: Math.round(baseGoldIdrPerGram), buy_price: 0, sell_price: Math.round(dasar * karatMult + premium) };
+        return { gold_type: gt, base_price: Math.round(baseGoldIdrPerGram), buy_price: 0, sell_price: Math.round(dasar * karatMult + 100000) };
       }
-      // K6 - K22
+      // K6 - K22 (tidak berubah)
       const dasar = acuanBuybackLM - dasarPerhiasanOffset + adjPerhiasan;
       const karatMult = karat / 24;
       return { gold_type: gt, base_price: Math.round(baseGoldIdrPerGram), buy_price: 0, sell_price: Math.round(dasar * karatMult) };
