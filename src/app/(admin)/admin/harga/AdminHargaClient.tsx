@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import type { GoldTypeRow, FormattedPrice } from "@/lib/gold-api";
+import { sortGoldTypes } from "@/lib/gold-api";
 import { createClient } from "@/lib/supabase/client";
 
 function formatRupiahClient(amount: number): string {
@@ -42,7 +43,7 @@ function ModeModal({
 
   if (!open) return null;
 
-  const filtered = goldTypes.filter((g) => g.category === tab);
+  const filtered = sortGoldTypes(goldTypes).filter((g) => g.category === tab);
 
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto pt-[10vh] pb-10">
@@ -243,7 +244,7 @@ export default function AdminHargaClient({ goldTypes, prices }: { goldTypes: Gol
               </tr>
             </thead>
             <tbody className="divide-y divide-border/30">
-              {goldTypes.map((gt) => {
+              {sortGoldTypes(goldTypes).map((gt) => {
                 const price = prices.find((p) => p.goldTypeId === gt.id);
                 const displayPrice = getPrice(gt, price);
                 const label = getPriceLabel(gt.category);

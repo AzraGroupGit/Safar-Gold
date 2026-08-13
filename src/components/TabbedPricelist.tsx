@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import type { FormattedPrice } from "@/lib/gold-api";
-import { formatRupiah, BB_LM_ORDER } from "@/lib/gold-api";
+import { formatRupiah, BB_LM_ORDER, perhiasanRank } from "@/lib/gold-api";
 
 const CATEGORIES: { key: string; label: string }[] = [
   { key: "lm", label: "Logam Mulia" },
@@ -20,7 +20,7 @@ export default function TabbedPricelist({
   const filtered = prices
     .filter((p) => p.category === active)
     .sort((a, b) => {
-      if (active === "bb-perhiasan") return (b.karat ?? 0) - (a.karat ?? 0);
+      if (active === "bb-perhiasan") return perhiasanRank(b.goldTypeId) - perhiasanRank(a.goldTypeId);
       if (active === "bb-lm") {
         const ia = BB_LM_ORDER.indexOf(a.goldTypeId);
         const ib = BB_LM_ORDER.indexOf(b.goldTypeId);

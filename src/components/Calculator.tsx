@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useEffect } from "react";
 import type { GoldTypeRow, FormattedPrice } from "@/lib/gold-api";
+import { sortGoldTypes } from "@/lib/gold-api";
 
 function formatRupiahClient(amount: number): string {
   return new Intl.NumberFormat("id-ID", {
@@ -13,6 +14,14 @@ function formatRupiahClient(amount: number): string {
 }
 
 const quickWeights = [1, 5, 10, 25, 50, 100];
+const quickQty = [1, 2, 5, 10];
+
+const SELL_CATEGORY_ORDER = ["bb-lm", "bb-perhiasan", "bb-logam"];
+const CATEGORY_LABELS: Record<string, string> = {
+  "bb-lm": "ANTAM Certi",
+  "bb-perhiasan": "Perhiasan",
+  "bb-logam": "Logam Lain",
+};
 
 export default function Calculator({
   goldTypes,
@@ -26,12 +35,13 @@ export default function Calculator({
   const waNumber = phone.replace(/\D/g, "");
   const [goldTypeId, setGoldTypeId] = useState("");
   const [weight, setWeight] = useState("");
+  const [qty, setQty] = useState(1);
   const [txType, setTxType] = useState<"buy" | "sell">("buy");
 
   // Filter: Beli → hanya Logam Mulia. Jual → hanya buyback (LM, perhiasan, logam lain)
   const filteredTypes = useMemo(() => {
-    if (txType === "buy") return goldTypes.filter((g) => g.category === "lm");
-    return goldTypes.filter((g) => g.category.startsWith("bb-"));
+    if (txType === "buy") return sortGoldTypes(goldTypes.filter((g) => g.category === "lm"));
+    return sortGoldTypes(goldTypes.filter((g) => g.category.startsWith("bb-")));
   }, [goldTypes, txType]);
 
   // Reset pilihan saat txType berubah
@@ -41,7 +51,7 @@ export default function Calculator({
 
   const selectedGold = goldTypes.find((g) => g.id === goldTypeId);
   const price = prices.find((p) => p.goldTypeId === goldTypeId);
-  const weightNum = parseFloat(weight) || 0;
+  const weightNum = txType === "buy" ? (selectedGold?.weight ?? 0) * qty : (parseFloat(weight) || 0);
   const pricePerGram = txType === "buy" ? price?.buyPrice ?? 0 : price?.sellPrice ?? 0;
   const total = pricePerGram * weightNum;
   const displayPricePerGram = Math.round(pricePerGram / 1000) * 1000;
@@ -49,7 +59,7 @@ export default function Calculator({
   const hasData = price && (txType === "buy" ? price.buyPrice > 0 : price.sellPrice > 0);
 
   const waMessage = encodeURIComponent(
-    `Halo Safar Gold, saya ingin ${txType === "buy" ? "membeli" : "menjual"} ${selectedGold?.name ?? "emas"} seberat ${weightNum} gram.\n\nEstimasi total: ${formatRupiahClient(displayTotal)}\n\nMohon info lebih lanjut.`
+    `Halo Safar Gold, saya ingin ${txType === "buy" ? "membeli" : "menjual"} ${selectedGold?.name ?? "emas"}${txType === "buy" ? ` sebanyak ${qty} keping (${weightNum} gram)` : ` seberat ${weightNum} gram`}.\n\nEstimasi total: ${formatRupiahClient(displayTotal)}\n\nMohon info lebih lanjut.`
   );
 
   return (
@@ -89,34 +99,70 @@ export default function Calculator({
           <div>
             <label className="mb-2.5 block text-sm font-semibold text-text">Jenis Emas</label>
             <select value={goldTypeId} onChange={(e) => setGoldTypeId(e.target.value)} className="w-full rounded-xl border border-border/60 bg-white px-4 py-3 text-sm text-text focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/10">
-              {filteredTypes.map((g) => (
-                <option key={g.id} value={g.id}>{g.name}{g.karat ? ` (${g.karat}K)` : ""}</option>
-              ))}
+              {txType === "sell" ? (
+                SELL_CATEGORY_ORDER.map((cat) => {
+                  const items = filteredTypes.filter((g) => g.category === cat);
+                  if (items.length === 0) return null;
+                  return (
+                    <optgroup key={cat} label={CATEGORY_LABELS[cat] ?? cat}>
+                      {items.map((g) => (
+                        <option key={g.id} value={g.id}>{g.name}{g.karat ? ` (${g.karat}K)` : ""}</option>
+                      ))}
+                    </optgroup>
+                  );
+                })
+              ) : (
+                filteredTypes.map((g) => (
+                  <option key={g.id} value={g.id}>{g.name}{g.karat ? ` (${g.karat}K)` : ""}</option>
+                ))
+              )}
             </select>
           </div>
 
-          <div>
-            <label className="mb-2.5 block text-sm font-semibold text-text">Berat (gram)</label>
-            <div className="relative">
-              <input type="number" value={weight} onChange={(e) => setWeight(e.target.value)} placeholder="Masukkan berat emas" className="w-full rounded-xl border border-border/60 bg-white px-4 py-3 pr-16 text-sm text-text placeholder:text-text-light focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/10" />
-              <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-medium text-text-muted">gram</span>
+          {txType === "buy" ? (
+            <div>
+              <label className="mb-2.5 block text-sm font-semibold text-text">Jumlah (keping)</label>
+              <input type="number" min={1} value={qty} onChange={(e) => setQty(Math.max(1, parseInt(e.target.value) || 1))} className="w-full rounded-xl border border-border/60 bg-white px-4 py-3 text-sm text-text focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/10" />
+              <div className="mt-3 flex flex-wrap gap-2">
+                {quickQty.map((q) => (
+                  <button
+                    key={q}
+                    onClick={() => setQty(q)}
+                    className={`rounded-lg border px-3 py-1.5 text-xs font-semibold transition-all ${
+                      qty === q
+                        ? "border-gold bg-gold/5 text-gold-dark"
+                        : "border-border/60 text-text-muted hover:border-gold/40 hover:text-gold-dark"
+                    }`}
+                  >
+                    {q} keping
+                  </button>
+                ))}
+              </div>
             </div>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {quickWeights.map((w) => (
-                <button
-                  key={w}
-                  onClick={() => setWeight(String(w))}
-                  className={`rounded-lg border px-3 py-1.5 text-xs font-semibold transition-all ${
-                    weightNum === w
-                      ? "border-gold bg-gold/5 text-gold-dark"
-                      : "border-border/60 text-text-muted hover:border-gold/40 hover:text-gold-dark"
-                  }`}
-                >
-                  {w}g
-                </button>
-              ))}
+          ) : (
+            <div>
+              <label className="mb-2.5 block text-sm font-semibold text-text">Berat (gram)</label>
+              <div className="relative">
+                <input type="number" value={weight} onChange={(e) => setWeight(e.target.value)} placeholder="Masukkan berat emas" className="w-full rounded-xl border border-border/60 bg-white px-4 py-3 pr-16 text-sm text-text placeholder:text-text-light focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/10" />
+                <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-medium text-text-muted">gram</span>
+              </div>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {quickWeights.map((w) => (
+                  <button
+                    key={w}
+                    onClick={() => setWeight(String(w))}
+                    className={`rounded-lg border px-3 py-1.5 text-xs font-semibold transition-all ${
+                      weightNum === w
+                        ? "border-gold bg-gold/5 text-gold-dark"
+                        : "border-border/60 text-text-muted hover:border-gold/40 hover:text-gold-dark"
+                    }`}
+                  >
+                    {w}g
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
           {weightNum > 0 && (
             <div className="overflow-hidden rounded-xl border border-gold/20 bg-gradient-to-br from-gold/5 to-transparent p-6">
@@ -127,7 +173,7 @@ export default function Calculator({
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-text-muted">Berat</span>
-                  <span className="font-semibold text-text">{weightNum} gram</span>
+                  <span className="font-semibold text-text">{weightNum} gram{txType === "buy" ? ` (${qty} keping)` : ""}</span>
                 </div>
                 <div className="border-t border-gold/20 pt-3">
                   <div className="flex items-end justify-between">
