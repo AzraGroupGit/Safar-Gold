@@ -129,9 +129,9 @@ export default function AdminDashboard() {
             initialAdjJual={s.adjustment_jual ?? "0"}
             initialAdjBeli={s.adjustment_beli ?? "0"}
             initialAdjPerhiasan={s.adjustment_perhiasan ?? "0"}
+            initialPersenBuybackPerhiasan={s.persen_buyback_perhiasan ?? "81"}
             premiPecahan={s.premi_pecahan ?? "{}"}
             spreadBuybackLM={s.spread_buyback_lm ?? "{}"}
-            dasarPerhiasanOffset={parseFloat(s.dasar_perhiasan_offset || "505000")}
             baseGoldIdr={baseGoldIdr}
             xauUsd={xauUsd}
             xagUsd={xagUsd}

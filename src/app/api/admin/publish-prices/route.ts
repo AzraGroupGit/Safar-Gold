@@ -7,13 +7,14 @@ export const dynamic = "force-dynamic";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { hargaDasarJual, acuanBuybackLM, adjJual, adjBeli, adjPerhiasan } = body;
+    const { hargaDasarJual, acuanBuybackLM, adjJual, adjBeli, adjPerhiasan, persenBuybackPerhiasan } = body;
 
     await setSetting("harga_dasar_jual", String(hargaDasarJual ?? 0));
     await setSetting("acuan_buyback_lm", String(acuanBuybackLM ?? 0));
     await setSetting("adjustment_jual", String(adjJual ?? 0));
     await setSetting("adjustment_beli", String(adjBeli ?? 0));
     await setSetting("adjustment_perhiasan", String(adjPerhiasan ?? 0));
+    await setSetting("persen_buyback_perhiasan", String(persenBuybackPerhiasan ?? 81));
 
     const { xauUsdPerOz, xagUsdPerOz, xpdUsdPerOz, usdIdrRate, error, warning } =
       await fetchInternationalGoldPrice();

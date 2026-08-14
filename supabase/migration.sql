@@ -124,6 +124,7 @@ insert into public.app_settings (key, value) values
   ('adjustment_jual',            '0'),
   ('adjustment_beli',            '0'),
   ('adjustment_perhiasan',       '0'),
+  ('persen_buyback_perhiasan',   '81'),
   ('phone',                      '+62 812-3456-7890'),
   ('email',                      'info@safargold.com'),
   ('address',                    'Jl. Emas No. 1, Jakarta'),
@@ -309,3 +310,11 @@ where key = 'spread_buyback_lm';
 
 -- 2. Offset perhiasan K24*/K24 tidak lagi dipakai (formula baru pakai Merek Lain − 100.000 / − 175.000).
 --    Kolom setting offset_perhiasan_k24s & offset_perhiasan_k24 dibiarkan, hanya tidak dibaca.
+
+-- #####################################################################
+-- v8: Persen Buyback Perhiasan (K6–K22) — margin yang bisa di-adjust
+-- #####################################################################
+-- Formula baru K6–K22: CEILING((karat/24) × acuan_buyback_lm × persen%, 1000)
+insert into public.app_settings (key, value)
+values ('persen_buyback_perhiasan', '81')
+on conflict (key) do nothing;
