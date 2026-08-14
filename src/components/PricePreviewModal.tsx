@@ -28,10 +28,6 @@ function formatRupiah(n: number): string {
   return n.toLocaleString("id-ID");
 }
 
-function roundToNearest(n: number): number {
-  return Math.round(n / 1000) * 1000;
-}
-
 export default function PricePreviewModal({ open, onClose, items }: PricePreviewModalProps) {
   if (!open) return null;
 
@@ -111,12 +107,12 @@ export default function PricePreviewModal({ open, onClose, items }: PricePreview
                           <span className="font-medium">{item.name}</span>
                         </td>
                         <td className="px-4 py-3 text-right text-sm font-semibold text-gold-dark md:px-6">
-                          {item.price > 0 ? `Rp ${formatRupiah(roundToNearest(item.price))}` : "-"}
+                          {item.price > 0 ? `Rp ${formatRupiah(item.price)}` : "-"}
                         </td>
                         {category === "lm" && (
                           <td className="px-4 py-3 text-right text-sm text-text-muted md:px-6">
                             {item.price > 0 && item.weight
-                              ?                               `Rp ${formatRupiah(roundToNearest(item.price * item.weight))}`
+                              ? `Rp ${formatRupiah(item.price * item.weight)}`
                               : "-"}
                           </td>
                         )}

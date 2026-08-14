@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -12,30 +12,21 @@ import {
   Title,
   Tooltip,
   Legend,
+  type ScriptableContext,
+  type Chart as ChartInstance,
 } from "chart.js";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Filler, Title, Tooltip, Legend);
 
-function generateMockData(days: number, basePrice: number) {
-  const labels: string[] = [];
-  const lm: number[] = [];
-  const buyback: number[] = [];
-  const perhiasan: number[] = [];
+type HistoryRow = { date: string; gold_type_id: string; buy_price: number; sell_price: number };
 
-  const now = new Date();
-  for (let i = days - 1; i >= 0; i--) {
-    const d = new Date(now);
-    d.setDate(d.getDate() - i);
-    labels.push(d.toLocaleDateString("id-ID", { day: "numeric", month: "short" }));
+const SERIES = [
+  { key: "lm", id: "antam-1", field: "buy_price", label: "Logam Mulia", color: "#c89116" },
+  { key: "buyback", id: "bb-certi-1-2", field: "sell_price", label: "Buyback LM", color: "#9b7110" },
+  { key: "perhiasan", id: "ph-k24", field: "sell_price", label: "Perhiasan", color: "#c7a56a" },
+] as const;
 
-    const variance = () => (Math.random() - 0.5) * basePrice * 0.02;
-    lm.push(basePrice + variance());
-    buyback.push(basePrice * 0.96 + variance());
-    perhiasan.push(basePrice * 0.94 + variance());
-  }
-
-  return { labels, lm, buyback, perhiasan };
-}
+type SeriesKey = (typeof SERIES)[number]["key"];
 
 const periods = [
   { key: 7, label: "7 Hari" },
@@ -43,11 +34,83 @@ const periods = [
   { key: 90, label: "90 Hari" },
 ];
 
-export default function PriceChart() {
-  const [period, setPeriod] = useState(7);
-  const data = generateMockData(period, 1245000);
+function formatRupiah(n: number): string {
+  return n.toLocaleString("id-ID");
+}
 
-  const makeGradient = (ctx: import("chart.js").ScriptableContext<"line">, color: string) => {
+function formatCompact(n: number): string {
+  if (n >= 1_000_000) return `Rp ${(n / 1_000_000).toLocaleString("id-ID", { maximumFractionDigits: 1 })} jt`;
+  if (n >= 1_000) return `Rp ${(n / 1_000).toLocaleString("id-ID", { maximumFractionDigits: 0 })} rb`;
+  return `Rp ${n}`;
+}
+
+function formatDateLabel(dateStr: string): string {
+  const d = new Date(dateStr + "T00:00:00");
+  return d.toLocaleDateString("id-ID", { day: "numeric", month: "short" });
+}
+
+const crosshairPlugin = {
+  id: "crosshair",
+  afterDatasetsDraw(chart: ChartInstance) {
+    const active = chart.tooltip?.getActiveElements?.();
+    if (!active || active.length === 0) return;
+    const x = active[0].element.x;
+    const y = chart.scales.y;
+    const ctx = chart.ctx;
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(x, y.top);
+    ctx.lineTo(x, y.bottom);
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = "rgba(200, 145, 22, 0.28)";
+    ctx.setLineDash([4, 4]);
+    ctx.stroke();
+    ctx.restore();
+  },
+};
+
+export default function PriceChart({ history }: { history: HistoryRow[] }) {
+  const [period, setPeriod] = useState(30);
+  const [visible, setVisible] = useState<Record<SeriesKey, boolean>>({ lm: true, buyback: false, perhiasan: false });
+
+  function toggle(key: SeriesKey) {
+    setVisible((v) => ({ ...v, [key]: !v[key] }));
+  }
+
+  const { labels, seriesData, stats } = useMemo(() => {
+    const map = new Map<string, Record<string, number>>();
+    for (const row of history) {
+      const s = SERIES.find((s) => s.id === row.gold_type_id);
+      if (!s) continue;
+      const val = row[s.field];
+      if (val == null || val <= 0) continue;
+      if (!map.has(row.date)) map.set(row.date, {});
+      map.get(row.date)![s.key] = val;
+    }
+
+    const dates = [...map.keys()].sort().slice(-period);
+    const data: Record<SeriesKey, (number | null)[]> = {
+      lm: dates.map((d) => map.get(d)?.lm ?? null),
+      buyback: dates.map((d) => map.get(d)?.buyback ?? null),
+      perhiasan: dates.map((d) => map.get(d)?.perhiasan ?? null),
+    };
+
+    const lmVals = data.lm.filter((v): v is number => v != null);
+    const last = lmVals[lmVals.length - 1] ?? 0;
+    const first = lmVals[0] ?? 0;
+    const change = last - first;
+    const changePct = first > 0 ? (change / first) * 100 : 0;
+    const high = lmVals.length ? Math.max(...lmVals) : 0;
+    const low = lmVals.length ? Math.min(...lmVals) : 0;
+
+    return {
+      labels: dates.map(formatDateLabel),
+      seriesData: data,
+      stats: { last, change, changePct, high, low, hasData: lmVals.length > 0 },
+    };
+  }, [history, period]);
+
+  const makeAreaGradient = (ctx: ScriptableContext<"line">, color: string) => {
     const chart = ctx.chart;
     const { ctx: c, chartArea } = chart;
     if (!chartArea) return color;
@@ -57,87 +120,85 @@ export default function PriceChart() {
     return gradient;
   };
 
-  const chartData = {
-    labels: data.labels,
-    datasets: [
-      {
-        label: "Logam Mulia",
-        data: data.lm,
-        borderColor: "#c89116",
-        backgroundColor: (ctx: import("chart.js").ScriptableContext<"line">) => makeGradient(ctx, "rgba(200, 145, 22, 0.25)"),
-        fill: true,
-        tension: 0.4,
-        pointRadius: 0,
-        pointHoverRadius: 5,
-        pointHoverBackgroundColor: "#c89116",
-        pointHoverBorderColor: "#fff",
-        pointHoverBorderWidth: 2,
-        borderWidth: 2.5,
-      },
-      {
-        label: "Buyback LM",
-        data: data.buyback,
-        borderColor: "#b8860b",
-        backgroundColor: (ctx: import("chart.js").ScriptableContext<"line">) => makeGradient(ctx, "rgba(184, 134, 11, 0.15)"),
-        fill: true,
-        tension: 0.4,
-        pointRadius: 0,
-        pointHoverRadius: 5,
-        pointHoverBackgroundColor: "#b8860b",
-        pointHoverBorderColor: "#fff",
-        pointHoverBorderWidth: 2,
-        borderWidth: 2.5,
-        borderDash: [6, 3],
-      },
-      {
-        label: "Perhiasan",
-        data: data.perhiasan,
-        borderColor: "#d4a76a",
-        backgroundColor: (ctx: import("chart.js").ScriptableContext<"line">) => makeGradient(ctx, "rgba(212, 167, 106, 0.12)"),
-        fill: true,
-        tension: 0.4,
-        pointRadius: 0,
-        pointHoverRadius: 5,
-        pointHoverBackgroundColor: "#d4a76a",
-        pointHoverBorderColor: "#fff",
-        pointHoverBorderWidth: 2,
-        borderWidth: 2.5,
-        borderDash: [3, 3],
-      },
-    ],
+  const makeLineGradient = (ctx: ScriptableContext<"line">) => {
+    const chart = ctx.chart;
+    const { ctx: c, chartArea } = chart;
+    if (!chartArea) return "#c89116";
+    const gradient = c.createLinearGradient(chartArea.left, 0, chartArea.right, 0);
+    gradient.addColorStop(0, "#e8b830");
+    gradient.addColorStop(0.5, "#c89116");
+    gradient.addColorStop(1, "#9b7110");
+    return gradient;
   };
+
+  const datasets: any[] = SERIES.filter((s) => visible[s.key]).map((s) => {
+    const isPrimary = s.key === "lm";
+    return {
+      label: s.label,
+      data: seriesData[s.key],
+      borderColor: isPrimary ? (makeLineGradient as never) : s.color,
+      backgroundColor: isPrimary
+        ? (ctx: ScriptableContext<"line">) => makeAreaGradient(ctx, "rgba(200, 145, 22, 0.28)")
+        : "transparent",
+      fill: isPrimary,
+      tension: 0.35,
+      pointRadius: 0,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: s.color,
+      pointHoverBorderColor: "#fff",
+      pointHoverBorderWidth: 2,
+      borderWidth: isPrimary ? 3 : 2,
+      borderDash: s.key === "buyback" ? [6, 4] : s.key === "perhiasan" ? [2, 3] : undefined,
+      spanGaps: true,
+    };
+  });
+
+  // Marker titik "hari ini" pada series utama
+  if (visible.lm && seriesData.lm.some((v) => v != null)) {
+    const lastIdx = seriesData.lm.length - 1;
+    datasets.push({
+      label: "Hari Ini",
+      data: seriesData.lm.map((v, i) => (i === lastIdx ? v : null)),
+      borderColor: "transparent",
+      backgroundColor: "transparent",
+      fill: false,
+      pointRadius: (ctx: ScriptableContext<"line">) => {
+        const i = ctx.dataIndex;
+        return i === lastIdx ? 6 : 0;
+      },
+      pointBackgroundColor: "#c89116",
+      pointBorderColor: "#fff",
+      pointBorderWidth: 2,
+      pointHoverRadius: 7,
+      showLine: false,
+    });
+  }
+
+  const chartData = { labels, datasets };
 
   const options = {
     responsive: true,
     maintainAspectRatio: false,
-    interaction: {
-      intersect: false,
-      mode: "index" as const,
-    },
+    interaction: { intersect: false, mode: "index" as const },
     plugins: {
-      legend: {
-        position: "bottom" as const,
-        labels: {
-          usePointStyle: true,
-          pointStyleWidth: 8,
-          padding: 20,
-          font: { family: "var(--font-sans)", size: 12 },
-          color: "#6b6b6b",
-        },
-      },
+      legend: { display: false },
       tooltip: {
         backgroundColor: "#ffffff",
         titleColor: "#1a1a1a",
         bodyColor: "#6b6b6b",
+        titleFont: { family: "var(--font-sans)", weight: "bold" as const, size: 12 },
+        bodyFont: { family: "var(--font-sans)", size: 12 },
         borderColor: "#e8e4d8",
         borderWidth: 1,
-        padding: 12,
-        cornerRadius: 12,
+        padding: 14,
+        cornerRadius: 14,
         displayColors: true,
+        boxPadding: 4,
         callbacks: {
           label: (ctx: { dataset: { label?: string }; parsed: { y: number | null } }) => {
-            const val = ctx.parsed.y ? ctx.parsed.y.toLocaleString("id-ID") : "0";
-            return `${ctx.dataset.label}: Rp ${val}`;
+            if (ctx.parsed.y == null) return "";
+            const val = ctx.parsed.y.toLocaleString("id-ID");
+            return ` ${ctx.dataset.label}: Rp ${val}`;
           },
         },
       },
@@ -145,50 +206,106 @@ export default function PriceChart() {
     scales: {
       x: {
         grid: { display: false },
-        ticks: { color: "#9ca3af", font: { size: 11 } },
-        border: { color: "#e8e4d8" },
+        ticks: { color: "#9ca3af", font: { size: 11 }, maxRotation: 0, autoSkipPadding: 12 },
+        border: { display: false },
       },
       y: {
-        grid: { color: "#f2efe7" },
+        grid: { color: "#f2efe7", borderDash: [4, 4] },
         ticks: {
           color: "#9ca3af",
           font: { size: 11 },
+          padding: 8,
           callback: (val: string | number) => {
             const n = Number(val);
             return n >= 1000000 ? `${(n / 1000000).toFixed(1)}M` : `${(n / 1000).toFixed(0)}K`;
           },
         },
-        border: { color: "#e8e4d8" },
+        border: { display: false },
       },
     },
   };
 
+  const isUp = stats.change >= 0;
+
   return (
-    <div className="overflow-hidden rounded-2xl border border-border/60 bg-white shadow-sm">
-      <div className="flex items-center justify-between border-b border-border/40 px-8 py-5">
-        <div>
-          <h3 className="font-serif text-lg font-bold text-text">Grafik Harga Emas</h3>
-          <p className="mt-0.5 text-xs text-text-muted">Pergerakan harga per gram (IDR)</p>
+    <div className="relative overflow-hidden rounded-2xl border border-gold/20 bg-white shadow-lg shadow-gold/5">
+      <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-gold/5 blur-3xl" />
+
+      <div className="relative border-b border-border/40 px-6 py-5 md:px-8">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-dark">Grafik Harga Emas</p>
+            <h3 className="mt-1 font-serif text-xl font-bold text-text md:text-2xl">Pergerakan Harga per Gram</h3>
+          </div>
+          <div className="flex items-center gap-1.5 self-start rounded-xl border border-border/60 bg-surface p-1">
+            {periods.map((p) => (
+              <button
+                key={p.key}
+                onClick={() => setPeriod(p.key)}
+                className={`rounded-lg px-3.5 py-1.5 text-xs font-medium transition-all ${
+                  period === p.key ? "gold-gradient-bg text-white shadow-sm shadow-gold/15" : "text-text-muted hover:text-text"
+                }`}
+              >
+                {p.label}
+              </button>
+            ))}
+          </div>
         </div>
-        <div className="flex items-center gap-1.5 rounded-xl border border-border/60 bg-surface p-1">
-          {periods.map((p) => (
+      </div>
+
+      <div className="relative px-6 py-5 md:px-8">
+        <div className="mb-5 flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className="text-xs text-text-muted">Harga Logam Mulia Terkini</p>
+            <div className="mt-1 flex items-center gap-3">
+              <span className="font-serif text-3xl font-bold text-text">
+                {stats.hasData ? `Rp ${formatRupiah(stats.last)}` : "-"}
+              </span>
+              {stats.hasData && stats.change !== 0 && (
+                <span className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold ${isUp ? "bg-emerald-500/10 text-emerald-600" : "bg-red-500/10 text-red-500"}`}>
+                  {isUp ? "▲" : "▼"} {isUp ? "+" : ""}{formatRupiah(stats.change)} ({isUp ? "+" : ""}{stats.changePct.toFixed(1).replace(".", ",")}%)
+                </span>
+              )}
+            </div>
+          </div>
+
+          {stats.hasData && (
+            <div className="flex flex-wrap gap-2">
+              <div className="rounded-xl border border-border/40 bg-surface px-4 py-2">
+                <p className="text-[10px] uppercase tracking-wider text-text-muted">Tertinggi</p>
+                <p className="text-sm font-semibold text-text">{formatCompact(stats.high)}</p>
+              </div>
+              <div className="rounded-xl border border-border/40 bg-surface px-4 py-2">
+                <p className="text-[10px] uppercase tracking-wider text-text-muted">Terendah</p>
+                <p className="text-sm font-semibold text-text">{formatCompact(stats.low)}</p>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Custom legend — toggle chips */}
+        <div className="mb-4 flex flex-wrap gap-2">
+          {SERIES.map((s) => (
             <button
-              key={p.key}
-              onClick={() => setPeriod(p.key)}
-              className={`rounded-lg px-3.5 py-1.5 text-xs font-medium transition-all ${
-                period === p.key
-                  ? "gold-gradient-bg text-white shadow-sm shadow-gold/15"
-                  : "text-text-muted hover:text-text"
+              key={s.key}
+              onClick={() => toggle(s.key)}
+              className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-medium transition-all ${
+                visible[s.key]
+                  ? "border-gold/40 bg-gold/5 text-gold-dark"
+                  : "border-border/60 bg-white text-text-muted hover:border-gold/30 hover:text-text"
               }`}
             >
-              {p.label}
+              <span
+                className="h-2 w-2 rounded-full"
+                style={{ backgroundColor: s.color, opacity: visible[s.key] ? 1 : 0.4 }}
+              />
+              {s.label}
             </button>
           ))}
         </div>
-      </div>
-      <div className="p-6">
+
         <div className="h-72">
-          <Line data={chartData} options={options} />
+          <Line data={chartData} options={options} plugins={[crosshairPlugin]} />
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useRef } from "react";
+import { useState, useRef } from "react";
 import type { GoldTypeRow } from "@/lib/gold-api";
 import PricePreviewModal from "@/components/PricePreviewModal";
 
@@ -12,12 +12,8 @@ interface Props {
   initialAdjBeli: string;
   initialAdjPerhiasan: string;
   initialPersenBuybackPerhiasan: string;
-  premiPecahan: string;
-  spreadBuybackLM: string;
   baseGoldIdr: number;
   xauUsd: number;
-  xagUsd: number;
-  xpdUsd: number;
   usdIdr: number;
   lastCronTime: string | null;
   suggestedJual: number | null;
@@ -26,7 +22,6 @@ interface Props {
   initialAntamPricePrev: string;
   initialGlobalGoldPrice: string;
   initialGlobalGoldPricePrev: string;
-  initialGoogleReviewsWidgetId: string;
 }
 
 function formatRupiah(n: number): string {
@@ -41,12 +36,8 @@ export default function PriceApprovalPanel({
   initialAdjBeli,
   initialAdjPerhiasan,
   initialPersenBuybackPerhiasan,
-  premiPecahan,
-  spreadBuybackLM,
   baseGoldIdr,
   xauUsd,
-  xagUsd,
-  xpdUsd,
   usdIdr,
   lastCronTime,
   suggestedJual,
@@ -55,7 +46,6 @@ export default function PriceApprovalPanel({
   initialAntamPricePrev,
   initialGlobalGoldPrice,
   initialGlobalGoldPricePrev,
-  initialGoogleReviewsWidgetId,
 }: Props) {
   const [hargaDasar, setHargaDasar] = useState(initialHargaDasarJual);
   const [acuanBuyback, setAcuanBuyback] = useState(initialAcuanBuyback);
@@ -88,136 +78,35 @@ export default function PriceApprovalPanel({
   const [globalSaveStatus, setGlobalSaveStatus] = useState<
     "idle" | "saving" | "saved"
   >("idle");
-  const [reviewsWidgetId, setReviewsWidgetId] = useState(
-    initialGoogleReviewsWidgetId,
-  );
-  const [reviewsSaveStatus, setReviewsSaveStatus] = useState<
-    "idle" | "saving" | "saved"
-  >("idle");
   const [scraping, setScraping] = useState(false);
   const [scrapeError, setScrapeError] = useState("");
 
-  const preview = useMemo(() => {
-    const hd = parseInt(hargaDasar) || 0;
-    const ac = parseInt(acuanBuyback) || 0;
-    const aj = parseInt(adjJual) || 0;
-    const ab = parseInt(adjBeli) || 0;
-    const persen = parseFloat(persenBuybackPerhiasan) || 81;
+  const [previewItems, setPreviewItems] = useState<any[]>([]);
+  const [previewLoading, setPreviewLoading] = useState(false);
 
-    const GOLD_OZ = 31.1034768;
-    const silverBase = xagUsd > 0 ? (xagUsd * usdIdr) / GOLD_OZ : 0;
-    const palladiumBase = xpdUsd > 0 ? (xpdUsd * usdIdr) / GOLD_OZ : 0;
-
-    let premi: Record<string, number> = {};
-    let spreadBb: Record<string, number> = {};
+  async function handleOpenPreview() {
+    setPreviewLoading(true);
     try {
-      premi = JSON.parse(premiPecahan);
-    } catch {}
-    try {
-      spreadBb = JSON.parse(spreadBuybackLM);
-    } catch {}
-
-    return goldTypes.map((gt) => {
-      if (gt.category === "bb-logam") {
-        const base = gt.id === "ll-perak" ? silverBase : palladiumBase;
-        return {
-          id: gt.id,
-          name: gt.name,
-          category: gt.category,
-          price: Math.round(base),
-          weight: gt.weight,
-          karat: gt.karat,
-        };
+      const res = await fetch("/api/admin/preview-prices", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          hargaDasarJual: parseInt(hargaDasar) || 0,
+          acuanBuybackLM: parseInt(acuanBuyback) || 0,
+          adjJual: parseInt(adjJual) || 0,
+          adjBeli: parseInt(adjBeli) || 0,
+          persenBuybackPerhiasan: parseFloat(persenBuybackPerhiasan) || 81,
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setPreviewItems(data.items ?? []);
+        setShowPreviewModal(true);
       }
-      if (gt.category === "bb-perhiasan") {
-        const karat = gt.karat ?? 24;
-        // Referensi: harga Merek Lain (acuan + spread + adjBeli)
-        const merekLain = ac + (spreadBb["bb-merek-lain"] ?? 0) + ab;
-        if (karat === 24 && gt.id === "ph-k24s") {
-          return {
-            id: gt.id,
-            name: gt.name,
-            category: gt.category,
-            price: Math.round(merekLain - 100000),
-            weight: gt.weight,
-            karat: gt.karat,
-          };
-        }
-        if (karat === 24 && gt.id === "ph-k24") {
-          return {
-            id: gt.id,
-            name: gt.name,
-            category: gt.category,
-            price: Math.round(merekLain - 100000 - 75000),
-            weight: gt.weight,
-            karat: gt.karat,
-          };
-        }
-        if (karat >= 23) {
-          return {
-            id: gt.id,
-            name: gt.name,
-            category: gt.category,
-            price: Math.round(merekLain - 175000 - 110000),
-            weight: gt.weight,
-            karat: gt.karat,
-          };
-        }
-        const raw = (karat / 24) * ac * (persen / 100);
-        return {
-          id: gt.id,
-          name: gt.name,
-          category: gt.category,
-          price: Math.ceil(raw / 1000) * 1000,
-          weight: gt.weight,
-          karat: gt.karat,
-        };
-      }
-      if (gt.category === "bb-lm") {
-        const spread = spreadBb[gt.id] ?? 0;
-        return {
-          id: gt.id,
-          name: gt.name,
-          category: gt.category,
-          price: Math.round(ac + spread + ab),
-          weight: gt.weight,
-          karat: gt.karat,
-        };
-      }
-      if (gt.category === "lm") {
-        const p = premi[String(gt.weight ?? 1)] ?? 0;
-        const unitPrice = Math.round(hd + p + aj);
-        return {
-          id: gt.id,
-          name: gt.name,
-          category: gt.category,
-          price: unitPrice,
-          weight: gt.weight,
-          karat: gt.karat,
-        };
-      }
-      return {
-        id: gt.id,
-        name: gt.name,
-        category: gt.category,
-        price: 0,
-        weight: gt.weight,
-        karat: gt.karat,
-      };
-    });
-  }, [
-    hargaDasar,
-    acuanBuyback,
-    adjJual,
-    adjBeli,
-    persenBuybackPerhiasan,
-    xagUsd,
-    xpdUsd,
-    usdIdr,
-    premiPecahan,
-    spreadBuybackLM,
-    goldTypes,
-  ]);
+    } finally {
+      setPreviewLoading(false);
+    }
+  }
 
   async function handlePublish() {
     setStatus({ type: "loading", msg: "Memproses..." });
@@ -335,23 +224,6 @@ export default function PriceApprovalPanel({
       setTimeout(() => setGlobalSaveStatus("idle"), 2000);
     } catch {
       setGlobalSaveStatus("idle");
-    }
-  }
-
-  async function handleSaveReviewsWidgetId(value: string) {
-    setReviewsSaveStatus("saving");
-    try {
-      await fetch("/api/admin/update-settings", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          settings: { google_reviews_widget_id: value.trim() },
-        }),
-      });
-      setReviewsSaveStatus("saved");
-      setTimeout(() => setReviewsSaveStatus("idle"), 2000);
-    } catch {
-      setReviewsSaveStatus("idle");
     }
   }
 
@@ -668,36 +540,6 @@ export default function PriceApprovalPanel({
               </div>
             </div>
           </div>
-
-          <div className="mt-4 border-t border-border/30 pt-4">
-            <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-text-muted">
-              Google Reviews Widget ID
-            </label>
-            <p className="mb-1 text-[11px] text-text-muted">
-              Dari Featurable dashboard → Embed → API
-            </p>
-            <div className="flex gap-2">
-              <input
-                type="text"
-                value={reviewsWidgetId}
-                onChange={(e) => setReviewsWidgetId(e.target.value)}
-                onBlur={(e) => handleSaveReviewsWidgetId(e.target.value)}
-                placeholder="example"
-                className="flex-1 rounded-lg border border-border/60 bg-white px-3 py-2 text-sm text-text focus:border-gold focus:outline-none font-mono"
-              />
-              <button
-                onClick={() => handleSaveReviewsWidgetId(reviewsWidgetId)}
-                disabled={reviewsSaveStatus === "saving"}
-                className="rounded-lg border-2 border-gold/40 px-4 py-2 text-sm font-semibold text-gold-dark transition-all hover:border-gold hover:bg-gold/5 disabled:opacity-50"
-              >
-                {reviewsSaveStatus === "saving"
-                  ? "..."
-                  : reviewsSaveStatus === "saved"
-                    ? "✓"
-                    : "Simpan"}
-              </button>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -809,10 +651,11 @@ export default function PriceApprovalPanel({
 
       <div className="flex items-center gap-4">
         <button
-          onClick={() => setShowPreviewModal(true)}
-          className="rounded-xl border-2 border-gold/40 px-6 py-3 text-sm font-semibold text-gold-dark transition-all hover:border-gold hover:bg-gold/5"
+          onClick={handleOpenPreview}
+          disabled={previewLoading}
+          className="rounded-xl border-2 border-gold/40 px-6 py-3 text-sm font-semibold text-gold-dark transition-all hover:border-gold hover:bg-gold/5 disabled:opacity-60"
         >
-          Preview Harga
+          {previewLoading ? "Memuat..." : "Preview Harga"}
         </button>
         <button
           onClick={handlePublish}
@@ -836,7 +679,7 @@ export default function PriceApprovalPanel({
       <PricePreviewModal
         open={showPreviewModal}
         onClose={() => setShowPreviewModal(false)}
-        items={preview}
+        items={previewItems}
       />
     </div>
   );
