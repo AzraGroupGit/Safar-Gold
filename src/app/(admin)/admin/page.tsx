@@ -75,8 +75,6 @@ export default function AdminDashboard() {
 
   const s = settings;
   const xauUsd = parseFloat(s.last_cron_xau_usd || "0");
-  const xagUsd = parseFloat(s.last_cron_xag_usd || "0");
-  const xpdUsd = parseFloat(s.last_cron_xpd_usd || "0");
   const usdIdr = parseFloat(s.last_cron_usd_idr || "0") || parseFloat(s.usd_idr_rate || "16300");
   const lastCron = s.last_cron_time
     ? new Date(s.last_cron_time).toLocaleString("id-ID", { hour: "2-digit", minute: "2-digit" })
@@ -130,19 +128,14 @@ export default function AdminDashboard() {
             initialAdjBeli={s.adjustment_beli ?? "0"}
             initialAdjPerhiasan={s.adjustment_perhiasan ?? "0"}
             initialPersenBuybackPerhiasan={s.persen_buyback_perhiasan ?? "81"}
-            premiPecahan={s.premi_pecahan ?? "{}"}
-            spreadBuybackLM={s.spread_buyback_lm ?? "{}"}
             baseGoldIdr={baseGoldIdr}
             xauUsd={xauUsd}
-            xagUsd={xagUsd}
-            xpdUsd={xpdUsd}
             usdIdr={usdIdr}
             lastCronTime={lastCron}
             initialAntamPrice={s.antam_price ?? ""}
             initialAntamPricePrev={s.antam_price_prev ?? ""}
             initialGlobalGoldPrice={s.global_gold_price ?? ""}
             initialGlobalGoldPricePrev={s.global_gold_price_prev ?? ""}
-            initialGoogleReviewsWidgetId={s.google_reviews_widget_id ?? ""}
             suggestedJual={medianFactors?.suggestedJual ?? null}
             suggestedBuyback={medianFactors?.suggestedBuyback ?? null}
           />

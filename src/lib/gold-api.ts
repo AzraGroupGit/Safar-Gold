@@ -202,28 +202,48 @@ export async function insertPriceHistory(
     .upsert(prices, { onConflict: "date,gold_type_id" });
 }
 
+/** Ambil histori harga N hari terakhir untuk grafik. */
+export async function getPriceHistory(days: number): Promise<{ date: string; gold_type_id: string; buy_price: number; sell_price: number }[]> {
+  const supabase = createAnonClient();
+  const since = new Date();
+  since.setDate(since.getDate() - days);
+  const sinceStr = since.toISOString().split("T")[0];
+  const { data } = await supabase
+    .from("price_history")
+    .select("date, gold_type_id, buy_price, sell_price")
+    .gte("date", sinceStr)
+    .order("date", { ascending: true });
+  return (data ?? []) as { date: string; gold_type_id: string; buy_price: number; sell_price: number }[];
+}
+
 // ---------- Price Calculation ----------
-export async function calculatePrices(
-  baseGoldIdrPerGram: number,
-  baseSilverIdrPerGram: number,
-  basePalladiumIdrPerGram: number
-) {
-  const goldTypes = await getAllGoldTypes();
+export type ComputedPrice = {
+  gold_type: GoldTypeRow;
+  base_price: number;
+  buy_price: number;
+  sell_price: number;
+};
 
-  // Baca parameter dari settings
-  const hargaDasarJual = parseFloat(await getSetting("harga_dasar_jual")) || 0;
-  const acuanBuybackLM = parseFloat(await getSetting("acuan_buyback_lm")) || 0;
-  const adjJual = parseFloat(await getSetting("adjustment_jual")) || 0;
-  const adjBeli = parseFloat(await getSetting("adjustment_beli")) || 0;
-  const persenBuybackPerhiasan = parseFloat(await getSetting("persen_buyback_perhiasan")) || 81;
+export type ComputePricesParams = {
+  goldTypes: GoldTypeRow[];
+  hargaDasarJual: number;
+  acuanBuybackLM: number;
+  adjJual: number;
+  adjBeli: number;
+  persenBuybackPerhiasan: number;
+  premiPecahan: Record<string, number>;
+  spreadBuyback: Record<string, number>;
+  baseGoldIdrPerGram: number;
+  baseSilverIdrPerGram: number;
+  basePalladiumIdrPerGram: number;
+};
 
-  const premiStr = await getSetting("premi_pecahan");
-  const spreadStr = await getSetting("spread_buyback_lm");
-
-  let premiPecahan: Record<string, number> = {};
-  let spreadBuyback: Record<string, number> = {};
-  try { premiPecahan = JSON.parse(premiStr); } catch { console.error("Failed to parse premi_pecahan JSON"); }
-  try { spreadBuyback = JSON.parse(spreadStr); } catch { console.error("Failed to parse spread_buyback_lm JSON"); }
+/** Kalkulasi harga — fungsi murni (tanpa akses DB). Dipakai oleh publish & preview. */
+export function computePrices(params: ComputePricesParams): ComputedPrice[] {
+  const {
+    goldTypes, hargaDasarJual, acuanBuybackLM, adjJual, adjBeli, persenBuybackPerhiasan,
+    premiPecahan, spreadBuyback, baseGoldIdrPerGram, baseSilverIdrPerGram, basePalladiumIdrPerGram,
+  } = params;
 
   return goldTypes.map((gt) => {
     const category = gt.category;
@@ -245,25 +265,22 @@ export async function calculatePrices(
       const karat = gt.karat ?? 24;
       // Referensi: harga Merek Lain (acuan + spread + adjBeli)
       const merekLain = acuanBuybackLM + (spreadBuyback["bb-merek-lain"] ?? 0) + adjBeli;
+      let price: number;
       if (karat === 24 && gt.id === "ph-k24s") {
         // K24* = Merek Lain − 100.000
-        const price = merekLain - 100000;
-        return { gold_type: gt, base_price: Math.round(baseGoldIdrPerGram), buy_price: 0, sell_price: Math.round(price) };
-      }
-      if (karat === 24 && gt.id === "ph-k24") {
+        price = merekLain - 100000;
+      } else if (karat === 24 && gt.id === "ph-k24") {
         // K24 = K24* − 75.000
-        const price = merekLain - 100000 - 75000;
-        return { gold_type: gt, base_price: Math.round(baseGoldIdrPerGram), buy_price: 0, sell_price: Math.round(price) };
-      }
-      if (karat >= 23) {
+        price = merekLain - 100000 - 75000;
+      } else if (karat >= 23) {
         // K23 = K24 − 110.000 (K24 = merekLain − 175.000)
-        const price = merekLain - 175000 - 110000;
-        return { gold_type: gt, base_price: Math.round(baseGoldIdrPerGram), buy_price: 0, sell_price: Math.round(price) };
+        price = merekLain - 175000 - 110000;
+      } else {
+        // K6 - K22: CEILING((karat/24) × acuan × persen%, 1000)
+        const raw = (karat / 24) * acuanBuybackLM * (persenBuybackPerhiasan / 100);
+        price = Math.ceil(raw / 1000) * 1000;
       }
-      // K6 - K22: CEILING((karat/24) × acuan × persen%, 1000)
-      const raw = (karat / 24) * acuanBuybackLM * (persenBuybackPerhiasan / 100);
-      const price = Math.ceil(raw / 1000) * 1000;
-      return { gold_type: gt, base_price: Math.round(baseGoldIdrPerGram), buy_price: 0, sell_price: price };
+      return { gold_type: gt, base_price: Math.round(baseGoldIdrPerGram), buy_price: 0, sell_price: gt.is_auto ? Math.round(price) : (gt.manual_sell ?? 0) };
     }
 
     // ---- Buyback LM ----
@@ -296,6 +313,34 @@ export async function calculatePrices(
       buy_price: 0,
       sell_price: 0,
     };
+  });
+}
+
+/** Baca settings + gold_types dari DB, lalu hitung harga. */
+export async function calculatePrices(
+  baseGoldIdrPerGram: number,
+  baseSilverIdrPerGram: number,
+  basePalladiumIdrPerGram: number
+): Promise<ComputedPrice[]> {
+  const goldTypes = await getAllGoldTypes();
+
+  const hargaDasarJual = parseFloat(await getSetting("harga_dasar_jual")) || 0;
+  const acuanBuybackLM = parseFloat(await getSetting("acuan_buyback_lm")) || 0;
+  const adjJual = parseFloat(await getSetting("adjustment_jual")) || 0;
+  const adjBeli = parseFloat(await getSetting("adjustment_beli")) || 0;
+  const persenBuybackPerhiasan = parseFloat(await getSetting("persen_buyback_perhiasan")) || 81;
+
+  const premiStr = await getSetting("premi_pecahan");
+  const spreadStr = await getSetting("spread_buyback_lm");
+
+  let premiPecahan: Record<string, number> = {};
+  let spreadBuyback: Record<string, number> = {};
+  try { premiPecahan = JSON.parse(premiStr); } catch { console.error("Failed to parse premi_pecahan JSON"); }
+  try { spreadBuyback = JSON.parse(spreadStr); } catch { console.error("Failed to parse spread_buyback_lm JSON"); }
+
+  return computePrices({
+    goldTypes, hargaDasarJual, acuanBuybackLM, adjJual, adjBeli, persenBuybackPerhiasan,
+    premiPecahan, spreadBuyback, baseGoldIdrPerGram, baseSilverIdrPerGram, basePalladiumIdrPerGram,
   });
 }
 

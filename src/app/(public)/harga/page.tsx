@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import TabbedPricelist from "@/components/TabbedPricelist";
 import PriceChart from "@/components/PriceChart";
 import LegalNotice from "@/components/LegalNotice";
-import { getFormattedTodayPrices, getMarketInfo, formatRupiah } from "@/lib/gold-api";
+import { getFormattedTodayPrices, getMarketInfo, getPriceHistory, formatRupiah } from "@/lib/gold-api";
 
 export const metadata: Metadata = {
   title: "Harga Emas Hari Ini — Logam Mulia, Buyback & Perhiasan",
@@ -12,12 +12,15 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function HargaPage() {
-  const prices = await getFormattedTodayPrices();
-  const market = await getMarketInfo();
+  const [prices, market, history] = await Promise.all([
+    getFormattedTodayPrices(),
+    getMarketInfo(),
+    getPriceHistory(90),
+  ]);
   const hasData = prices.length > 0 && prices[0].buyPrice > 0;
 
   const hargaAntam = prices.find((p) => p.goldTypeId === "antam-1");
-  const buyback24k = prices.find((p) => p.goldTypeId === "ph-k24");
+  const buyback24k = prices.find((p) => p.goldTypeId === "ph-k24s");
 
   return (
     <main className="bg-white">
@@ -56,7 +59,7 @@ export default async function HargaPage() {
           <div className="relative overflow-hidden rounded-2xl gold-gradient-bg p-5 shadow-lg shadow-gold/20 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-gold/30">
             <div className="bg-diamond absolute inset-0 opacity-20" />
             <div className="relative">
-              <p className="mb-1 text-xs font-medium uppercase tracking-wider text-white/70">Buyback 24K</p>
+              <p className="mb-1 text-xs font-medium uppercase tracking-wider text-white/70">Buyback 24K*</p>
               <p className="text-2xl font-bold text-white">
                 {buyback24k && buyback24k.sellPrice > 0 ? formatRupiah(buyback24k.sellPrice) : "-"}
               </p>
@@ -97,7 +100,7 @@ export default async function HargaPage() {
       </div>
 
       <div className="mx-auto max-w-7xl px-4 pb-6 md:px-6 md:pb-8">
-        <PriceChart />
+        <PriceChart history={history} />
       </div>
 
       <div className="mx-auto max-w-7xl px-4 pb-16 md:px-6 md:pb-20">

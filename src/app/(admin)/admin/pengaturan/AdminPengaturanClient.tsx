@@ -17,6 +17,7 @@ export default function AdminPengaturanClient({
     weekdayClose: initialSettings.weekday_close ?? "17:00",
     saturdayOpen: initialSettings.saturday_open ?? "09:00",
     saturdayClose: initialSettings.saturday_close ?? "14:00",
+    googleReviewsWidgetId: initialSettings.google_reviews_widget_id ?? "",
   });
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -41,6 +42,7 @@ export default function AdminPengaturanClient({
           weekday_close: settings.weekdayClose,
           saturday_open: settings.saturdayOpen,
           saturday_close: settings.saturdayClose,
+          google_reviews_widget_id: settings.googleReviewsWidgetId,
         },
       }),
     });
@@ -204,6 +206,31 @@ export default function AdminPengaturanClient({
                   className={fieldClass}
                 />
               </div>
+            </div>
+          </div>
+        </div>
+        <div className="rounded-2xl border border-border/60 bg-white p-6 shadow-sm">
+          <h3 className="mb-5 font-serif text-lg font-semibold text-text">
+            Google Reviews
+          </h3>
+          <div className="space-y-4">
+            <div>
+              <label className="mb-2 block text-sm font-semibold text-text">
+                Widget ID (Featurable)
+              </label>
+              <input
+                type="text"
+                value={settings.googleReviewsWidgetId}
+                onChange={(e) =>
+                  handleSettingChange("googleReviewsWidgetId", e.target.value)
+                }
+                placeholder="contoh: 60f51fb8-..."
+                className={`${fieldClass} font-mono`}
+              />
+              <p className="mt-1.5 text-xs text-text-light">
+                Dari Featurable dashboard → Embed → API. Digunakan di section
+                testimoni website.
+              </p>
             </div>
           </div>
         </div>

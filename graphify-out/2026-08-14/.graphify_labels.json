@@ -1,8 +1,9 @@
 {
   "0": "createAdminClient",
+  "1": "getSetting",
   "2": "(public)/page.tsx",
   "3": "dependencies",
-  "4": "(public)/harga/page.tsx",
+  "4": "AdminHargaClient.tsx",
   "5": "devDependencies",
   "6": "OrdersClient.tsx",
   "7": "admin/page.tsx",
@@ -27,5 +28,6 @@
   "26": "Safar Gold Store Interior Hero",
   "27": "window.svg",
   "28": "users/page.tsx",
+  "29": "PriceChart.tsx",
   "31": "regions/route.ts"
 }
