@@ -215,11 +215,10 @@ export async function calculatePrices(
   const acuanBuybackLM = parseFloat(await getSetting("acuan_buyback_lm")) || 0;
   const adjJual = parseFloat(await getSetting("adjustment_jual")) || 0;
   const adjBeli = parseFloat(await getSetting("adjustment_beli")) || 0;
-  const adjPerhiasan = parseFloat(await getSetting("adjustment_perhiasan")) || 0;
+  const persenBuybackPerhiasan = parseFloat(await getSetting("persen_buyback_perhiasan")) || 81;
 
   const premiStr = await getSetting("premi_pecahan");
   const spreadStr = await getSetting("spread_buyback_lm");
-  const dasarPerhiasanOffset = parseFloat(await getSetting("dasar_perhiasan_offset")) || 505000;
 
   let premiPecahan: Record<string, number> = {};
   let spreadBuyback: Record<string, number> = {};
@@ -261,10 +260,10 @@ export async function calculatePrices(
         const price = merekLain - 175000 - 110000;
         return { gold_type: gt, base_price: Math.round(baseGoldIdrPerGram), buy_price: 0, sell_price: Math.round(price) };
       }
-      // K6 - K22 (tidak berubah)
-      const dasar = acuanBuybackLM - dasarPerhiasanOffset + adjPerhiasan;
-      const karatMult = karat / 24;
-      return { gold_type: gt, base_price: Math.round(baseGoldIdrPerGram), buy_price: 0, sell_price: Math.round(dasar * karatMult) };
+      // K6 - K22: CEILING((karat/24) × acuan × persen%, 1000)
+      const raw = (karat / 24) * acuanBuybackLM * (persenBuybackPerhiasan / 100);
+      const price = Math.ceil(raw / 1000) * 1000;
+      return { gold_type: gt, base_price: Math.round(baseGoldIdrPerGram), buy_price: 0, sell_price: price };
     }
 
     // ---- Buyback LM ----
