@@ -88,8 +88,8 @@ export default function PelangganClient({ settings }: { settings: InvoiceSetting
         </div>
       </div>
 
-      <div className="overflow-hidden rounded-2xl border border-border/60 bg-white shadow-sm">
-        <table className="w-full">
+      <div className="overflow-x-auto rounded-2xl border border-border/60 bg-white shadow-sm">
+        <table className="w-full min-w-[640px]">
           <thead><tr className="border-b border-border/40 bg-surface/50 text-left text-xs font-semibold uppercase tracking-wider text-text-muted"><th className="px-4 py-4 md:px-6">Nama</th><th className="px-4 py-4 md:px-6">No WA</th><th className="hidden px-4 py-4 sm:table-cell md:px-6">Sumber</th><th className="px-4 py-4 text-center md:px-6">Order</th><th className="px-4 py-4 text-right md:px-6">Total Belanja</th><th className="hidden px-4 py-4 sm:table-cell md:px-6">Terakhir</th><th className="px-4 py-4 text-center md:px-6">Aksi</th></tr></thead>
           <tbody className="divide-y divide-border/30">
             {filtered.map(c => (
@@ -110,7 +110,7 @@ export default function PelangganClient({ settings }: { settings: InvoiceSetting
 
       {/* Detail Modal */}
       {detail && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto pt-[6vh] pb-10">
+        <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto px-4 pt-[6vh] pb-10">
           <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setDetail(null)} />
           <div className="relative w-full max-w-2xl rounded-2xl border border-border/60 bg-white shadow-2xl">
             <div className="flex items-center justify-between border-b border-border/40 px-6 py-4">
@@ -159,7 +159,7 @@ export default function PelangganClient({ settings }: { settings: InvoiceSetting
 
       {/* Invoice Modal */}
       {invoiceOrder && (
-        <div className="fixed inset-0 z-[60] flex items-start justify-center overflow-y-auto pt-[6vh] pb-10">
+        <div className="fixed inset-0 z-[60] flex items-start justify-center overflow-y-auto px-4 pt-[6vh] pb-10">
           <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setInvoiceOrder(null)} />
           <div className="relative w-full max-w-2xl rounded-2xl border border-border/60 bg-white shadow-2xl">
             <div className="flex items-center justify-between border-b border-border/40 px-6 py-4">

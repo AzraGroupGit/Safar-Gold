@@ -78,8 +78,8 @@ export default function LaporanClient() {
       {/* Stok Rekap */}
       <div className="mb-8">
         <h3 className="mb-4 font-serif text-lg font-semibold text-text">Stok Rekap</h3>
-        <div className="overflow-hidden rounded-2xl border border-border/60 bg-white shadow-sm">
-          <table className="w-full">
+        <div className="overflow-x-auto rounded-2xl border border-border/60 bg-white shadow-sm">
+          <table className="w-full min-w-[480px]">
             <thead><tr className="border-b border-border/40 bg-surface/50 text-left text-xs font-semibold uppercase tracking-wider text-text-muted"><th className="px-4 py-3">Produk</th><th className="px-4 py-3 text-center">Stok</th><th className="px-4 py-3 text-center">Status</th></tr></thead>
             <tbody className="divide-y divide-border/30">
               {stock.map(s => (

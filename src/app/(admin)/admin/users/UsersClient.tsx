@@ -177,8 +177,8 @@ export default function UsersClient() {
         <div className="mb-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">{error}</div>
       )}
 
-      <div className="overflow-hidden rounded-2xl border border-border/60 bg-white shadow-sm">
-        <table className="w-full">
+      <div className="overflow-x-auto rounded-2xl border border-border/60 bg-white shadow-sm">
+        <table className="w-full min-w-[640px]">
           <thead>
             <tr className="border-b border-border/40 bg-surface/50 text-left text-xs font-semibold uppercase tracking-wider text-text-muted">
               <th className="px-4 py-4 md:px-6">Email</th>
@@ -249,7 +249,7 @@ export default function UsersClient() {
 
       {/* Add / Edit Modal */}
       {showModal && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto pt-[15vh]">
+        <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto px-4 pt-[15vh]">
           <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setShowModal(false)} />
           <div className="relative w-full max-w-md rounded-2xl border border-border/60 bg-white p-6 shadow-2xl">
             <h3 className="mb-4 font-serif text-lg font-semibold text-text">
@@ -329,7 +329,7 @@ export default function UsersClient() {
 
       {/* Delete Confirmation Modal */}
       {deleteConfirm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
           <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setDeleteConfirm(null)} />
           <div className="relative w-full max-w-sm rounded-2xl border border-border/60 bg-white p-6 shadow-2xl text-center">
             <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-red-50">

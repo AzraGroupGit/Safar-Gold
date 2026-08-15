@@ -46,7 +46,7 @@ function ModeModal({
   const filtered = sortGoldTypes(goldTypes).filter((g) => g.category === tab);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto pt-[10vh] pb-10">
+    <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto px-4 pt-[10vh] pb-10">
       <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} />
       <div className="relative w-full max-w-2xl rounded-2xl border border-border/60 bg-white shadow-2xl">
         <div className="flex items-center justify-between border-b border-border/40 px-6 py-4">

@@ -15,6 +15,23 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
 export async function DELETE(_req: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const adm = createAdminClient();
+
+  // Pastikan order ada & belum cancelled
+  const { data: order } = await adm.from("orders").select("id, status").eq("id", id).single();
+  if (!order) return NextResponse.json({ error: "Order not found" }, { status: 404 });
+  if (order.status === "cancelled") return NextResponse.json({ success: true });
+
+  // Reverse stock movements — kembalikan stok ke kondisi pra-order
+  const { data: movements } = await adm.from("stock_movements").select("*").eq("order_id", id);
+  for (const mv of movements ?? []) {
+    const reverseType = mv.type === "in" ? "out" : "in";
+    const { data: stockRow } = await adm.from("stock").select("qty").eq("gold_type_id", mv.gold_type_id).maybeSingle();
+    const current = stockRow?.qty ?? 0;
+    const newQty = reverseType === "in" ? current + mv.qty : Math.max(0, current - mv.qty);
+    await adm.from("stock").upsert({ gold_type_id: mv.gold_type_id, qty: newQty, updated_at: new Date().toISOString() });
+  }
+  await adm.from("stock_movements").delete().eq("order_id", id);
+
   const { error } = await adm.from("orders").update({ status: "cancelled" }).eq("id", id);
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json({ success: true });
