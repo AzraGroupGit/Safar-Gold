@@ -89,8 +89,8 @@ export default function StockClient() {
         <input type="text" value={search} onChange={e => setSearch(e.target.value)} placeholder="Cari produk..." className="w-full max-w-xs rounded-xl border border-border/60 bg-white pl-10 pr-4 py-2.5 text-sm text-text focus:border-gold focus:outline-none" />
       </div>
 
-      <div className="mb-8 overflow-hidden rounded-2xl border border-border/60 bg-white shadow-sm">
-        <table className="w-full">
+      <div className="mb-8 overflow-x-auto rounded-2xl border border-border/60 bg-white shadow-sm">
+        <table className="w-full min-w-[520px]">
           <thead><tr className="border-b border-border/40 bg-surface/50 text-left text-xs font-semibold uppercase tracking-wider text-text-muted"><th className="px-4 py-4 md:px-6">Produk</th><th className="hidden px-4 py-4 sm:table-cell md:px-6">Berat</th><th className="px-4 py-4 text-center md:px-6">Stok</th><th className="px-4 py-4 text-center md:px-6">Min</th><th className="px-4 py-4 text-center md:px-6">Status</th></tr></thead>
           <tbody className="divide-y divide-border/30">
             {filteredStock.map(s => (
@@ -121,8 +121,8 @@ export default function StockClient() {
           ))}
         </div>
       </div>
-      <div className="overflow-hidden rounded-2xl border border-border/60 bg-white shadow-sm">
-        <table className="w-full">
+      <div className="overflow-x-auto rounded-2xl border border-border/60 bg-white shadow-sm">
+        <table className="w-full min-w-[640px]">
           <thead><tr className="border-b border-border/40 bg-surface/50 text-left text-xs font-semibold uppercase tracking-wider text-text-muted"><th className="px-4 py-3">Waktu</th><th className="px-4 py-3">Produk</th><th className="px-4 py-3 text-center">Tipe</th><th className="px-4 py-3 text-center">Qty</th><th className="px-4 py-3">Catatan</th></tr></thead>
           <tbody className="divide-y divide-border/30">
             {filteredMovements.map(m => (
@@ -135,7 +135,7 @@ export default function StockClient() {
 
       {/* Adjustment Modal */}
       {showModal && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center pt-[20vh]">
+        <div className="fixed inset-0 z-50 flex items-start justify-center px-4 pt-[20vh]">
           <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setShowModal(false)} />
           <div className="relative w-full max-w-sm rounded-2xl border border-border/60 bg-white p-6 shadow-2xl">
             <h3 className="mb-4 font-serif text-lg font-semibold text-text">Sesuaikan Stok</h3>
@@ -153,7 +153,7 @@ export default function StockClient() {
 
       {/* Min Qty Modal */}
       {showMinModal && minProduct && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center pt-[25vh]">
+        <div className="fixed inset-0 z-50 flex items-start justify-center px-4 pt-[25vh]">
           <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setShowMinModal(false)} />
           <div className="relative w-full max-w-xs rounded-2xl border border-border/60 bg-white p-6 shadow-2xl">
             <h3 className="mb-4 font-serif text-lg font-semibold text-text">Edit Min Stok</h3>

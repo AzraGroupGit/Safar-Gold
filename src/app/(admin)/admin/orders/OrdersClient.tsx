@@ -270,8 +270,8 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
         <div className="flex gap-1 rounded-xl border border-border/60 bg-white p-1">{[{key:"all",label:"Semua"},{key:"completed",label:"Selesai"},{key:"cancelled",label:"Batal"}].map(f=>(<button key={f.key} onClick={()=>{setFilterStatus(f.key as any);setPage(1);}} className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${filterStatus===f.key?"bg-gold/10 text-gold-dark":"text-text-muted hover:text-text"}`}>{f.label}</button>))}</div>
       </div>
 
-      <div className="overflow-hidden rounded-2xl border border-border/60 bg-white shadow-sm">
-        <table className="w-full">
+      <div className="overflow-x-auto rounded-2xl border border-border/60 bg-white shadow-sm">
+        <table className="w-full min-w-[640px]">
           <thead><tr className="border-b border-border/40 bg-surface/50 text-left text-xs font-semibold uppercase tracking-wider text-text-muted"><th className="px-4 py-4 md:px-6">No. Order</th><th className="px-4 py-4 md:px-6">Customer</th><th className="hidden px-4 py-4 sm:table-cell md:px-6">Tipe</th><th className="hidden px-4 py-4 sm:table-cell md:px-6">Tanggal</th><th className="px-4 py-4 text-right md:px-6">Total</th><th className="px-4 py-4 text-center md:px-6">Status</th><th className="px-4 py-4 text-center md:px-6">Aksi</th></tr></thead>
           <tbody className="divide-y divide-border/30">
             {paged.map(o => (
@@ -311,7 +311,7 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
 
       {/* Detail Order Modal */}
       {viewOrder && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto pt-[8vh] pb-10">
+        <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto px-4 pt-[8vh] pb-10">
           <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" onClick={()=>setViewOrder(null)} />
           <div className="relative w-full max-w-2xl rounded-2xl border border-border/60 bg-white shadow-2xl">
             <div className="flex items-center justify-between border-b border-border/40 px-6 py-4">
@@ -343,7 +343,7 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
 
       {/* Invoice Modal */}
       {printOrder && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto pt-[8vh] pb-10">
+        <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto px-4 pt-[8vh] pb-10">
           <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" onClick={()=>setPrintOrder(null)} />
           <div className="relative w-full max-w-2xl rounded-2xl border border-border/60 bg-white shadow-2xl">
             <div className="flex items-center justify-between border-b border-border/40 px-6 py-4">
@@ -365,7 +365,7 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
 
       {/* Delete Confirm */}
       {deleteConfirm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
           <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" onClick={()=>setDeleteConfirm(null)} />
           <div className="relative w-full max-w-sm rounded-2xl border border-border/60 bg-white p-6 shadow-2xl text-center">
             <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-red-50"><svg className="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg></div>
@@ -378,7 +378,7 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
 
       {/* Create/Edit Modal */}
       {showModal && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto pt-[5vh] pb-10">
+        <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto px-4 pt-[5vh] pb-10">
           <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" onClick={()=>{setShowModal(false);resetForm();}} />
           <div className="relative w-full max-w-3xl rounded-2xl border border-border/60 bg-white shadow-2xl">
             <div className="flex items-center justify-between border-b border-border/40 px-6 py-4"><h3 className="font-serif text-lg font-semibold text-text">{editingId?"Edit Order":"Buat Order Baru"}</h3><button onClick={()=>{setShowModal(false);resetForm();}} className="rounded-lg p-1 text-text-muted hover:bg-surface hover:text-text">&times;</button></div>
