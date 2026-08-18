@@ -1,16 +1,16 @@
-# Graph Report - safar-gold  (2026-08-18)
+# Graph Report - safar-gold  (2026-08-15)
 
 ## Corpus Check
-- 91 files · ~187,730 words
+- 91 files · ~95,586 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 393 nodes · 696 edges · 30 communities (23 shown, 7 thin omitted)
+- 393 nodes · 695 edges · 31 communities (24 shown, 7 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 5 edges (avg confidence: 0.78)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `261ec39a`
+- Built from commit: `6a4c0571`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -19,13 +19,14 @@
 - getSetting
 - (public)/page.tsx
 - dependencies
-- getAllGoldTypes
+- AdminHargaClient.tsx
 - devDependencies
 - OrdersClient.tsx
 - admin/page.tsx
 - stock/page.tsx
 - gold-api.ts
 - app/layout.tsx
+- getAllGoldTypes
 - tentang/page.tsx
 - migration.sql
 - graphify.js
@@ -37,7 +38,7 @@
 - About Us Hero Image
 - Safar Gold Store Interior Hero
 - users/page.tsx
-- (public)/harga/page.tsx
+- PriceChart.tsx
 - regions/route.ts
 
 ## God Nodes (most connected - your core abstractions)
@@ -61,8 +62,8 @@
   src/app/(admin)/admin/jenis-emas/page.tsx → src/lib/gold-api.ts
 - `Props` --references--> `GoldTypeRow`  [EXTRACTED]
   src/app/(admin)/admin/PriceApprovalPanel.tsx → src/lib/gold-api.ts
-- `AdminKontenPage()` --calls--> `getHeroContent()`  [EXTRACTED]
-  src/app/(admin)/admin/konten/page.tsx → src/lib/gold-api.ts
+- `ModeModal()` --calls--> `sortGoldTypes()`  [EXTRACTED]
+  src/app/(admin)/admin/harga/AdminHargaClient.tsx → src/lib/gold-api.ts
 
 ## Import Cycles
 - None detected.
@@ -71,7 +72,7 @@
 - **Brand Identity Assets** — public_favicon_png, public_logo_1_webp, src_app_icon_png [EXTRACTED 0.90]
 - **UI Vector Icons** — public_file_svg, public_globe_svg, public_window_svg [INFERRED 0.70]
 
-## Communities (30 total, 7 thin omitted)
+## Communities (31 total, 7 thin omitted)
 
 ### Community 0 - "createAdminClient"
 Cohesion: 0.08
@@ -82,20 +83,20 @@ Cohesion: 0.20
 Nodes (19): dynamic, POST(), dynamic, POST(), dynamic, POST(), dynamic, POST() (+11 more)
 
 ### Community 2 - "(public)/page.tsx"
-Cohesion: 0.06
-Nodes (28): InvoicePage(), dynamic, metadata, PelangganPage(), PublicLayout(), dynamic, HomePage(), metadata (+20 more)
+Cohesion: 0.07
+Nodes (27): InvoicePage(), dynamic, metadata, PelangganPage(), PublicLayout(), dynamic, HomePage(), metadata (+19 more)
 
 ### Community 3 - "dependencies"
-Cohesion: 0.12
-Nodes (17): chart.js, next, dependencies, chart.js, next, react, react-chartjs-2, react-dom (+9 more)
+Cohesion: 0.08
+Nodes (25): chart.js, next, dependencies, chart.js, next, react, react-chartjs-2, react-dom (+17 more)
 
-### Community 4 - "getAllGoldTypes"
-Cohesion: 0.12
-Nodes (24): AdminHargaClient(), formatRupiahClient(), MODE_TABS, ModeModal(), AdminHargaPage(), dynamic, dynamic, metadata (+16 more)
+### Community 4 - "AdminHargaClient.tsx"
+Cohesion: 0.11
+Nodes (23): AdminHargaClient(), formatRupiahClient(), MODE_TABS, ModeModal(), Calculator(), CATEGORY_LABELS, formatRupiahClient(), quickQty (+15 more)
 
 ### Community 5 - "devDependencies"
-Cohesion: 0.08
-Nodes (25): eslint, eslint-config-next, devDependencies, eslint, eslint-config-next, tailwindcss, @tailwindcss/postcss, @types/node (+17 more)
+Cohesion: 0.12
+Nodes (17): eslint, eslint-config-next, devDependencies, eslint, eslint-config-next, tailwindcss, @tailwindcss/postcss, @types/node (+9 more)
 
 ### Community 6 - "OrdersClient.tsx"
 Cohesion: 0.10
@@ -110,12 +111,16 @@ Cohesion: 0.29
 Nodes (5): dynamic, metadata, Movement, StockClient(), StockRow
 
 ### Community 9 - "gold-api.ts"
-Cohesion: 0.08
-Nodes (29): AdminKontenClient(), AdminKontenPage(), dynamic, AdminPengaturanClient(), AdminPengaturanPage(), dynamic, POST(), DELETE() (+21 more)
+Cohesion: 0.09
+Nodes (23): AdminKontenClient(), AdminKontenPage(), dynamic, POST(), DELETE(), PUT(), Hero(), LivePriceBand() (+15 more)
 
 ### Community 10 - "app/layout.tsx"
 Cohesion: 0.29
 Nodes (5): geistMono, geistSans, metadata, playfair, NavigationEvents()
+
+### Community 11 - "getAllGoldTypes"
+Cohesion: 0.12
+Nodes (21): AdminHargaPage(), dynamic, dynamic, metadata, OrdersPage(), AdminDashboard(), AdminPengaturanClient(), AdminPengaturanPage() (+13 more)
 
 ### Community 12 - "tentang/page.tsx"
 Cohesion: 0.40
@@ -137,9 +142,9 @@ Nodes (4): config, CS_RESTRICTED_API, CS_RESTRICTED_PAGES, middleware()
 Cohesion: 0.33
 Nodes (4): dynamic, metadata, UserRow, UsersClient()
 
-### Community 29 - "(public)/harga/page.tsx"
-Cohesion: 0.11
-Nodes (22): dynamic, metadata, LegalNotice(), crosshairPlugin, formatCompact(), formatDateLabel(), formatRupiah(), HistoryRow (+14 more)
+### Community 29 - "PriceChart.tsx"
+Cohesion: 0.29
+Nodes (9): crosshairPlugin, formatCompact(), formatDateLabel(), formatRupiah(), HistoryRow, periods, PriceChart(), SERIES (+1 more)
 
 ## Knowledge Gaps
 - **122 isolated node(s):** `eslintConfig`, `nextConfig`, `name`, `version`, `private` (+117 more)
@@ -151,7 +156,7 @@ _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `createAdminClient()` connect `createAdminClient` to `gold-api.ts`, `(public)/page.tsx`, `OrdersClient.tsx`, `getSetting`?**
   _High betweenness centrality (0.092) - this node is a cross-community bridge._
-- **Why does `formatRupiah()` connect `OrdersClient.tsx` to `(public)/page.tsx`, `getAllGoldTypes`, `admin/page.tsx`, `gold-api.ts`, `(public)/harga/page.tsx`?**
+- **Why does `formatRupiah()` connect `OrdersClient.tsx` to `gold-api.ts`, `getAllGoldTypes`, `AdminHargaClient.tsx`, `admin/page.tsx`?**
   _High betweenness centrality (0.020) - this node is a cross-community bridge._
 - **Why does `getPublicSettings()` connect `(public)/page.tsx` to `gold-api.ts`, `getAllGoldTypes`, `OrdersClient.tsx`?**
   _High betweenness centrality (0.020) - this node is a cross-community bridge._
@@ -160,6 +165,6 @@ _Questions this graph is uniquely positioned to answer:_
 - **Should `createAdminClient` be split into smaller, more focused modules?**
   _Cohesion score 0.07510204081632653 - nodes in this community are weakly interconnected._
 - **Should `(public)/page.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.0647342995169082 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06976744186046512 - nodes in this community are weakly interconnected._
 - **Should `dependencies` be split into smaller, more focused modules?**
-  _Cohesion score 0.11764705882352941 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.07692307692307693 - nodes in this community are weakly interconnected._

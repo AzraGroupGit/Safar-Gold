@@ -133,7 +133,8 @@ export default function PelangganClient({ settings }: { settings: InvoiceSetting
                 {detail.orders.length === 0 ? (
                   <p className="py-6 text-center text-sm text-text-muted">Belum ada order.</p>
                 ) : (
-                  <table className="w-full text-sm">
+                  <div className="overflow-x-auto">
+                  <table className="w-full min-w-[520px] text-sm">
                     <thead><tr className="border-b border-border/30 text-left text-xs text-text-muted"><th className="py-2">No. Order</th><th className="py-2 text-center">Tipe</th><th className="py-2 text-right">Total</th><th className="py-2 text-center">Status</th><th className="py-2 text-center">Aksi</th></tr></thead>
                     <tbody className="divide-y divide-border/20">
                       {detail.orders.map(o => (
@@ -147,6 +148,7 @@ export default function PelangganClient({ settings }: { settings: InvoiceSetting
                       ))}
                     </tbody>
                   </table>
+                  </div>
                 )}
               </div>
             </div>
