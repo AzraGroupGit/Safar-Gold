@@ -89,26 +89,28 @@ function ModeModal({
                     <p className="truncate text-sm font-semibold text-text">{gt.name}</p>
                     {autoMode[gt.id] ? (
                       <p className="mt-0.5 text-xs text-text-muted">Harga dihitung otomatis dari acuan dashboard</p>
+                    ) : gt.category === "lm" ? (
+                      <div className="mt-2">
+                        <label className="mb-1 block text-xs text-text-muted">Harga Jual Total (per keping)</label>
+                        <input
+                          type="number"
+                          value={manualPrices[gt.id]?.buy ?? 0}
+                          onChange={(e) => setManualPrices({ ...manualPrices, [gt.id]: { ...manualPrices[gt.id], buy: parseInt(e.target.value) || 0 } })}
+                          className="w-full rounded-lg border border-border/60 bg-white px-3 py-2 text-sm text-text focus:border-gold focus:outline-none"
+                        />
+                        {gt.weight ? (
+                          <p className="mt-1 text-[11px] text-text-muted">= Rp {formatRupiahClient(Math.round((manualPrices[gt.id]?.buy ?? 0) / gt.weight))} / gram</p>
+                        ) : null}
+                      </div>
                     ) : (
-                      <div className="mt-2 grid grid-cols-2 gap-3">
-                        <div>
-                          <label className="mb-1 block text-xs text-text-muted">Harga Jual Manual</label>
-                          <input
-                            type="number"
-                            value={manualPrices[gt.id]?.buy ?? 0}
-                            onChange={(e) => setManualPrices({ ...manualPrices, [gt.id]: { ...manualPrices[gt.id], buy: parseInt(e.target.value) || 0 } })}
-                            className="w-full rounded-lg border border-border/60 bg-white px-3 py-2 text-sm text-text focus:border-gold focus:outline-none"
-                          />
-                        </div>
-                        <div>
-                          <label className="mb-1 block text-xs text-text-muted">Harga Buyback Manual</label>
-                          <input
-                            type="number"
-                            value={manualPrices[gt.id]?.sell ?? 0}
-                            onChange={(e) => setManualPrices({ ...manualPrices, [gt.id]: { ...manualPrices[gt.id], sell: parseInt(e.target.value) || 0 } })}
-                            className="w-full rounded-lg border border-border/60 bg-white px-3 py-2 text-sm text-text focus:border-gold focus:outline-none"
-                          />
-                        </div>
+                      <div className="mt-2">
+                        <label className="mb-1 block text-xs text-text-muted">Harga Buyback per Gram</label>
+                        <input
+                          type="number"
+                          value={manualPrices[gt.id]?.sell ?? 0}
+                          onChange={(e) => setManualPrices({ ...manualPrices, [gt.id]: { ...manualPrices[gt.id], sell: parseInt(e.target.value) || 0 } })}
+                          className="w-full rounded-lg border border-border/60 bg-white px-3 py-2 text-sm text-text focus:border-gold focus:outline-none"
+                        />
                       </div>
                     )}
                   </div>
@@ -152,7 +154,12 @@ export default function AdminHargaClient({ goldTypes, prices }: { goldTypes: Gol
   const [showModal, setShowModal] = useState(false);
   const [autoMode, setAutoMode] = useState<Record<string, boolean>>(Object.fromEntries(goldTypes.map((g) => [g.id, !!g.is_auto])));
   const [manualPrices, setManualPrices] = useState<Record<string, { buy: number; sell: number }>>(
-    Object.fromEntries(goldTypes.map((g) => [g.id, { buy: g.manual_buy ?? 0, sell: g.manual_sell ?? 0 }]))
+    Object.fromEntries(goldTypes.map((g) => [
+      g.id,
+      g.category === "lm"
+        ? { buy: Math.round((g.manual_buy ?? 0) * (g.weight ?? 1)), sell: 0 }
+        : { buy: 0, sell: g.manual_sell ?? 0 },
+    ]))
   );
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -190,7 +197,16 @@ export default function AdminHargaClient({ goldTypes, prices }: { goldTypes: Gol
     await fetch("/api/admin/update-gold-types", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(goldTypes.map((g) => ({ id: g.id, isAuto: autoMode[g.id], manualBuy: manualPrices[g.id].buy, manualSell: manualPrices[g.id].sell }))),
+      body: JSON.stringify(goldTypes.map((g) => {
+        const isLm = g.category === "lm";
+        const weight = g.weight ?? 1;
+        return {
+          id: g.id,
+          isAuto: autoMode[g.id],
+          manualBuy: isLm ? Math.round((manualPrices[g.id]?.buy ?? 0) / weight) : null,
+          manualSell: isLm ? null : (manualPrices[g.id]?.sell ?? 0),
+        };
+      })),
     });
     setSaving(false);
     setSaved(true);
