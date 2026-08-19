@@ -704,7 +704,7 @@ export async function getFormattedTodayPrices(): Promise<FormattedPrice[]> {
       karat: gt?.karat ?? null,
       weight: gt?.weight ?? null,
       category,
-      buyPrice: p.buy_price,
+      buyPrice: gt?.is_auto === false && category === "lm" ? (gt.manual_buy ?? p.buy_price) : p.buy_price,
       sellPrice: p.sell_price,
       basePrice: p.base_price,
       date: p.date,
