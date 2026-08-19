@@ -205,7 +205,7 @@ export default function AdminHargaClient({ goldTypes, prices }: { goldTypes: Gol
         return {
           id: g.id,
           isAuto: autoMode[g.id],
-          manualBuy: isLm ? (autoMode[g.id] ? Math.round((manualPrices[g.id]?.buy ?? 0) / weight) : manualPrices[g.id]?.buy ?? 0) : null,
+          manualBuy: isLm ? manualPrices[g.id]?.buy ?? 0 : null,
           manualSell: isLm ? null : (manualPrices[g.id]?.sell ?? 0),
         };
       })),
