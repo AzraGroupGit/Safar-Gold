@@ -98,19 +98,11 @@ function ModeModal({
                           onChange={(e) => setManualPrices({ ...manualPrices, [gt.id]: { ...manualPrices[gt.id], buy: parseInt(e.target.value) || 0 } })}
                           className="w-full rounded-lg border border-border/60 bg-white px-3 py-2 text-sm text-text focus:border-gold focus:outline-none"
                         />
-                        {gt.weight ? (() => {
-                          const total = manualPrices[gt.id]?.buy ?? 0;
-                          const w = Number(gt.weight) || 1;
-                          const perGram = Math.round(total / w);
-                          const stored = perGram * w;
-                          const mismatch = stored !== total;
-                          return (
-                            <p className={`mt-1 text-[11px] ${mismatch ? "text-amber-600" : "text-text-muted"}`}>
-                              Per-gram Rp {formatRupiahClient(perGram)} · Total tersimpan Rp {formatRupiahClient(stored)}
-                              {mismatch ? " (dibulatkan — sesuaikan agar habis dibagi berat)" : ""}
-                            </p>
-                          );
-                        })() : null}
+                        {gt.weight ? (
+                          <p className="mt-1 text-[11px] text-text-muted">
+                            Harga yang dimasukkan adalah total per keping (sudah termasuk perkalian dengan berat). Sistem menampilkannya langsung, tanpa perlu dikalikan lagi.
+                          </p>
+                        ) : null}
                       </div>
                     ) : (
                       <div className="mt-2">
@@ -167,7 +159,7 @@ export default function AdminHargaClient({ goldTypes, prices }: { goldTypes: Gol
     Object.fromEntries(goldTypes.map((g) => [
       g.id,
       g.category === "lm"
-        ? { buy: Math.round((g.manual_buy ?? 0) * (g.weight ?? 1)), sell: 0 }
+        ? { buy: g.manual_buy ?? 0, sell: 0 }
         : { buy: 0, sell: g.manual_sell ?? 0 },
     ]))
   );
@@ -213,7 +205,7 @@ export default function AdminHargaClient({ goldTypes, prices }: { goldTypes: Gol
         return {
           id: g.id,
           isAuto: autoMode[g.id],
-          manualBuy: isLm ? Math.round((manualPrices[g.id]?.buy ?? 0) / weight) : null,
+          manualBuy: isLm ? (autoMode[g.id] ? Math.round((manualPrices[g.id]?.buy ?? 0) / weight) : manualPrices[g.id]?.buy ?? 0) : null,
           manualSell: isLm ? null : (manualPrices[g.id]?.sell ?? 0),
         };
       })),
