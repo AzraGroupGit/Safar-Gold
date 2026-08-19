@@ -13,35 +13,19 @@ export default async function Hero() {
       label: "Update Terakhir",
       value: lastUpdate,
       hint: "06:00 WIB",
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
-          <rect x="3" y="5" width="18" height="16" rx="2" />
-          <path d="M8 3v4M16 3v4M3 10h18" />
-        </svg>
-      ),
+      live: true,
     },
     {
       label: "Buyback Diterima",
       value: "6K – 24K",
       hint: "Semua kadar perhiasan",
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
-          <path d="M20 12a8 8 0 0 1-8 8 8 8 0 0 1-6.9-4" />
-          <path d="M4 12a8 8 0 0 1 8-8 8 8 0 0 1 6.9 4" />
-          <path d="M18.9 4.5V8h-3.5M5.1 19.5V16h3.5" />
-        </svg>
-      ),
+      live: false,
     },
     {
       label: "Emas Ready",
       value: "0.5 – 100 gr",
       hint: "Antam & Logam Mulia",
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
-          <path d="M6.5 10h11l2.5 8H4z" />
-          <path d="M9 6h6l1.5 4h-9z" />
-        </svg>
-      ),
+      live: false,
     },
   ];
 
@@ -87,26 +71,28 @@ export default async function Hero() {
           </Link>
         </div>
 
-        <div className="mt-12 grid gap-3 sm:grid-cols-3 sm:gap-4 md:mt-14">
-          {stats.map((s) => (
-            <div
-              key={s.label}
-              className="group flex items-center justify-between gap-4 rounded-2xl border border-gold/25 bg-white/[0.06] px-4 py-3.5 backdrop-blur-md transition-all hover:-translate-y-0.5 hover:border-gold/50 hover:bg-white/[0.1] sm:block sm:px-5 sm:py-4 sm:text-left"
-            >
-              <div className="flex items-center gap-2 text-gold/70 transition-colors group-hover:text-gold">
-                <span className="[&>svg]:h-4 [&>svg]:w-4">{s.icon}</span>
-                <p className="text-[10px] font-semibold uppercase tracking-wider md:text-xs">
+        <div className="mx-auto mt-12 max-w-2xl border-t border-gold/50 bg-black/20 backdrop-blur-sm md:mt-14">
+          <div className="grid grid-cols-1 divide-y divide-white/10 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+            {stats.map((s) => (
+              <div
+                key={s.label}
+                className="group flex items-center justify-between gap-3 px-5 py-3.5 text-left sm:block sm:px-6 sm:py-5 sm:text-center"
+              >
+                <p className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-gold/75">
+                  {s.live && (
+                    <span className="h-1.5 w-1.5 rounded-full bg-gold shadow-[0_0_8px_1px_rgba(200,145,22,0.7)]" />
+                  )}
                   {s.label}
                 </p>
+                <div className="text-right sm:mt-3 sm:text-center">
+                  <p className="font-serif text-lg font-semibold leading-none text-white transition-colors group-hover:text-gold-light sm:text-2xl md:text-3xl">
+                    {s.value}
+                  </p>
+                  <p className="mt-1 text-[11px] text-white/50">{s.hint}</p>
+                </div>
               </div>
-              <div className="text-right sm:mt-2.5 sm:text-left">
-                <p className="gold-gradient-text font-serif text-xl font-bold leading-none md:text-2xl">
-                  {s.value}
-                </p>
-                <p className="mt-1 text-[11px] text-white/45">{s.hint}</p>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

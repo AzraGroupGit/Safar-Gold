@@ -98,9 +98,19 @@ function ModeModal({
                           onChange={(e) => setManualPrices({ ...manualPrices, [gt.id]: { ...manualPrices[gt.id], buy: parseInt(e.target.value) || 0 } })}
                           className="w-full rounded-lg border border-border/60 bg-white px-3 py-2 text-sm text-text focus:border-gold focus:outline-none"
                         />
-                        {gt.weight ? (
-                          <p className="mt-1 text-[11px] text-text-muted">= Rp {formatRupiahClient(Math.round((manualPrices[gt.id]?.buy ?? 0) / gt.weight))} / gram</p>
-                        ) : null}
+                        {gt.weight ? (() => {
+                          const total = manualPrices[gt.id]?.buy ?? 0;
+                          const w = Number(gt.weight) || 1;
+                          const perGram = Math.round(total / w);
+                          const stored = perGram * w;
+                          const mismatch = stored !== total;
+                          return (
+                            <p className={`mt-1 text-[11px] ${mismatch ? "text-amber-600" : "text-text-muted"}`}>
+                              Per-gram Rp {formatRupiahClient(perGram)} · Total tersimpan Rp {formatRupiahClient(stored)}
+                              {mismatch ? " (dibulatkan — sesuaikan agar habis dibagi berat)" : ""}
+                            </p>
+                          );
+                        })() : null}
                       </div>
                     ) : (
                       <div className="mt-2">

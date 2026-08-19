@@ -1,16 +1,15 @@
 {
   "0": "createAdminClient",
-  "1": "gold-api.ts",
+  "1": "getSetting",
   "2": "(public)/page.tsx",
   "3": "dependencies",
-  "4": "AdminHargaClient.tsx",
+  "4": "getAllGoldTypes",
   "5": "devDependencies",
   "6": "OrdersClient.tsx",
-  "7": "JenisEmasClient.tsx",
+  "7": "admin/page.tsx",
   "8": "stock/page.tsx",
-  "9": "admin/page.tsx",
+  "9": "gold-api.ts",
   "10": "app/layout.tsx",
-  "11": "formatRupiah",
   "12": "tentang/page.tsx",
   "13": "migration.sql",
   "14": "graphify.js",
@@ -28,8 +27,6 @@
   "26": "Safar Gold Store Interior Hero",
   "27": "window.svg",
   "28": "users/page.tsx",
-  "29": "PriceChart.tsx",
-  "30": "LaporanClient.tsx",
-  "31": "regions/route.ts",
-  "32": "konten/page.tsx"
+  "29": "(public)/harga/page.tsx",
+  "31": "regions/route.ts"
 }
