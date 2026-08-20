@@ -41,6 +41,16 @@ function ModeModal({
 }) {
   const [tab, setTab] = useState("lm");
 
+  function cleanNumber(n: string) {
+    return n.replace(/\D/g, "");
+  }
+
+  function addDots(n: string) {
+    const clean = n.replace(/\D/g, "");
+    if (!clean) return "";
+    return parseInt(clean, 10).toLocaleString("id-ID");
+  }
+
   if (!open) return null;
 
   const filtered = sortGoldTypes(goldTypes).filter((g) => g.category === tab);
@@ -93,9 +103,11 @@ function ModeModal({
                       <div className="mt-2">
                         <label className="mb-1 block text-xs text-text-muted">Harga Jual Total (per keping)</label>
                         <input
-                          type="number"
-                          value={manualPrices[gt.id]?.buy ?? 0}
-                          onChange={(e) => setManualPrices({ ...manualPrices, [gt.id]: { ...manualPrices[gt.id], buy: parseInt(e.target.value) || 0 } })}
+                          type="text"
+                          inputMode="numeric"
+                          value={manualPrices[gt.id]?.buy ? addDots(String(manualPrices[gt.id]?.buy)) : ""}
+                          onChange={(e) => setManualPrices({ ...manualPrices, [gt.id]: { ...manualPrices[gt.id], buy: parseInt(cleanNumber(e.target.value)) || 0 } })}
+                          placeholder="0"
                           className="w-full rounded-lg border border-border/60 bg-white px-3 py-2 text-sm text-text focus:border-gold focus:outline-none"
                         />
                         {gt.weight ? (
@@ -108,9 +120,11 @@ function ModeModal({
                       <div className="mt-2">
                         <label className="mb-1 block text-xs text-text-muted">Harga Buyback per Gram</label>
                         <input
-                          type="number"
-                          value={manualPrices[gt.id]?.sell ?? 0}
-                          onChange={(e) => setManualPrices({ ...manualPrices, [gt.id]: { ...manualPrices[gt.id], sell: parseInt(e.target.value) || 0 } })}
+                          type="text"
+                          inputMode="numeric"
+                          value={manualPrices[gt.id]?.sell ? addDots(String(manualPrices[gt.id]?.sell)) : ""}
+                          onChange={(e) => setManualPrices({ ...manualPrices, [gt.id]: { ...manualPrices[gt.id], sell: parseInt(cleanNumber(e.target.value)) || 0 } })}
+                          placeholder="0"
                           className="w-full rounded-lg border border-border/60 bg-white px-3 py-2 text-sm text-text focus:border-gold focus:outline-none"
                         />
                       </div>

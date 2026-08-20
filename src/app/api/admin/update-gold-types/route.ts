@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { syncTodayPrices } from "@/lib/gold-api";
 
 export async function POST(request: NextRequest) {
   try {
@@ -16,6 +17,8 @@ export async function POST(request: NextRequest) {
         manual_sell: item.manualSell ?? null,
       }).eq("id", item.id);
     }
+
+    await syncTodayPrices();
 
     return NextResponse.json({ success: true });
   } catch (err) {

@@ -120,7 +120,7 @@ export default function AdminSidebar({
       )}
 
       <aside
-        className={`fixed left-0 top-0 z-50 flex h-screen w-64 flex-col border-r border-gold/10 bg-white shadow-md shadow-black/[0.02] transition-transform duration-300 lg:translate-x-0 ${
+        className={`fixed left-0 top-0 z-50 flex h-screen w-64 flex-col border-r border-border bg-surface-alt shadow-sm shadow-black/[0.03] transition-transform duration-300 lg:translate-x-0 ${
           open ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -146,10 +146,10 @@ export default function AdminSidebar({
                 key={link.href}
                 href={link.href}
                 onClick={onClose}
-                className={`flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm font-medium transition-all duration-200 ${
+                className={`flex items-center gap-3 rounded-lg px-4 py-2.5 text-sm font-medium transition-colors duration-150 ${
                   isActive
-                    ? "bg-gold/5 text-gold-dark shadow-sm"
-                    : "text-text-muted hover:bg-surface hover:text-text"
+                    ? "bg-gold/10 font-semibold text-gold-dark"
+                    : "text-text-muted hover:bg-white/70 hover:text-text"
                 }`}
               >
                 <svg className="h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
