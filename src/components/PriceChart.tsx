@@ -20,12 +20,11 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Filler, 
 
 type HistoryRow = { date: string; gold_type_id: string; buy_price: number; sell_price: number };
 
-type TodayValues = { lm: number; buyback: number; perhiasan: number };
+type TodayValues = { lm: number; buyback: number };
 
 const SERIES = [
   { key: "lm", id: "antam-1", field: "buy_price", label: "Logam Mulia", color: "#c89116" },
-  { key: "buyback", id: "bb-certi-1-2", field: "sell_price", label: "Buyback LM", color: "#9b7110" },
-  { key: "perhiasan", id: "ph-k24", field: "sell_price", label: "Perhiasan", color: "#c7a56a" },
+  { key: "buyback", id: "ph-k24s", field: "sell_price", label: "Buyback 24K*", color: "#9b7110" },
 ] as const;
 
 type SeriesKey = (typeof SERIES)[number]["key"];
@@ -73,7 +72,7 @@ const crosshairPlugin = {
 
 export default function PriceChart({ history, todayValues }: { history: HistoryRow[]; todayValues?: TodayValues }) {
   const [period, setPeriod] = useState(30);
-  const [visible, setVisible] = useState<Record<SeriesKey, boolean>>({ lm: true, buyback: false, perhiasan: false });
+  const [visible, setVisible] = useState<Record<SeriesKey, boolean>>({ lm: true, buyback: false });
 
   function toggle(key: SeriesKey) {
     setVisible((v) => ({ ...v, [key]: !v[key] }));
@@ -95,7 +94,6 @@ export default function PriceChart({ history, todayValues }: { history: HistoryR
       const entry = map.get(today) ?? {};
       if (todayValues.lm > 0) entry.lm = todayValues.lm;
       if (todayValues.buyback > 0) entry.buyback = todayValues.buyback;
-      if (todayValues.perhiasan > 0) entry.perhiasan = todayValues.perhiasan;
       map.set(today, entry);
     }
 
@@ -103,7 +101,6 @@ export default function PriceChart({ history, todayValues }: { history: HistoryR
     const data: Record<SeriesKey, (number | null)[]> = {
       lm: dates.map((d) => map.get(d)?.lm ?? null),
       buyback: dates.map((d) => map.get(d)?.buyback ?? null),
-      perhiasan: dates.map((d) => map.get(d)?.perhiasan ?? null),
     };
 
     const lmVals = data.lm.filter((v): v is number => v != null);
@@ -159,7 +156,7 @@ export default function PriceChart({ history, todayValues }: { history: HistoryR
       pointHoverBorderColor: "#fff",
       pointHoverBorderWidth: 2,
       borderWidth: isPrimary ? 3 : 2,
-      borderDash: s.key === "buyback" ? [6, 4] : s.key === "perhiasan" ? [2, 3] : undefined,
+      borderDash: s.key === "buyback" ? [6, 4] : undefined,
       spanGaps: true,
     };
   });
