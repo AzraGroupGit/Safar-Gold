@@ -186,7 +186,15 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
   function addSellItem() {
     const p = priceMap.get(sellProduct); if (!p || p.buyPrice <= 0) return;
     const gt = goldTypes.find(g => g.id === sellProduct);
-    setItems([...items, { goldTypeId: sellProduct, itemName: gt?.name ?? sellProduct, weight: sellQty * (gt?.weight ?? 1), karat: 24, qty: sellQty, pricePerGram: p.buyPrice, priceTotal: p.buyPrice * sellQty }]);
+    const weightPerPiece = gt?.weight ?? 1;
+    const qty = sellQty;
+    const pricePerGram = p.isTotalPrice
+      ? Math.round(p.buyPrice / weightPerPiece)
+      : p.buyPrice;
+    const priceTotal = p.isTotalPrice
+      ? p.buyPrice * qty
+      : Math.round(p.buyPrice * weightPerPiece * qty);
+    setItems([...items, { goldTypeId: sellProduct, itemName: gt?.name ?? sellProduct, weight: qty * weightPerPiece, karat: 24, qty, pricePerGram, priceTotal }]);
   }
 
   function addBuybackItem() {
@@ -393,7 +401,7 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
               <div className="rounded-xl border border-border/40 bg-surface p-4">
                 <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-text-muted">Tambah Item</p>
                 {type==="sell"?(
-                  <div className="flex flex-wrap gap-3 items-end"><div className="flex-1 min-w-[180px]"><label className="mb-1 block text-xs text-text-muted">Produk</label><select value={sellProduct} onChange={e=>setSellProduct(e.target.value)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm">{LM_PRODUCTS.map(id=>{const gt=goldTypes.find(g=>g.id===id);const p=priceMap.get(id);return <option key={id} value={id}>{gt?.name??id} — {p?formatRupiah(p.buyPrice):"-"}/g</option>;})}</select></div><div className="w-24"><label className="mb-1 block text-xs text-text-muted">Qty</label><input type="number" min={1} value={sellQty} onChange={e=>setSellQty(parseInt(e.target.value)||1)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm" /></div><button onClick={addSellItem} className="rounded-lg border border-gold/40 px-4 py-2.5 text-sm font-semibold text-gold-dark hover:bg-gold/5">+ Tambah</button></div>
+                  <div className="flex flex-wrap gap-3 items-end"><div className="flex-1 min-w-[180px]"><label className="mb-1 block text-xs text-text-muted">Produk</label><select value={sellProduct} onChange={e=>setSellProduct(e.target.value)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm">{LM_PRODUCTS.map(id=>{const gt=goldTypes.find(g=>g.id===id);const p=priceMap.get(id);const ppg = p?.isTotalPrice && gt?.weight ? Math.round(p.buyPrice / gt.weight) : p?.buyPrice;return <option key={id} value={id}>{gt?.name??id} — {ppg?formatRupiah(ppg):"-"}/g</option>;})}</select></div><div className="w-24"><label className="mb-1 block text-xs text-text-muted">Qty</label><input type="number" min={1} value={sellQty} onChange={e=>setSellQty(parseInt(e.target.value)||1)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm" /></div><button onClick={addSellItem} className="rounded-lg border border-gold/40 px-4 py-2.5 text-sm font-semibold text-gold-dark hover:bg-gold/5">+ Tambah</button></div>
                 ):(
                   <div className="space-y-3">
                     <div className="flex flex-wrap gap-3"><div className="w-40"><label className="mb-1 block text-xs text-text-muted">Kategori</label><select value={bbCategory} onChange={e=>{setBbCategory(e.target.value);const f=goldTypes.filter(g=>g.category===e.target.value)[0];if(f)setBbGoldType(f.id);}} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm"><option value="bb-lm">LM (Antam)</option><option value="bb-perhiasan">Perhiasan</option><option value="bb-logam">Logam Lain</option></select></div><div className="flex-1 min-w-[180px]"><label className="mb-1 block text-xs text-text-muted">Jenis</label><select value={bbGoldType} onChange={e=>setBbGoldType(e.target.value)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm">{bbGoldTypes.map(g=>{const p=priceMap.get(g.id);return <option key={g.id} value={g.id}>{g.name} {p?`— ${formatRupiah(p.sellPrice)}/g`:""}</option>;})}</select></div></div>

@@ -84,6 +84,15 @@ export default function AdminDashboard() {
   const hargaDasarJual = parseFloat(s.harga_dasar_jual || "0") || Math.round(baseGoldIdr * 1.03);
   const acuanBuybackLM = parseFloat(s.acuan_buyback_lm || "0") || Math.round(baseGoldIdr * 0.97);
 
+  const antam100 = prices.find((p) => p.goldTypeId === "antam-100");
+  const antam100PerGram = antam100
+    ? Math.round(
+        antam100.isTotalPrice && antam100.weight
+          ? antam100.buyPrice / antam100.weight
+          : antam100.buyPrice,
+      )
+    : 0;
+
   return (
     <div>
       <div className="mb-8">
@@ -106,7 +115,7 @@ export default function AdminDashboard() {
         />
         <StatCard
           label="Antam 100gr"
-          value={hasData ? formatRupiah(prices.find((p: any) => p.goldTypeId === "antam-100")?.buyPrice ?? 0) : "-"}
+          value={hasData ? formatRupiah(antam100PerGram) : "-"}
           sub="harga jual / gram"
           icon="M12 1.5a.75.75 0 01.75.75V4.5a.75.75 0 01-1.5 0V2.25A.75.75 0 0112 1.5z"
         />
