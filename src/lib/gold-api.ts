@@ -646,6 +646,7 @@ export type FormattedPrice = {
   spread: number;
   spreadPercent: string;
   lastUpdated: string;
+  isTotalPrice: boolean;
 };
 
 export async function getFormattedTodayPrices(): Promise<FormattedPrice[]> {
@@ -669,6 +670,7 @@ export async function getFormattedTodayPrices(): Promise<FormattedPrice[]> {
       spread: 0,
       spreadPercent: "0.0",
       lastUpdated: "",
+      isTotalPrice: false,
     }));
   }
 
@@ -685,14 +687,28 @@ export async function getFormattedTodayPrices(): Promise<FormattedPrice[]> {
     return null;
   }
 
+  const refGtMap = new Map(goldTypes.map((g) => [g.id, g]));
+
+  function lmPerGram(ph: PriceHistoryRow, g: GoldTypeRow | undefined): number {
+    if (g && g.category === "lm" && !g.is_auto && g.manual_buy) {
+      return g.manual_buy / (g.weight ?? 1);
+    }
+    return ph.buy_price;
+  }
+
   return todayPrices.map((p) => {
     const gt = goldTypes.find((g) => g.id === p.gold_type_id);
     const category = gt?.category ?? "";
     const ref = getRef(category);
 
+    const isManualTotal = category === "lm" && !gt?.is_auto && !!gt?.manual_buy;
+
     let spread = 0;
+    let refPerGram = 0;
     if (ref && category === "lm") {
-      spread = p.buy_price - ref.buy_price;
+      const refGt = refGtMap.get(ref.gold_type_id);
+      refPerGram = lmPerGram(ref, refGt);
+      spread = Math.round(lmPerGram(p, gt) - refPerGram);
     } else if (ref && p.gold_type_id !== ref.gold_type_id) {
       spread = ref.sell_price - p.sell_price;
     }
@@ -704,15 +720,16 @@ export async function getFormattedTodayPrices(): Promise<FormattedPrice[]> {
       karat: gt?.karat ?? null,
       weight: gt?.weight ?? null,
       category,
-      buyPrice: category === "lm" && gt?.manual_buy ? gt.manual_buy : p.buy_price,
+      buyPrice: isManualTotal && gt?.manual_buy ? gt.manual_buy : p.buy_price,
       sellPrice: p.sell_price,
       basePrice: p.base_price,
       date: p.date,
       spread,
-      spreadPercent: ref && category === "lm" && ref.buy_price > 0
-        ? ((spread / ref.buy_price) * 100).toFixed(1)
+      spreadPercent: ref && category === "lm" && refPerGram > 0
+        ? ((spread / refPerGram) * 100).toFixed(1)
         : "0.0",
       lastUpdated: p.created_at,
+      isTotalPrice: isManualTotal,
     };
   });
 }

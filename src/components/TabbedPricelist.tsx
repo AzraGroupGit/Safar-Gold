@@ -110,14 +110,22 @@ export default function TabbedPricelist({
                       </span>
                     ) : (
                       <span className="text-sm font-bold text-gold-dark">
-                        {formatRupiah(price.buyPrice)}
+                        {formatRupiah(
+                          price.isTotalPrice && price.weight
+                            ? Math.round(price.buyPrice / price.weight)
+                            : price.buyPrice,
+                        )}
                       </span>
                     )}
                   </td>
                   {isLM && price.weight && (
                     <td className="px-5 py-4 md:px-8">
                       <span className="text-sm font-bold text-gold-dark">
-                        {formatRupiah(price.buyPrice * price.weight)}
+                        {formatRupiah(
+                          price.isTotalPrice
+                            ? price.buyPrice
+                            : price.buyPrice * price.weight,
+                        )}
                       </span>
                     </td>
                   )}

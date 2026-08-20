@@ -49,6 +49,8 @@ export async function POST(request: Request) {
       price: c.gold_type.category === "lm" ? c.buy_price : c.sell_price,
       weight: c.gold_type.weight,
       karat: c.gold_type.karat,
+      isTotalPrice:
+        c.gold_type.category === "lm" && !c.gold_type.is_auto && c.buy_price > 0,
     }));
 
     return NextResponse.json({ success: true, items });

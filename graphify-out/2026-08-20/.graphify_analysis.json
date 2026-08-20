@@ -1,0 +1,488 @@
+{
+  "communities": {
+    "0": [
+      "src_app_admin_admin_harga_adminhargaclient",
+      "src_app_admin_admin_harga_adminhargaclient_adminhargaclient",
+      "src_app_admin_admin_harga_adminhargaclient_formatrupiahclient",
+      "src_app_admin_admin_harga_adminhargaclient_mode_tabs",
+      "src_app_admin_admin_harga_adminhargaclient_modemodal",
+      "src_app_admin_admin_harga_page",
+      "src_app_admin_admin_harga_page_adminhargapage",
+      "src_app_admin_admin_harga_page_dynamic",
+      "src_app_admin_admin_page_admindashboard",
+      "src_app_public_harga_page",
+      "src_app_public_harga_page_dynamic",
+      "src_app_public_harga_page_hargapage",
+      "src_app_public_harga_page_metadata",
+      "src_app_public_kalkulator_page",
+      "src_app_public_kalkulator_page_dynamic",
+      "src_app_public_kalkulator_page_kalkulatorpage",
+      "src_app_public_kalkulator_page_metadata",
+      "src_components_calculator",
+      "src_components_calculator_calculator",
+      "src_components_calculator_formatrupiahclient",
+      "src_components_calculator_quickweights",
+      "src_components_legalnotice",
+      "src_components_legalnotice_legalnotice",
+      "src_components_tabbedpricelist",
+      "src_components_tabbedpricelist_categories",
+      "src_components_tabbedpricelist_tabbedpricelist",
+      "src_lib_gold_api_formatrupiah",
+      "src_lib_gold_api_formattedprice",
+      "src_lib_gold_api_getallgoldtypes",
+      "src_lib_gold_api_getformattedtodayprices",
+      "src_lib_gold_api_getmarketinfo"
+    ],
+    "1": [
+      "src_app_admin_admin_pengaturan_adminpengaturanclient",
+      "src_app_admin_admin_pengaturan_adminpengaturanclient_adminpengaturanclient",
+      "src_app_admin_admin_pengaturan_page",
+      "src_app_admin_admin_pengaturan_page_adminpengaturanpage",
+      "src_app_admin_admin_pengaturan_page_dynamic",
+      "src_app_api_admin_publish_prices_route",
+      "src_app_api_admin_publish_prices_route_dynamic",
+      "src_app_api_admin_publish_prices_route_post",
+      "src_app_api_admin_trigger_update_route",
+      "src_app_api_admin_trigger_update_route_dynamic",
+      "src_app_api_admin_trigger_update_route_post",
+      "src_app_api_cron_update_prices_route",
+      "src_app_api_cron_update_prices_route_dynamic",
+      "src_app_api_cron_update_prices_route_get",
+      "src_lib_gold_api",
+      "src_lib_gold_api_appsettingrow",
+      "src_lib_gold_api_calculateprices",
+      "src_lib_gold_api_converttoidrpergram",
+      "src_lib_gold_api_fetchallfallbackprices",
+      "src_lib_gold_api_fetchinternationalgoldprice",
+      "src_lib_gold_api_formatdate",
+      "src_lib_gold_api_getmedianfactors",
+      "src_lib_gold_api_getsetting",
+      "src_lib_gold_api_gettodayprices",
+      "src_lib_gold_api_insertpricehistory",
+      "src_lib_gold_api_median",
+      "src_lib_gold_api_pricehistoryrow",
+      "src_lib_gold_api_publicsettings",
+      "src_lib_gold_api_setsetting",
+      "src_lib_supabase_anon",
+      "src_lib_supabase_anon_createanonclient"
+    ],
+    "2": [
+      "src_app_public_layout",
+      "src_app_public_layout_publiclayout",
+      "src_app_public_page",
+      "src_app_public_page_dynamic",
+      "src_app_public_page_homepage",
+      "src_app_public_page_metadata",
+      "src_components_backtotop",
+      "src_components_backtotop_backtotop",
+      "src_components_caratransaksi",
+      "src_components_caratransaksi_caratransaksi",
+      "src_components_faq",
+      "src_components_faq_faq",
+      "src_components_faq_faqs",
+      "src_components_footer",
+      "src_components_footer_footer",
+      "src_components_golddivider",
+      "src_components_golddivider_golddivider",
+      "src_components_keunggulan",
+      "src_components_keunggulan_keunggulan",
+      "src_components_kunjungikami",
+      "src_components_kunjungikami_kunjungikami",
+      "src_components_legalitassection",
+      "src_components_legalitassection_legalitassection",
+      "src_components_navbar",
+      "src_components_navbar_navbar",
+      "src_components_testimoni",
+      "src_components_testimoni_testimoni",
+      "src_components_whatsappbutton",
+      "src_components_whatsappbutton_whatsappbutton",
+      "src_lib_gold_api_getpublicsettings"
+    ],
+    "3": [
+      "chart_js",
+      "next",
+      "package",
+      "package_dependencies",
+      "package_dependencies_chart_js",
+      "package_dependencies_next",
+      "package_dependencies_react",
+      "package_dependencies_react_chartjs_2",
+      "package_dependencies_react_dom",
+      "package_dependencies_supabase_ssr",
+      "package_dependencies_supabase_supabase_js",
+      "package_name",
+      "package_private",
+      "package_scripts",
+      "package_scripts_build",
+      "package_scripts_dev",
+      "package_scripts_lint",
+      "package_scripts_start",
+      "package_version",
+      "react",
+      "react_chartjs_2",
+      "react_dom",
+      "supabase_ssr",
+      "supabase_supabase_js"
+    ],
+    "4": [
+      "src_app_admin_admin_loading",
+      "src_app_admin_admin_loading_adminloading",
+      "src_app_admin_admin_page",
+      "src_app_admin_admin_page_dynamic",
+      "src_app_admin_admin_page_statcard",
+      "src_app_admin_admin_priceapprovalpanel",
+      "src_app_admin_admin_priceapprovalpanel_formatrupiah",
+      "src_app_admin_admin_priceapprovalpanel_priceapprovalpanel",
+      "src_app_admin_admin_priceapprovalpanel_props",
+      "src_components_admin_adminskeleton",
+      "src_components_admin_adminskeleton_adminskeleton",
+      "src_components_pricepreviewmodal",
+      "src_components_pricepreviewmodal_category_labels",
+      "src_components_pricepreviewmodal_formatrupiah",
+      "src_components_pricepreviewmodal_previewitem",
+      "src_components_pricepreviewmodal_pricepreviewmodal",
+      "src_components_pricepreviewmodal_pricepreviewmodalprops",
+      "src_components_pricepreviewmodal_roundtonearest",
+      "src_lib_gold_api_goldtyperow"
+    ],
+    "5": [
+      "eslint",
+      "eslint_config_next",
+      "package_devdependencies",
+      "package_devdependencies_eslint",
+      "package_devdependencies_eslint_config_next",
+      "package_devdependencies_tailwindcss",
+      "package_devdependencies_tailwindcss_postcss",
+      "package_devdependencies_types_node",
+      "package_devdependencies_types_react",
+      "package_devdependencies_types_react_dom",
+      "package_devdependencies_typescript",
+      "tailwindcss",
+      "tailwindcss_postcss",
+      "types_node",
+      "types_react",
+      "types_react_dom",
+      "typescript"
+    ],
+    "6": [
+      "src_app_api_admin_create_gold_type_route",
+      "src_app_api_admin_create_gold_type_route_post",
+      "src_app_api_admin_delete_gold_type_route",
+      "src_app_api_admin_delete_gold_type_route_delete",
+      "src_app_api_admin_update_gold_type_route",
+      "src_app_api_admin_update_gold_type_route_put",
+      "src_app_api_admin_update_gold_types_route",
+      "src_app_api_admin_update_gold_types_route_post",
+      "src_app_api_admin_update_konten_route",
+      "src_app_api_admin_update_konten_route_post",
+      "src_app_api_admin_update_settings_route",
+      "src_app_api_admin_update_settings_route_post",
+      "src_lib_gold_api_creategoldtype",
+      "src_lib_gold_api_deletegoldtype",
+      "src_lib_gold_api_updategoldtype",
+      "src_lib_supabase_admin",
+      "src_lib_supabase_admin_createadminclient"
+    ],
+    "7": [
+      "src_app_admin_admin_login_page",
+      "src_app_admin_admin_login_page_adminloginpage",
+      "src_app_admin_layout",
+      "src_app_admin_layout_adminlayout",
+      "src_components_admin_adminsidebar",
+      "src_components_admin_adminsidebar_adminsidebar",
+      "src_components_admin_adminsidebar_fillicons",
+      "src_components_admin_adminsidebar_links",
+      "src_components_confirmmodal",
+      "src_components_confirmmodal_confirmmodal",
+      "src_components_confirmmodal_props",
+      "src_lib_supabase_client",
+      "src_lib_supabase_client_createclient"
+    ],
+    "8": [
+      "src_app_admin_admin_jenis_emas_jenisemasclient",
+      "src_app_admin_admin_jenis_emas_jenisemasclient_categories",
+      "src_app_admin_admin_jenis_emas_jenisemasclient_emptyform",
+      "src_app_admin_admin_jenis_emas_jenisemasclient_formdata",
+      "src_app_admin_admin_jenis_emas_jenisemasclient_formmodal",
+      "src_app_admin_admin_jenis_emas_jenisemasclient_getcategorylabel",
+      "src_app_admin_admin_jenis_emas_jenisemasclient_jenisemasclient",
+      "src_app_admin_admin_jenis_emas_jenisemasclient_nametoslug",
+      "src_app_admin_admin_jenis_emas_page",
+      "src_app_admin_admin_jenis_emas_page_dynamic",
+      "src_app_admin_admin_jenis_emas_page_jenisemaspage"
+    ],
+    "9": [
+      "src_app_admin_admin_konten_adminkontenclient",
+      "src_app_admin_admin_konten_adminkontenclient_adminkontenclient",
+      "src_app_admin_admin_konten_page",
+      "src_app_admin_admin_konten_page_adminkontenpage",
+      "src_app_admin_admin_konten_page_dynamic",
+      "src_components_hero",
+      "src_components_hero_hero",
+      "src_lib_gold_api_getherocontent",
+      "src_lib_gold_api_herocontent"
+    ],
+    "10": [
+      "src_app_layout",
+      "src_app_layout_geistmono",
+      "src_app_layout_geistsans",
+      "src_app_layout_metadata",
+      "src_app_layout_playfair",
+      "src_app_layout_rootlayout",
+      "src_components_navigationevents",
+      "src_components_navigationevents_navigationevents"
+    ],
+    "11": [
+      "src_components_pricechart",
+      "src_components_pricechart_chartdata",
+      "src_components_pricechart_generatemockdata",
+      "src_components_pricechart_options",
+      "src_components_pricechart_periods",
+      "src_components_pricechart_pricechart"
+    ],
+    "12": [
+      "src_app_public_tentang_page",
+      "src_app_public_tentang_page_metadata",
+      "src_app_public_tentang_page_tentangpage",
+      "src_app_public_tentang_page_timeline",
+      "src_app_public_tentang_page_values"
+    ],
+    "13": [
+      "supabase_migration",
+      "supabase_migration_public_app_settings",
+      "supabase_migration_public_gold_types",
+      "supabase_migration_public_price_history"
+    ],
+    "14": [
+      "opencode_plugins_graphify",
+      "opencode_plugins_graphify_graphifyplugin",
+      "opencode_plugins_graphify_rationale_4"
+    ],
+    "15": [
+      "public_favicon_png",
+      "public_logo_1_webp",
+      "src_app_icon_png"
+    ],
+    "16": [
+      "public_next_svg",
+      "public_vercel_svg",
+      "readme"
+    ],
+    "17": [
+      "src_middleware",
+      "src_middleware_config",
+      "src_middleware_middleware"
+    ],
+    "18": [
+      "eslint_config",
+      "eslint_config_eslintconfig"
+    ],
+    "19": [
+      "next_config",
+      "next_config_nextconfig"
+    ],
+    "20": [
+      "postcss_config",
+      "postcss_config_config"
+    ],
+    "21": [
+      "scripts_import_historis",
+      "scripts_import_historis_supabase_post"
+    ],
+    "22": [
+      "src_lib_supabase_server",
+      "src_lib_supabase_server_createclient"
+    ],
+    "23": [
+      "public_file_svg"
+    ],
+    "24": [
+      "public_globe_svg"
+    ],
+    "25": [
+      "public_hero_tentangkami_webp"
+    ],
+    "26": [
+      "public_safar_hero_webp"
+    ],
+    "27": [
+      "public_window_svg"
+    ]
+  },
+  "cohesion": {
+    "0": 0.11612903225806452,
+    "1": 0.15053763440860216,
+    "2": 0.10574712643678161,
+    "3": 0.08333333333333333,
+    "4": 0.14619883040935672,
+    "5": 0.11764705882352941,
+    "6": 0.18382352941176472,
+    "7": 0.19230769230769232,
+    "8": 0.23636363636363636,
+    "9": 0.3055555555555556,
+    "10": 0.2857142857142857,
+    "11": 0.4,
+    "12": 0.4,
+    "13": 0.6666666666666666,
+    "14": 0.6666666666666666,
+    "15": 0.6666666666666666,
+    "16": 0.6666666666666666,
+    "17": 0.6666666666666666,
+    "18": 1.0,
+    "19": 1.0,
+    "20": 1.0,
+    "21": 1.0,
+    "22": 1.0,
+    "23": 1.0,
+    "24": 1.0,
+    "25": 1.0,
+    "26": 1.0,
+    "27": 1.0
+  },
+  "gods": [
+    {
+      "id": "src_lib_supabase_anon_createanonclient",
+      "label": "createAnonClient()",
+      "degree": 14
+    },
+    {
+      "id": "src_lib_supabase_admin_createadminclient",
+      "label": "createAdminClient()",
+      "degree": 13
+    },
+    {
+      "id": "src_lib_gold_api_getallgoldtypes",
+      "label": "getAllGoldTypes()",
+      "degree": 12
+    },
+    {
+      "id": "src_lib_gold_api_getpublicsettings",
+      "label": "getPublicSettings()",
+      "degree": 12
+    },
+    {
+      "id": "src_lib_gold_api_getformattedtodayprices",
+      "label": "getFormattedTodayPrices()",
+      "degree": 11
+    },
+    {
+      "id": "src_lib_gold_api_fetchinternationalgoldprice",
+      "label": "fetchInternationalGoldPrice()",
+      "degree": 10
+    },
+    {
+      "id": "src_lib_gold_api_setsetting",
+      "label": "setSetting()",
+      "degree": 9
+    },
+    {
+      "id": "src_lib_gold_api_formatrupiah",
+      "label": "formatRupiah()",
+      "degree": 9
+    },
+    {
+      "id": "src_lib_gold_api_calculateprices",
+      "label": "calculatePrices()",
+      "degree": 7
+    },
+    {
+      "id": "src_app_api_admin_trigger_update_route_post",
+      "label": "POST()",
+      "degree": 6
+    }
+  ],
+  "surprises": [
+    {
+      "source": "Favicon Logo",
+      "target": "App Icon",
+      "source_files": [
+        "public/favicon.png",
+        "src/app/icon.png"
+      ],
+      "confidence": "INFERRED",
+      "relation": "semantically_similar_to",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; semantically similar concepts with no structural link"
+    },
+    {
+      "source": "Safar Gold Logo",
+      "target": "App Icon",
+      "source_files": [
+        "public/logo-1.webp",
+        "src/app/icon.png"
+      ],
+      "confidence": "INFERRED",
+      "relation": "semantically_similar_to",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; semantically similar concepts with no structural link"
+    },
+    {
+      "source": "JenisEmasPage()",
+      "target": "getAllGoldTypes()",
+      "source_files": [
+        "src/app/(admin)/admin/jenis-emas/page.tsx",
+        "src/lib/gold-api.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "bridges separate communities; peripheral node `JenisEmasPage()` unexpectedly reaches hub `getAllGoldTypes()`"
+    },
+    {
+      "source": "AdminKontenPage()",
+      "target": "getHeroContent()",
+      "source_files": [
+        "src/app/(admin)/admin/konten/page.tsx",
+        "src/lib/gold-api.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "peripheral node `AdminKontenPage()` unexpectedly reaches hub `getHeroContent()`"
+    },
+    {
+      "source": "AdminPengaturanPage()",
+      "target": "createAnonClient()",
+      "source_files": [
+        "src/app/(admin)/admin/pengaturan/page.tsx",
+        "src/lib/supabase/anon.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "peripheral node `AdminPengaturanPage()` unexpectedly reaches hub `createAnonClient()`"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `createAdminClient()` connect `createAdminClient` to `gold-api.ts`?",
+      "why": "High betweenness centrality (0.024) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `createAnonClient()` connect `gold-api.ts` to `(public)/harga/page.tsx`, `konten/page.tsx`, `(public)/page.tsx`, `admin/page.tsx`?",
+      "why": "High betweenness centrality (0.023) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `getPublicSettings()` connect `(public)/page.tsx` to `(public)/harga/page.tsx`, `gold-api.ts`?",
+      "why": "High betweenness centrality (0.018) - this node is a cross-community bridge."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `eslintConfig`, `nextConfig`, `name` to the rest of the system?",
+      "why": "71 weakly-connected nodes found - possible documentation gaps or missing edges."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `(public)/harga/page.tsx` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.11612903225806452 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `(public)/page.tsx` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.10574712643678161 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `dependencies` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.08333333333333333 - nodes in this community are weakly interconnected."
+    }
+  ]
+}

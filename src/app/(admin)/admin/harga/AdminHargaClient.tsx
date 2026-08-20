@@ -181,13 +181,20 @@ export default function AdminHargaClient({ goldTypes, prices }: { goldTypes: Gol
   function getPrice(gt: GoldTypeRow, price: FormattedPrice | undefined) {
     if (!hasData || !price) return null;
     if (isBuyable(gt.category)) {
+      if (price.isTotalPrice) {
+        return price.buyPrice > 0 ? price.buyPrice : null;
+      }
       const perGram = price.buyPrice;
       if (perGram <= 0) return null;
       return gt.weight ? Math.round(perGram * gt.weight) : perGram;
     }
     return price.sellPrice > 0 ? price.sellPrice : null;
   }
-  function getPriceLabel(category: string) { return isBuyable(category) ? "Harga Jual" : "Harga Buyback"; }
+  function getPriceLabel(gt: GoldTypeRow, price: FormattedPrice | undefined) {
+    if (!isBuyable(gt.category)) return "Harga Buyback";
+    if (price?.isTotalPrice) return "Harga Jual (total/keping)";
+    return "Harga Jual";
+  }
   function formatPrice(amount: number | null) {
     if (amount === null) return "-";
     return formatRupiahClient(amount);
@@ -201,7 +208,6 @@ export default function AdminHargaClient({ goldTypes, prices }: { goldTypes: Gol
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(goldTypes.map((g) => {
         const isLm = g.category === "lm";
-        const weight = g.weight ?? 1;
         return {
           id: g.id,
           isAuto: autoMode[g.id],
@@ -265,7 +271,7 @@ export default function AdminHargaClient({ goldTypes, prices }: { goldTypes: Gol
               {sortGoldTypes(goldTypes).map((gt) => {
                 const price = prices.find((p) => p.goldTypeId === gt.id);
                 const displayPrice = getPrice(gt, price);
-                const label = getPriceLabel(gt.category);
+                const label = getPriceLabel(gt, price);
                 return (
                   <tr key={gt.id} className="transition-colors hover:bg-surface/50">
                     <td className="px-4 py-4 md:px-6"><p className="text-sm font-semibold text-text">{gt.name}</p></td>
