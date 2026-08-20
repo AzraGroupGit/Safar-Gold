@@ -22,6 +22,12 @@ export default async function HargaPage() {
   const hargaAntam = prices.find((p) => p.goldTypeId === "antam-1");
   const buyback24k = prices.find((p) => p.goldTypeId === "ph-k24s");
 
+  const todayValues = {
+    lm: prices.find((p) => p.goldTypeId === "antam-1")?.buyPrice ?? 0,
+    buyback: prices.find((p) => p.goldTypeId === "bb-certi-1-2")?.sellPrice ?? 0,
+    perhiasan: prices.find((p) => p.goldTypeId === "ph-k24")?.sellPrice ?? 0,
+  };
+
   return (
     <main className="bg-white">
       <div className="bg-surface">
@@ -100,7 +106,7 @@ export default async function HargaPage() {
       </div>
 
       <div className="mx-auto max-w-7xl px-4 pb-6 md:px-6 md:pb-8">
-        <PriceChart history={history} />
+        <PriceChart history={history} todayValues={todayValues} />
       </div>
 
       <div className="mx-auto max-w-7xl px-4 pb-16 md:px-6 md:pb-20">

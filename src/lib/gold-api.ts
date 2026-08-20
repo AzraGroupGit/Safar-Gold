@@ -344,6 +344,27 @@ export async function calculatePrices(
   });
 }
 
+/** Rekomputasi semua harga & upsert price_history hari ini — dipakai saat admin ubah mode/harga manual. */
+export async function syncTodayPrices(): Promise<void> {
+  const market = await getMarketInfo();
+  const baseGold = convertToIdrPerGram(market.xauUsdPerOz, market.usdIdrRate);
+  const baseSilver = convertToIdrPerGram(market.xagUsdPerOz, market.usdIdrRate);
+  const basePalladium = convertToIdrPerGram(market.xpdUsdPerOz, market.usdIdrRate);
+
+  const calculated = await calculatePrices(baseGold, baseSilver, basePalladium);
+  const today = new Date().toISOString().split("T")[0];
+  const priceRows = calculated.map((c) => ({
+    date: today,
+    gold_type_id: c.gold_type.id,
+    base_price: c.base_price,
+    buy_price: c.buy_price,
+    sell_price: c.sell_price,
+  }));
+
+  await insertPriceHistory(priceRows);
+  await setSetting("last_price_update", new Date().toISOString());
+}
+
 // ---------- International Price Fetch ----------
 export async function fetchInternationalGoldPrice(): Promise<{
   xauUsdPerOz: number;

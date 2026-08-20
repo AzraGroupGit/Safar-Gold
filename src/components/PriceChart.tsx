@@ -20,6 +20,8 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Filler, 
 
 type HistoryRow = { date: string; gold_type_id: string; buy_price: number; sell_price: number };
 
+type TodayValues = { lm: number; buyback: number; perhiasan: number };
+
 const SERIES = [
   { key: "lm", id: "antam-1", field: "buy_price", label: "Logam Mulia", color: "#c89116" },
   { key: "buyback", id: "bb-certi-1-2", field: "sell_price", label: "Buyback LM", color: "#9b7110" },
@@ -69,7 +71,7 @@ const crosshairPlugin = {
   },
 };
 
-export default function PriceChart({ history }: { history: HistoryRow[] }) {
+export default function PriceChart({ history, todayValues }: { history: HistoryRow[]; todayValues?: TodayValues }) {
   const [period, setPeriod] = useState(30);
   const [visible, setVisible] = useState<Record<SeriesKey, boolean>>({ lm: true, buyback: false, perhiasan: false });
 
@@ -86,6 +88,15 @@ export default function PriceChart({ history }: { history: HistoryRow[] }) {
       if (val == null || val <= 0) continue;
       if (!map.has(row.date)) map.set(row.date, {});
       map.get(row.date)![s.key] = val;
+    }
+
+    const today = new Date().toISOString().split("T")[0];
+    if (todayValues) {
+      const entry = map.get(today) ?? {};
+      if (todayValues.lm > 0) entry.lm = todayValues.lm;
+      if (todayValues.buyback > 0) entry.buyback = todayValues.buyback;
+      if (todayValues.perhiasan > 0) entry.perhiasan = todayValues.perhiasan;
+      map.set(today, entry);
     }
 
     const dates = [...map.keys()].sort().slice(-period);
@@ -108,7 +119,7 @@ export default function PriceChart({ history }: { history: HistoryRow[] }) {
       seriesData: data,
       stats: { last, change, changePct, high, low, hasData: lmVals.length > 0 },
     };
-  }, [history, period]);
+  }, [history, period, todayValues]);
 
   const makeAreaGradient = (ctx: ScriptableContext<"line">, color: string) => {
     const chart = ctx.chart;
