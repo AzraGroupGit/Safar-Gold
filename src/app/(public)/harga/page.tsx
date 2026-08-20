@@ -24,8 +24,7 @@ export default async function HargaPage() {
 
   const todayValues = {
     lm: prices.find((p) => p.goldTypeId === "antam-1")?.buyPrice ?? 0,
-    buyback: prices.find((p) => p.goldTypeId === "bb-certi-1-2")?.sellPrice ?? 0,
-    perhiasan: prices.find((p) => p.goldTypeId === "ph-k24")?.sellPrice ?? 0,
+    buyback: prices.find((p) => p.goldTypeId === "ph-k24s")?.sellPrice ?? 0,
   };
 
   return (

@@ -82,7 +82,20 @@
       "file_type": "code",
       "norm_label": "serieskey",
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L29"
+      "source_location": "L31"
+    },
+    {
+      "id": "src_components_pricechart_todayvalues",
+      "label": "TodayValues",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "PriceChart.tsx",
+      "file_type": "code",
+      "norm_label": "todayvalues",
+      "source_file": "src/components/PriceChart.tsx",
+      "source_location": "L23"
     },
     {
       "id": "src_lib_gold_api_appsettingrow",
@@ -134,7 +147,7 @@
       "file_type": "code",
       "norm_label": "customerinput",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L554"
+      "source_location": "L575"
     },
     {
       "id": "src_lib_gold_api_herocontent",
@@ -173,7 +186,7 @@
       "file_type": "code",
       "norm_label": "publicsettings",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L609"
+      "source_location": "L630"
     },
     {
       "id": "src_lib_gold_api_scrapeantamresult",
@@ -186,7 +199,20 @@
       "file_type": "code",
       "norm_label": "scrapeantamresult",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L484"
+      "source_location": "L505"
+    },
+    {
+      "id": "src_components_confirmmodal_props",
+      "label": "Props",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "createClient",
+      "file_type": "code",
+      "norm_label": "props",
+      "source_file": "src/components/ConfirmModal.tsx",
+      "source_location": "L3"
     },
     {
       "id": "src_lib_gold_api_formattedprice",
@@ -195,11 +221,11 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "AdminHargaClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "formattedprice",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L635"
+      "source_location": "L656"
     },
     {
       "id": "src_app_admin_admin_laporan_laporanclient_dailysummary",
@@ -358,19 +384,6 @@
       "source_location": "L25"
     },
     {
-      "id": "src_components_confirmmodal_props",
-      "label": "Props",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "JenisEmasClient.tsx",
-      "file_type": "code",
-      "norm_label": "props",
-      "source_file": "src/components/ConfirmModal.tsx",
-      "source_location": "L3"
-    },
-    {
       "id": "src_app_admin_admin_stock_stockclient_movement",
       "label": "Movement",
       "_callable": true,
@@ -403,7 +416,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 9,
-      "community_name": "admin/page.tsx",
+      "community_name": "PricePreviewModal.tsx",
       "file_type": "code",
       "norm_label": "props",
       "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
@@ -416,7 +429,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 9,
-      "community_name": "admin/page.tsx",
+      "community_name": "PricePreviewModal.tsx",
       "file_type": "code",
       "norm_label": "previewitem",
       "source_file": "src/components/PricePreviewModal.tsx",
@@ -429,7 +442,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 9,
-      "community_name": "admin/page.tsx",
+      "community_name": "PricePreviewModal.tsx",
       "file_type": "code",
       "norm_label": "pricepreviewmodalprops",
       "source_file": "src/components/PricePreviewModal.tsx",
@@ -442,7 +455,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 9,
-      "community_name": "admin/page.tsx",
+      "community_name": "PricePreviewModal.tsx",
       "file_type": "code",
       "norm_label": "goldtyperow",
       "source_file": "src/lib/gold-api.ts",
@@ -626,7 +639,7 @@
       "file_type": "code",
       "norm_label": "post()",
       "source_file": "src/app/api/admin/update-gold-types/route.ts",
-      "source_location": "L4"
+      "source_location": "L5"
     },
     {
       "id": "src_app_api_admin_update_konten_route_post",
@@ -710,7 +723,7 @@
       "file_type": "code",
       "norm_label": "normalizephone()",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L548"
+      "source_location": "L569"
     },
     {
       "id": "src_lib_gold_api_upsertcustomerbyphone",
@@ -722,7 +735,7 @@
       "file_type": "code",
       "norm_label": "upsertcustomerbyphone()",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L568"
+      "source_location": "L589"
     },
     {
       "id": "src_lib_supabase_admin_createadminclient",
@@ -737,172 +750,136 @@
       "source_location": "L8"
     },
     {
-      "id": "src_app_api_admin_preview_prices_route_post",
-      "label": "POST()",
+      "id": "src_app_admin_admin_priceapprovalpanel_priceapprovalpanel",
+      "label": "PriceApprovalPanel()",
       "_callable": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": "getSetting",
+      "community_name": "PriceApprovalPanel",
       "file_type": "code",
-      "norm_label": "post()",
-      "source_file": "src/app/api/admin/preview-prices/route.ts",
-      "source_location": "L6"
+      "norm_label": "priceapprovalpanel()",
+      "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
+      "source_location": "L31"
     },
     {
-      "id": "src_app_api_admin_publish_prices_route_post",
-      "label": "POST()",
+      "id": "src_app_admin_admin_priceapprovalpanel_priceapprovalpanel_adddots",
+      "label": "addDots()",
       "_callable": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": "getSetting",
+      "community_name": "PriceApprovalPanel",
       "file_type": "code",
-      "norm_label": "post()",
-      "source_file": "src/app/api/admin/publish-prices/route.ts",
-      "source_location": "L7"
+      "norm_label": "adddots()",
+      "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
+      "source_location": "L230"
     },
     {
-      "id": "src_app_api_admin_trigger_update_route_post",
-      "label": "POST()",
+      "id": "src_app_admin_admin_priceapprovalpanel_priceapprovalpanel_adddotssigned",
+      "label": "addDotsSigned()",
       "_callable": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": "getSetting",
+      "community_name": "PriceApprovalPanel",
       "file_type": "code",
-      "norm_label": "post()",
-      "source_file": "src/app/api/admin/trigger-update/route.ts",
-      "source_location": "L12"
+      "norm_label": "adddotssigned()",
+      "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
+      "source_location": "L248"
     },
     {
-      "id": "src_app_api_cron_scrape_antam_route_post",
-      "label": "POST()",
+      "id": "src_app_admin_admin_priceapprovalpanel_priceapprovalpanel_cleannumber",
+      "label": "cleanNumber()",
       "_callable": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": "getSetting",
+      "community_name": "PriceApprovalPanel",
       "file_type": "code",
-      "norm_label": "post()",
-      "source_file": "src/app/api/cron/scrape-antam/route.ts",
-      "source_location": "L6"
+      "norm_label": "cleannumber()",
+      "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
+      "source_location": "L236"
     },
     {
-      "id": "src_app_api_cron_update_prices_route_get",
-      "label": "GET()",
+      "id": "src_app_admin_admin_priceapprovalpanel_priceapprovalpanel_cleansigned",
+      "label": "cleanSigned()",
       "_callable": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": "getSetting",
+      "community_name": "PriceApprovalPanel",
       "file_type": "code",
-      "norm_label": "get()",
-      "source_file": "src/app/api/cron/update-prices/route.ts",
-      "source_location": "L9"
+      "norm_label": "cleansigned()",
+      "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
+      "source_location": "L241"
     },
     {
-      "id": "src_lib_gold_api_calculateprices",
-      "label": "calculatePrices()",
+      "id": "src_app_admin_admin_priceapprovalpanel_priceapprovalpanel_handlefetchacuan",
+      "label": "handleFetchAcuan()",
       "_callable": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": "getSetting",
+      "community_name": "PriceApprovalPanel",
       "file_type": "code",
-      "norm_label": "calculateprices()",
-      "source_file": "src/lib/gold-api.ts",
-      "source_location": "L320"
+      "norm_label": "handlefetchacuan()",
+      "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
+      "source_location": "L140"
     },
     {
-      "id": "src_lib_gold_api_computeprices",
-      "label": "computePrices()",
+      "id": "src_app_admin_admin_priceapprovalpanel_priceapprovalpanel_handleopenpreview",
+      "label": "handleOpenPreview()",
       "_callable": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": "getSetting",
+      "community_name": "PriceApprovalPanel",
       "file_type": "code",
-      "norm_label": "computeprices()",
-      "source_file": "src/lib/gold-api.ts",
-      "source_location": "L242"
+      "norm_label": "handleopenpreview()",
+      "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
+      "source_location": "L87"
     },
     {
-      "id": "src_lib_gold_api_converttoidrpergram",
-      "label": "convertToIdrPerGram()",
+      "id": "src_app_admin_admin_priceapprovalpanel_priceapprovalpanel_handlepublish",
+      "label": "handlePublish()",
       "_callable": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": "getSetting",
+      "community_name": "PriceApprovalPanel",
       "file_type": "code",
-      "norm_label": "converttoidrpergram()",
-      "source_file": "src/lib/gold-api.ts",
-      "source_location": "L479"
+      "norm_label": "handlepublish()",
+      "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
+      "source_location": "L111"
     },
     {
-      "id": "src_lib_gold_api_fetchallfallbackprices",
-      "label": "fetchAllFallbackPrices()",
+      "id": "src_app_admin_admin_priceapprovalpanel_priceapprovalpanel_handlesaveantamprice",
+      "label": "handleSaveAntamPrice()",
       "_callable": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": "getSetting",
+      "community_name": "PriceApprovalPanel",
       "file_type": "code",
-      "norm_label": "fetchallfallbackprices()",
-      "source_file": "src/lib/gold-api.ts",
-      "source_location": "L451"
+      "norm_label": "handlesaveantamprice()",
+      "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
+      "source_location": "L158"
     },
     {
-      "id": "src_lib_gold_api_fetchinternationalgoldprice",
-      "label": "fetchInternationalGoldPrice()",
+      "id": "src_app_admin_admin_priceapprovalpanel_priceapprovalpanel_handlesaveglobalgoldprice",
+      "label": "handleSaveGlobalGoldPrice()",
       "_callable": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": "getSetting",
+      "community_name": "PriceApprovalPanel",
       "file_type": "code",
-      "norm_label": "fetchinternationalgoldprice()",
-      "source_file": "src/lib/gold-api.ts",
-      "source_location": "L348"
+      "norm_label": "handlesaveglobalgoldprice()",
+      "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
+      "source_location": "L203"
     },
     {
-      "id": "src_lib_gold_api_getsetting",
-      "label": "getSetting()",
+      "id": "src_app_admin_admin_priceapprovalpanel_priceapprovalpanel_handlescrapeantam",
+      "label": "handleScrapeAntam()",
       "_callable": true,
       "_origin": "ast",
       "community": 1,
-      "community_name": "getSetting",
+      "community_name": "PriceApprovalPanel",
       "file_type": "code",
-      "norm_label": "getsetting()",
-      "source_file": "src/lib/gold-api.ts",
-      "source_location": "L77"
-    },
-    {
-      "id": "src_lib_gold_api_insertpricehistory",
-      "label": "insertPriceHistory()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "getSetting",
-      "file_type": "code",
-      "norm_label": "insertpricehistory()",
-      "source_file": "src/lib/gold-api.ts",
-      "source_location": "L196"
-    },
-    {
-      "id": "src_lib_gold_api_scrapeantamprice",
-      "label": "scrapeAntamPrice()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "getSetting",
-      "file_type": "code",
-      "norm_label": "scrapeantamprice()",
-      "source_file": "src/lib/gold-api.ts",
-      "source_location": "L492"
-    },
-    {
-      "id": "src_lib_gold_api_setsetting",
-      "label": "setSetting()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "getSetting",
-      "file_type": "code",
-      "norm_label": "setsetting()",
-      "source_file": "src/lib/gold-api.ts",
-      "source_location": "L88"
+      "norm_label": "handlescrapeantam()",
+      "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
+      "source_location": "L184"
     },
     {
       "id": "src_app_layout_rootlayout",
@@ -934,7 +911,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 11,
-      "community_name": "getAllGoldTypes",
+      "community_name": "admin/page.tsx",
       "file_type": "code",
       "norm_label": "adminhargapage()",
       "source_file": "src/app/(admin)/admin/harga/page.tsx",
@@ -946,11 +923,23 @@
       "_callable": true,
       "_origin": "ast",
       "community": 11,
-      "community_name": "getAllGoldTypes",
+      "community_name": "admin/page.tsx",
       "file_type": "code",
       "norm_label": "jenisemaspage()",
       "source_file": "src/app/(admin)/admin/jenis-emas/page.tsx",
       "source_location": "L6"
+    },
+    {
+      "id": "src_app_admin_admin_loading_adminloading",
+      "label": "AdminLoading()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "admin/page.tsx",
+      "file_type": "code",
+      "norm_label": "adminloading()",
+      "source_file": "src/app/(admin)/admin/loading.tsx",
+      "source_location": "L3"
     },
     {
       "id": "src_app_admin_admin_orders_page_orderspage",
@@ -958,7 +947,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 11,
-      "community_name": "getAllGoldTypes",
+      "community_name": "admin/page.tsx",
       "file_type": "code",
       "norm_label": "orderspage()",
       "source_file": "src/app/(admin)/admin/orders/page.tsx",
@@ -970,7 +959,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 11,
-      "community_name": "getAllGoldTypes",
+      "community_name": "admin/page.tsx",
       "file_type": "code",
       "norm_label": "admindashboard()",
       "source_file": "src/app/(admin)/admin/page.tsx",
@@ -982,7 +971,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 11,
-      "community_name": "getAllGoldTypes",
+      "community_name": "admin/page.tsx",
       "file_type": "code",
       "norm_label": "loaddata()",
       "source_file": "src/app/(admin)/admin/page.tsx",
@@ -994,11 +983,83 @@
       "_callable": true,
       "_origin": "ast",
       "community": 11,
-      "community_name": "getAllGoldTypes",
+      "community_name": "admin/page.tsx",
       "file_type": "code",
       "norm_label": "loadsettings()",
       "source_file": "src/app/(admin)/admin/page.tsx",
       "source_location": "L182"
+    },
+    {
+      "id": "src_app_admin_admin_page_dashboarderror",
+      "label": "DashboardError()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "admin/page.tsx",
+      "file_type": "code",
+      "norm_label": "dashboarderror()",
+      "source_file": "src/app/(admin)/admin/page.tsx",
+      "source_location": "L90"
+    },
+    {
+      "id": "src_app_admin_admin_page_statcard",
+      "label": "StatCard()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "admin/page.tsx",
+      "file_type": "code",
+      "norm_label": "statcard()",
+      "source_file": "src/app/(admin)/admin/page.tsx",
+      "source_location": "L43"
+    },
+    {
+      "id": "src_app_admin_admin_page_trendindicator",
+      "label": "TrendIndicator()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "admin/page.tsx",
+      "file_type": "code",
+      "norm_label": "trendindicator()",
+      "source_file": "src/app/(admin)/admin/page.tsx",
+      "source_location": "L14"
+    },
+    {
+      "id": "src_app_admin_admin_pengaturan_adminpengaturanclient_adminpengaturanclient",
+      "label": "AdminPengaturanClient()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "admin/page.tsx",
+      "file_type": "code",
+      "norm_label": "adminpengaturanclient()",
+      "source_file": "src/app/(admin)/admin/pengaturan/AdminPengaturanClient.tsx",
+      "source_location": "L5"
+    },
+    {
+      "id": "src_app_admin_admin_pengaturan_adminpengaturanclient_adminpengaturanclient_handlesave",
+      "label": "handleSave()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "admin/page.tsx",
+      "file_type": "code",
+      "norm_label": "handlesave()",
+      "source_file": "src/app/(admin)/admin/pengaturan/AdminPengaturanClient.tsx",
+      "source_location": "L28"
+    },
+    {
+      "id": "src_app_admin_admin_pengaturan_page_adminpengaturanpage",
+      "label": "AdminPengaturanPage()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "admin/page.tsx",
+      "file_type": "code",
+      "norm_label": "adminpengaturanpage()",
+      "source_file": "src/app/(admin)/admin/pengaturan/page.tsx",
+      "source_location": "L6"
     },
     {
       "id": "src_app_public_harga_page_hargapage",
@@ -1006,7 +1067,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 11,
-      "community_name": "getAllGoldTypes",
+      "community_name": "admin/page.tsx",
       "file_type": "code",
       "norm_label": "hargapage()",
       "source_file": "src/app/(public)/harga/page.tsx",
@@ -1018,11 +1079,23 @@
       "_callable": true,
       "_origin": "ast",
       "community": 11,
-      "community_name": "getAllGoldTypes",
+      "community_name": "admin/page.tsx",
       "file_type": "code",
       "norm_label": "kalkulatorpage()",
       "source_file": "src/app/(public)/kalkulator/page.tsx",
       "source_location": "L14"
+    },
+    {
+      "id": "src_components_admin_adminskeleton_adminskeleton",
+      "label": "AdminSkeleton()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "admin/page.tsx",
+      "file_type": "code",
+      "norm_label": "adminskeleton()",
+      "source_file": "src/components/admin/AdminSkeleton.tsx",
+      "source_location": "L1"
     },
     {
       "id": "src_components_legalnotice_legalnotice",
@@ -1030,7 +1103,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 11,
-      "community_name": "getAllGoldTypes",
+      "community_name": "admin/page.tsx",
       "file_type": "code",
       "norm_label": "legalnotice()",
       "source_file": "src/components/LegalNotice.tsx",
@@ -1042,7 +1115,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 11,
-      "community_name": "getAllGoldTypes",
+      "community_name": "admin/page.tsx",
       "file_type": "code",
       "norm_label": "getallgoldtypes()",
       "source_file": "src/lib/gold-api.ts",
@@ -1054,11 +1127,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 11,
-      "community_name": "getAllGoldTypes",
+      "community_name": "admin/page.tsx",
       "file_type": "code",
       "norm_label": "getformattedtodayprices()",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L652"
+      "source_location": "L673"
     },
     {
       "id": "src_lib_gold_api_getformattedtodayprices_getref",
@@ -1066,11 +1139,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 11,
-      "community_name": "getAllGoldTypes",
+      "community_name": "admin/page.tsx",
       "file_type": "code",
       "norm_label": "getref()",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L683"
+      "source_location": "L704"
     },
     {
       "id": "src_lib_gold_api_getformattedtodayprices_lmpergram",
@@ -1078,11 +1151,23 @@
       "_callable": true,
       "_origin": "ast",
       "community": 11,
-      "community_name": "getAllGoldTypes",
+      "community_name": "admin/page.tsx",
       "file_type": "code",
       "norm_label": "lmpergram()",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L692"
+      "source_location": "L713"
+    },
+    {
+      "id": "src_lib_gold_api_getmedianfactors",
+      "label": "getMedianFactors()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "admin/page.tsx",
+      "file_type": "code",
+      "norm_label": "getmedianfactors()",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L759"
     },
     {
       "id": "src_lib_gold_api_getpricehistory",
@@ -1090,11 +1175,47 @@
       "_callable": true,
       "_origin": "ast",
       "community": 11,
-      "community_name": "getAllGoldTypes",
+      "community_name": "admin/page.tsx",
       "file_type": "code",
       "norm_label": "getpricehistory()",
       "source_file": "src/lib/gold-api.ts",
       "source_location": "L206"
+    },
+    {
+      "id": "src_lib_gold_api_gettodayprices",
+      "label": "getTodayPrices()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "admin/page.tsx",
+      "file_type": "code",
+      "norm_label": "gettodayprices()",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L170"
+    },
+    {
+      "id": "src_lib_gold_api_median",
+      "label": "median()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "admin/page.tsx",
+      "file_type": "code",
+      "norm_label": "median()",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L802"
+    },
+    {
+      "id": "src_lib_supabase_anon_createanonclient",
+      "label": "createAnonClient()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "admin/page.tsx",
+      "file_type": "code",
+      "norm_label": "createanonclient()",
+      "source_file": "src/lib/supabase/anon.ts",
+      "source_location": "L8"
     },
     {
       "id": "src_app_public_tentang_page_tentangpage",
@@ -1325,18 +1446,6 @@
       "source_location": "L16"
     },
     {
-      "id": "src_app_admin_admin_orders_id_invoice_page_invoicepage",
-      "label": "InvoicePage()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "(public)/page.tsx",
-      "file_type": "code",
-      "norm_label": "invoicepage()",
-      "source_file": "src/app/(admin)/admin/orders/[id]/invoice/page.tsx",
-      "source_location": "L7"
-    },
-    {
       "id": "src_app_admin_admin_pelanggan_page_pelangganpage",
       "label": "PelangganPage()",
       "_callable": true,
@@ -1562,7 +1671,7 @@
       "file_type": "code",
       "norm_label": "getpublicsettings()",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L619"
+      "source_location": "L640"
     },
     {
       "id": "scripts_import_historis_supabase_post",
@@ -1718,7 +1827,7 @@
       "file_type": "code",
       "norm_label": "formatcompact()",
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L41"
+      "source_location": "L43"
     },
     {
       "id": "src_components_pricechart_formatdatelabel",
@@ -1730,7 +1839,7 @@
       "file_type": "code",
       "norm_label": "formatdatelabel()",
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L47"
+      "source_location": "L49"
     },
     {
       "id": "src_components_pricechart_formatrupiah",
@@ -1742,7 +1851,7 @@
       "file_type": "code",
       "norm_label": "formatrupiah()",
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L37"
+      "source_location": "L39"
     },
     {
       "id": "src_components_pricechart_pricechart",
@@ -1754,7 +1863,7 @@
       "file_type": "code",
       "norm_label": "pricechart()",
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L72"
+      "source_location": "L74"
     },
     {
       "id": "src_components_pricechart_pricechart_toggle",
@@ -1766,7 +1875,7 @@
       "file_type": "code",
       "norm_label": "toggle()",
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L76"
+      "source_location": "L78"
     },
     {
       "id": "src_app_api_regions_route_get",
@@ -1829,42 +1938,6 @@
       "source_location": "L6"
     },
     {
-      "id": "src_app_admin_admin_pengaturan_adminpengaturanclient_adminpengaturanclient",
-      "label": "AdminPengaturanClient()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "gold-api.ts",
-      "file_type": "code",
-      "norm_label": "adminpengaturanclient()",
-      "source_file": "src/app/(admin)/admin/pengaturan/AdminPengaturanClient.tsx",
-      "source_location": "L5"
-    },
-    {
-      "id": "src_app_admin_admin_pengaturan_adminpengaturanclient_adminpengaturanclient_handlesave",
-      "label": "handleSave()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "gold-api.ts",
-      "file_type": "code",
-      "norm_label": "handlesave()",
-      "source_file": "src/app/(admin)/admin/pengaturan/AdminPengaturanClient.tsx",
-      "source_location": "L28"
-    },
-    {
-      "id": "src_app_admin_admin_pengaturan_page_adminpengaturanpage",
-      "label": "AdminPengaturanPage()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "gold-api.ts",
-      "file_type": "code",
-      "norm_label": "adminpengaturanpage()",
-      "source_file": "src/app/(admin)/admin/pengaturan/page.tsx",
-      "source_location": "L6"
-    },
-    {
       "id": "src_app_api_admin_create_gold_type_route_post",
       "label": "POST()",
       "_callable": true,
@@ -1889,6 +1962,42 @@
       "source_location": "L4"
     },
     {
+      "id": "src_app_api_admin_preview_prices_route_post",
+      "label": "POST()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "gold-api.ts",
+      "file_type": "code",
+      "norm_label": "post()",
+      "source_file": "src/app/api/admin/preview-prices/route.ts",
+      "source_location": "L6"
+    },
+    {
+      "id": "src_app_api_admin_publish_prices_route_post",
+      "label": "POST()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "gold-api.ts",
+      "file_type": "code",
+      "norm_label": "post()",
+      "source_file": "src/app/api/admin/publish-prices/route.ts",
+      "source_location": "L7"
+    },
+    {
+      "id": "src_app_api_admin_trigger_update_route_post",
+      "label": "POST()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "gold-api.ts",
+      "file_type": "code",
+      "norm_label": "post()",
+      "source_file": "src/app/api/admin/trigger-update/route.ts",
+      "source_location": "L12"
+    },
+    {
       "id": "src_app_api_admin_update_gold_type_route_put",
       "label": "PUT()",
       "_callable": true,
@@ -1901,6 +2010,30 @@
       "source_location": "L4"
     },
     {
+      "id": "src_app_api_cron_scrape_antam_route_post",
+      "label": "POST()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "gold-api.ts",
+      "file_type": "code",
+      "norm_label": "post()",
+      "source_file": "src/app/api/cron/scrape-antam/route.ts",
+      "source_location": "L6"
+    },
+    {
+      "id": "src_app_api_cron_update_prices_route_get",
+      "label": "GET()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "gold-api.ts",
+      "file_type": "code",
+      "norm_label": "get()",
+      "source_file": "src/app/api/cron/update-prices/route.ts",
+      "source_location": "L9"
+    },
+    {
       "id": "src_components_hero_hero",
       "label": "Hero()",
       "_callable": true,
@@ -1911,6 +2044,42 @@
       "norm_label": "hero()",
       "source_file": "src/components/Hero.tsx",
       "source_location": "L4"
+    },
+    {
+      "id": "src_lib_gold_api_calculateprices",
+      "label": "calculatePrices()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "gold-api.ts",
+      "file_type": "code",
+      "norm_label": "calculateprices()",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L320"
+    },
+    {
+      "id": "src_lib_gold_api_computeprices",
+      "label": "computePrices()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "gold-api.ts",
+      "file_type": "code",
+      "norm_label": "computeprices()",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L242"
+    },
+    {
+      "id": "src_lib_gold_api_converttoidrpergram",
+      "label": "convertToIdrPerGram()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "gold-api.ts",
+      "file_type": "code",
+      "norm_label": "converttoidrpergram()",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L500"
     },
     {
       "id": "src_lib_gold_api_creategoldtype",
@@ -1937,6 +2106,30 @@
       "source_location": "L164"
     },
     {
+      "id": "src_lib_gold_api_fetchallfallbackprices",
+      "label": "fetchAllFallbackPrices()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "gold-api.ts",
+      "file_type": "code",
+      "norm_label": "fetchallfallbackprices()",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L472"
+    },
+    {
+      "id": "src_lib_gold_api_fetchinternationalgoldprice",
+      "label": "fetchInternationalGoldPrice()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "gold-api.ts",
+      "file_type": "code",
+      "norm_label": "fetchinternationalgoldprice()",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L369"
+    },
+    {
       "id": "src_lib_gold_api_formatdate",
       "label": "formatDate()",
       "_callable": true,
@@ -1946,7 +2139,7 @@
       "file_type": "code",
       "norm_label": "formatdate()",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L797"
+      "source_location": "L818"
     },
     {
       "id": "src_lib_gold_api_getherocontent",
@@ -1973,40 +2166,64 @@
       "source_location": "L94"
     },
     {
-      "id": "src_lib_gold_api_getmedianfactors",
-      "label": "getMedianFactors()",
+      "id": "src_lib_gold_api_getsetting",
+      "label": "getSetting()",
       "_callable": true,
       "_origin": "ast",
       "community": 32,
       "community_name": "gold-api.ts",
       "file_type": "code",
-      "norm_label": "getmedianfactors()",
+      "norm_label": "getsetting()",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L738"
+      "source_location": "L77"
     },
     {
-      "id": "src_lib_gold_api_gettodayprices",
-      "label": "getTodayPrices()",
+      "id": "src_lib_gold_api_insertpricehistory",
+      "label": "insertPriceHistory()",
       "_callable": true,
       "_origin": "ast",
       "community": 32,
       "community_name": "gold-api.ts",
       "file_type": "code",
-      "norm_label": "gettodayprices()",
+      "norm_label": "insertpricehistory()",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L170"
+      "source_location": "L196"
     },
     {
-      "id": "src_lib_gold_api_median",
-      "label": "median()",
+      "id": "src_lib_gold_api_scrapeantamprice",
+      "label": "scrapeAntamPrice()",
       "_callable": true,
       "_origin": "ast",
       "community": 32,
       "community_name": "gold-api.ts",
       "file_type": "code",
-      "norm_label": "median()",
+      "norm_label": "scrapeantamprice()",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L781"
+      "source_location": "L513"
+    },
+    {
+      "id": "src_lib_gold_api_setsetting",
+      "label": "setSetting()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "gold-api.ts",
+      "file_type": "code",
+      "norm_label": "setsetting()",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L88"
+    },
+    {
+      "id": "src_lib_gold_api_synctodayprices",
+      "label": "syncTodayPrices()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "gold-api.ts",
+      "file_type": "code",
+      "norm_label": "synctodayprices()",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L348"
     },
     {
       "id": "src_lib_gold_api_updategoldtype",
@@ -2021,24 +2238,12 @@
       "source_location": "L159"
     },
     {
-      "id": "src_lib_supabase_anon_createanonclient",
-      "label": "createAnonClient()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "gold-api.ts",
-      "file_type": "code",
-      "norm_label": "createanonclient()",
-      "source_file": "src/lib/supabase/anon.ts",
-      "source_location": "L8"
-    },
-    {
       "id": "src_app_admin_admin_harga_adminhargaclient_adminhargaclient",
       "label": "AdminHargaClient()",
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "AdminHargaClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "adminhargaclient()",
       "source_file": "src/app/(admin)/admin/harga/AdminHargaClient.tsx",
@@ -2050,7 +2255,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "AdminHargaClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "fetchrole()",
       "source_file": "src/app/(admin)/admin/harga/AdminHargaClient.tsx",
@@ -2062,7 +2267,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "AdminHargaClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "formatprice()",
       "source_file": "src/app/(admin)/admin/harga/AdminHargaClient.tsx",
@@ -2074,7 +2279,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "AdminHargaClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "getprice()",
       "source_file": "src/app/(admin)/admin/harga/AdminHargaClient.tsx",
@@ -2086,7 +2291,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "AdminHargaClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "getpricelabel()",
       "source_file": "src/app/(admin)/admin/harga/AdminHargaClient.tsx",
@@ -2098,7 +2303,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "AdminHargaClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "handlesave()",
       "source_file": "src/app/(admin)/admin/harga/AdminHargaClient.tsx",
@@ -2110,7 +2315,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "AdminHargaClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "isbuyable()",
       "source_file": "src/app/(admin)/admin/harga/AdminHargaClient.tsx",
@@ -2122,7 +2327,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "AdminHargaClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "formatrupiahclient()",
       "source_file": "src/app/(admin)/admin/harga/AdminHargaClient.tsx",
@@ -2134,7 +2339,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "AdminHargaClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "modemodal()",
       "source_file": "src/app/(admin)/admin/harga/AdminHargaClient.tsx",
@@ -2146,7 +2351,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "AdminHargaClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "adddots()",
       "source_file": "src/app/(admin)/admin/harga/AdminHargaClient.tsx",
@@ -2158,11 +2363,83 @@
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "AdminHargaClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "cleannumber()",
       "source_file": "src/app/(admin)/admin/harga/AdminHargaClient.tsx",
       "source_location": "L44"
+    },
+    {
+      "id": "src_app_admin_admin_login_page_adminloginpage",
+      "label": "AdminLoginPage()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "createClient",
+      "file_type": "code",
+      "norm_label": "adminloginpage()",
+      "source_file": "src/app/(admin)/admin/login/page.tsx",
+      "source_location": "L8"
+    },
+    {
+      "id": "src_app_admin_admin_login_page_adminloginpage_handlesubmit",
+      "label": "handleSubmit()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "createClient",
+      "file_type": "code",
+      "norm_label": "handlesubmit()",
+      "source_file": "src/app/(admin)/admin/login/page.tsx",
+      "source_location": "L16"
+    },
+    {
+      "id": "src_app_admin_layout_adminlayout",
+      "label": "AdminLayout()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "createClient",
+      "file_type": "code",
+      "norm_label": "adminlayout()",
+      "source_file": "src/app/(admin)/layout.tsx",
+      "source_location": "L7"
+    },
+    {
+      "id": "src_components_admin_adminsidebar_adminsidebar",
+      "label": "AdminSidebar()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "createClient",
+      "file_type": "code",
+      "norm_label": "adminsidebar()",
+      "source_file": "src/components/admin/AdminSidebar.tsx",
+      "source_location": "L72"
+    },
+    {
+      "id": "src_components_admin_adminsidebar_adminsidebar_fetchrole",
+      "label": "fetchRole()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "createClient",
+      "file_type": "code",
+      "norm_label": "fetchrole()",
+      "source_file": "src/components/admin/AdminSidebar.tsx",
+      "source_location": "L85"
+    },
+    {
+      "id": "src_components_admin_adminsidebar_adminsidebar_handlelogout",
+      "label": "handleLogout()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "createClient",
+      "file_type": "code",
+      "norm_label": "handlelogout()",
+      "source_file": "src/components/admin/AdminSidebar.tsx",
+      "source_location": "L106"
     },
     {
       "id": "src_components_calculator_calculator",
@@ -2170,7 +2447,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "AdminHargaClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "calculator()",
       "source_file": "src/components/Calculator.tsx",
@@ -2182,11 +2459,23 @@
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "AdminHargaClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "formatrupiahclient()",
       "source_file": "src/components/Calculator.tsx",
       "source_location": "L7"
+    },
+    {
+      "id": "src_components_confirmmodal_confirmmodal",
+      "label": "ConfirmModal()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "createClient",
+      "file_type": "code",
+      "norm_label": "confirmmodal()",
+      "source_file": "src/components/ConfirmModal.tsx",
+      "source_location": "L13"
     },
     {
       "id": "src_lib_gold_api_orderindex",
@@ -2194,7 +2483,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "AdminHargaClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "orderindex()",
       "source_file": "src/lib/gold-api.ts",
@@ -2206,11 +2495,23 @@
       "_callable": true,
       "_origin": "ast",
       "community": 4,
-      "community_name": "AdminHargaClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "sortgoldtypes()",
       "source_file": "src/lib/gold-api.ts",
       "source_location": "L33"
+    },
+    {
+      "id": "src_lib_supabase_client_createclient",
+      "label": "createClient()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "createClient",
+      "file_type": "code",
+      "norm_label": "createclient()",
+      "source_file": "src/lib/supabase/client.ts",
+      "source_location": "L4"
     },
     {
       "id": "src_app_admin_admin_laporan_laporanclient_laporanclient",
@@ -2246,6 +2547,18 @@
       "file_type": "code",
       "norm_label": "laporanpage()",
       "source_file": "src/app/(admin)/admin/laporan/page.tsx",
+      "source_location": "L7"
+    },
+    {
+      "id": "src_app_admin_admin_orders_id_invoice_page_invoicepage",
+      "label": "InvoicePage()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "OrdersClient.tsx",
+      "file_type": "code",
+      "norm_label": "invoicepage()",
+      "source_file": "src/app/(admin)/admin/orders/[id]/invoice/page.tsx",
       "source_location": "L7"
     },
     {
@@ -2366,7 +2679,7 @@
       "file_type": "code",
       "norm_label": "formatrupiah()",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L788"
+      "source_location": "L809"
     },
     {
       "id": "src_app_admin_admin_jenis_emas_jenisemasclient_formmodal",
@@ -2465,102 +2778,6 @@
       "source_location": "L18"
     },
     {
-      "id": "src_app_admin_admin_login_page_adminloginpage",
-      "label": "AdminLoginPage()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "JenisEmasClient.tsx",
-      "file_type": "code",
-      "norm_label": "adminloginpage()",
-      "source_file": "src/app/(admin)/admin/login/page.tsx",
-      "source_location": "L8"
-    },
-    {
-      "id": "src_app_admin_admin_login_page_adminloginpage_handlesubmit",
-      "label": "handleSubmit()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "JenisEmasClient.tsx",
-      "file_type": "code",
-      "norm_label": "handlesubmit()",
-      "source_file": "src/app/(admin)/admin/login/page.tsx",
-      "source_location": "L16"
-    },
-    {
-      "id": "src_app_admin_layout_adminlayout",
-      "label": "AdminLayout()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "JenisEmasClient.tsx",
-      "file_type": "code",
-      "norm_label": "adminlayout()",
-      "source_file": "src/app/(admin)/layout.tsx",
-      "source_location": "L7"
-    },
-    {
-      "id": "src_components_admin_adminsidebar_adminsidebar",
-      "label": "AdminSidebar()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "JenisEmasClient.tsx",
-      "file_type": "code",
-      "norm_label": "adminsidebar()",
-      "source_file": "src/components/admin/AdminSidebar.tsx",
-      "source_location": "L72"
-    },
-    {
-      "id": "src_components_admin_adminsidebar_adminsidebar_fetchrole",
-      "label": "fetchRole()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "JenisEmasClient.tsx",
-      "file_type": "code",
-      "norm_label": "fetchrole()",
-      "source_file": "src/components/admin/AdminSidebar.tsx",
-      "source_location": "L85"
-    },
-    {
-      "id": "src_components_admin_adminsidebar_adminsidebar_handlelogout",
-      "label": "handleLogout()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "JenisEmasClient.tsx",
-      "file_type": "code",
-      "norm_label": "handlelogout()",
-      "source_file": "src/components/admin/AdminSidebar.tsx",
-      "source_location": "L106"
-    },
-    {
-      "id": "src_components_confirmmodal_confirmmodal",
-      "label": "ConfirmModal()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "JenisEmasClient.tsx",
-      "file_type": "code",
-      "norm_label": "confirmmodal()",
-      "source_file": "src/components/ConfirmModal.tsx",
-      "source_location": "L13"
-    },
-    {
-      "id": "src_lib_supabase_client_createclient",
-      "label": "createClient()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "JenisEmasClient.tsx",
-      "file_type": "code",
-      "norm_label": "createclient()",
-      "source_file": "src/lib/supabase/client.ts",
-      "source_location": "L4"
-    },
-    {
       "id": "src_app_admin_admin_stock_page_stockpage",
       "label": "StockPage()",
       "_callable": true,
@@ -2633,208 +2850,16 @@
       "source_location": "L61"
     },
     {
-      "id": "src_app_admin_admin_loading_adminloading",
-      "label": "AdminLoading()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "admin/page.tsx",
-      "file_type": "code",
-      "norm_label": "adminloading()",
-      "source_file": "src/app/(admin)/admin/loading.tsx",
-      "source_location": "L3"
-    },
-    {
-      "id": "src_app_admin_admin_page_dashboarderror",
-      "label": "DashboardError()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "admin/page.tsx",
-      "file_type": "code",
-      "norm_label": "dashboarderror()",
-      "source_file": "src/app/(admin)/admin/page.tsx",
-      "source_location": "L90"
-    },
-    {
-      "id": "src_app_admin_admin_page_statcard",
-      "label": "StatCard()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "admin/page.tsx",
-      "file_type": "code",
-      "norm_label": "statcard()",
-      "source_file": "src/app/(admin)/admin/page.tsx",
-      "source_location": "L43"
-    },
-    {
-      "id": "src_app_admin_admin_page_trendindicator",
-      "label": "TrendIndicator()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "admin/page.tsx",
-      "file_type": "code",
-      "norm_label": "trendindicator()",
-      "source_file": "src/app/(admin)/admin/page.tsx",
-      "source_location": "L14"
-    },
-    {
       "id": "src_app_admin_admin_priceapprovalpanel_formatrupiah",
       "label": "formatRupiah()",
       "_callable": true,
       "_origin": "ast",
       "community": 9,
-      "community_name": "admin/page.tsx",
+      "community_name": "PricePreviewModal.tsx",
       "file_type": "code",
       "norm_label": "formatrupiah()",
       "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
       "source_location": "L27"
-    },
-    {
-      "id": "src_app_admin_admin_priceapprovalpanel_priceapprovalpanel",
-      "label": "PriceApprovalPanel()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "admin/page.tsx",
-      "file_type": "code",
-      "norm_label": "priceapprovalpanel()",
-      "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
-      "source_location": "L31"
-    },
-    {
-      "id": "src_app_admin_admin_priceapprovalpanel_priceapprovalpanel_adddots",
-      "label": "addDots()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "admin/page.tsx",
-      "file_type": "code",
-      "norm_label": "adddots()",
-      "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
-      "source_location": "L230"
-    },
-    {
-      "id": "src_app_admin_admin_priceapprovalpanel_priceapprovalpanel_adddotssigned",
-      "label": "addDotsSigned()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "admin/page.tsx",
-      "file_type": "code",
-      "norm_label": "adddotssigned()",
-      "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
-      "source_location": "L248"
-    },
-    {
-      "id": "src_app_admin_admin_priceapprovalpanel_priceapprovalpanel_cleannumber",
-      "label": "cleanNumber()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "admin/page.tsx",
-      "file_type": "code",
-      "norm_label": "cleannumber()",
-      "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
-      "source_location": "L236"
-    },
-    {
-      "id": "src_app_admin_admin_priceapprovalpanel_priceapprovalpanel_cleansigned",
-      "label": "cleanSigned()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "admin/page.tsx",
-      "file_type": "code",
-      "norm_label": "cleansigned()",
-      "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
-      "source_location": "L241"
-    },
-    {
-      "id": "src_app_admin_admin_priceapprovalpanel_priceapprovalpanel_handlefetchacuan",
-      "label": "handleFetchAcuan()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "admin/page.tsx",
-      "file_type": "code",
-      "norm_label": "handlefetchacuan()",
-      "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
-      "source_location": "L140"
-    },
-    {
-      "id": "src_app_admin_admin_priceapprovalpanel_priceapprovalpanel_handleopenpreview",
-      "label": "handleOpenPreview()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "admin/page.tsx",
-      "file_type": "code",
-      "norm_label": "handleopenpreview()",
-      "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
-      "source_location": "L87"
-    },
-    {
-      "id": "src_app_admin_admin_priceapprovalpanel_priceapprovalpanel_handlepublish",
-      "label": "handlePublish()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "admin/page.tsx",
-      "file_type": "code",
-      "norm_label": "handlepublish()",
-      "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
-      "source_location": "L111"
-    },
-    {
-      "id": "src_app_admin_admin_priceapprovalpanel_priceapprovalpanel_handlesaveantamprice",
-      "label": "handleSaveAntamPrice()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "admin/page.tsx",
-      "file_type": "code",
-      "norm_label": "handlesaveantamprice()",
-      "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
-      "source_location": "L158"
-    },
-    {
-      "id": "src_app_admin_admin_priceapprovalpanel_priceapprovalpanel_handlesaveglobalgoldprice",
-      "label": "handleSaveGlobalGoldPrice()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "admin/page.tsx",
-      "file_type": "code",
-      "norm_label": "handlesaveglobalgoldprice()",
-      "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
-      "source_location": "L203"
-    },
-    {
-      "id": "src_app_admin_admin_priceapprovalpanel_priceapprovalpanel_handlescrapeantam",
-      "label": "handleScrapeAntam()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "admin/page.tsx",
-      "file_type": "code",
-      "norm_label": "handlescrapeantam()",
-      "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
-      "source_location": "L184"
-    },
-    {
-      "id": "src_components_admin_adminskeleton_adminskeleton",
-      "label": "AdminSkeleton()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "admin/page.tsx",
-      "file_type": "code",
-      "norm_label": "adminskeleton()",
-      "source_file": "src/components/admin/AdminSkeleton.tsx",
-      "source_location": "L1"
     },
     {
       "id": "src_components_pricepreviewmodal_formatrupiah",
@@ -2842,7 +2867,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 9,
-      "community_name": "admin/page.tsx",
+      "community_name": "PricePreviewModal.tsx",
       "file_type": "code",
       "norm_label": "formatrupiah()",
       "source_file": "src/components/PricePreviewModal.tsx",
@@ -2854,7 +2879,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 9,
-      "community_name": "admin/page.tsx",
+      "community_name": "PricePreviewModal.tsx",
       "file_type": "code",
       "norm_label": "pricepreviewmodal()",
       "source_file": "src/components/PricePreviewModal.tsx",
@@ -2866,7 +2891,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 9,
-      "community_name": "admin/page.tsx",
+      "community_name": "PricePreviewModal.tsx",
       "file_type": "code",
       "norm_label": "tabbedpricelist()",
       "source_file": "src/components/TabbedPricelist.tsx",
@@ -2878,7 +2903,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 9,
-      "community_name": "admin/page.tsx",
+      "community_name": "PricePreviewModal.tsx",
       "file_type": "code",
       "norm_label": "perhiasanrank()",
       "source_file": "src/lib/gold-api.ts",
@@ -3171,116 +3196,6 @@
       "source_location": "L1"
     },
     {
-      "id": "src_app_api_admin_preview_prices_route",
-      "label": "preview-prices/route.ts",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "getSetting",
-      "file_type": "code",
-      "norm_label": "preview-prices/route.ts",
-      "source_file": "src/app/api/admin/preview-prices/route.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_app_api_admin_preview_prices_route_dynamic",
-      "label": "dynamic",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "getSetting",
-      "file_type": "code",
-      "norm_label": "dynamic",
-      "source_file": "src/app/api/admin/preview-prices/route.ts",
-      "source_location": "L4"
-    },
-    {
-      "id": "src_app_api_admin_publish_prices_route",
-      "label": "publish-prices/route.ts",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "getSetting",
-      "file_type": "code",
-      "norm_label": "publish-prices/route.ts",
-      "source_file": "src/app/api/admin/publish-prices/route.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_app_api_admin_publish_prices_route_dynamic",
-      "label": "dynamic",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "getSetting",
-      "file_type": "code",
-      "norm_label": "dynamic",
-      "source_file": "src/app/api/admin/publish-prices/route.ts",
-      "source_location": "L5"
-    },
-    {
-      "id": "src_app_api_admin_trigger_update_route",
-      "label": "trigger-update/route.ts",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "getSetting",
-      "file_type": "code",
-      "norm_label": "trigger-update/route.ts",
-      "source_file": "src/app/api/admin/trigger-update/route.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_app_api_admin_trigger_update_route_dynamic",
-      "label": "dynamic",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "getSetting",
-      "file_type": "code",
-      "norm_label": "dynamic",
-      "source_file": "src/app/api/admin/trigger-update/route.ts",
-      "source_location": "L10"
-    },
-    {
-      "id": "src_app_api_cron_scrape_antam_route",
-      "label": "scrape-antam/route.ts",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "getSetting",
-      "file_type": "code",
-      "norm_label": "scrape-antam/route.ts",
-      "source_file": "src/app/api/cron/scrape-antam/route.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_app_api_cron_scrape_antam_route_dynamic",
-      "label": "dynamic",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "getSetting",
-      "file_type": "code",
-      "norm_label": "dynamic",
-      "source_file": "src/app/api/cron/scrape-antam/route.ts",
-      "source_location": "L4"
-    },
-    {
-      "id": "src_app_api_cron_update_prices_route",
-      "label": "update-prices/route.ts",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "getSetting",
-      "file_type": "code",
-      "norm_label": "update-prices/route.ts",
-      "source_file": "src/app/api/cron/update-prices/route.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_app_api_cron_update_prices_route_dynamic",
-      "label": "dynamic",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "getSetting",
-      "file_type": "code",
-      "norm_label": "dynamic",
-      "source_file": "src/app/api/cron/update-prices/route.ts",
-      "source_location": "L5"
-    },
-    {
       "id": "src_app_layout",
       "label": "app/layout.tsx",
       "_origin": "ast",
@@ -3351,7 +3266,7 @@
       "label": "admin/harga/page.tsx",
       "_origin": "ast",
       "community": 11,
-      "community_name": "getAllGoldTypes",
+      "community_name": "admin/page.tsx",
       "file_type": "code",
       "norm_label": "admin/harga/page.tsx",
       "source_file": "src/app/(admin)/admin/harga/page.tsx",
@@ -3362,7 +3277,7 @@
       "label": "dynamic",
       "_origin": "ast",
       "community": 11,
-      "community_name": "getAllGoldTypes",
+      "community_name": "admin/page.tsx",
       "file_type": "code",
       "norm_label": "dynamic",
       "source_file": "src/app/(admin)/admin/harga/page.tsx",
@@ -3373,7 +3288,7 @@
       "label": "jenis-emas/page.tsx",
       "_origin": "ast",
       "community": 11,
-      "community_name": "getAllGoldTypes",
+      "community_name": "admin/page.tsx",
       "file_type": "code",
       "norm_label": "jenis-emas/page.tsx",
       "source_file": "src/app/(admin)/admin/jenis-emas/page.tsx",
@@ -3384,18 +3299,29 @@
       "label": "dynamic",
       "_origin": "ast",
       "community": 11,
-      "community_name": "getAllGoldTypes",
+      "community_name": "admin/page.tsx",
       "file_type": "code",
       "norm_label": "dynamic",
       "source_file": "src/app/(admin)/admin/jenis-emas/page.tsx",
       "source_location": "L4"
     },
     {
+      "id": "src_app_admin_admin_loading",
+      "label": "loading.tsx",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "admin/page.tsx",
+      "file_type": "code",
+      "norm_label": "loading.tsx",
+      "source_file": "src/app/(admin)/admin/loading.tsx",
+      "source_location": "L1"
+    },
+    {
       "id": "src_app_admin_admin_orders_page",
       "label": "orders/page.tsx",
       "_origin": "ast",
       "community": 11,
-      "community_name": "getAllGoldTypes",
+      "community_name": "admin/page.tsx",
       "file_type": "code",
       "norm_label": "orders/page.tsx",
       "source_file": "src/app/(admin)/admin/orders/page.tsx",
@@ -3406,7 +3332,7 @@
       "label": "dynamic",
       "_origin": "ast",
       "community": 11,
-      "community_name": "getAllGoldTypes",
+      "community_name": "admin/page.tsx",
       "file_type": "code",
       "norm_label": "dynamic",
       "source_file": "src/app/(admin)/admin/orders/page.tsx",
@@ -3417,18 +3343,73 @@
       "label": "metadata",
       "_origin": "ast",
       "community": 11,
-      "community_name": "getAllGoldTypes",
+      "community_name": "admin/page.tsx",
       "file_type": "code",
       "norm_label": "metadata",
       "source_file": "src/app/(admin)/admin/orders/page.tsx",
       "source_location": "L6"
     },
     {
+      "id": "src_app_admin_admin_page",
+      "label": "admin/page.tsx",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "admin/page.tsx",
+      "file_type": "code",
+      "norm_label": "admin/page.tsx",
+      "source_file": "src/app/(admin)/admin/page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_admin_admin_page_dynamic",
+      "label": "dynamic",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "admin/page.tsx",
+      "file_type": "code",
+      "norm_label": "dynamic",
+      "source_file": "src/app/(admin)/admin/page.tsx",
+      "source_location": "L12"
+    },
+    {
+      "id": "src_app_admin_admin_pengaturan_adminpengaturanclient",
+      "label": "AdminPengaturanClient.tsx",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "admin/page.tsx",
+      "file_type": "code",
+      "norm_label": "adminpengaturanclient.tsx",
+      "source_file": "src/app/(admin)/admin/pengaturan/AdminPengaturanClient.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_admin_admin_pengaturan_page",
+      "label": "pengaturan/page.tsx",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "admin/page.tsx",
+      "file_type": "code",
+      "norm_label": "pengaturan/page.tsx",
+      "source_file": "src/app/(admin)/admin/pengaturan/page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_admin_admin_pengaturan_page_dynamic",
+      "label": "dynamic",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "admin/page.tsx",
+      "file_type": "code",
+      "norm_label": "dynamic",
+      "source_file": "src/app/(admin)/admin/pengaturan/page.tsx",
+      "source_location": "L4"
+    },
+    {
       "id": "src_app_public_harga_page",
       "label": "(public)/harga/page.tsx",
       "_origin": "ast",
       "community": 11,
-      "community_name": "getAllGoldTypes",
+      "community_name": "admin/page.tsx",
       "file_type": "code",
       "norm_label": "(public)/harga/page.tsx",
       "source_file": "src/app/(public)/harga/page.tsx",
@@ -3439,7 +3420,7 @@
       "label": "dynamic",
       "_origin": "ast",
       "community": 11,
-      "community_name": "getAllGoldTypes",
+      "community_name": "admin/page.tsx",
       "file_type": "code",
       "norm_label": "dynamic",
       "source_file": "src/app/(public)/harga/page.tsx",
@@ -3450,7 +3431,7 @@
       "label": "metadata",
       "_origin": "ast",
       "community": 11,
-      "community_name": "getAllGoldTypes",
+      "community_name": "admin/page.tsx",
       "file_type": "code",
       "norm_label": "metadata",
       "source_file": "src/app/(public)/harga/page.tsx",
@@ -3461,7 +3442,7 @@
       "label": "kalkulator/page.tsx",
       "_origin": "ast",
       "community": 11,
-      "community_name": "getAllGoldTypes",
+      "community_name": "admin/page.tsx",
       "file_type": "code",
       "norm_label": "kalkulator/page.tsx",
       "source_file": "src/app/(public)/kalkulator/page.tsx",
@@ -3472,7 +3453,7 @@
       "label": "dynamic",
       "_origin": "ast",
       "community": 11,
-      "community_name": "getAllGoldTypes",
+      "community_name": "admin/page.tsx",
       "file_type": "code",
       "norm_label": "dynamic",
       "source_file": "src/app/(public)/kalkulator/page.tsx",
@@ -3483,21 +3464,43 @@
       "label": "metadata",
       "_origin": "ast",
       "community": 11,
-      "community_name": "getAllGoldTypes",
+      "community_name": "admin/page.tsx",
       "file_type": "code",
       "norm_label": "metadata",
       "source_file": "src/app/(public)/kalkulator/page.tsx",
       "source_location": "L7"
     },
     {
+      "id": "src_components_admin_adminskeleton",
+      "label": "AdminSkeleton.tsx",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "admin/page.tsx",
+      "file_type": "code",
+      "norm_label": "adminskeleton.tsx",
+      "source_file": "src/components/admin/AdminSkeleton.tsx",
+      "source_location": "L1"
+    },
+    {
       "id": "src_components_legalnotice",
       "label": "LegalNotice.tsx",
       "_origin": "ast",
       "community": 11,
-      "community_name": "getAllGoldTypes",
+      "community_name": "admin/page.tsx",
       "file_type": "code",
       "norm_label": "legalnotice.tsx",
       "source_file": "src/components/LegalNotice.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_lib_supabase_anon",
+      "label": "anon.ts",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "admin/page.tsx",
+      "file_type": "code",
+      "norm_label": "anon.ts",
+      "source_file": "src/lib/supabase/anon.ts",
       "source_location": "L1"
     },
     {
@@ -3982,7 +3985,7 @@
       "file_type": "code",
       "norm_label": "crosshairplugin",
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L52"
+      "source_location": "L54"
     },
     {
       "id": "src_components_pricechart_periods",
@@ -3993,7 +3996,7 @@
       "file_type": "code",
       "norm_label": "periods",
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L31"
+      "source_location": "L33"
     },
     {
       "id": "src_components_pricechart_series",
@@ -4004,7 +4007,7 @@
       "file_type": "code",
       "norm_label": "series",
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L23"
+      "source_location": "L25"
     },
     {
       "id": "package_dependencies",
@@ -4249,39 +4252,6 @@
       "source_location": "L4"
     },
     {
-      "id": "src_app_admin_admin_pengaturan_adminpengaturanclient",
-      "label": "AdminPengaturanClient.tsx",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "gold-api.ts",
-      "file_type": "code",
-      "norm_label": "adminpengaturanclient.tsx",
-      "source_file": "src/app/(admin)/admin/pengaturan/AdminPengaturanClient.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_app_admin_admin_pengaturan_page",
-      "label": "pengaturan/page.tsx",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "gold-api.ts",
-      "file_type": "code",
-      "norm_label": "pengaturan/page.tsx",
-      "source_file": "src/app/(admin)/admin/pengaturan/page.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_app_admin_admin_pengaturan_page_dynamic",
-      "label": "dynamic",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "gold-api.ts",
-      "file_type": "code",
-      "norm_label": "dynamic",
-      "source_file": "src/app/(admin)/admin/pengaturan/page.tsx",
-      "source_location": "L4"
-    },
-    {
       "id": "src_app_api_admin_create_gold_type_route",
       "label": "create-gold-type/route.ts",
       "_origin": "ast",
@@ -4304,6 +4274,72 @@
       "source_location": "L1"
     },
     {
+      "id": "src_app_api_admin_preview_prices_route",
+      "label": "preview-prices/route.ts",
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "gold-api.ts",
+      "file_type": "code",
+      "norm_label": "preview-prices/route.ts",
+      "source_file": "src/app/api/admin/preview-prices/route.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_api_admin_preview_prices_route_dynamic",
+      "label": "dynamic",
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "gold-api.ts",
+      "file_type": "code",
+      "norm_label": "dynamic",
+      "source_file": "src/app/api/admin/preview-prices/route.ts",
+      "source_location": "L4"
+    },
+    {
+      "id": "src_app_api_admin_publish_prices_route",
+      "label": "publish-prices/route.ts",
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "gold-api.ts",
+      "file_type": "code",
+      "norm_label": "publish-prices/route.ts",
+      "source_file": "src/app/api/admin/publish-prices/route.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_api_admin_publish_prices_route_dynamic",
+      "label": "dynamic",
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "gold-api.ts",
+      "file_type": "code",
+      "norm_label": "dynamic",
+      "source_file": "src/app/api/admin/publish-prices/route.ts",
+      "source_location": "L5"
+    },
+    {
+      "id": "src_app_api_admin_trigger_update_route",
+      "label": "trigger-update/route.ts",
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "gold-api.ts",
+      "file_type": "code",
+      "norm_label": "trigger-update/route.ts",
+      "source_file": "src/app/api/admin/trigger-update/route.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_api_admin_trigger_update_route_dynamic",
+      "label": "dynamic",
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "gold-api.ts",
+      "file_type": "code",
+      "norm_label": "dynamic",
+      "source_file": "src/app/api/admin/trigger-update/route.ts",
+      "source_location": "L10"
+    },
+    {
       "id": "src_app_api_admin_update_gold_type_route",
       "label": "update-gold-type/route.ts",
       "_origin": "ast",
@@ -4313,6 +4349,50 @@
       "norm_label": "update-gold-type/route.ts",
       "source_file": "src/app/api/admin/update-gold-type/route.ts",
       "source_location": "L1"
+    },
+    {
+      "id": "src_app_api_cron_scrape_antam_route",
+      "label": "scrape-antam/route.ts",
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "gold-api.ts",
+      "file_type": "code",
+      "norm_label": "scrape-antam/route.ts",
+      "source_file": "src/app/api/cron/scrape-antam/route.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_api_cron_scrape_antam_route_dynamic",
+      "label": "dynamic",
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "gold-api.ts",
+      "file_type": "code",
+      "norm_label": "dynamic",
+      "source_file": "src/app/api/cron/scrape-antam/route.ts",
+      "source_location": "L4"
+    },
+    {
+      "id": "src_app_api_cron_update_prices_route",
+      "label": "update-prices/route.ts",
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "gold-api.ts",
+      "file_type": "code",
+      "norm_label": "update-prices/route.ts",
+      "source_file": "src/app/api/cron/update-prices/route.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_api_cron_update_prices_route_dynamic",
+      "label": "dynamic",
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "gold-api.ts",
+      "file_type": "code",
+      "norm_label": "dynamic",
+      "source_file": "src/app/api/cron/update-prices/route.ts",
+      "source_location": "L5"
     },
     {
       "id": "src_components_hero",
@@ -4337,22 +4417,11 @@
       "source_location": "L1"
     },
     {
-      "id": "src_lib_supabase_anon",
-      "label": "anon.ts",
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "gold-api.ts",
-      "file_type": "code",
-      "norm_label": "anon.ts",
-      "source_file": "src/lib/supabase/anon.ts",
-      "source_location": "L1"
-    },
-    {
       "id": "src_app_admin_admin_harga_adminhargaclient",
       "label": "AdminHargaClient.tsx",
       "_origin": "ast",
       "community": 4,
-      "community_name": "AdminHargaClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "adminhargaclient.tsx",
       "source_file": "src/app/(admin)/admin/harga/AdminHargaClient.tsx",
@@ -4363,18 +4432,62 @@
       "label": "MODE_TABS",
       "_origin": "ast",
       "community": 4,
-      "community_name": "AdminHargaClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "mode_tabs",
       "source_file": "src/app/(admin)/admin/harga/AdminHargaClient.tsx",
       "source_location": "L12"
     },
     {
+      "id": "src_app_admin_admin_login_page",
+      "label": "login/page.tsx",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "createClient",
+      "file_type": "code",
+      "norm_label": "login/page.tsx",
+      "source_file": "src/app/(admin)/admin/login/page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_admin_layout",
+      "label": "(admin)/layout.tsx",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "createClient",
+      "file_type": "code",
+      "norm_label": "(admin)/layout.tsx",
+      "source_file": "src/app/(admin)/layout.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_components_admin_adminsidebar",
+      "label": "AdminSidebar.tsx",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "createClient",
+      "file_type": "code",
+      "norm_label": "adminsidebar.tsx",
+      "source_file": "src/components/admin/AdminSidebar.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_components_admin_adminsidebar_links",
+      "label": "links",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "createClient",
+      "file_type": "code",
+      "norm_label": "links",
+      "source_file": "src/components/admin/AdminSidebar.tsx",
+      "source_location": "L9"
+    },
+    {
       "id": "src_components_calculator",
       "label": "Calculator.tsx",
       "_origin": "ast",
       "community": 4,
-      "community_name": "AdminHargaClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "calculator.tsx",
       "source_file": "src/components/Calculator.tsx",
@@ -4385,7 +4498,7 @@
       "label": "CATEGORY_LABELS",
       "_origin": "ast",
       "community": 4,
-      "community_name": "AdminHargaClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "category_labels",
       "source_file": "src/components/Calculator.tsx",
@@ -4396,7 +4509,7 @@
       "label": "quickQty",
       "_origin": "ast",
       "community": 4,
-      "community_name": "AdminHargaClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "quickqty",
       "source_file": "src/components/Calculator.tsx",
@@ -4407,7 +4520,7 @@
       "label": "quickWeights",
       "_origin": "ast",
       "community": 4,
-      "community_name": "AdminHargaClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "quickweights",
       "source_file": "src/components/Calculator.tsx",
@@ -4418,11 +4531,33 @@
       "label": "SELL_CATEGORY_ORDER",
       "_origin": "ast",
       "community": 4,
-      "community_name": "AdminHargaClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "sell_category_order",
       "source_file": "src/components/Calculator.tsx",
       "source_location": "L19"
+    },
+    {
+      "id": "src_components_confirmmodal",
+      "label": "ConfirmModal.tsx",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "createClient",
+      "file_type": "code",
+      "norm_label": "confirmmodal.tsx",
+      "source_file": "src/components/ConfirmModal.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_lib_supabase_client",
+      "label": "client.ts",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "createClient",
+      "file_type": "code",
+      "norm_label": "client.ts",
+      "source_file": "src/lib/supabase/client.ts",
+      "source_location": "L1"
     },
     {
       "id": "package",
@@ -4887,72 +5022,6 @@
       "source_location": "L33"
     },
     {
-      "id": "src_app_admin_admin_login_page",
-      "label": "login/page.tsx",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "JenisEmasClient.tsx",
-      "file_type": "code",
-      "norm_label": "login/page.tsx",
-      "source_file": "src/app/(admin)/admin/login/page.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_app_admin_layout",
-      "label": "(admin)/layout.tsx",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "JenisEmasClient.tsx",
-      "file_type": "code",
-      "norm_label": "(admin)/layout.tsx",
-      "source_file": "src/app/(admin)/layout.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_components_admin_adminsidebar",
-      "label": "AdminSidebar.tsx",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "JenisEmasClient.tsx",
-      "file_type": "code",
-      "norm_label": "adminsidebar.tsx",
-      "source_file": "src/components/admin/AdminSidebar.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_components_admin_adminsidebar_links",
-      "label": "links",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "JenisEmasClient.tsx",
-      "file_type": "code",
-      "norm_label": "links",
-      "source_file": "src/components/admin/AdminSidebar.tsx",
-      "source_location": "L9"
-    },
-    {
-      "id": "src_components_confirmmodal",
-      "label": "ConfirmModal.tsx",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "JenisEmasClient.tsx",
-      "file_type": "code",
-      "norm_label": "confirmmodal.tsx",
-      "source_file": "src/components/ConfirmModal.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_lib_supabase_client",
-      "label": "client.ts",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "JenisEmasClient.tsx",
-      "file_type": "code",
-      "norm_label": "client.ts",
-      "source_file": "src/lib/supabase/client.ts",
-      "source_location": "L1"
-    },
-    {
       "id": "src_app_admin_admin_stock_page",
       "label": "stock/page.tsx",
       "_origin": "ast",
@@ -4997,58 +5066,14 @@
       "source_location": "L1"
     },
     {
-      "id": "src_app_admin_admin_loading",
-      "label": "loading.tsx",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "admin/page.tsx",
-      "file_type": "code",
-      "norm_label": "loading.tsx",
-      "source_file": "src/app/(admin)/admin/loading.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_app_admin_admin_page",
-      "label": "admin/page.tsx",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "admin/page.tsx",
-      "file_type": "code",
-      "norm_label": "admin/page.tsx",
-      "source_file": "src/app/(admin)/admin/page.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_app_admin_admin_page_dynamic",
-      "label": "dynamic",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "admin/page.tsx",
-      "file_type": "code",
-      "norm_label": "dynamic",
-      "source_file": "src/app/(admin)/admin/page.tsx",
-      "source_location": "L12"
-    },
-    {
       "id": "src_app_admin_admin_priceapprovalpanel",
       "label": "PriceApprovalPanel.tsx",
       "_origin": "ast",
       "community": 9,
-      "community_name": "admin/page.tsx",
+      "community_name": "PricePreviewModal.tsx",
       "file_type": "code",
       "norm_label": "priceapprovalpanel.tsx",
       "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_components_admin_adminskeleton",
-      "label": "AdminSkeleton.tsx",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "admin/page.tsx",
-      "file_type": "code",
-      "norm_label": "adminskeleton.tsx",
-      "source_file": "src/components/admin/AdminSkeleton.tsx",
       "source_location": "L1"
     },
     {
@@ -5056,7 +5081,7 @@
       "label": "PricePreviewModal.tsx",
       "_origin": "ast",
       "community": 9,
-      "community_name": "admin/page.tsx",
+      "community_name": "PricePreviewModal.tsx",
       "file_type": "code",
       "norm_label": "pricepreviewmodal.tsx",
       "source_file": "src/components/PricePreviewModal.tsx",
@@ -5067,7 +5092,7 @@
       "label": "CATEGORY_LABELS",
       "_origin": "ast",
       "community": 9,
-      "community_name": "admin/page.tsx",
+      "community_name": "PricePreviewModal.tsx",
       "file_type": "code",
       "norm_label": "category_labels",
       "source_file": "src/components/PricePreviewModal.tsx",
@@ -5078,7 +5103,7 @@
       "label": "TabbedPricelist.tsx",
       "_origin": "ast",
       "community": 9,
-      "community_name": "admin/page.tsx",
+      "community_name": "PricePreviewModal.tsx",
       "file_type": "code",
       "norm_label": "tabbedpricelist.tsx",
       "source_file": "src/components/TabbedPricelist.tsx",
@@ -5089,7 +5114,7 @@
       "label": "CATEGORIES",
       "_origin": "ast",
       "community": 9,
-      "community_name": "admin/page.tsx",
+      "community_name": "PricePreviewModal.tsx",
       "file_type": "code",
       "norm_label": "categories",
       "source_file": "src/components/TabbedPricelist.tsx",
@@ -5100,7 +5125,7 @@
       "label": "BB_LM_ORDER",
       "_origin": "ast",
       "community": 9,
-      "community_name": "admin/page.tsx",
+      "community_name": "PricePreviewModal.tsx",
       "file_type": "code",
       "norm_label": "bb_lm_order",
       "source_file": "src/lib/gold-api.ts",
@@ -5111,7 +5136,7 @@
       "label": "BB_LOGAM_ORDER",
       "_origin": "ast",
       "community": 9,
-      "community_name": "admin/page.tsx",
+      "community_name": "PricePreviewModal.tsx",
       "file_type": "code",
       "norm_label": "bb_logam_order",
       "source_file": "src/lib/gold-api.ts",
@@ -6161,7 +6186,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/app/api/admin/update-gold-types/route.ts",
-      "source_location": "L11",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_api_admin_update_gold_types_route_post",
+      "target": "src_lib_gold_api_synctodayprices",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/app/api/admin/update-gold-types/route.ts",
+      "source_location": "L21",
       "weight": 1.0
     },
     {
@@ -6353,7 +6390,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/app/(public)/harga/page.tsx",
-      "source_location": "L52",
+      "source_location": "L58",
       "weight": 1.0
     },
     {
@@ -6605,7 +6642,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L262",
+      "source_location": "L273",
       "weight": 1.0
     },
     {
@@ -6617,7 +6654,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L276",
+      "source_location": "L287",
       "weight": 1.0
     },
     {
@@ -6749,7 +6786,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L457",
+      "source_location": "L478",
       "weight": 1.0
     },
     {
@@ -6761,7 +6798,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L356",
+      "source_location": "L377",
       "weight": 1.0
     },
     {
@@ -6773,7 +6810,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L357",
+      "source_location": "L378",
       "weight": 1.0
     },
     {
@@ -6785,7 +6822,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L387",
+      "source_location": "L408",
       "weight": 1.0
     },
     {
@@ -6809,7 +6846,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L654",
+      "source_location": "L675",
       "weight": 1.0
     },
     {
@@ -6821,7 +6858,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L655",
+      "source_location": "L676",
       "weight": 1.0
     },
     {
@@ -6857,7 +6894,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L744",
+      "source_location": "L765",
       "weight": 1.0
     },
     {
@@ -6869,7 +6906,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L775",
+      "source_location": "L796",
       "weight": 1.0
     },
     {
@@ -6893,7 +6930,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L620",
+      "source_location": "L641",
       "weight": 1.0
     },
     {
@@ -6941,7 +6978,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L538",
+      "source_location": "L559",
       "weight": 1.0
     },
     {
@@ -6953,7 +6990,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L541",
+      "source_location": "L562",
       "weight": 1.0
     },
     {
@@ -6993,6 +7030,66 @@
       "weight": 1.0
     },
     {
+      "source": "src_lib_gold_api_synctodayprices",
+      "target": "src_lib_gold_api_getmarketinfo",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L349",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_gold_api_synctodayprices",
+      "target": "src_lib_gold_api_converttoidrpergram",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L350",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_gold_api_synctodayprices",
+      "target": "src_lib_gold_api_calculateprices",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L354",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_gold_api_synctodayprices",
+      "target": "src_lib_gold_api_insertpricehistory",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L364",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_gold_api_synctodayprices",
+      "target": "src_lib_gold_api_setsetting",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L365",
+      "weight": 1.0
+    },
+    {
       "source": "src_lib_gold_api_updategoldtype",
       "target": "src_lib_supabase_admin_createadminclient",
       "relation": "calls",
@@ -7013,7 +7110,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L569",
+      "source_location": "L590",
       "weight": 1.0
     },
     {
@@ -7025,7 +7122,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L570",
+      "source_location": "L591",
       "weight": 1.0
     },
     {
@@ -7481,7 +7578,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L76",
+      "source_location": "L78",
       "weight": 1.0
     },
     {
@@ -7493,7 +7590,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L683",
+      "source_location": "L704",
       "weight": 1.0
     },
     {
@@ -7505,7 +7602,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L692",
+      "source_location": "L713",
       "weight": 1.0
     },
     {
@@ -8778,6 +8875,18 @@
       "context": "import",
       "source_file": "src/app/api/admin/update-gold-types/route.ts",
       "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_api_admin_update_gold_types_route",
+      "target": "src_lib_gold_api_synctodayprices",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/api/admin/update-gold-types/route.ts",
+      "source_location": "L3",
       "weight": 1.0
     },
     {
@@ -10254,6 +10363,18 @@
       "context": "import",
       "source_file": "src/app/api/admin/update-gold-types/route.ts",
       "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_api_admin_update_gold_types_route",
+      "target": "src_lib_gold_api",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/api/admin/update-gold-types/route.ts",
+      "source_location": "L3",
       "weight": 1.0
     },
     {
@@ -12519,7 +12640,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/api/admin/update-gold-types/route.ts",
-      "source_location": "L4",
+      "source_location": "L5",
       "weight": 1.0
     },
     {
@@ -13294,7 +13415,7 @@
     },
     {
       "source": "src_components_pricechart",
-      "target": "src_components_pricechart_series",
+      "target": "src_components_pricechart_todayvalues",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -13305,18 +13426,18 @@
     },
     {
       "source": "src_components_pricechart",
-      "target": "src_components_pricechart_serieskey",
+      "target": "src_components_pricechart_series",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L29",
+      "source_location": "L25",
       "weight": 1.0
     },
     {
       "source": "src_components_pricechart",
-      "target": "src_components_pricechart_periods",
+      "target": "src_components_pricechart_serieskey",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -13327,13 +13448,24 @@
     },
     {
       "source": "src_components_pricechart",
+      "target": "src_components_pricechart_periods",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/components/PriceChart.tsx",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_pricechart",
       "target": "src_components_pricechart_formatrupiah",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L37",
+      "source_location": "L39",
       "weight": 1.0
     },
     {
@@ -13344,7 +13476,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L41",
+      "source_location": "L43",
       "weight": 1.0
     },
     {
@@ -13355,7 +13487,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L47",
+      "source_location": "L49",
       "weight": 1.0
     },
     {
@@ -13366,7 +13498,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L52",
+      "source_location": "L54",
       "weight": 1.0
     },
     {
@@ -13377,7 +13509,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L72",
+      "source_location": "L74",
       "weight": 1.0
     },
     {
@@ -13668,7 +13800,7 @@
     },
     {
       "source": "src_lib_gold_api",
-      "target": "src_lib_gold_api_fetchinternationalgoldprice",
+      "target": "src_lib_gold_api_synctodayprices",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -13679,24 +13811,24 @@
     },
     {
       "source": "src_lib_gold_api",
+      "target": "src_lib_gold_api_fetchinternationalgoldprice",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L369",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_gold_api",
       "target": "src_lib_gold_api_fetchallfallbackprices",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L451",
-      "weight": 1.0
-    },
-    {
-      "source": "src_lib_gold_api",
-      "target": "src_lib_gold_api_converttoidrpergram",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/lib/gold-api.ts",
-      "source_location": "L479",
+      "source_location": "L472",
       "weight": 1.0
     },
     {
@@ -13712,13 +13844,24 @@
     },
     {
       "source": "src_lib_gold_api",
+      "target": "src_lib_gold_api_converttoidrpergram",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L500",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_gold_api",
       "target": "src_lib_gold_api_scrapeantamresult",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L484",
+      "source_location": "L505",
       "weight": 1.0
     },
     {
@@ -13729,7 +13872,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L492",
+      "source_location": "L513",
       "weight": 1.0
     },
     {
@@ -13740,7 +13883,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L548",
+      "source_location": "L569",
       "weight": 1.0
     },
     {
@@ -13751,7 +13894,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L554",
+      "source_location": "L575",
       "weight": 1.0
     },
     {
@@ -13762,18 +13905,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L568",
-      "weight": 1.0
-    },
-    {
-      "source": "src_lib_gold_api",
-      "target": "src_lib_gold_api_publicsettings",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/lib/gold-api.ts",
-      "source_location": "L609",
+      "source_location": "L589",
       "weight": 1.0
     },
     {
@@ -13789,13 +13921,24 @@
     },
     {
       "source": "src_lib_gold_api",
+      "target": "src_lib_gold_api_publicsettings",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L630",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_gold_api",
       "target": "src_lib_gold_api_getpublicsettings",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L619",
+      "source_location": "L640",
       "weight": 1.0
     },
     {
@@ -13806,7 +13949,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L635",
+      "source_location": "L656",
       "weight": 1.0
     },
     {
@@ -13817,7 +13960,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L652",
+      "source_location": "L673",
       "weight": 1.0
     },
     {
@@ -13850,7 +13993,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L738",
+      "source_location": "L759",
       "weight": 1.0
     },
     {
@@ -13872,7 +14015,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L781",
+      "source_location": "L802",
       "weight": 1.0
     },
     {
@@ -13883,7 +14026,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L788",
+      "source_location": "L809",
       "weight": 1.0
     },
     {
@@ -13894,7 +14037,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L797",
+      "source_location": "L818",
       "weight": 1.0
     },
     {
@@ -14016,7 +14159,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L107",
+      "source_location": "L118",
       "weight": 1.0
     },
     {

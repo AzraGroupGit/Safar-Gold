@@ -82,7 +82,7 @@
       "file_type": "code",
       "norm_label": "serieskey",
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L31"
+      "source_location": "L30"
     },
     {
       "id": "src_components_pricechart_todayvalues",
@@ -1827,7 +1827,7 @@
       "file_type": "code",
       "norm_label": "formatcompact()",
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L43"
+      "source_location": "L42"
     },
     {
       "id": "src_components_pricechart_formatdatelabel",
@@ -1839,7 +1839,7 @@
       "file_type": "code",
       "norm_label": "formatdatelabel()",
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L49"
+      "source_location": "L48"
     },
     {
       "id": "src_components_pricechart_formatrupiah",
@@ -1851,7 +1851,7 @@
       "file_type": "code",
       "norm_label": "formatrupiah()",
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L39"
+      "source_location": "L38"
     },
     {
       "id": "src_components_pricechart_pricechart",
@@ -1863,7 +1863,7 @@
       "file_type": "code",
       "norm_label": "pricechart()",
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L74"
+      "source_location": "L73"
     },
     {
       "id": "src_components_pricechart_pricechart_toggle",
@@ -1875,7 +1875,7 @@
       "file_type": "code",
       "norm_label": "toggle()",
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L78"
+      "source_location": "L77"
     },
     {
       "id": "src_app_api_regions_route_get",
@@ -3985,7 +3985,7 @@
       "file_type": "code",
       "norm_label": "crosshairplugin",
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L54"
+      "source_location": "L53"
     },
     {
       "id": "src_components_pricechart_periods",
@@ -3996,7 +3996,7 @@
       "file_type": "code",
       "norm_label": "periods",
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L33"
+      "source_location": "L32"
     },
     {
       "id": "src_components_pricechart_series",
@@ -6390,7 +6390,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/app/(public)/harga/page.tsx",
-      "source_location": "L58",
+      "source_location": "L57",
       "weight": 1.0
     },
     {
@@ -6642,7 +6642,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L273",
+      "source_location": "L270",
       "weight": 1.0
     },
     {
@@ -6654,7 +6654,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L287",
+      "source_location": "L284",
       "weight": 1.0
     },
     {
@@ -7578,7 +7578,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L78",
+      "source_location": "L77",
       "weight": 1.0
     },
     {
@@ -13443,7 +13443,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L31",
+      "source_location": "L30",
       "weight": 1.0
     },
     {
@@ -13454,7 +13454,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L33",
+      "source_location": "L32",
       "weight": 1.0
     },
     {
@@ -13465,7 +13465,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L39",
+      "source_location": "L38",
       "weight": 1.0
     },
     {
@@ -13476,7 +13476,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L43",
+      "source_location": "L42",
       "weight": 1.0
     },
     {
@@ -13487,7 +13487,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L49",
+      "source_location": "L48",
       "weight": 1.0
     },
     {
@@ -13498,7 +13498,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L54",
+      "source_location": "L53",
       "weight": 1.0
     },
     {
@@ -13509,7 +13509,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L74",
+      "source_location": "L73",
       "weight": 1.0
     },
     {
@@ -14159,7 +14159,7 @@
       "confidence_score": 0.85,
       "context": "argument",
       "source_file": "src/components/PriceChart.tsx",
-      "source_location": "L118",
+      "source_location": "L115",
       "weight": 1.0
     },
     {
@@ -14227,5 +14227,5 @@
       "source_file": "README.md"
     }
   ],
-  "built_at_commit": "65019a09b9364eef661aa3514f17dc1c5bba85b1"
+  "built_at_commit": "06d0997f435d43b50a18b5b2467e1afae3bee020"
 }
