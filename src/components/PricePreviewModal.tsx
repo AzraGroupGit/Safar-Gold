@@ -58,7 +58,7 @@ export default function PricePreviewModal({ open, onClose, items }: PricePreview
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto pt-[6vh] pb-10">
       <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative mx-4 w-full max-w-3xl rounded-2xl border border-border/60 bg-white shadow-2xl">
+      <div className="relative mx-4 w-full max-w-3xl rounded-xl border border-border/60 bg-white shadow-lg">
         <div className="flex items-center justify-between border-b border-border/40 px-6 py-4">
           <div>
             <h2 className="font-serif text-lg font-semibold text-text">Preview Harga</h2>
@@ -83,7 +83,7 @@ export default function PricePreviewModal({ open, onClose, items }: PricePreview
                   {CATEGORY_LABELS[category] ?? category}
                 </h3>
               </div>
-              <div className="overflow-hidden rounded-xl border border-border/40">
+              <div className="overflow-hidden rounded-lg border border-border/40">
                 <table className="w-full">
                   <thead>
                     <tr className="border-b border-border/40 bg-surface/50 text-left text-xs font-semibold uppercase tracking-wider text-text-muted">
@@ -107,13 +107,13 @@ export default function PricePreviewModal({ open, onClose, items }: PricePreview
                         <td className="px-4 py-3 text-sm text-text md:px-6">
                           <span className="font-medium">{item.name}</span>
                         </td>
-                        <td className="px-4 py-3 text-right text-sm font-semibold text-gold-dark md:px-6">
+                        <td className="px-4 py-3 text-right text-sm font-semibold tabular-nums text-gold-dark md:px-6">
                           {item.price > 0
                             ? `Rp ${formatRupiah(item.isTotalPrice && item.weight ? Math.round(item.price / item.weight) : item.price)}`
                             : "-"}
                         </td>
                         {category === "lm" && (
-                          <td className="px-4 py-3 text-right text-sm text-text-muted md:px-6">
+                          <td className="px-4 py-3 text-right text-sm tabular-nums text-text-muted md:px-6">
                             {item.price > 0 && item.weight
                               ? `Rp ${formatRupiah(item.isTotalPrice ? item.price : item.price * item.weight)}`
                               : "-"}
@@ -131,7 +131,7 @@ export default function PricePreviewModal({ open, onClose, items }: PricePreview
         <div className="flex items-center justify-end border-t border-border/40 px-6 py-4">
           <button
             onClick={onClose}
-            className="gold-gradient-bg rounded-xl px-6 py-2.5 text-sm font-semibold text-white shadow-md shadow-gold/20 transition-all hover:shadow-lg hover:shadow-gold/30"
+            className="rounded-lg bg-gold px-6 py-2.5 text-sm font-semibold text-[#1a1a1a] transition-colors hover:bg-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 focus-visible:ring-offset-2"
           >
             Tutup
           </button>

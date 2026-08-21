@@ -19,7 +19,7 @@ function TrendIndicator({ value }: { value: number }) {
   })}%`;
   return (
     <p
-      className={`mt-2 inline-flex items-center gap-1 text-xs font-medium ${
+      className={`mt-2 inline-flex items-center gap-1 text-xs font-medium tabular-nums ${
         up ? "text-emerald-600" : "text-red-500"
       }`}
     >
@@ -66,7 +66,7 @@ function StatCard({
         )}
         {label}
       </p>
-      <p className="mt-2.5 font-serif text-[1.7rem] font-semibold leading-none tracking-tight text-text">
+      <p className="mt-2.5 font-serif text-[1.7rem] font-semibold leading-none tracking-tight tabular-nums text-text">
         {value}
       </p>
       {trend !== null && trend !== undefined && <TrendIndicator value={trend} />}
@@ -284,7 +284,6 @@ export default function AdminDashboard() {
       {role !== "cs" && (
         <div className="rounded-xl border border-border/60 bg-white">
           <PriceApprovalPanel
-            goldTypes={goldTypes}
             initialHargaDasarJual={String(hargaDasarJual)}
             initialAcuanBuyback={String(acuanBuybackLM)}
             initialAdjJual={s.adjustment_jual ?? "0"}

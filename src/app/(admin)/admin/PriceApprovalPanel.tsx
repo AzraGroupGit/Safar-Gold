@@ -1,11 +1,9 @@
 "use client";
 
 import { useState, useRef } from "react";
-import type { GoldTypeRow } from "@/lib/gold-api";
 import PricePreviewModal from "@/components/PricePreviewModal";
 
 interface Props {
-  goldTypes: GoldTypeRow[];
   initialHargaDasarJual: string;
   initialAcuanBuyback: string;
   initialAdjJual: string;
@@ -24,12 +22,17 @@ interface Props {
   initialGlobalGoldPricePrev: string;
 }
 
-function formatRupiah(n: number): string {
-  return n.toLocaleString("id-ID");
-}
+type PreviewPriceItem = {
+  id: string;
+  name: string;
+  category: string;
+  price: number;
+  weight: number | null;
+  karat: number | null;
+  isTotalPrice?: boolean;
+};
 
 export default function PriceApprovalPanel({
-  goldTypes,
   initialHargaDasarJual,
   initialAcuanBuyback,
   initialAdjJual,
@@ -51,7 +54,7 @@ export default function PriceApprovalPanel({
   const [acuanBuyback, setAcuanBuyback] = useState(initialAcuanBuyback);
   const [adjJual, setAdjJual] = useState(initialAdjJual);
   const [adjBeli, setAdjBeli] = useState(initialAdjBeli);
-  const [adjPerhiasan, setAdjPerhiasan] = useState(initialAdjPerhiasan);
+  const [adjPerhiasan] = useState(initialAdjPerhiasan);
   const [persenBuybackPerhiasan, setPersenBuybackPerhiasan] = useState(
     initialPersenBuybackPerhiasan,
   );
@@ -81,7 +84,7 @@ export default function PriceApprovalPanel({
   const [scraping, setScraping] = useState(false);
   const [scrapeError, setScrapeError] = useState("");
 
-  const [previewItems, setPreviewItems] = useState<any[]>([]);
+  const [previewItems, setPreviewItems] = useState<PreviewPriceItem[]>([]);
   const [previewLoading, setPreviewLoading] = useState(false);
 
   async function handleOpenPreview() {
@@ -254,7 +257,7 @@ export default function PriceApprovalPanel({
 
   return (
     <div className="space-y-6">
-      <div className="rounded-2xl border border-border/60 bg-white p-6 shadow-sm">
+      <div className="rounded-xl border border-border/60 bg-white p-6">
         <div className="flex items-center justify-between">
           <div>
             <h3 className="mb-1 font-serif text-lg font-semibold text-text">
@@ -269,7 +272,7 @@ export default function PriceApprovalPanel({
           <button
             onClick={handleFetchAcuan}
             disabled={fetchStatus.type === "loading"}
-            className="flex items-center gap-2 rounded-xl border-2 border-gold/40 px-4 py-2 text-sm font-semibold text-gold-dark transition-all hover:border-gold hover:bg-gold/5 disabled:opacity-50"
+            className="flex items-center gap-2 rounded-lg border border-gold/40 px-4 py-2 text-sm font-semibold text-gold-dark transition-colors hover:bg-gold/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 focus-visible:ring-offset-2 disabled:opacity-50"
           >
             <svg
               className={`h-4 w-4 ${fetchStatus.type === "loading" ? "animate-spin" : ""}`}
@@ -297,29 +300,29 @@ export default function PriceApprovalPanel({
           </p>
         )}
         <div className="mt-4 grid gap-4 sm:grid-cols-3">
-          <div className="rounded-xl border border-border/40 bg-surface p-4">
+          <div className="rounded-lg border border-border/40 bg-surface p-4">
             <p className="text-xs font-medium uppercase tracking-wider text-text-muted">
               Emas Dunia
             </p>
-            <p className="mt-1 text-xl font-bold text-text">
+            <p className="mt-1 text-xl font-bold tabular-nums text-text">
               ${xauUsd.toLocaleString("en-US")}
             </p>
             <p className="text-xs text-text-muted">/ oz</p>
           </div>
-          <div className="rounded-xl border border-border/40 bg-surface p-4">
+          <div className="rounded-lg border border-border/40 bg-surface p-4">
             <p className="text-xs font-medium uppercase tracking-wider text-text-muted">
               Kurs JISDOR
             </p>
-            <p className="mt-1 text-xl font-bold text-text">
+            <p className="mt-1 text-xl font-bold tabular-nums text-text">
               Rp {usdIdr.toLocaleString("id-ID")}
             </p>
             <p className="text-xs text-text-muted">USD/IDR</p>
           </div>
-          <div className="rounded-xl border border-border/40 bg-surface p-4">
+          <div className="rounded-lg border border-border/40 bg-surface p-4">
             <p className="text-xs font-medium uppercase tracking-wider text-text-muted">
               Est. Harga Dasar
             </p>
-            <p className="mt-1 text-xl font-bold text-gold-dark">
+            <p className="mt-1 text-xl font-bold tabular-nums text-gold-dark">
               Rp {baseGoldIdr.toLocaleString("id-ID")}
             </p>
             <p className="text-xs text-text-muted">/ gram</p>
@@ -327,7 +330,7 @@ export default function PriceApprovalPanel({
         </div>
       </div>
 
-      <div className="rounded-2xl border border-gold/20 bg-white p-6 shadow-sm">
+      <div className="rounded-xl border border-gold/20 bg-white p-6">
         <h3 className="mb-1 font-serif text-lg font-semibold text-text">
           Acuan Harga Safar Gold
         </h3>
@@ -336,7 +339,7 @@ export default function PriceApprovalPanel({
         </p>
 
         <div className="grid gap-4 md:grid-cols-2">
-          <div className="rounded-xl border border-border/40 bg-surface p-4">
+          <div className="rounded-lg border border-border/40 bg-surface p-4">
             <label className="mb-2 block text-sm font-semibold text-text">
               Harga Dasar Jual LM (Rp/gram)
             </label>
@@ -345,7 +348,7 @@ export default function PriceApprovalPanel({
               inputMode="numeric"
               value={addDots(hargaDasar)}
               onChange={(e) => setHargaDasar(cleanNumber(e.target.value))}
-              className="mb-2 w-full rounded-lg border border-border/60 bg-white px-4 py-2.5 text-sm font-bold text-text focus:border-gold focus:outline-none"
+              className="mb-2 w-full rounded-lg border border-border/60 bg-white px-4 py-2.5 text-sm font-bold text-text focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30"
             />
             <p className="text-xs text-text-muted">
               Harga per gram untuk LM 50gr & 100gr. Pecahan lain + premi.
@@ -418,12 +421,12 @@ export default function PriceApprovalPanel({
                 inputMode="numeric"
                 value={addDotsSigned(adjJual)}
                 onChange={(e) => setAdjJual(cleanSigned(e.target.value))}
-                className="w-full rounded-lg border border-border/60 bg-white px-4 py-2.5 text-sm font-semibold text-gold-dark focus:border-gold focus:outline-none"
+                className="w-full rounded-lg border border-border/60 bg-white px-4 py-2.5 text-sm font-semibold text-gold-dark focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30"
               />
             </div>
           </div>
 
-          <div className="rounded-xl border border-border/40 bg-surface p-4">
+          <div className="rounded-lg border border-border/40 bg-surface p-4">
             <label className="mb-2 block text-sm font-semibold text-text">
               Acuan Buyback LM (Rp/gr, RM 1-2)
             </label>
@@ -432,7 +435,7 @@ export default function PriceApprovalPanel({
               inputMode="numeric"
               value={addDots(acuanBuyback)}
               onChange={(e) => setAcuanBuyback(cleanNumber(e.target.value))}
-              className="mb-2 w-full rounded-lg border border-border/60 bg-white px-4 py-2.5 text-sm font-bold text-text focus:border-gold focus:outline-none"
+              className="mb-2 w-full rounded-lg border border-border/60 bg-white px-4 py-2.5 text-sm font-bold text-text focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30"
             />
             <p className="text-xs text-text-muted">
               Harga buyback ANTAM Certi RM 1-2gr. Kategori lain dihitung
@@ -508,7 +511,7 @@ export default function PriceApprovalPanel({
                   inputMode="numeric"
                   value={addDotsSigned(adjBeli)}
                   onChange={(e) => setAdjBeli(cleanSigned(e.target.value))}
-                  className="w-full rounded-lg border border-border/60 bg-white px-4 py-2.5 text-sm font-semibold text-gold-dark focus:border-gold focus:outline-none"
+                  className="w-full rounded-lg border border-border/60 bg-white px-4 py-2.5 text-sm font-semibold text-gold-dark focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30"
                 />
               </div>
               {/* <div>
@@ -518,7 +521,7 @@ export default function PriceApprovalPanel({
                   inputMode="numeric"
                   value={addDotsSigned(adjPerhiasan)}
                   onChange={(e) => setAdjPerhiasan(cleanSigned(e.target.value))}
-                  className="w-full rounded-lg border border-border/60 bg-white px-4 py-2.5 text-sm font-semibold text-gold-dark focus:border-gold focus:outline-none"
+                  className="w-full rounded-lg border border-border/60 bg-white px-4 py-2.5 text-sm font-semibold text-gold-dark focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30"
                 />
               </div> */}
               <div>
@@ -532,7 +535,7 @@ export default function PriceApprovalPanel({
                   max="100"
                   value={persenBuybackPerhiasan}
                   onChange={(e) => setPersenBuybackPerhiasan(e.target.value)}
-                  className="w-full rounded-lg border border-border/60 bg-white px-4 py-2.5 text-sm font-semibold text-gold-dark focus:border-gold focus:outline-none"
+                  className="w-full rounded-lg border border-border/60 bg-white px-4 py-2.5 text-sm font-semibold text-gold-dark focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30"
                 />
                 <p className="mt-1 text-[10px] text-text-muted">
                   Margin buyback perhiasan K6–K22
@@ -543,7 +546,7 @@ export default function PriceApprovalPanel({
         </div>
       </div>
 
-      <div className="rounded-2xl border border-border/60 bg-white p-6 shadow-sm">
+      <div className="rounded-xl border border-border/60 bg-white p-6">
         <h3 className="mb-1 font-serif text-lg font-semibold text-text">
           Tampilan Harga di Homepage
         </h3>
@@ -552,7 +555,7 @@ export default function PriceApprovalPanel({
           perhitungan harga jual/buyback.
         </p>
         <div className="grid gap-4 sm:grid-cols-2">
-          <div className="rounded-xl border border-border/40 bg-surface p-4">
+          <div className="rounded-lg border border-border/40 bg-surface p-4">
             <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-text-muted">
               Emas Dunia (Rp/gram)
             </label>
@@ -569,7 +572,7 @@ export default function PriceApprovalPanel({
                 }
                 onBlur={(e) => handleSaveGlobalGoldPrice(e.target.value)}
                 placeholder="Kosong = auto"
-                className="w-full rounded-lg border border-border/60 bg-white px-3 py-2 text-sm font-bold text-text focus:border-gold focus:outline-none"
+                className="w-full rounded-lg border border-border/60 bg-white px-3 py-2 text-sm font-bold text-text focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30"
               />
               {globalSaveStatus !== "idle" && (
                 <span className="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-green-600">
@@ -578,7 +581,7 @@ export default function PriceApprovalPanel({
               )}
             </div>
           </div>
-          <div className="rounded-xl border border-border/40 bg-surface p-4">
+          <div className="rounded-lg border border-border/40 bg-surface p-4">
             <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-text-muted">
               Emas Antam (Rp/gram)
             </label>
@@ -594,7 +597,7 @@ export default function PriceApprovalPanel({
                 onChange={(e) => setAntamPrice(cleanNumber(e.target.value))}
                 onBlur={(e) => handleSaveAntamPrice(e.target.value)}
                 placeholder="Masukkan harga"
-                className="w-full rounded-lg border border-border/60 bg-white px-3 py-2 pr-10 text-sm font-bold text-text focus:border-gold focus:outline-none"
+                className="w-full rounded-lg border border-border/60 bg-white px-3 py-2 pr-10 text-sm font-bold text-text focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30"
               />
               <button
                 type="button"
@@ -649,24 +652,24 @@ export default function PriceApprovalPanel({
         </div>
       </div>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center justify-end gap-4 px-6 pb-6">
         <button
           onClick={handleOpenPreview}
           disabled={previewLoading}
-          className="rounded-xl border-2 border-gold/40 px-6 py-3 text-sm font-semibold text-gold-dark transition-all hover:border-gold hover:bg-gold/5 disabled:opacity-60"
+          className="rounded-lg border border-gold/40 px-6 py-3 text-sm font-semibold text-gold-dark transition-colors hover:bg-gold/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 focus-visible:ring-offset-2 disabled:opacity-60"
         >
           {previewLoading ? "Memuat..." : "Preview Harga"}
         </button>
         <button
           onClick={handlePublish}
           disabled={status.type === "loading"}
-          className="gold-gradient-bg rounded-xl px-8 py-3 text-sm font-semibold text-white shadow-lg shadow-gold/25 transition-all hover:shadow-xl hover:shadow-gold/30 disabled:opacity-60"
+          className="rounded-lg bg-gold px-8 py-3 text-sm font-semibold text-[#1a1a1a] transition-colors hover:bg-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 focus-visible:ring-offset-2 disabled:opacity-60"
         >
           {status.type === "loading" ? "Memproses..." : "Publikasikan"}
         </button>
         {status.msg && (
           <span
-            className={`text-sm font-medium ${status.type === "success" ? "text-green-600" : status.type === "error" ? "text-red-500" : "text-text-muted"}`}
+            className={`mr-auto text-sm font-medium ${status.type === "success" ? "text-green-600" : status.type === "error" ? "text-red-500" : "text-text-muted"}`}
           >
             {status.type === "loading" && (
               <span className="mr-1 inline-block h-3 w-3 animate-spin rounded-full border-2 border-gold border-t-transparent" />

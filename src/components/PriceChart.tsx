@@ -73,9 +73,14 @@ const crosshairPlugin = {
 export default function PriceChart({ history, todayValues }: { history: HistoryRow[]; todayValues?: TodayValues }) {
   const [period, setPeriod] = useState(30);
   const [visible, setVisible] = useState<Record<SeriesKey, boolean>>({ lm: true, buyback: false });
+  const [activeKey, setActiveKey] = useState<SeriesKey>("lm");
+
+  const activeSeries: SeriesKey = visible[activeKey] ? activeKey : (visible.lm ? "lm" : "buyback");
 
   function toggle(key: SeriesKey) {
+    const turningOn = !visible[key];
     setVisible((v) => ({ ...v, [key]: !v[key] }));
+    if (turningOn) setActiveKey(key);
   }
 
   const { labels, seriesData, stats } = useMemo(() => {
@@ -97,26 +102,34 @@ export default function PriceChart({ history, todayValues }: { history: HistoryR
       map.set(today, entry);
     }
 
-    const dates = [...map.keys()].sort().slice(-period);
+    // Rentang N hari kalender berurutan (berakhir hari ini), hari tanpa data = null
+    const dates: string[] = [];
+    const todayDate = new Date(today + "T00:00:00Z");
+    for (let i = period - 1; i >= 0; i--) {
+      const d = new Date(todayDate);
+      d.setUTCDate(d.getUTCDate() - i);
+      dates.push(d.toISOString().split("T")[0]);
+    }
+
     const data: Record<SeriesKey, (number | null)[]> = {
       lm: dates.map((d) => map.get(d)?.lm ?? null),
       buyback: dates.map((d) => map.get(d)?.buyback ?? null),
     };
 
-    const lmVals = data.lm.filter((v): v is number => v != null);
-    const last = lmVals[lmVals.length - 1] ?? 0;
-    const first = lmVals[0] ?? 0;
+    const activeVals = data[activeSeries].filter((v): v is number => v != null);
+    const last = activeVals[activeVals.length - 1] ?? 0;
+    const first = activeVals[0] ?? 0;
     const change = last - first;
     const changePct = first > 0 ? (change / first) * 100 : 0;
-    const high = lmVals.length ? Math.max(...lmVals) : 0;
-    const low = lmVals.length ? Math.min(...lmVals) : 0;
+    const high = activeVals.length ? Math.max(...activeVals) : 0;
+    const low = activeVals.length ? Math.min(...activeVals) : 0;
 
     return {
       labels: dates.map(formatDateLabel),
       seriesData: data,
-      stats: { last, change, changePct, high, low, hasData: lmVals.length > 0 },
+      stats: { last, change, changePct, high, low, hasData: activeVals.length > 0 },
     };
-  }, [history, period, todayValues]);
+  }, [history, period, todayValues, activeSeries]);
 
   const makeAreaGradient = (ctx: ScriptableContext<"line">, color: string) => {
     const chart = ctx.chart;
@@ -161,12 +174,12 @@ export default function PriceChart({ history, todayValues }: { history: HistoryR
     };
   });
 
-  // Marker titik "hari ini" pada series utama
-  if (visible.lm && seriesData.lm.some((v) => v != null)) {
-    const lastIdx = seriesData.lm.length - 1;
+  // Marker titik "hari ini" pada series aktif
+  if (visible[activeSeries] && seriesData[activeSeries].some((v) => v != null)) {
+    const lastIdx = seriesData[activeSeries].length - 1;
     datasets.push({
       label: "Hari Ini",
-      data: seriesData.lm.map((v, i) => (i === lastIdx ? v : null)),
+      data: seriesData[activeSeries].map((v, i) => (i === lastIdx ? v : null)),
       borderColor: "transparent",
       backgroundColor: "transparent",
       fill: false,
@@ -234,6 +247,7 @@ export default function PriceChart({ history, todayValues }: { history: HistoryR
   };
 
   const isUp = stats.change >= 0;
+  const activeLabel = SERIES.find((s) => s.key === activeSeries)?.label ?? "Logam Mulia";
 
   return (
     <div className="relative overflow-hidden rounded-2xl border border-gold/20 bg-white shadow-lg shadow-gold/5">
@@ -264,7 +278,7 @@ export default function PriceChart({ history, todayValues }: { history: HistoryR
       <div className="relative px-6 py-5 md:px-8">
         <div className="mb-5 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="text-xs text-text-muted">Harga Logam Mulia Terkini</p>
+            <p className="text-xs text-text-muted">Harga {activeLabel} Terkini</p>
             <div className="mt-1 flex items-center gap-3">
               <span className="font-serif text-3xl font-bold text-text">
                 {stats.hasData ? `Rp ${formatRupiah(stats.last)}` : "-"}
