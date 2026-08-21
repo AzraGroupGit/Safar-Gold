@@ -26,23 +26,23 @@ export default function AdminKontenClient({ initial }: { initial: HeroContent })
   }
 
   const inputClass =
-    "w-full rounded-xl border border-border/60 bg-white px-4 py-3 text-sm text-text placeholder:text-text-light focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/10";
+    "w-full rounded-lg border border-border/60 bg-white px-4 py-3 text-sm text-text placeholder:text-text-light focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30";
 
   return (
     <div>
       <div className="mb-8">
-        <h1 className="font-serif text-2xl font-bold text-text">Manajemen Konten</h1>
+        <h1 className="font-serif text-2xl font-semibold text-text">Manajemen Konten</h1>
         <p className="mt-1 text-sm text-text-muted">Edit konten Hero halaman utama.</p>
       </div>
 
-      <div className="mb-8 rounded-2xl border border-border/60 bg-white p-6 shadow-sm md:p-8">
+      <div className="mb-8 rounded-xl border border-border/60 bg-white p-6 md:p-8">
         <h3 className="mb-6 font-serif text-lg font-semibold text-text">Hero Section</h3>
         <div className="space-y-5">
           <div>
             <label className="mb-2 block text-sm font-semibold text-text">Badge (teks kecil atas)</label>
             <input type="text" value={hero.badge} onChange={(e) => update("badge", e.target.value)} className={inputClass} />
           </div>
-          <div className="rounded-xl border border-border/40 bg-surface/50 p-4">
+          <div className="rounded-lg border border-border/40 bg-surface/50 p-4">
             <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-gold-dark">Judul Utama (3 bagian)</p>
             <div className="grid gap-4 md:grid-cols-3">
               <div>
@@ -69,16 +69,16 @@ export default function AdminKontenClient({ initial }: { initial: HeroContent })
           </div>
         </div>
         <div className="mt-6 flex items-center gap-4">
-          <button onClick={handleSave} disabled={saving} className="gold-gradient-bg rounded-xl px-6 py-3 text-sm font-semibold text-white shadow-md shadow-gold/20 transition-all hover:shadow-lg hover:shadow-gold/30 disabled:opacity-50">
+          <button onClick={handleSave} disabled={saving} className="rounded-lg bg-gold px-6 py-3 text-sm font-semibold text-[#1a1a1a] transition-colors hover:bg-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 focus-visible:ring-offset-2 disabled:opacity-50">
             {saving ? "Menyimpan..." : "Simpan Perubahan"}
           </button>
           {saved && <span className="text-sm font-medium text-green-600">Tersimpan!</span>}
         </div>
       </div>
 
-      <div className="rounded-2xl border border-border/60 bg-white p-6 shadow-sm md:p-8">
+      <div className="rounded-xl border border-border/60 bg-white p-6 md:p-8">
         <h3 className="mb-6 font-serif text-lg font-semibold text-text">Preview Hero</h3>
-        <div className="rounded-2xl border border-border/40 bg-footer p-6 text-center md:p-10">
+        <div className="rounded-xl border border-border/40 bg-footer p-6 text-center md:p-10">
           <div className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-4 py-2 text-xs font-medium text-gold">
             <span className="h-2 w-2 rounded-full bg-gold" />
             {hero.badge}

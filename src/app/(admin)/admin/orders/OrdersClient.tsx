@@ -1,13 +1,14 @@
 "use client";
 
-import { useState, useEffect, useMemo, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import type { GoldTypeRow, FormattedPrice } from "@/lib/gold-api";
 import { formatRupiah } from "@/lib/gold-api";
 import { createClient } from "@/lib/supabase/client";
 import OrderInvoice, { type InvoiceOrder, type InvoiceSettings } from "@/components/OrderInvoice";
 
 type Order = { id: string; order_number: string; type: string; customer_name: string; customer_phone: string; total: number; status: string; created_at: string };
-type OrderDetail = Order & { order_items: { id?: string; item_name: string; weight: number; karat: number | null; qty: number; price_per_gram: number; price_total: number; gold_type_id?: string | null }[] };
+type OrderDetail = Order & { order_items: { id?: string; item_name: string; weight: number; karat: number | null; qty: number; price_per_gram: number; price_total: number; gold_type_id?: string | null }[]; source?: string | null; nik?: string | null; address?: string | null; instagram?: string | null; provinsi?: string | null; kabupaten?: string | null; kecamatan?: string | null; kelurahan?: string | null };
+type CustomerLookup = { name: string | null; source: string | null; nik: string | null; address: string | null; kelurahan: string | null; kecamatan: string | null; kabupaten: string | null; provinsi: string | null; instagram: string | null; order_count: number };
 type CartItem = { goldTypeId: string | null; itemName: string; weight: number; karat: number | null; qty: number; pricePerGram: number; priceTotal: number };
 
 const LM_PRODUCTS = ["antam-0.5", "antam-1", "antam-2", "antam-3", "antam-5", "antam-10", "antam-25", "antam-50", "antam-100"];
@@ -69,7 +70,7 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
   const [kelurahan, setKelurahan] = useState("");
 
   // Customer lookup (repeat order autofill)
-  const [lookup, setLookup] = useState<any>(null);
+  const [lookup, setLookup] = useState<CustomerLookup | null>(null);
   const lookupTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const priceMap = new Map(prices.map(p => [p.goldTypeId, p]));
@@ -160,18 +161,18 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
     const order: OrderDetail = data.order;
     if (!order) return;
     setEditingId(order.id);
-    setType(order.type as any);
+    setType(order.type as "sell" | "buyback");
     setCustomerName(order.customer_name);
     setCustomerPhone(order.customer_phone);
     setItems(order.order_items.map(it => ({ goldTypeId: it.gold_type_id ?? null, itemName: it.item_name, weight: it.weight, karat: it.karat, qty: it.qty, pricePerGram: it.price_per_gram, priceTotal: it.price_total })));
-    setSource((order as any).source ?? "");
-    setNik((order as any).nik ?? "");
-    setAddress((order as any).address ?? "");
-    setInstagram((order as any).instagram ?? "");
-    setProvinsi((order as any).provinsi ?? "");
-    setKabupaten((order as any).kabupaten ?? "");
-    setKecamatan((order as any).kecamatan ?? "");
-    setKelurahan((order as any).kelurahan ?? "");
+    setSource(order.source ?? "");
+    setNik(order.nik ?? "");
+    setAddress(order.address ?? "");
+    setInstagram(order.instagram ?? "");
+    setProvinsi(order.provinsi ?? "");
+    setKabupaten(order.kabupaten ?? "");
+    setKecamatan(order.kecamatan ?? "");
+    setKelurahan(order.kelurahan ?? "");
     setShowModal(true);
   }
 
@@ -249,13 +250,10 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
     URL.revokeObjectURL(url);
   }
 
-  const filtered = useMemo(() => {
-    let list = orders;
-    if (filterType !== "all") list = list.filter(o => o.type === filterType);
-    if (filterStatus !== "all") list = list.filter(o => o.status === filterStatus);
-    if (search) { const q = search.toLowerCase(); list = list.filter(o => o.order_number.toLowerCase().includes(q) || o.customer_name.toLowerCase().includes(q) || o.customer_phone.includes(q)); }
-    return list;
-  }, [orders, search, filterType, filterStatus]);
+  let filtered = orders;
+  if (filterType !== "all") filtered = filtered.filter(o => o.type === filterType);
+  if (filterStatus !== "all") filtered = filtered.filter(o => o.status === filterStatus);
+  if (search) { const q = search.toLowerCase(); filtered = filtered.filter(o => o.order_number.toLowerCase().includes(q) || o.customer_name.toLowerCase().includes(q) || o.customer_phone.includes(q)); }
 
   const totalPages = Math.ceil(filtered.length / PER_PAGE);
   const paged = filtered.slice((page - 1) * PER_PAGE, page * PER_PAGE);
@@ -265,20 +263,20 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
   return (
     <div>
       <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
-        <div><h1 className="font-serif text-2xl font-bold text-text">Orders</h1><p className="mt-1 text-sm text-text-muted">{filtered.length} transaksi</p></div>
+        <div><h1 className="font-serif text-2xl font-semibold text-text">Orders</h1><p className="mt-1 text-sm text-text-muted">{filtered.length} transaksi</p></div>
         <div className="flex gap-2">
-          <button onClick={exportCSV} disabled={filtered.length===0} className="rounded-xl border border-border/60 px-4 py-2.5 text-sm font-medium text-text-muted transition-all hover:border-gold/30 hover:text-gold-dark disabled:opacity-40">Export CSV</button>
-          <button onClick={() => { resetForm(); setShowModal(true); }} className="gold-gradient-bg rounded-xl px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-gold/20 transition-all hover:shadow-lg hover:shadow-gold/30">+ Buat Order</button>
+          <button onClick={exportCSV} disabled={filtered.length===0} className="rounded-lg border border-border/60 px-4 py-2.5 text-sm font-medium text-text-muted transition-colors hover:border-gold/40 hover:text-gold-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 focus-visible:ring-offset-2 disabled:opacity-40">Export CSV</button>
+          <button onClick={() => { resetForm(); setShowModal(true); }} className="rounded-lg bg-gold px-5 py-2.5 text-sm font-semibold text-[#1a1a1a] transition-colors hover:bg-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 focus-visible:ring-offset-2">+ Buat Order</button>
         </div>
       </div>
 
       <div className="mb-4 flex flex-wrap items-center gap-3">
-        <div className="relative flex-1 min-w-[200px]"><svg className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-text-muted" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg><input type="text" value={search} onChange={e=>{setSearch(e.target.value);setPage(1);}} placeholder="Cari no. order atau customer..." className="w-full rounded-xl border border-border/60 bg-white pl-10 pr-4 py-2.5 text-sm text-text focus:border-gold focus:outline-none" /></div>
-        <div className="flex gap-1 rounded-xl border border-border/60 bg-white p-1">{[{key:"all",label:"Semua"},{key:"sell",label:"Jual"},{key:"buyback",label:"Buyback"}].map(f=>(<button key={f.key} onClick={()=>{setFilterType(f.key as any);setPage(1);}} className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${filterType===f.key?"bg-gold/10 text-gold-dark":"text-text-muted hover:text-text"}`}>{f.label}</button>))}</div>
-        <div className="flex gap-1 rounded-xl border border-border/60 bg-white p-1">{[{key:"all",label:"Semua"},{key:"completed",label:"Selesai"},{key:"cancelled",label:"Batal"}].map(f=>(<button key={f.key} onClick={()=>{setFilterStatus(f.key as any);setPage(1);}} className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${filterStatus===f.key?"bg-gold/10 text-gold-dark":"text-text-muted hover:text-text"}`}>{f.label}</button>))}</div>
+        <div className="relative flex-1 min-w-[200px]"><svg className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-text-muted" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg><input type="text" value={search} onChange={e=>{setSearch(e.target.value);setPage(1);}} placeholder="Cari no. order atau customer..." className="w-full rounded-lg border border-border/60 bg-white pl-10 pr-4 py-2.5 text-sm text-text focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30" /></div>
+        <div className="flex gap-1 rounded-lg border border-border/60 bg-white p-1">{[{key:"all",label:"Semua"},{key:"sell",label:"Jual"},{key:"buyback",label:"Buyback"}].map(f=>(<button key={f.key} onClick={()=>{setFilterType(f.key as "all" | "sell" | "buyback");setPage(1);}} className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${filterType===f.key?"bg-gold/10 text-gold-dark":"text-text-muted hover:text-text"}`}>{f.label}</button>))}</div>
+        <div className="flex gap-1 rounded-lg border border-border/60 bg-white p-1">{[{key:"all",label:"Semua"},{key:"completed",label:"Selesai"},{key:"cancelled",label:"Batal"}].map(f=>(<button key={f.key} onClick={()=>{setFilterStatus(f.key as "all" | "completed" | "cancelled");setPage(1);}} className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${filterStatus===f.key?"bg-gold/10 text-gold-dark":"text-text-muted hover:text-text"}`}>{f.label}</button>))}</div>
       </div>
 
-      <div className="overflow-x-auto rounded-2xl border border-border/60 bg-white shadow-sm">
+      <div className="overflow-x-auto rounded-xl border border-border/60 bg-white">
         <table className="w-full min-w-[640px]">
           <thead><tr className="border-b border-border/40 bg-surface/50 text-left text-xs font-semibold uppercase tracking-wider text-text-muted"><th className="px-4 py-4 md:px-6">No. Order</th><th className="px-4 py-4 md:px-6">Customer</th><th className="hidden px-4 py-4 sm:table-cell md:px-6">Tipe</th><th className="hidden px-4 py-4 sm:table-cell md:px-6">Tanggal</th><th className="px-4 py-4 text-right md:px-6">Total</th><th className="px-4 py-4 text-center md:px-6">Status</th><th className="px-4 py-4 text-center md:px-6">Aksi</th></tr></thead>
           <tbody className="divide-y divide-border/30">
@@ -288,7 +286,7 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
                 <td className="px-4 py-3.5 md:px-6"><p className="text-sm font-medium text-text">{o.customer_name}</p><p className="text-xs text-text-muted">{o.customer_phone}</p></td>
                 <td className="hidden px-4 py-3.5 sm:table-cell md:px-6"><span className={`rounded-full px-2 py-0.5 text-xs font-medium ${o.type==='sell'?'bg-emerald-50 text-emerald-700':'bg-amber-50 text-amber-700'}`}>{o.type==='sell'?'Jual':'Buyback'}</span></td>
                 <td className="hidden px-4 py-3.5 text-sm text-text-muted sm:table-cell md:px-6">{new Date(o.created_at).toLocaleDateString("id-ID",{day:"numeric",month:"short",year:"numeric"})}</td>
-                <td className="px-4 py-3.5 text-right text-sm font-semibold text-text md:px-6">{formatRupiah(o.total)}</td>
+                <td className="px-4 py-3.5 text-right text-sm font-semibold tabular-nums text-text md:px-6">{formatRupiah(o.total)}</td>
                 <td className="px-4 py-3.5 text-center md:px-6"><span className={`rounded-full px-2 py-0.5 text-xs font-medium ${o.status==='completed'?'bg-emerald-50 text-emerald-700':'bg-red-50 text-red-600'}`}>{o.status==='completed'?'Selesai':'Batal'}</span></td>
                 <td className="px-4 py-3.5 text-center md:px-6">
                   <div className="flex items-center justify-center gap-1">
@@ -321,7 +319,7 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
       {viewOrder && (
         <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto px-4 pt-[8vh] pb-10">
           <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" onClick={()=>setViewOrder(null)} />
-          <div className="relative w-full max-w-2xl rounded-2xl border border-border/60 bg-white shadow-2xl">
+          <div className="relative w-full max-w-2xl rounded-xl border border-border/60 bg-white shadow-lg">
             <div className="flex items-center justify-between border-b border-border/40 px-6 py-4">
               <div><h3 className="font-serif text-lg font-semibold text-text">{viewOrder.order_number}</h3><p className="text-xs text-text-muted">{new Date(viewOrder.created_at).toLocaleDateString("id-ID",{weekday:"long",day:"numeric",month:"long",year:"numeric",hour:"2-digit",minute:"2-digit"})}</p></div>
               <div className="flex items-center gap-2">
@@ -331,8 +329,8 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
             </div>
             <div className="p-6 space-y-5">
               <div className="grid gap-4 sm:grid-cols-2">
-                <div className="rounded-xl border border-border/30 bg-surface p-3"><p className="text-[11px] uppercase tracking-wider text-text-muted">Customer</p><p className="mt-1 text-sm font-semibold text-text">{viewOrder.customer_name}</p><p className="text-xs text-text-muted">{viewOrder.customer_phone}</p></div>
-                <div className="rounded-xl border border-border/30 bg-surface p-3"><p className="text-[11px] uppercase tracking-wider text-text-muted">Status</p><p className="mt-1 text-sm font-semibold text-text">{viewOrder.status==="completed"?"Selesai":"Batal"}</p></div>
+                <div className="rounded-lg border border-border/30 bg-surface p-3"><p className="text-[11px] uppercase tracking-wider text-text-muted">Customer</p><p className="mt-1 text-sm font-semibold text-text">{viewOrder.customer_name}</p><p className="text-xs text-text-muted">{viewOrder.customer_phone}</p></div>
+                <div className="rounded-lg border border-border/30 bg-surface p-3"><p className="text-[11px] uppercase tracking-wider text-text-muted">Status</p><p className="mt-1 text-sm font-semibold text-text">{viewOrder.status==="completed"?"Selesai":"Batal"}</p></div>
               </div>
               <div>
                 <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-text-muted">Item</p>
@@ -344,8 +342,8 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
                 </div>
               </div>
             </div>
-            <div className="flex justify-end gap-3 border-t border-border/40 bg-surface/30 px-6 py-4 rounded-b-2xl">
-              <button onClick={()=>setViewOrder(null)} className="rounded-xl border border-border/60 px-5 py-2.5 text-sm font-medium text-text-muted transition-colors hover:bg-white">Tutup</button>
+            <div className="flex justify-end gap-3 border-t border-border/40 bg-surface/30 px-6 py-4 rounded-b-xl">
+              <button onClick={()=>setViewOrder(null)} className="rounded-lg border border-border/60 px-5 py-2.5 text-sm font-medium text-text-muted transition-colors hover:bg-white">Tutup</button>
             </div>
           </div>
         </div>
@@ -355,7 +353,7 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
       {printOrder && (
         <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto px-4 pt-[8vh] pb-10">
           <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" onClick={()=>setPrintOrder(null)} />
-          <div className="relative w-full max-w-2xl rounded-2xl border border-border/60 bg-white shadow-2xl">
+          <div className="relative w-full max-w-2xl rounded-xl border border-border/60 bg-white shadow-lg">
             <div className="flex items-center justify-between border-b border-border/40 px-6 py-4">
               <div><h3 className="font-serif text-lg font-semibold text-text">{printOrder.order_number}</h3><p className="text-xs text-text-muted">Preview Invoice</p></div>
               <div className="flex items-center gap-2">
@@ -366,8 +364,8 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
             <div className="max-h-[70vh] overflow-y-auto">
               <OrderInvoice order={printOrder as InvoiceOrder} settings={settings} />
             </div>
-            <div className="flex justify-end gap-3 border-t border-border/40 bg-surface/30 px-6 py-4 rounded-b-2xl">
-              <button onClick={()=>setPrintOrder(null)} className="rounded-xl border border-border/60 px-5 py-2.5 text-sm font-medium text-text-muted transition-colors hover:bg-white">Tutup</button>
+            <div className="flex justify-end gap-3 border-t border-border/40 bg-surface/30 px-6 py-4 rounded-b-xl">
+              <button onClick={()=>setPrintOrder(null)} className="rounded-lg border border-border/60 px-5 py-2.5 text-sm font-medium text-text-muted transition-colors hover:bg-white">Tutup</button>
             </div>
           </div>
         </div>
@@ -377,11 +375,11 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
       {deleteConfirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
           <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" onClick={()=>setDeleteConfirm(null)} />
-          <div className="relative w-full max-w-sm rounded-2xl border border-border/60 bg-white p-6 shadow-2xl text-center">
+          <div className="relative w-full max-w-sm rounded-xl border border-border/60 bg-white p-6 shadow-lg text-center">
             <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-red-50"><svg className="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg></div>
             <h4 className="font-serif text-lg font-semibold text-text">Cancel Order?</h4>
             <p className="mt-1 text-sm text-text-muted">{deleteConfirm.order_number} — {deleteConfirm.customer_name}</p>
-            <div className="mt-5 flex gap-3"><button onClick={()=>setDeleteConfirm(null)} className="flex-1 rounded-xl border border-border/60 px-4 py-2.5 text-sm font-medium text-text-muted hover:bg-surface">Batal</button><button onClick={handleDelete} className="flex-1 rounded-xl bg-red-500 px-4 py-2.5 text-sm font-semibold text-white transition-all hover:bg-red-600">Ya, Cancel</button></div>
+            <div className="mt-5 flex gap-3"><button onClick={()=>setDeleteConfirm(null)} className="flex-1 rounded-lg border border-border/60 px-4 py-2.5 text-sm font-medium text-text-muted transition-colors hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 focus-visible:ring-offset-2">Batal</button><button onClick={handleDelete} className="flex-1 rounded-lg bg-red-500 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-red-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-400/40 focus-visible:ring-offset-2">Ya, Cancel</button></div>
           </div>
         </div>
       )}
@@ -390,15 +388,15 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto px-4 pt-[5vh] pb-10">
           <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" onClick={()=>{setShowModal(false);resetForm();}} />
-          <div className="relative w-full max-w-3xl rounded-2xl border border-border/60 bg-white shadow-2xl">
+          <div className="relative w-full max-w-3xl rounded-xl border border-border/60 bg-white shadow-lg">
             <div className="flex items-center justify-between border-b border-border/40 px-6 py-4"><h3 className="font-serif text-lg font-semibold text-text">{editingId?"Edit Order":"Buat Order Baru"}</h3><button onClick={()=>{setShowModal(false);resetForm();}} className="rounded-lg p-1 text-text-muted hover:bg-surface hover:text-text">&times;</button></div>
             <div className="p-6 space-y-6">
               {error && <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">{error}</div>}
               <div className="flex gap-3">
-                <button onClick={()=>setType("sell")} className={`flex-1 rounded-xl border px-4 py-3 text-sm font-semibold transition-colors ${type==="sell"?"border-gold bg-gold/5 text-gold-dark":"border-border/60 text-text-muted hover:border-gold/30"}`}>Jual LM</button>
-                <button onClick={()=>setType("buyback")} className={`flex-1 rounded-xl border px-4 py-3 text-sm font-semibold transition-colors ${type==="buyback"?"border-gold bg-gold/5 text-gold-dark":"border-border/60 text-text-muted hover:border-gold/30"}`}>Buyback</button>
+                <button onClick={()=>setType("sell")} className={`flex-1 rounded-lg border px-4 py-3 text-sm font-semibold transition-colors ${type==="sell"?"border-gold bg-gold/5 text-gold-dark":"border-border/60 text-text-muted hover:border-gold/30"}`}>Jual LM</button>
+                <button onClick={()=>setType("buyback")} className={`flex-1 rounded-lg border px-4 py-3 text-sm font-semibold transition-colors ${type==="buyback"?"border-gold bg-gold/5 text-gold-dark":"border-border/60 text-text-muted hover:border-gold/30"}`}>Buyback</button>
               </div>
-              <div className="rounded-xl border border-border/40 bg-surface p-4">
+              <div className="rounded-lg border border-border/40 bg-surface p-4">
                 <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-text-muted">Tambah Item</p>
                 {type==="sell"?(
                   <div className="flex flex-wrap gap-3 items-end"><div className="flex-1 min-w-[180px]"><label className="mb-1 block text-xs text-text-muted">Produk</label><select value={sellProduct} onChange={e=>setSellProduct(e.target.value)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm">{LM_PRODUCTS.map(id=>{const gt=goldTypes.find(g=>g.id===id);const p=priceMap.get(id);const ppg = p?.isTotalPrice && gt?.weight ? Math.round(p.buyPrice / gt.weight) : p?.buyPrice;return <option key={id} value={id}>{gt?.name??id} — {ppg?formatRupiah(ppg):"-"}/g</option>;})}</select></div><div className="w-24"><label className="mb-1 block text-xs text-text-muted">Qty</label><input type="number" min={1} value={sellQty} onChange={e=>setSellQty(parseInt(e.target.value)||1)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm" /></div><button onClick={addSellItem} className="rounded-lg border border-gold/40 px-4 py-2.5 text-sm font-semibold text-gold-dark hover:bg-gold/5">+ Tambah</button></div>
@@ -431,8 +429,8 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
                   </div>
                 )}
               </div>
-              {items.length>0&&(<div className="rounded-xl border border-border/40 bg-surface overflow-x-auto"><table className="w-full min-w-[560px] text-sm"><thead><tr className="border-b border-border/30 text-left text-xs text-text-muted"><th className="px-4 py-2">Item</th><th className="px-4 py-2">Berat/Karat</th><th className="px-4 py-2">Qty</th><th className="px-4 py-2 text-right">Harga/g</th><th className="px-4 py-2 text-right">Total</th><th className="px-4 py-2"></th></tr></thead><tbody className="divide-y divide-border/20">{items.map((it,i)=>(<tr key={i}><td className="px-4 py-2.5 font-medium text-text">{it.itemName}</td><td className="px-4 py-2.5 text-text-muted">{it.weight}g{it.karat?` — ${it.karat}K`:""}</td><td className="px-4 py-2.5">{it.qty}</td><td className="px-4 py-2.5 text-right">{formatRupiah(it.pricePerGram)}</td><td className="px-4 py-2.5 text-right font-semibold">{formatRupiah(it.priceTotal)}</td><td className="px-4 py-2.5 text-center"><button onClick={()=>removeItem(i)} className="text-red-400 hover:text-red-600">&times;</button></td></tr>))}</tbody></table></div>)}
-              <div className="rounded-xl border border-border/40 bg-surface p-4">
+              {items.length>0&&(<div className="rounded-lg border border-border/40 bg-surface overflow-x-auto"><table className="w-full min-w-[560px] text-sm"><thead><tr className="border-b border-border/30 text-left text-xs text-text-muted"><th className="px-4 py-2">Item</th><th className="px-4 py-2">Berat/Karat</th><th className="px-4 py-2">Qty</th><th className="px-4 py-2 text-right">Harga/g</th><th className="px-4 py-2 text-right">Total</th><th className="px-4 py-2"></th></tr></thead><tbody className="divide-y divide-border/20">{items.map((it,i)=>(<tr key={i}><td className="px-4 py-2.5 font-medium text-text">{it.itemName}</td><td className="px-4 py-2.5 text-text-muted">{it.weight}g{it.karat?` — ${it.karat}K`:""}</td><td className="px-4 py-2.5">{it.qty}</td><td className="px-4 py-2.5 text-right">{formatRupiah(it.pricePerGram)}</td><td className="px-4 py-2.5 text-right font-semibold">{formatRupiah(it.priceTotal)}</td><td className="px-4 py-2.5 text-center"><button onClick={()=>removeItem(i)} className="text-red-400 hover:text-red-600">&times;</button></td></tr>))}</tbody></table></div>)}
+              <div className="rounded-lg border border-border/40 bg-surface p-4">
                 <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-text-muted">Data Customer</p>
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div><label className="mb-1 block text-xs text-text-muted">Nama <span className="text-red-400">*</span></label><input type="text" value={customerName} onChange={e=>setCustomerName(e.target.value)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm" placeholder="Nama lengkap" /></div>
@@ -527,7 +525,7 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
                 </div>
               </div>
             </div>
-            <div className="flex items-center justify-between border-t border-border/40 bg-surface/30 px-6 py-4 rounded-b-2xl"><div><p className="text-xs text-text-muted">Total</p><p className="text-xl font-bold text-gold-dark">{formatRupiah(total)}</p></div><div className="flex gap-3"><button onClick={()=>{setShowModal(false);resetForm();}} className="rounded-xl border border-border/60 px-5 py-2.5 text-sm font-medium text-text-muted hover:bg-white">Batal</button><button onClick={handleSubmit} disabled={saving||items.length===0} className="gold-gradient-bg rounded-xl px-6 py-2.5 text-sm font-semibold text-white shadow-md disabled:opacity-60">{saving?"Menyimpan...":editingId?"Update Order":"Simpan Order"}</button></div></div>
+            <div className="flex items-center justify-between border-t border-border/40 bg-surface/30 px-6 py-4 rounded-b-xl"><div><p className="text-xs text-text-muted">Total</p><p className="text-xl font-bold text-gold-dark">{formatRupiah(total)}</p></div><div className="flex gap-3"><button onClick={()=>{setShowModal(false);resetForm();}} className="rounded-xl border border-border/60 px-5 py-2.5 text-sm font-medium text-text-muted hover:bg-white">Batal</button><button onClick={handleSubmit} disabled={saving||items.length===0} className="rounded-lg bg-gold px-6 py-2.5 text-sm font-semibold text-[#1a1a1a] transition-colors hover:bg-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 focus-visible:ring-offset-2 disabled:opacity-60">{saving?"Menyimpan...":editingId?"Update Order":"Simpan Order"}</button></div></div>
           </div>
         </div>
       )}
