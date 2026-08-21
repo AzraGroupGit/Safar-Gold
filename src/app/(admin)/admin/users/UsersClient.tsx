@@ -18,25 +18,30 @@ export default function UsersClient() {
   const [editUser, setEditUser] = useState<UserRow | null>(null);
   const [deleteConfirm, setDeleteConfirm] = useState<UserRow | null>(null);
   const [saving, setSaving] = useState(false);
+  const [reloadKey, setReloadKey] = useState(0);
 
   const [formEmail, setFormEmail] = useState("");
   const [formPassword, setFormPassword] = useState("");
   const [formRole, setFormRole] = useState("cs");
 
-  async function fetchUsers() {
-    try {
-      const res = await fetch("/api/admin/users");
-      const data = await res.json();
-      if (data.error) setError(data.error);
-      else setUsers(data.users ?? []);
-    } catch {
-      setError("Gagal memuat data user");
-    } finally {
-      setLoading(false);
+  useEffect(() => {
+    let cancelled = false;
+    async function load() {
+      try {
+        const res = await fetch("/api/admin/users");
+        const data = await res.json();
+        if (cancelled) return;
+        if (data.error) setError(data.error);
+        else setUsers(data.users ?? []);
+      } catch {
+        if (!cancelled) setError("Gagal memuat data user");
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
     }
-  }
-
-  useEffect(() => { fetchUsers(); }, []);
+    load();
+    return () => { cancelled = true; };
+  }, [reloadKey]);
 
   function resetForm() {
     setFormEmail("");
@@ -92,7 +97,7 @@ export default function UsersClient() {
         });
         const data = await res.json();
         if (data.success) {
-          await fetchUsers();
+          setReloadKey(k => k + 1);
           setShowModal(false);
           resetForm();
         } else {
@@ -162,22 +167,22 @@ export default function UsersClient() {
     <div>
       <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="font-serif text-2xl font-bold text-text">Kelola User</h1>
+          <h1 className="font-serif text-2xl font-semibold text-text">Kelola User</h1>
           <p className="mt-1 text-sm text-text-muted">Tambah, edit, dan hapus user Admin & CS</p>
         </div>
         <button
           onClick={openAdd}
-          className="gold-gradient-bg rounded-xl px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-gold/20 transition-all hover:shadow-lg hover:shadow-gold/30"
+          className="rounded-lg bg-gold px-5 py-2.5 text-sm font-semibold text-[#1a1a1a] transition-colors hover:bg-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 focus-visible:ring-offset-2"
         >
           + Tambah User
         </button>
       </div>
 
       {error && (
-        <div className="mb-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">{error}</div>
+        <div className="mb-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">{error}</div>
       )}
 
-      <div className="overflow-x-auto rounded-2xl border border-border/60 bg-white shadow-sm">
+      <div className="overflow-x-auto rounded-xl border border-border/60 bg-white">
         <table className="w-full min-w-[640px]">
           <thead>
             <tr className="border-b border-border/40 bg-surface/50 text-left text-xs font-semibold uppercase tracking-wider text-text-muted">
@@ -251,7 +256,7 @@ export default function UsersClient() {
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto px-4 pt-[15vh]">
           <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setShowModal(false)} />
-          <div className="relative w-full max-w-md rounded-2xl border border-border/60 bg-white p-6 shadow-2xl">
+          <div className="relative w-full max-w-md rounded-xl border border-border/60 bg-white p-6 shadow-lg">
             <h3 className="mb-4 font-serif text-lg font-semibold text-text">
               {editUser ? "Edit User" : "Tambah User"}
             </h3>
@@ -263,7 +268,7 @@ export default function UsersClient() {
                   type="email"
                   value={formEmail}
                   onChange={(e) => setFormEmail(e.target.value)}
-                  className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm text-text focus:border-gold focus:outline-none"
+                  className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm text-text focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30"
                   placeholder="user@safargold.com"
                 />
               </div>
@@ -275,7 +280,7 @@ export default function UsersClient() {
                   type="password"
                   value={formPassword}
                   onChange={(e) => setFormPassword(e.target.value)}
-                  className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm text-text focus:border-gold focus:outline-none"
+                  className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm text-text focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30"
                   placeholder={editUser ? "••••••" : "Minimal 6 karakter"}
                 />
               </div>
@@ -311,14 +316,14 @@ export default function UsersClient() {
             <div className="mt-6 flex gap-3">
               <button
                 onClick={() => setShowModal(false)}
-                className="flex-1 rounded-xl border border-border/60 px-4 py-2.5 text-sm font-medium text-text-muted transition-colors hover:bg-surface"
+                className="flex-1 rounded-lg border border-border/60 px-4 py-2.5 text-sm font-medium text-text-muted transition-colors hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 focus-visible:ring-offset-2"
               >
                 Batal
               </button>
               <button
                 onClick={handleSave}
                 disabled={saving}
-                className="gold-gradient-bg flex-1 rounded-xl px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:shadow-md disabled:opacity-60"
+                className="flex-1 rounded-lg bg-gold px-4 py-2.5 text-sm font-semibold text-[#1a1a1a] transition-colors hover:bg-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 focus-visible:ring-offset-2 disabled:opacity-60"
               >
                 {saving ? "Menyimpan..." : editUser ? "Update" : "Buat User"}
               </button>
@@ -331,7 +336,7 @@ export default function UsersClient() {
       {deleteConfirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
           <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setDeleteConfirm(null)} />
-          <div className="relative w-full max-w-sm rounded-2xl border border-border/60 bg-white p-6 shadow-2xl text-center">
+          <div className="relative w-full max-w-sm rounded-xl border border-border/60 bg-white p-6 shadow-lg text-center">
             <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-red-50">
               <svg className="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
@@ -344,14 +349,14 @@ export default function UsersClient() {
             <div className="mt-5 flex gap-3">
               <button
                 onClick={() => setDeleteConfirm(null)}
-                className="flex-1 rounded-xl border border-border/60 px-4 py-2.5 text-sm font-medium text-text-muted transition-colors hover:bg-surface"
+                className="flex-1 rounded-lg border border-border/60 px-4 py-2.5 text-sm font-medium text-text-muted transition-colors hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 focus-visible:ring-offset-2"
               >
                 Batal
               </button>
               <button
                 onClick={() => handleDelete(deleteConfirm.id)}
                 disabled={saving}
-                className="flex-1 rounded-xl bg-red-500 px-4 py-2.5 text-sm font-semibold text-white transition-all hover:bg-red-600 disabled:opacity-60"
+                className="flex-1 rounded-lg bg-red-500 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-red-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-400/40 focus-visible:ring-offset-2 disabled:opacity-60"
               >
                 {saving ? "..." : "Hapus"}
               </button>

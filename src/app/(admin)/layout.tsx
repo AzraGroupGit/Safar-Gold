@@ -1,28 +1,29 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import AdminSidebar from "@/components/admin/AdminSidebar";
+import { createClient } from "@/lib/supabase/client";
 
-const pageTitles: Record<string, string> = {
-  "/admin": "Dashboard",
-  "/admin/harga": "Manajemen Harga",
-  "/admin/jenis-emas": "Jenis Emas",
-  "/admin/users": "Kelola User",
-  "/admin/konten": "Konten",
-  "/admin/laporan": "Laporan",
-  "/admin/orders": "Orders",
-  "/admin/pelanggan": "Pelanggan",
-  "/admin/pengaturan": "Pengaturan",
-  "/admin/stock": "Stok",
+const pageMeta: Record<string, { title: string; group: string }> = {
+  "/admin": { title: "Dashboard", group: "Utama" },
+  "/admin/harga": { title: "Manajemen Harga", group: "Utama" },
+  "/admin/orders": { title: "Orders", group: "Transaksi" },
+  "/admin/pelanggan": { title: "Pelanggan", group: "Transaksi" },
+  "/admin/stock": { title: "Stok", group: "Inventori" },
+  "/admin/laporan": { title: "Laporan", group: "Inventori" },
+  "/admin/jenis-emas": { title: "Jenis Emas", group: "Pengelolaan" },
+  "/admin/konten": { title: "Konten", group: "Pengelolaan" },
+  "/admin/users": { title: "Kelola User", group: "Pengelolaan" },
+  "/admin/pengaturan": { title: "Pengaturan", group: "Pengelolaan" },
 };
 
-function getPageTitle(pathname: string): string {
-  if (pathname === "/admin") return "Dashboard";
-  const match = Object.keys(pageTitles)
+function getPageMeta(pathname: string): { title: string; group: string } {
+  if (pathname === "/admin") return pageMeta["/admin"];
+  const match = Object.keys(pageMeta)
     .filter((k) => pathname.startsWith(k))
     .sort((a, b) => b.length - a.length)[0];
-  return match ? pageTitles[match] : "Dashboard";
+  return match ? pageMeta[match] : pageMeta["/admin"];
 }
 
 export default function AdminLayout({
@@ -31,14 +32,33 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [user, setUser] = useState<{ email: string; role: string } | null>(null);
   const pathname = usePathname();
+
+  useEffect(() => {
+    async function fetchUser() {
+      try {
+        const supabase = createClient();
+        const { data: { user: u } } = await supabase.auth.getUser();
+        if (u) {
+          setUser({ email: u.email ?? "", role: u.user_metadata?.role ?? "admin" });
+        }
+      } catch {
+        // keep null
+      }
+    }
+    fetchUser();
+  }, []);
 
   // Halaman login tampil penuh tanpa sidebar
   if (pathname === "/admin/login") {
     return <>{children}</>;
   }
 
-  const title = getPageTitle(pathname);
+  const { title, group } = getPageMeta(pathname);
+  const name = user?.email ? user.email.split("@")[0] : "";
+  const roleLabel = user?.role === "cs" ? "CS" : "Admin";
+  const initial = (name.charAt(0) || "A").toUpperCase();
 
   return (
     <div className="min-h-screen bg-surface">
@@ -67,7 +87,7 @@ export default function AdminLayout({
           </button>
 
           <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-sm">
-            <span className="text-text-muted">Admin</span>
+            <span className="text-text-muted">{group}</span>
             <svg
               className="h-3.5 w-3.5 text-text-light"
               fill="none"
@@ -82,22 +102,36 @@ export default function AdminLayout({
           </nav>
 
           <div className="ml-auto flex items-center gap-3">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gold/15 text-gold-dark ring-1 ring-gold/30">
-              <svg
-                className="h-4 w-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
-                />
-              </svg>
-            </div>
+            {user ? (
+              <>
+                <div className="hidden flex-col items-end sm:flex">
+                  <p className="text-sm font-semibold leading-tight text-text">{name}</p>
+                  <span className="mt-1 rounded-full bg-gold/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-gold-dark">
+                    {roleLabel}
+                  </span>
+                </div>
+                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gold/15 text-sm font-semibold text-gold-dark ring-1 ring-gold/30">
+                  {initial}
+                </div>
+              </>
+            ) : (
+              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gold/15 text-gold-dark ring-1 ring-gold/30">
+                <svg
+                  className="h-4 w-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                  />
+                </svg>
+              </div>
+            )}
           </div>
         </header>
 

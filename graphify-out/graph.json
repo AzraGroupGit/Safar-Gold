@@ -33,6 +33,110 @@
   },
   "nodes": [
     {
+      "id": "src_app_api_admin_laporan_eod_route_eodorder",
+      "label": "EodOrder",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "createAdminClient",
+      "file_type": "code",
+      "norm_label": "eodorder",
+      "source_file": "src/app/api/admin/laporan/eod/route.ts",
+      "source_location": "L7"
+    },
+    {
+      "id": "src_app_api_admin_laporan_eod_route_eodorderitem",
+      "label": "EodOrderItem",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "createAdminClient",
+      "file_type": "code",
+      "norm_label": "eodorderitem",
+      "source_file": "src/app/api/admin/laporan/eod/route.ts",
+      "source_location": "L6"
+    },
+    {
+      "id": "src_app_api_admin_laporan_eod_route_goldtypecat",
+      "label": "GoldTypeCat",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "createAdminClient",
+      "file_type": "code",
+      "norm_label": "goldtypecat",
+      "source_file": "src/app/api/admin/laporan/eod/route.ts",
+      "source_location": "L8"
+    },
+    {
+      "id": "src_app_api_admin_laporan_eod_route_stocksnapshotrow",
+      "label": "StockSnapshotRow",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "createAdminClient",
+      "file_type": "code",
+      "norm_label": "stocksnapshotrow",
+      "source_file": "src/app/api/admin/laporan/eod/route.ts",
+      "source_location": "L9"
+    },
+    {
+      "id": "src_app_admin_admin_priceapprovalpanel_previewpriceitem",
+      "label": "PreviewPriceItem",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "PriceApprovalPanel",
+      "file_type": "code",
+      "norm_label": "previewpriceitem",
+      "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
+      "source_location": "L25"
+    },
+    {
+      "id": "src_app_admin_admin_priceapprovalpanel_props",
+      "label": "Props",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "PriceApprovalPanel",
+      "file_type": "code",
+      "norm_label": "props",
+      "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
+      "source_location": "L6"
+    },
+    {
+      "id": "src_components_pricepreviewmodal_previewitem",
+      "label": "PreviewItem",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "PriceApprovalPanel",
+      "file_type": "code",
+      "norm_label": "previewitem",
+      "source_file": "src/components/PricePreviewModal.tsx",
+      "source_location": "L5"
+    },
+    {
+      "id": "src_components_pricepreviewmodal_pricepreviewmodalprops",
+      "label": "PricePreviewModalProps",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "PriceApprovalPanel",
+      "file_type": "code",
+      "norm_label": "pricepreviewmodalprops",
+      "source_file": "src/components/PricePreviewModal.tsx",
+      "source_location": "L15"
+    },
+    {
       "id": "src_components_mesinpresisi_machine",
       "label": "Machine",
       "_callable": true,
@@ -44,19 +148,6 @@
       "norm_label": "machine",
       "source_file": "src/components/MesinPresisi.tsx",
       "source_location": "L5"
-    },
-    {
-      "id": "src_lib_gold_api_herocontent",
-      "label": "HeroContent",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "(public)/page.tsx",
-      "file_type": "code",
-      "norm_label": "herocontent",
-      "source_file": "src/lib/gold-api.ts",
-      "source_location": "L111"
     },
     {
       "id": "src_app_admin_admin_users_usersclient_userrow",
@@ -163,6 +254,19 @@
       "source_location": "L575"
     },
     {
+      "id": "src_lib_gold_api_herocontent",
+      "label": "HeroContent",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "gold-api.ts",
+      "file_type": "code",
+      "norm_label": "herocontent",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L111"
+    },
+    {
       "id": "src_lib_gold_api_pricehistoryrow",
       "label": "PriceHistoryRow",
       "_callable": true,
@@ -202,6 +306,32 @@
       "source_location": "L505"
     },
     {
+      "id": "src_app_admin_admin_stock_stockclient_movement",
+      "label": "Movement",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "AdminHargaClient.tsx",
+      "file_type": "code",
+      "norm_label": "movement",
+      "source_file": "src/app/(admin)/admin/stock/StockClient.tsx",
+      "source_location": "L8"
+    },
+    {
+      "id": "src_app_admin_admin_stock_stockclient_stockrow",
+      "label": "StockRow",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "AdminHargaClient.tsx",
+      "file_type": "code",
+      "norm_label": "stockrow",
+      "source_file": "src/app/(admin)/admin/stock/StockClient.tsx",
+      "source_location": "L7"
+    },
+    {
       "id": "src_lib_gold_api_formattedprice",
       "label": "FormattedPrice",
       "_callable": true,
@@ -215,15 +345,67 @@
       "source_location": "L656"
     },
     {
+      "id": "src_lib_gold_api_goldtyperow",
+      "label": "GoldTypeRow",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "AdminHargaClient.tsx",
+      "file_type": "code",
+      "norm_label": "goldtyperow",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L48"
+    },
+    {
+      "id": "src_app_admin_admin_laporan_laporanclient_dailysummary",
+      "label": "DailySummary",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "formatRupiah",
+      "file_type": "code",
+      "norm_label": "dailysummary",
+      "source_file": "src/app/(admin)/admin/laporan/LaporanClient.tsx",
+      "source_location": "L6"
+    },
+    {
+      "id": "src_app_admin_admin_laporan_laporanclient_stockrow",
+      "label": "StockRow",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "formatRupiah",
+      "file_type": "code",
+      "norm_label": "stockrow",
+      "source_file": "src/app/(admin)/admin/laporan/LaporanClient.tsx",
+      "source_location": "L7"
+    },
+    {
       "id": "src_app_admin_admin_orders_ordersclient_cartitem",
       "label": "CartItem",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 6,
-      "community_name": "OrdersClient.tsx",
+      "community_name": "formatRupiah",
       "file_type": "code",
       "norm_label": "cartitem",
+      "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
+      "source_location": "L12"
+    },
+    {
+      "id": "src_app_admin_admin_orders_ordersclient_customerlookup",
+      "label": "CustomerLookup",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "formatRupiah",
+      "file_type": "code",
+      "norm_label": "customerlookup",
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
       "source_location": "L11"
     },
@@ -234,7 +416,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 6,
-      "community_name": "OrdersClient.tsx",
+      "community_name": "formatRupiah",
       "file_type": "code",
       "norm_label": "order",
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
@@ -247,7 +429,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 6,
-      "community_name": "OrdersClient.tsx",
+      "community_name": "formatRupiah",
       "file_type": "code",
       "norm_label": "orderdetail",
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
@@ -260,11 +442,11 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 6,
-      "community_name": "OrdersClient.tsx",
+      "community_name": "formatRupiah",
       "file_type": "code",
       "norm_label": "regionoption",
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L17"
+      "source_location": "L18"
     },
     {
       "id": "src_app_admin_admin_pelanggan_pelangganclient_customer",
@@ -273,7 +455,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 6,
-      "community_name": "OrdersClient.tsx",
+      "community_name": "formatRupiah",
       "file_type": "code",
       "norm_label": "customer",
       "source_file": "src/app/(admin)/admin/pelanggan/PelangganClient.tsx",
@@ -286,7 +468,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 6,
-      "community_name": "OrdersClient.tsx",
+      "community_name": "formatRupiah",
       "file_type": "code",
       "norm_label": "customerorder",
       "source_file": "src/app/(admin)/admin/pelanggan/PelangganClient.tsx",
@@ -299,7 +481,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 6,
-      "community_name": "OrdersClient.tsx",
+      "community_name": "formatRupiah",
       "file_type": "code",
       "norm_label": "invoiceorder",
       "source_file": "src/components/OrderInvoice.tsx",
@@ -312,7 +494,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 6,
-      "community_name": "OrdersClient.tsx",
+      "community_name": "formatRupiah",
       "file_type": "code",
       "norm_label": "invoicesettings",
       "source_file": "src/components/OrderInvoice.tsx",
@@ -325,7 +507,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "formdata",
       "source_file": "src/app/(admin)/admin/jenis-emas/JenisEmasClient.tsx",
@@ -338,7 +520,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "navlink",
       "source_file": "src/components/admin/AdminSidebar.tsx",
@@ -351,141 +533,50 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "props",
       "source_file": "src/components/ConfirmModal.tsx",
       "source_location": "L3"
     },
     {
-      "id": "src_lib_gold_api_goldtyperow",
-      "label": "GoldTypeRow",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "JenisEmasClient.tsx",
-      "file_type": "code",
-      "norm_label": "goldtyperow",
-      "source_file": "src/lib/gold-api.ts",
-      "source_location": "L48"
-    },
-    {
-      "id": "src_app_admin_admin_stock_stockclient_movement",
-      "label": "Movement",
+      "id": "src_app_admin_admin_eod_eodclient_breakdown",
+      "label": "Breakdown",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
       "community": 8,
-      "community_name": "StockClient",
+      "community_name": "EODClient.tsx",
       "file_type": "code",
-      "norm_label": "movement",
-      "source_file": "src/app/(admin)/admin/stock/StockClient.tsx",
+      "norm_label": "breakdown",
+      "source_file": "src/app/(admin)/admin/eod/EODClient.tsx",
       "source_location": "L6"
     },
     {
-      "id": "src_app_admin_admin_stock_stockclient_stockrow",
-      "label": "StockRow",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 8,
-      "community_name": "StockClient",
-      "file_type": "code",
-      "norm_label": "stockrow",
-      "source_file": "src/app/(admin)/admin/stock/StockClient.tsx",
-      "source_location": "L5"
-    },
-    {
-      "id": "src_app_admin_admin_laporan_laporanclient_dailysummary",
-      "label": "DailySummary",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "formatRupiah",
-      "file_type": "code",
-      "norm_label": "dailysummary",
-      "source_file": "src/app/(admin)/admin/laporan/LaporanClient.tsx",
-      "source_location": "L6"
-    },
-    {
-      "id": "src_app_admin_admin_laporan_laporanclient_eod",
+      "id": "src_app_admin_admin_eod_eodclient_eod",
       "label": "EOD",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 9,
-      "community_name": "formatRupiah",
+      "community": 8,
+      "community_name": "EODClient.tsx",
       "file_type": "code",
       "norm_label": "eod",
-      "source_file": "src/app/(admin)/admin/laporan/LaporanClient.tsx",
-      "source_location": "L7"
+      "source_file": "src/app/(admin)/admin/eod/EODClient.tsx",
+      "source_location": "L13"
     },
     {
-      "id": "src_app_admin_admin_laporan_laporanclient_stockrow",
-      "label": "StockRow",
+      "id": "src_app_admin_admin_eod_eodclient_stocksnapshot",
+      "label": "StockSnapshot",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 9,
-      "community_name": "formatRupiah",
+      "community": 8,
+      "community_name": "EODClient.tsx",
       "file_type": "code",
-      "norm_label": "stockrow",
-      "source_file": "src/app/(admin)/admin/laporan/LaporanClient.tsx",
-      "source_location": "L8"
-    },
-    {
-      "id": "src_app_admin_admin_priceapprovalpanel_previewpriceitem",
-      "label": "PreviewPriceItem",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "formatRupiah",
-      "file_type": "code",
-      "norm_label": "previewpriceitem",
-      "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
-      "source_location": "L25"
-    },
-    {
-      "id": "src_app_admin_admin_priceapprovalpanel_props",
-      "label": "Props",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "formatRupiah",
-      "file_type": "code",
-      "norm_label": "props",
-      "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
-      "source_location": "L6"
-    },
-    {
-      "id": "src_components_pricepreviewmodal_previewitem",
-      "label": "PreviewItem",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "formatRupiah",
-      "file_type": "code",
-      "norm_label": "previewitem",
-      "source_file": "src/components/PricePreviewModal.tsx",
-      "source_location": "L5"
-    },
-    {
-      "id": "src_components_pricepreviewmodal_pricepreviewmodalprops",
-      "label": "PricePreviewModalProps",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "formatRupiah",
-      "file_type": "code",
-      "norm_label": "pricepreviewmodalprops",
-      "source_file": "src/components/PricePreviewModal.tsx",
-      "source_location": "L15"
+      "norm_label": "stocksnapshot",
+      "source_file": "src/app/(admin)/admin/eod/EODClient.tsx",
+      "source_location": "L12"
     },
     {
       "id": "src_app_api_admin_customers_id_route_get",
@@ -548,6 +639,18 @@
       "source_location": "L6"
     },
     {
+      "id": "src_app_api_admin_laporan_eod_route_get",
+      "label": "GET()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "createAdminClient",
+      "file_type": "code",
+      "norm_label": "get()",
+      "source_file": "src/app/api/admin/laporan/eod/route.ts",
+      "source_location": "L25"
+    },
+    {
       "id": "src_app_api_admin_laporan_eod_route_post",
       "label": "POST()",
       "_callable": true,
@@ -557,7 +660,19 @@
       "file_type": "code",
       "norm_label": "post()",
       "source_file": "src/app/api/admin/laporan/eod/route.ts",
-      "source_location": "L6"
+      "source_location": "L37"
+    },
+    {
+      "id": "src_app_api_admin_laporan_eod_route_wibdatestr",
+      "label": "wibDateStr()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "createAdminClient",
+      "file_type": "code",
+      "norm_label": "wibdatestr()",
+      "source_file": "src/app/api/admin/laporan/eod/route.ts",
+      "source_location": "L16"
     },
     {
       "id": "src_app_api_admin_orders_id_route_delete",
@@ -629,6 +744,18 @@
       "file_type": "code",
       "norm_label": "post()",
       "source_file": "src/app/api/admin/stock/adjust/route.ts",
+      "source_location": "L6"
+    },
+    {
+      "id": "src_app_api_admin_stock_min_qty_route_post",
+      "label": "POST()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "createAdminClient",
+      "file_type": "code",
+      "norm_label": "post()",
+      "source_file": "src/app/api/admin/stock/min-qty/route.ts",
       "source_location": "L6"
     },
     {
@@ -896,6 +1023,54 @@
       "source_location": "L187"
     },
     {
+      "id": "src_components_pricepreviewmodal_formatrupiah",
+      "label": "formatRupiah()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "PriceApprovalPanel",
+      "file_type": "code",
+      "norm_label": "formatrupiah()",
+      "source_file": "src/components/PricePreviewModal.tsx",
+      "source_location": "L28"
+    },
+    {
+      "id": "src_components_pricepreviewmodal_pricepreviewmodal",
+      "label": "PricePreviewModal()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "PriceApprovalPanel",
+      "file_type": "code",
+      "norm_label": "pricepreviewmodal()",
+      "source_file": "src/components/PricePreviewModal.tsx",
+      "source_location": "L32"
+    },
+    {
+      "id": "src_components_tabbedpricelist_tabbedpricelist",
+      "label": "TabbedPricelist()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "PriceApprovalPanel",
+      "file_type": "code",
+      "norm_label": "tabbedpricelist()",
+      "source_file": "src/components/TabbedPricelist.tsx",
+      "source_location": "L14"
+    },
+    {
+      "id": "src_lib_gold_api_perhiasanrank",
+      "label": "perhiasanRank()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "PriceApprovalPanel",
+      "file_type": "code",
+      "norm_label": "perhiasanrank()",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L18"
+    },
+    {
       "id": "src_app_layout_rootlayout",
       "label": "RootLayout()",
       "_callable": true,
@@ -929,18 +1104,6 @@
       "file_type": "code",
       "norm_label": "adminhargapage()",
       "source_file": "src/app/(admin)/admin/harga/page.tsx",
-      "source_location": "L6"
-    },
-    {
-      "id": "src_app_admin_admin_jenis_emas_page_jenisemaspage",
-      "label": "JenisEmasPage()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "admin/page.tsx",
-      "file_type": "code",
-      "norm_label": "jenisemaspage()",
-      "source_file": "src/app/(admin)/admin/jenis-emas/page.tsx",
       "source_location": "L6"
     },
     {
@@ -1076,6 +1239,30 @@
       "source_location": "L6"
     },
     {
+      "id": "src_app_public_harga_page_hargapage",
+      "label": "HargaPage()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "admin/page.tsx",
+      "file_type": "code",
+      "norm_label": "hargapage()",
+      "source_file": "src/app/(public)/harga/page.tsx",
+      "source_location": "L14"
+    },
+    {
+      "id": "src_app_public_kalkulator_page_kalkulatorpage",
+      "label": "KalkulatorPage()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "admin/page.tsx",
+      "file_type": "code",
+      "norm_label": "kalkulatorpage()",
+      "source_file": "src/app/(public)/kalkulator/page.tsx",
+      "source_location": "L14"
+    },
+    {
       "id": "src_components_admin_adminskeleton_adminskeleton",
       "label": "AdminSkeleton()",
       "_callable": true,
@@ -1085,6 +1272,18 @@
       "file_type": "code",
       "norm_label": "adminskeleton()",
       "source_file": "src/components/admin/AdminSkeleton.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_components_legalnotice_legalnotice",
+      "label": "LegalNotice()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "admin/page.tsx",
+      "file_type": "code",
+      "norm_label": "legalnotice()",
+      "source_file": "src/components/LegalNotice.tsx",
       "source_location": "L1"
     },
     {
@@ -1148,6 +1347,18 @@
       "source_location": "L759"
     },
     {
+      "id": "src_lib_gold_api_getpricehistory",
+      "label": "getPriceHistory()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "admin/page.tsx",
+      "file_type": "code",
+      "norm_label": "getpricehistory()",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L206"
+    },
+    {
       "id": "src_lib_gold_api_gettodayprices",
       "label": "getTodayPrices()",
       "_callable": true,
@@ -1205,7 +1416,7 @@
       "file_type": "code",
       "norm_label": "ordersclient()",
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L19"
+      "source_location": "L20"
     },
     {
       "id": "src_app_admin_admin_orders_ordersclient_ordersclient_addbuybackitem",
@@ -1217,7 +1428,7 @@
       "file_type": "code",
       "norm_label": "addbuybackitem()",
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L200"
+      "source_location": "L201"
     },
     {
       "id": "src_app_admin_admin_orders_ordersclient_ordersclient_addsellitem",
@@ -1229,7 +1440,7 @@
       "file_type": "code",
       "norm_label": "addsellitem()",
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L186"
+      "source_location": "L187"
     },
     {
       "id": "src_app_admin_admin_orders_ordersclient_ordersclient_applylookup",
@@ -1241,7 +1452,7 @@
       "file_type": "code",
       "norm_label": "applylookup()",
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L105"
+      "source_location": "L106"
     },
     {
       "id": "src_app_admin_admin_orders_ordersclient_ordersclient_exportcsv",
@@ -1253,7 +1464,7 @@
       "file_type": "code",
       "norm_label": "exportcsv()",
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L243"
+      "source_location": "L244"
     },
     {
       "id": "src_app_admin_admin_orders_ordersclient_ordersclient_fetchorders",
@@ -1265,7 +1476,7 @@
       "file_type": "code",
       "norm_label": "fetchorders()",
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L78"
+      "source_location": "L79"
     },
     {
       "id": "src_app_admin_admin_orders_ordersclient_ordersclient_handledelete",
@@ -1277,7 +1488,7 @@
       "file_type": "code",
       "norm_label": "handledelete()",
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L236"
+      "source_location": "L237"
     },
     {
       "id": "src_app_admin_admin_orders_ordersclient_ordersclient_handlephonechange",
@@ -1289,7 +1500,7 @@
       "file_type": "code",
       "norm_label": "handlephonechange()",
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L91"
+      "source_location": "L92"
     },
     {
       "id": "src_app_admin_admin_orders_ordersclient_ordersclient_handlesubmit",
@@ -1301,7 +1512,7 @@
       "file_type": "code",
       "norm_label": "handlesubmit()",
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L216"
+      "source_location": "L217"
     },
     {
       "id": "src_app_admin_admin_orders_ordersclient_ordersclient_ondistrictchange",
@@ -1313,7 +1524,7 @@
       "file_type": "code",
       "norm_label": "ondistrictchange()",
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L147"
+      "source_location": "L148"
     },
     {
       "id": "src_app_admin_admin_orders_ordersclient_ordersclient_onprovincechange",
@@ -1325,7 +1536,7 @@
       "file_type": "code",
       "norm_label": "onprovincechange()",
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L129"
+      "source_location": "L130"
     },
     {
       "id": "src_app_admin_admin_orders_ordersclient_ordersclient_onregencychange",
@@ -1337,7 +1548,7 @@
       "file_type": "code",
       "norm_label": "onregencychange()",
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L138"
+      "source_location": "L139"
     },
     {
       "id": "src_app_admin_admin_orders_ordersclient_ordersclient_openedit",
@@ -1349,7 +1560,7 @@
       "file_type": "code",
       "norm_label": "openedit()",
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L157"
+      "source_location": "L158"
     },
     {
       "id": "src_app_admin_admin_orders_ordersclient_ordersclient_openprint",
@@ -1361,7 +1572,7 @@
       "file_type": "code",
       "norm_label": "openprint()",
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L182"
+      "source_location": "L183"
     },
     {
       "id": "src_app_admin_admin_orders_ordersclient_ordersclient_openview",
@@ -1373,7 +1584,7 @@
       "file_type": "code",
       "norm_label": "openview()",
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L178"
+      "source_location": "L179"
     },
     {
       "id": "src_app_admin_admin_orders_ordersclient_ordersclient_removeitem",
@@ -1385,7 +1596,7 @@
       "file_type": "code",
       "norm_label": "removeitem()",
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L213"
+      "source_location": "L214"
     },
     {
       "id": "src_app_admin_admin_orders_ordersclient_ordersclient_resetform",
@@ -1397,7 +1608,7 @@
       "file_type": "code",
       "norm_label": "resetform()",
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L81"
+      "source_location": "L82"
     },
     {
       "id": "src_middleware_middleware",
@@ -1412,52 +1623,52 @@
       "source_location": "L16"
     },
     {
-      "id": "src_app_admin_admin_konten_adminkontenclient_adminkontenclient",
-      "label": "AdminKontenClient()",
+      "id": "src_app_admin_admin_pelanggan_page_pelangganpage",
+      "label": "PelangganPage()",
       "_callable": true,
       "_origin": "ast",
       "community": 2,
       "community_name": "(public)/page.tsx",
       "file_type": "code",
-      "norm_label": "adminkontenclient()",
-      "source_file": "src/app/(admin)/admin/konten/AdminKontenClient.tsx",
-      "source_location": "L6"
+      "norm_label": "pelangganpage()",
+      "source_file": "src/app/(admin)/admin/pelanggan/page.tsx",
+      "source_location": "L8"
     },
     {
-      "id": "src_app_admin_admin_konten_adminkontenclient_adminkontenclient_handlesave",
-      "label": "handleSave()",
+      "id": "src_app_public_layout_publiclayout",
+      "label": "PublicLayout()",
       "_callable": true,
       "_origin": "ast",
       "community": 2,
       "community_name": "(public)/page.tsx",
       "file_type": "code",
-      "norm_label": "handlesave()",
-      "source_file": "src/app/(admin)/admin/konten/AdminKontenClient.tsx",
-      "source_location": "L15"
+      "norm_label": "publiclayout()",
+      "source_file": "src/app/(public)/layout.tsx",
+      "source_location": "L7"
     },
     {
-      "id": "src_app_admin_admin_konten_adminkontenclient_adminkontenclient_update",
-      "label": "update()",
+      "id": "src_app_public_page_homepage",
+      "label": "HomePage()",
       "_callable": true,
       "_origin": "ast",
       "community": 2,
       "community_name": "(public)/page.tsx",
       "file_type": "code",
-      "norm_label": "update()",
-      "source_file": "src/app/(admin)/admin/konten/AdminKontenClient.tsx",
-      "source_location": "L11"
+      "norm_label": "homepage()",
+      "source_file": "src/app/(public)/page.tsx",
+      "source_location": "L23"
     },
     {
-      "id": "src_app_admin_admin_konten_page_adminkontenpage",
-      "label": "AdminKontenPage()",
+      "id": "src_components_backtotop_backtotop",
+      "label": "BackToTop()",
       "_callable": true,
       "_origin": "ast",
       "community": 2,
       "community_name": "(public)/page.tsx",
       "file_type": "code",
-      "norm_label": "adminkontenpage()",
-      "source_file": "src/app/(admin)/admin/konten/page.tsx",
-      "source_location": "L6"
+      "norm_label": "backtotop()",
+      "source_file": "src/components/BackToTop.tsx",
+      "source_location": "L5"
     },
     {
       "id": "src_components_caratransaksi_caratransaksi",
@@ -1496,6 +1707,18 @@
       "source_location": "L5"
     },
     {
+      "id": "src_components_footer_footer",
+      "label": "Footer()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "(public)/page.tsx",
+      "file_type": "code",
+      "norm_label": "footer()",
+      "source_file": "src/components/Footer.tsx",
+      "source_location": "L4"
+    },
+    {
       "id": "src_components_golddivider_golddivider",
       "label": "GoldDivider()",
       "_callable": true,
@@ -1506,18 +1729,6 @@
       "norm_label": "golddivider()",
       "source_file": "src/components/GoldDivider.tsx",
       "source_location": "L1"
-    },
-    {
-      "id": "src_components_hero_hero",
-      "label": "Hero()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "(public)/page.tsx",
-      "file_type": "code",
-      "norm_label": "hero()",
-      "source_file": "src/components/Hero.tsx",
-      "source_location": "L4"
     },
     {
       "id": "src_components_keunggulan_keunggulan",
@@ -1592,6 +1803,18 @@
       "source_location": "L79"
     },
     {
+      "id": "src_components_navbar_navbar",
+      "label": "Navbar()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "(public)/page.tsx",
+      "file_type": "code",
+      "norm_label": "navbar()",
+      "source_file": "src/components/Navbar.tsx",
+      "source_location": "L6"
+    },
+    {
       "id": "src_components_testimoni_testimoni",
       "label": "Testimoni()",
       "_callable": true,
@@ -1604,16 +1827,28 @@
       "source_location": "L4"
     },
     {
-      "id": "src_lib_gold_api_getherocontent",
-      "label": "getHeroContent()",
+      "id": "src_components_whatsappbutton_whatsappbutton",
+      "label": "WhatsAppButton()",
       "_callable": true,
       "_origin": "ast",
       "community": 2,
       "community_name": "(public)/page.tsx",
       "file_type": "code",
-      "norm_label": "getherocontent()",
+      "norm_label": "whatsappbutton()",
+      "source_file": "src/components/WhatsAppButton.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_lib_gold_api_getpublicsettings",
+      "label": "getPublicSettings()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "(public)/page.tsx",
+      "file_type": "code",
+      "norm_label": "getpublicsettings()",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L120"
+      "source_location": "L640"
     },
     {
       "id": "scripts_import_historis_supabase_post",
@@ -1664,18 +1899,6 @@
       "source_location": "L13"
     },
     {
-      "id": "src_app_admin_admin_users_usersclient_usersclient_fetchusers",
-      "label": "fetchUsers()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 28,
-      "community_name": "UsersClient",
-      "file_type": "code",
-      "norm_label": "fetchusers()",
-      "source_file": "src/app/(admin)/admin/users/UsersClient.tsx",
-      "source_location": "L26"
-    },
-    {
       "id": "src_app_admin_admin_users_usersclient_usersclient_formatdate",
       "label": "formatDate()",
       "_callable": true,
@@ -1685,7 +1908,7 @@
       "file_type": "code",
       "norm_label": "formatdate()",
       "source_file": "src/app/(admin)/admin/users/UsersClient.tsx",
-      "source_location": "L148"
+      "source_location": "L153"
     },
     {
       "id": "src_app_admin_admin_users_usersclient_usersclient_handledelete",
@@ -1697,7 +1920,7 @@
       "file_type": "code",
       "norm_label": "handledelete()",
       "source_file": "src/app/(admin)/admin/users/UsersClient.tsx",
-      "source_location": "L109"
+      "source_location": "L114"
     },
     {
       "id": "src_app_admin_admin_users_usersclient_usersclient_handlesave",
@@ -1709,7 +1932,19 @@
       "file_type": "code",
       "norm_label": "handlesave()",
       "source_file": "src/app/(admin)/admin/users/UsersClient.tsx",
-      "source_location": "L61"
+      "source_location": "L66"
+    },
+    {
+      "id": "src_app_admin_admin_users_usersclient_usersclient_load",
+      "label": "load()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "UsersClient",
+      "file_type": "code",
+      "norm_label": "load()",
+      "source_file": "src/app/(admin)/admin/users/UsersClient.tsx",
+      "source_location": "L29"
     },
     {
       "id": "src_app_admin_admin_users_usersclient_usersclient_openadd",
@@ -1721,7 +1956,7 @@
       "file_type": "code",
       "norm_label": "openadd()",
       "source_file": "src/app/(admin)/admin/users/UsersClient.tsx",
-      "source_location": "L56"
+      "source_location": "L61"
     },
     {
       "id": "src_app_admin_admin_users_usersclient_usersclient_openedit",
@@ -1733,7 +1968,7 @@
       "file_type": "code",
       "norm_label": "openedit()",
       "source_file": "src/app/(admin)/admin/users/UsersClient.tsx",
-      "source_location": "L48"
+      "source_location": "L53"
     },
     {
       "id": "src_app_admin_admin_users_usersclient_usersclient_resetform",
@@ -1745,7 +1980,7 @@
       "file_type": "code",
       "norm_label": "resetform()",
       "source_file": "src/app/(admin)/admin/users/UsersClient.tsx",
-      "source_location": "L41"
+      "source_location": "L46"
     },
     {
       "id": "src_app_admin_admin_users_usersclient_usersclient_togglerole",
@@ -1757,7 +1992,7 @@
       "file_type": "code",
       "norm_label": "togglerole()",
       "source_file": "src/app/(admin)/admin/users/UsersClient.tsx",
-      "source_location": "L131"
+      "source_location": "L136"
     },
     {
       "id": "src_components_pricechart_formatcompact",
@@ -1830,6 +2065,54 @@
       "norm_label": "get()",
       "source_file": "src/app/api/regions/route.ts",
       "source_location": "L7"
+    },
+    {
+      "id": "src_app_admin_admin_konten_adminkontenclient_adminkontenclient",
+      "label": "AdminKontenClient()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "gold-api.ts",
+      "file_type": "code",
+      "norm_label": "adminkontenclient()",
+      "source_file": "src/app/(admin)/admin/konten/AdminKontenClient.tsx",
+      "source_location": "L6"
+    },
+    {
+      "id": "src_app_admin_admin_konten_adminkontenclient_adminkontenclient_handlesave",
+      "label": "handleSave()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "gold-api.ts",
+      "file_type": "code",
+      "norm_label": "handlesave()",
+      "source_file": "src/app/(admin)/admin/konten/AdminKontenClient.tsx",
+      "source_location": "L15"
+    },
+    {
+      "id": "src_app_admin_admin_konten_adminkontenclient_adminkontenclient_update",
+      "label": "update()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "gold-api.ts",
+      "file_type": "code",
+      "norm_label": "update()",
+      "source_file": "src/app/(admin)/admin/konten/AdminKontenClient.tsx",
+      "source_location": "L11"
+    },
+    {
+      "id": "src_app_admin_admin_konten_page_adminkontenpage",
+      "label": "AdminKontenPage()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "gold-api.ts",
+      "file_type": "code",
+      "norm_label": "adminkontenpage()",
+      "source_file": "src/app/(admin)/admin/konten/page.tsx",
+      "source_location": "L6"
     },
     {
       "id": "src_app_api_admin_create_gold_type_route_post",
@@ -1940,28 +2223,16 @@
       "source_location": "L9"
     },
     {
-      "id": "src_components_livepriceband_fluctuationbadge",
-      "label": "FluctuationBadge()",
+      "id": "src_components_hero_hero",
+      "label": "Hero()",
       "_callable": true,
       "_origin": "ast",
       "community": 32,
       "community_name": "gold-api.ts",
       "file_type": "code",
-      "norm_label": "fluctuationbadge()",
-      "source_file": "src/components/LivePriceBand.tsx",
-      "source_location": "L6"
-    },
-    {
-      "id": "src_components_livepriceband_livepriceband",
-      "label": "LivePriceBand()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 32,
-      "community_name": "gold-api.ts",
-      "file_type": "code",
-      "norm_label": "livepriceband()",
-      "source_file": "src/components/LivePriceBand.tsx",
-      "source_location": "L35"
+      "norm_label": "hero()",
+      "source_file": "src/components/Hero.tsx",
+      "source_location": "L4"
     },
     {
       "id": "src_lib_gold_api_calculateprices",
@@ -2058,6 +2329,18 @@
       "norm_label": "formatdate()",
       "source_file": "src/lib/gold-api.ts",
       "source_location": "L818"
+    },
+    {
+      "id": "src_lib_gold_api_getherocontent",
+      "label": "getHeroContent()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "gold-api.ts",
+      "file_type": "code",
+      "norm_label": "getherocontent()",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L120"
     },
     {
       "id": "src_lib_gold_api_getmarketinfo",
@@ -2276,6 +2559,90 @@
       "source_location": "L44"
     },
     {
+      "id": "src_app_admin_admin_stock_page_stockpage",
+      "label": "StockPage()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "AdminHargaClient.tsx",
+      "file_type": "code",
+      "norm_label": "stockpage()",
+      "source_file": "src/app/(admin)/admin/stock/page.tsx",
+      "source_location": "L8"
+    },
+    {
+      "id": "src_app_admin_admin_stock_stockclient_stockclient",
+      "label": "StockClient()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "AdminHargaClient.tsx",
+      "file_type": "code",
+      "norm_label": "stockclient()",
+      "source_file": "src/app/(admin)/admin/stock/StockClient.tsx",
+      "source_location": "L18"
+    },
+    {
+      "id": "src_app_admin_admin_stock_stockclient_stockclient_handleadjust",
+      "label": "handleAdjust()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "AdminHargaClient.tsx",
+      "file_type": "code",
+      "norm_label": "handleadjust()",
+      "source_file": "src/app/(admin)/admin/stock/StockClient.tsx",
+      "source_location": "L70"
+    },
+    {
+      "id": "src_app_admin_admin_stock_stockclient_stockclient_handlesaveminqty",
+      "label": "handleSaveMinQty()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "AdminHargaClient.tsx",
+      "file_type": "code",
+      "norm_label": "handlesaveminqty()",
+      "source_file": "src/app/(admin)/admin/stock/StockClient.tsx",
+      "source_location": "L79"
+    },
+    {
+      "id": "src_app_admin_admin_stock_stockclient_stockclient_load",
+      "label": "load()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "AdminHargaClient.tsx",
+      "file_type": "code",
+      "norm_label": "load()",
+      "source_file": "src/app/(admin)/admin/stock/StockClient.tsx",
+      "source_location": "L52"
+    },
+    {
+      "id": "src_app_admin_admin_stock_stockclient_stockclient_openminmodal",
+      "label": "openMinModal()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "AdminHargaClient.tsx",
+      "file_type": "code",
+      "norm_label": "openminmodal()",
+      "source_file": "src/app/(admin)/admin/stock/StockClient.tsx",
+      "source_location": "L93"
+    },
+    {
+      "id": "src_app_admin_admin_stock_stockclient_stockclient_switchtype",
+      "label": "switchType()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "AdminHargaClient.tsx",
+      "file_type": "code",
+      "norm_label": "switchtype()",
+      "source_file": "src/app/(admin)/admin/stock/StockClient.tsx",
+      "source_location": "L100"
+    },
+    {
       "id": "src_components_calculator_calculator",
       "label": "Calculator()",
       "_callable": true,
@@ -2324,28 +2691,52 @@
       "source_location": "L33"
     },
     {
+      "id": "src_app_admin_admin_laporan_laporanclient_laporanclient",
+      "label": "LaporanClient()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "formatRupiah",
+      "file_type": "code",
+      "norm_label": "laporanclient()",
+      "source_file": "src/app/(admin)/admin/laporan/LaporanClient.tsx",
+      "source_location": "L9"
+    },
+    {
+      "id": "src_app_admin_admin_laporan_laporanclient_laporanclient_load",
+      "label": "load()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "formatRupiah",
+      "file_type": "code",
+      "norm_label": "load()",
+      "source_file": "src/app/(admin)/admin/laporan/LaporanClient.tsx",
+      "source_location": "L17"
+    },
+    {
+      "id": "src_app_admin_admin_laporan_page_laporanpage",
+      "label": "LaporanPage()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "formatRupiah",
+      "file_type": "code",
+      "norm_label": "laporanpage()",
+      "source_file": "src/app/(admin)/admin/laporan/page.tsx",
+      "source_location": "L7"
+    },
+    {
       "id": "src_app_admin_admin_orders_id_invoice_page_invoicepage",
       "label": "InvoicePage()",
       "_callable": true,
       "_origin": "ast",
       "community": 6,
-      "community_name": "OrdersClient.tsx",
+      "community_name": "formatRupiah",
       "file_type": "code",
       "norm_label": "invoicepage()",
       "source_file": "src/app/(admin)/admin/orders/[id]/invoice/page.tsx",
       "source_location": "L7"
-    },
-    {
-      "id": "src_app_admin_admin_pelanggan_page_pelangganpage",
-      "label": "PelangganPage()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "OrdersClient.tsx",
-      "file_type": "code",
-      "norm_label": "pelangganpage()",
-      "source_file": "src/app/(admin)/admin/pelanggan/page.tsx",
-      "source_location": "L8"
     },
     {
       "id": "src_app_admin_admin_pelanggan_pelangganclient_pelangganclient",
@@ -2353,7 +2744,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 6,
-      "community_name": "OrdersClient.tsx",
+      "community_name": "formatRupiah",
       "file_type": "code",
       "norm_label": "pelangganclient()",
       "source_file": "src/app/(admin)/admin/pelanggan/PelangganClient.tsx",
@@ -2365,7 +2756,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 6,
-      "community_name": "OrdersClient.tsx",
+      "community_name": "formatRupiah",
       "file_type": "code",
       "norm_label": "backtodetail()",
       "source_file": "src/app/(admin)/admin/pelanggan/PelangganClient.tsx",
@@ -2377,7 +2768,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 6,
-      "community_name": "OrdersClient.tsx",
+      "community_name": "formatRupiah",
       "file_type": "code",
       "norm_label": "fetchcustomers()",
       "source_file": "src/app/(admin)/admin/pelanggan/PelangganClient.tsx",
@@ -2389,7 +2780,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 6,
-      "community_name": "OrdersClient.tsx",
+      "community_name": "formatRupiah",
       "file_type": "code",
       "norm_label": "opendetail()",
       "source_file": "src/app/(admin)/admin/pelanggan/PelangganClient.tsx",
@@ -2401,71 +2792,35 @@
       "_callable": true,
       "_origin": "ast",
       "community": 6,
-      "community_name": "OrdersClient.tsx",
+      "community_name": "formatRupiah",
       "file_type": "code",
       "norm_label": "openinvoice()",
       "source_file": "src/app/(admin)/admin/pelanggan/PelangganClient.tsx",
       "source_location": "L55"
     },
     {
-      "id": "src_app_public_layout_publiclayout",
-      "label": "PublicLayout()",
+      "id": "src_components_livepriceband_fluctuationbadge",
+      "label": "FluctuationBadge()",
       "_callable": true,
       "_origin": "ast",
       "community": 6,
-      "community_name": "OrdersClient.tsx",
+      "community_name": "formatRupiah",
       "file_type": "code",
-      "norm_label": "publiclayout()",
-      "source_file": "src/app/(public)/layout.tsx",
-      "source_location": "L7"
-    },
-    {
-      "id": "src_app_public_page_homepage",
-      "label": "HomePage()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "OrdersClient.tsx",
-      "file_type": "code",
-      "norm_label": "homepage()",
-      "source_file": "src/app/(public)/page.tsx",
-      "source_location": "L23"
-    },
-    {
-      "id": "src_components_backtotop_backtotop",
-      "label": "BackToTop()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "OrdersClient.tsx",
-      "file_type": "code",
-      "norm_label": "backtotop()",
-      "source_file": "src/components/BackToTop.tsx",
-      "source_location": "L5"
-    },
-    {
-      "id": "src_components_footer_footer",
-      "label": "Footer()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "OrdersClient.tsx",
-      "file_type": "code",
-      "norm_label": "footer()",
-      "source_file": "src/components/Footer.tsx",
-      "source_location": "L4"
-    },
-    {
-      "id": "src_components_navbar_navbar",
-      "label": "Navbar()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "OrdersClient.tsx",
-      "file_type": "code",
-      "norm_label": "navbar()",
-      "source_file": "src/components/Navbar.tsx",
+      "norm_label": "fluctuationbadge()",
+      "source_file": "src/components/LivePriceBand.tsx",
       "source_location": "L6"
+    },
+    {
+      "id": "src_components_livepriceband_livepriceband",
+      "label": "LivePriceBand()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "formatRupiah",
+      "file_type": "code",
+      "norm_label": "livepriceband()",
+      "source_file": "src/components/LivePriceBand.tsx",
+      "source_location": "L35"
     },
     {
       "id": "src_components_orderinvoice_buildaddress",
@@ -2473,7 +2828,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 6,
-      "community_name": "OrdersClient.tsx",
+      "community_name": "formatRupiah",
       "file_type": "code",
       "norm_label": "buildaddress()",
       "source_file": "src/components/OrderInvoice.tsx",
@@ -2485,35 +2840,23 @@
       "_callable": true,
       "_origin": "ast",
       "community": 6,
-      "community_name": "OrdersClient.tsx",
+      "community_name": "formatRupiah",
       "file_type": "code",
       "norm_label": "orderinvoice()",
       "source_file": "src/components/OrderInvoice.tsx",
       "source_location": "L46"
     },
     {
-      "id": "src_components_whatsappbutton_whatsappbutton",
-      "label": "WhatsAppButton()",
+      "id": "src_lib_gold_api_formatrupiah",
+      "label": "formatRupiah()",
       "_callable": true,
       "_origin": "ast",
       "community": 6,
-      "community_name": "OrdersClient.tsx",
+      "community_name": "formatRupiah",
       "file_type": "code",
-      "norm_label": "whatsappbutton()",
-      "source_file": "src/components/WhatsAppButton.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_lib_gold_api_getpublicsettings",
-      "label": "getPublicSettings()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "OrdersClient.tsx",
-      "file_type": "code",
-      "norm_label": "getpublicsettings()",
+      "norm_label": "formatrupiah()",
       "source_file": "src/lib/gold-api.ts",
-      "source_location": "L640"
+      "source_location": "L809"
     },
     {
       "id": "src_app_admin_admin_jenis_emas_jenisemasclient_formmodal",
@@ -2521,7 +2864,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "formmodal()",
       "source_file": "src/app/(admin)/admin/jenis-emas/JenisEmasClient.tsx",
@@ -2533,7 +2876,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "getcategorylabel()",
       "source_file": "src/app/(admin)/admin/jenis-emas/JenisEmasClient.tsx",
@@ -2545,7 +2888,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "jenisemasclient()",
       "source_file": "src/app/(admin)/admin/jenis-emas/JenisEmasClient.tsx",
@@ -2557,7 +2900,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "handledelete()",
       "source_file": "src/app/(admin)/admin/jenis-emas/JenisEmasClient.tsx",
@@ -2569,7 +2912,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "handlesave()",
       "source_file": "src/app/(admin)/admin/jenis-emas/JenisEmasClient.tsx",
@@ -2581,7 +2924,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "openadd()",
       "source_file": "src/app/(admin)/admin/jenis-emas/JenisEmasClient.tsx",
@@ -2593,7 +2936,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "openedit()",
       "source_file": "src/app/(admin)/admin/jenis-emas/JenisEmasClient.tsx",
@@ -2605,11 +2948,23 @@
       "_callable": true,
       "_origin": "ast",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "nametoslug()",
       "source_file": "src/app/(admin)/admin/jenis-emas/JenisEmasClient.tsx",
       "source_location": "L18"
+    },
+    {
+      "id": "src_app_admin_admin_jenis_emas_page_jenisemaspage",
+      "label": "JenisEmasPage()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "createClient",
+      "file_type": "code",
+      "norm_label": "jenisemaspage()",
+      "source_file": "src/app/(admin)/admin/jenis-emas/page.tsx",
+      "source_location": "L6"
     },
     {
       "id": "src_app_admin_admin_login_page_adminloginpage",
@@ -2617,7 +2972,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "adminloginpage()",
       "source_file": "src/app/(admin)/admin/login/page.tsx",
@@ -2629,7 +2984,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "handlesubmit()",
       "source_file": "src/app/(admin)/admin/login/page.tsx",
@@ -2641,23 +2996,35 @@
       "_callable": true,
       "_origin": "ast",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "adminlayout()",
       "source_file": "src/app/(admin)/layout.tsx",
-      "source_location": "L28"
+      "source_location": "L29"
     },
     {
-      "id": "src_app_admin_layout_getpagetitle",
-      "label": "getPageTitle()",
+      "id": "src_app_admin_layout_adminlayout_fetchuser",
+      "label": "fetchUser()",
       "_callable": true,
       "_origin": "ast",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
-      "norm_label": "getpagetitle()",
+      "norm_label": "fetchuser()",
       "source_file": "src/app/(admin)/layout.tsx",
-      "source_location": "L20"
+      "source_location": "L39"
+    },
+    {
+      "id": "src_app_admin_layout_getpagemeta",
+      "label": "getPageMeta()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "createClient",
+      "file_type": "code",
+      "norm_label": "getpagemeta()",
+      "source_file": "src/app/(admin)/layout.tsx",
+      "source_location": "L21"
     },
     {
       "id": "src_components_admin_adminsidebar_adminsidebar",
@@ -2665,11 +3032,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "adminsidebar()",
       "source_file": "src/components/admin/AdminSidebar.tsx",
-      "source_location": "L105"
+      "source_location": "L111"
     },
     {
       "id": "src_components_admin_adminsidebar_adminsidebar_fetchrole",
@@ -2677,11 +3044,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "fetchrole()",
       "source_file": "src/components/admin/AdminSidebar.tsx",
-      "source_location": "L118"
+      "source_location": "L124"
     },
     {
       "id": "src_components_admin_adminsidebar_adminsidebar_handlelogout",
@@ -2689,11 +3056,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "handlelogout()",
       "source_file": "src/components/admin/AdminSidebar.tsx",
-      "source_location": "L138"
+      "source_location": "L144"
     },
     {
       "id": "src_components_admin_adminsidebar_isactivepath",
@@ -2701,11 +3068,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "isactivepath()",
       "source_file": "src/components/admin/AdminSidebar.tsx",
-      "source_location": "L100"
+      "source_location": "L106"
     },
     {
       "id": "src_components_confirmmodal_confirmmodal",
@@ -2713,7 +3080,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "confirmmodal()",
       "source_file": "src/components/ConfirmModal.tsx",
@@ -2725,227 +3092,71 @@
       "_callable": true,
       "_origin": "ast",
       "community": 7,
-      "community_name": "JenisEmasClient.tsx",
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "createclient()",
       "source_file": "src/lib/supabase/client.ts",
       "source_location": "L4"
     },
     {
-      "id": "src_app_admin_admin_stock_page_stockpage",
-      "label": "StockPage()",
+      "id": "src_app_admin_admin_eod_eodclient_eodclient",
+      "label": "EODClient()",
       "_callable": true,
       "_origin": "ast",
       "community": 8,
-      "community_name": "StockClient",
+      "community_name": "EODClient.tsx",
       "file_type": "code",
-      "norm_label": "stockpage()",
-      "source_file": "src/app/(admin)/admin/stock/page.tsx",
-      "source_location": "L7"
+      "norm_label": "eodclient()",
+      "source_file": "src/app/(admin)/admin/eod/EODClient.tsx",
+      "source_location": "L39"
     },
     {
-      "id": "src_app_admin_admin_stock_stockclient_stockclient",
-      "label": "StockClient()",
+      "id": "src_app_admin_admin_eod_eodclient_eodclient_handlegenerate",
+      "label": "handleGenerate()",
       "_callable": true,
       "_origin": "ast",
       "community": 8,
-      "community_name": "StockClient",
+      "community_name": "EODClient.tsx",
       "file_type": "code",
-      "norm_label": "stockclient()",
-      "source_file": "src/app/(admin)/admin/stock/StockClient.tsx",
-      "source_location": "L8"
+      "norm_label": "handlegenerate()",
+      "source_file": "src/app/(admin)/admin/eod/EODClient.tsx",
+      "source_location": "L60"
     },
     {
-      "id": "src_app_admin_admin_stock_stockclient_stockclient_fetchdata",
-      "label": "fetchData()",
+      "id": "src_app_admin_admin_eod_eodclient_eodclient_load",
+      "label": "load()",
       "_callable": true,
       "_origin": "ast",
       "community": 8,
-      "community_name": "StockClient",
+      "community_name": "EODClient.tsx",
       "file_type": "code",
-      "norm_label": "fetchdata()",
-      "source_file": "src/app/(admin)/admin/stock/StockClient.tsx",
-      "source_location": "L29"
+      "norm_label": "load()",
+      "source_file": "src/app/(admin)/admin/eod/EODClient.tsx",
+      "source_location": "L47"
     },
     {
-      "id": "src_app_admin_admin_stock_stockclient_stockclient_handleadjust",
-      "label": "handleAdjust()",
+      "id": "src_app_admin_admin_eod_eodclient_formatdate",
+      "label": "formatDate()",
       "_callable": true,
       "_origin": "ast",
       "community": 8,
-      "community_name": "StockClient",
+      "community_name": "EODClient.tsx",
       "file_type": "code",
-      "norm_label": "handleadjust()",
-      "source_file": "src/app/(admin)/admin/stock/StockClient.tsx",
-      "source_location": "L43"
-    },
-    {
-      "id": "src_app_admin_admin_stock_stockclient_stockclient_handlesaveminqty",
-      "label": "handleSaveMinQty()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 8,
-      "community_name": "StockClient",
-      "file_type": "code",
-      "norm_label": "handlesaveminqty()",
-      "source_file": "src/app/(admin)/admin/stock/StockClient.tsx",
-      "source_location": "L52"
-    },
-    {
-      "id": "src_app_admin_admin_stock_stockclient_stockclient_openminmodal",
-      "label": "openMinModal()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 8,
-      "community_name": "StockClient",
-      "file_type": "code",
-      "norm_label": "openminmodal()",
-      "source_file": "src/app/(admin)/admin/stock/StockClient.tsx",
-      "source_location": "L61"
-    },
-    {
-      "id": "src_app_admin_admin_laporan_laporanclient_laporanclient",
-      "label": "LaporanClient()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "formatRupiah",
-      "file_type": "code",
-      "norm_label": "laporanclient()",
-      "source_file": "src/app/(admin)/admin/laporan/LaporanClient.tsx",
-      "source_location": "L10"
-    },
-    {
-      "id": "src_app_admin_admin_laporan_laporanclient_laporanclient_handlegenerateeod",
-      "label": "handleGenerateEOD()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "formatRupiah",
-      "file_type": "code",
-      "norm_label": "handlegenerateeod()",
-      "source_file": "src/app/(admin)/admin/laporan/LaporanClient.tsx",
+      "norm_label": "formatdate()",
+      "source_file": "src/app/(admin)/admin/eod/EODClient.tsx",
       "source_location": "L30"
     },
     {
-      "id": "src_app_admin_admin_laporan_page_laporanpage",
-      "label": "LaporanPage()",
+      "id": "src_app_admin_admin_eod_page_eodpage",
+      "label": "EODPage()",
       "_callable": true,
       "_origin": "ast",
-      "community": 9,
-      "community_name": "formatRupiah",
+      "community": 8,
+      "community_name": "EODClient.tsx",
       "file_type": "code",
-      "norm_label": "laporanpage()",
-      "source_file": "src/app/(admin)/admin/laporan/page.tsx",
+      "norm_label": "eodpage()",
+      "source_file": "src/app/(admin)/admin/eod/page.tsx",
       "source_location": "L7"
-    },
-    {
-      "id": "src_app_public_harga_page_hargapage",
-      "label": "HargaPage()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "formatRupiah",
-      "file_type": "code",
-      "norm_label": "hargapage()",
-      "source_file": "src/app/(public)/harga/page.tsx",
-      "source_location": "L14"
-    },
-    {
-      "id": "src_app_public_kalkulator_page_kalkulatorpage",
-      "label": "KalkulatorPage()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "formatRupiah",
-      "file_type": "code",
-      "norm_label": "kalkulatorpage()",
-      "source_file": "src/app/(public)/kalkulator/page.tsx",
-      "source_location": "L14"
-    },
-    {
-      "id": "src_components_legalnotice_legalnotice",
-      "label": "LegalNotice()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "formatRupiah",
-      "file_type": "code",
-      "norm_label": "legalnotice()",
-      "source_file": "src/components/LegalNotice.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_components_pricepreviewmodal_formatrupiah",
-      "label": "formatRupiah()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "formatRupiah",
-      "file_type": "code",
-      "norm_label": "formatrupiah()",
-      "source_file": "src/components/PricePreviewModal.tsx",
-      "source_location": "L28"
-    },
-    {
-      "id": "src_components_pricepreviewmodal_pricepreviewmodal",
-      "label": "PricePreviewModal()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "formatRupiah",
-      "file_type": "code",
-      "norm_label": "pricepreviewmodal()",
-      "source_file": "src/components/PricePreviewModal.tsx",
-      "source_location": "L32"
-    },
-    {
-      "id": "src_components_tabbedpricelist_tabbedpricelist",
-      "label": "TabbedPricelist()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "formatRupiah",
-      "file_type": "code",
-      "norm_label": "tabbedpricelist()",
-      "source_file": "src/components/TabbedPricelist.tsx",
-      "source_location": "L14"
-    },
-    {
-      "id": "src_lib_gold_api_formatrupiah",
-      "label": "formatRupiah()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "formatRupiah",
-      "file_type": "code",
-      "norm_label": "formatrupiah()",
-      "source_file": "src/lib/gold-api.ts",
-      "source_location": "L809"
-    },
-    {
-      "id": "src_lib_gold_api_getpricehistory",
-      "label": "getPriceHistory()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "formatRupiah",
-      "file_type": "code",
-      "norm_label": "getpricehistory()",
-      "source_file": "src/lib/gold-api.ts",
-      "source_location": "L206"
-    },
-    {
-      "id": "src_lib_gold_api_perhiasanrank",
-      "label": "perhiasanRank()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "formatRupiah",
-      "file_type": "code",
-      "norm_label": "perhiasanrank()",
-      "source_file": "src/lib/gold-api.ts",
-      "source_location": "L18"
     },
     {
       "id": "src_app_api_admin_customers_id_route",
@@ -3124,6 +3335,28 @@
       "source_location": "L4"
     },
     {
+      "id": "src_app_api_admin_stock_min_qty_route",
+      "label": "min-qty/route.ts",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "createAdminClient",
+      "file_type": "code",
+      "norm_label": "min-qty/route.ts",
+      "source_file": "src/app/api/admin/stock/min-qty/route.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_api_admin_stock_min_qty_route_dynamic",
+      "label": "dynamic",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "createAdminClient",
+      "file_type": "code",
+      "norm_label": "dynamic",
+      "source_file": "src/app/api/admin/stock/min-qty/route.ts",
+      "source_location": "L4"
+    },
+    {
       "id": "src_app_api_admin_stock_movements_route",
       "label": "movements/route.ts",
       "_origin": "ast",
@@ -3223,6 +3456,83 @@
       "source_location": "L1"
     },
     {
+      "id": "src_app_admin_admin_priceapprovalpanel",
+      "label": "PriceApprovalPanel.tsx",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "PriceApprovalPanel",
+      "file_type": "code",
+      "norm_label": "priceapprovalpanel.tsx",
+      "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_components_pricepreviewmodal",
+      "label": "PricePreviewModal.tsx",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "PriceApprovalPanel",
+      "file_type": "code",
+      "norm_label": "pricepreviewmodal.tsx",
+      "source_file": "src/components/PricePreviewModal.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_components_pricepreviewmodal_category_labels",
+      "label": "CATEGORY_LABELS",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "PriceApprovalPanel",
+      "file_type": "code",
+      "norm_label": "category_labels",
+      "source_file": "src/components/PricePreviewModal.tsx",
+      "source_location": "L21"
+    },
+    {
+      "id": "src_components_tabbedpricelist",
+      "label": "TabbedPricelist.tsx",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "PriceApprovalPanel",
+      "file_type": "code",
+      "norm_label": "tabbedpricelist.tsx",
+      "source_file": "src/components/TabbedPricelist.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_components_tabbedpricelist_categories",
+      "label": "CATEGORIES",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "PriceApprovalPanel",
+      "file_type": "code",
+      "norm_label": "categories",
+      "source_file": "src/components/TabbedPricelist.tsx",
+      "source_location": "L7"
+    },
+    {
+      "id": "src_lib_gold_api_bb_lm_order",
+      "label": "BB_LM_ORDER",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "PriceApprovalPanel",
+      "file_type": "code",
+      "norm_label": "bb_lm_order",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L7"
+    },
+    {
+      "id": "src_lib_gold_api_bb_logam_order",
+      "label": "BB_LOGAM_ORDER",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "PriceApprovalPanel",
+      "file_type": "code",
+      "norm_label": "bb_logam_order",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L25"
+    },
+    {
       "id": "src_app_layout",
       "label": "app/layout.tsx",
       "_origin": "ast",
@@ -3308,28 +3618,6 @@
       "file_type": "code",
       "norm_label": "dynamic",
       "source_file": "src/app/(admin)/admin/harga/page.tsx",
-      "source_location": "L4"
-    },
-    {
-      "id": "src_app_admin_admin_jenis_emas_page",
-      "label": "jenis-emas/page.tsx",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "admin/page.tsx",
-      "file_type": "code",
-      "norm_label": "jenis-emas/page.tsx",
-      "source_file": "src/app/(admin)/admin/jenis-emas/page.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_app_admin_admin_jenis_emas_page_dynamic",
-      "label": "dynamic",
-      "_origin": "ast",
-      "community": 11,
-      "community_name": "admin/page.tsx",
-      "file_type": "code",
-      "norm_label": "dynamic",
-      "source_file": "src/app/(admin)/admin/jenis-emas/page.tsx",
       "source_location": "L4"
     },
     {
@@ -3432,6 +3720,72 @@
       "source_location": "L4"
     },
     {
+      "id": "src_app_public_harga_page",
+      "label": "(public)/harga/page.tsx",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "admin/page.tsx",
+      "file_type": "code",
+      "norm_label": "(public)/harga/page.tsx",
+      "source_file": "src/app/(public)/harga/page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_public_harga_page_dynamic",
+      "label": "dynamic",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "admin/page.tsx",
+      "file_type": "code",
+      "norm_label": "dynamic",
+      "source_file": "src/app/(public)/harga/page.tsx",
+      "source_location": "L12"
+    },
+    {
+      "id": "src_app_public_harga_page_metadata",
+      "label": "metadata",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "admin/page.tsx",
+      "file_type": "code",
+      "norm_label": "metadata",
+      "source_file": "src/app/(public)/harga/page.tsx",
+      "source_location": "L7"
+    },
+    {
+      "id": "src_app_public_kalkulator_page",
+      "label": "kalkulator/page.tsx",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "admin/page.tsx",
+      "file_type": "code",
+      "norm_label": "kalkulator/page.tsx",
+      "source_file": "src/app/(public)/kalkulator/page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_public_kalkulator_page_dynamic",
+      "label": "dynamic",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "admin/page.tsx",
+      "file_type": "code",
+      "norm_label": "dynamic",
+      "source_file": "src/app/(public)/kalkulator/page.tsx",
+      "source_location": "L12"
+    },
+    {
+      "id": "src_app_public_kalkulator_page_metadata",
+      "label": "metadata",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "admin/page.tsx",
+      "file_type": "code",
+      "norm_label": "metadata",
+      "source_file": "src/app/(public)/kalkulator/page.tsx",
+      "source_location": "L7"
+    },
+    {
       "id": "src_components_admin_adminskeleton",
       "label": "AdminSkeleton.tsx",
       "_origin": "ast",
@@ -3440,6 +3794,17 @@
       "file_type": "code",
       "norm_label": "adminskeleton.tsx",
       "source_file": "src/components/admin/AdminSkeleton.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_components_legalnotice",
+      "label": "LegalNotice.tsx",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "admin/page.tsx",
+      "file_type": "code",
+      "norm_label": "legalnotice.tsx",
+      "source_file": "src/components/LegalNotice.tsx",
       "source_location": "L1"
     },
     {
@@ -3496,6 +3861,138 @@
       "norm_label": "values",
       "source_file": "src/app/(public)/tentang/page.tsx",
       "source_location": "L35"
+    },
+    {
+      "id": "design",
+      "label": "DESIGN.md",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "DESIGN.md \u2014 Safar Gold \"Atelier\"",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "design.md",
+      "source_file": "DESIGN.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "design_buttons",
+      "label": "Buttons",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "DESIGN.md \u2014 Safar Gold \"Atelier\"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "buttons",
+      "source_file": "DESIGN.md",
+      "source_location": "L42"
+    },
+    {
+      "id": "design_component_vocabulary",
+      "label": "Component vocabulary",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "DESIGN.md \u2014 Safar Gold \"Atelier\"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "component vocabulary",
+      "source_file": "DESIGN.md",
+      "source_location": "L76"
+    },
+    {
+      "id": "design_design_md_safar_gold_atelier",
+      "label": "DESIGN.md \u2014 Safar Gold \"Atelier\"",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "DESIGN.md \u2014 Safar Gold \"Atelier\"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "design.md \u2014 safar gold \"atelier\"",
+      "source_file": "DESIGN.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "design_design_tokens",
+      "label": "Design tokens",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "DESIGN.md \u2014 Safar Gold \"Atelier\"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "design tokens",
+      "source_file": "DESIGN.md",
+      "source_location": "L5"
+    },
+    {
+      "id": "design_fonts",
+      "label": "Fonts",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "DESIGN.md \u2014 Safar Gold \"Atelier\"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "fonts",
+      "source_file": "DESIGN.md",
+      "source_location": "L24"
+    },
+    {
+      "id": "design_layout_shell",
+      "label": "Layout / shell",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "DESIGN.md \u2014 Safar Gold \"Atelier\"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "layout / shell",
+      "source_file": "DESIGN.md",
+      "source_location": "L63"
+    },
+    {
+      "id": "design_radius_scale",
+      "label": "Radius scale",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "DESIGN.md \u2014 Safar Gold \"Atelier\"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "radius scale",
+      "source_file": "DESIGN.md",
+      "source_location": "L29"
+    },
+    {
+      "id": "design_shadows",
+      "label": "Shadows",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "DESIGN.md \u2014 Safar Gold \"Atelier\"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "shadows",
+      "source_file": "DESIGN.md",
+      "source_location": "L36"
+    },
+    {
+      "id": "design_state_patterns",
+      "label": "State patterns",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "DESIGN.md \u2014 Safar Gold \"Atelier\"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "state patterns",
+      "source_file": "DESIGN.md",
+      "source_location": "L69"
+    },
+    {
+      "id": "design_typography_conventions",
+      "label": "Typography conventions",
+      "_origin": "ast",
+      "community": 14,
+      "community_name": "DESIGN.md \u2014 Safar Gold \"Atelier\"",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "typography conventions",
+      "source_file": "DESIGN.md",
+      "source_location": "L56"
     },
     {
       "id": "src_middleware",
@@ -3586,37 +4083,48 @@
       "source_location": "L3"
     },
     {
-      "id": "src_app_admin_admin_konten_adminkontenclient",
-      "label": "AdminKontenClient.tsx",
+      "id": "src_app_admin_admin_pelanggan_page",
+      "label": "pelanggan/page.tsx",
       "_origin": "ast",
       "community": 2,
       "community_name": "(public)/page.tsx",
       "file_type": "code",
-      "norm_label": "adminkontenclient.tsx",
-      "source_file": "src/app/(admin)/admin/konten/AdminKontenClient.tsx",
+      "norm_label": "pelanggan/page.tsx",
+      "source_file": "src/app/(admin)/admin/pelanggan/page.tsx",
       "source_location": "L1"
     },
     {
-      "id": "src_app_admin_admin_konten_page",
-      "label": "konten/page.tsx",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "(public)/page.tsx",
-      "file_type": "code",
-      "norm_label": "konten/page.tsx",
-      "source_file": "src/app/(admin)/admin/konten/page.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_app_admin_admin_konten_page_dynamic",
+      "id": "src_app_admin_admin_pelanggan_page_dynamic",
       "label": "dynamic",
       "_origin": "ast",
       "community": 2,
       "community_name": "(public)/page.tsx",
       "file_type": "code",
       "norm_label": "dynamic",
-      "source_file": "src/app/(admin)/admin/konten/page.tsx",
-      "source_location": "L4"
+      "source_file": "src/app/(admin)/admin/pelanggan/page.tsx",
+      "source_location": "L5"
+    },
+    {
+      "id": "src_app_admin_admin_pelanggan_page_metadata",
+      "label": "metadata",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "(public)/page.tsx",
+      "file_type": "code",
+      "norm_label": "metadata",
+      "source_file": "src/app/(admin)/admin/pelanggan/page.tsx",
+      "source_location": "L6"
+    },
+    {
+      "id": "src_app_public_layout",
+      "label": "(public)/layout.tsx",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "(public)/page.tsx",
+      "file_type": "code",
+      "norm_label": "(public)/layout.tsx",
+      "source_file": "src/app/(public)/layout.tsx",
+      "source_location": "L1"
     },
     {
       "id": "src_app_public_page",
@@ -3650,6 +4158,17 @@
       "norm_label": "metadata",
       "source_file": "src/app/(public)/page.tsx",
       "source_location": "L14"
+    },
+    {
+      "id": "src_components_backtotop",
+      "label": "BackToTop.tsx",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "(public)/page.tsx",
+      "file_type": "code",
+      "norm_label": "backtotop.tsx",
+      "source_file": "src/components/BackToTop.tsx",
+      "source_location": "L1"
     },
     {
       "id": "src_components_caratransaksi",
@@ -3696,6 +4215,17 @@
       "source_location": "L1"
     },
     {
+      "id": "src_components_footer",
+      "label": "Footer.tsx",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "(public)/page.tsx",
+      "file_type": "code",
+      "norm_label": "footer.tsx",
+      "source_file": "src/components/Footer.tsx",
+      "source_location": "L1"
+    },
+    {
       "id": "src_components_golddivider",
       "label": "GoldDivider.tsx",
       "_origin": "ast",
@@ -3704,17 +4234,6 @@
       "file_type": "code",
       "norm_label": "golddivider.tsx",
       "source_file": "src/components/GoldDivider.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_components_hero",
-      "label": "Hero.tsx",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "(public)/page.tsx",
-      "file_type": "code",
-      "norm_label": "hero.tsx",
-      "source_file": "src/components/Hero.tsx",
       "source_location": "L1"
     },
     {
@@ -3773,6 +4292,17 @@
       "source_location": "L13"
     },
     {
+      "id": "src_components_navbar",
+      "label": "Navbar.tsx",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "(public)/page.tsx",
+      "file_type": "code",
+      "norm_label": "navbar.tsx",
+      "source_file": "src/components/Navbar.tsx",
+      "source_location": "L1"
+    },
+    {
       "id": "src_components_testimoni",
       "label": "Testimoni.tsx",
       "_origin": "ast",
@@ -3781,6 +4311,17 @@
       "file_type": "code",
       "norm_label": "testimoni.tsx",
       "source_file": "src/components/Testimoni.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_components_whatsappbutton",
+      "label": "WhatsAppButton.tsx",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "(public)/page.tsx",
+      "file_type": "code",
+      "norm_label": "whatsappbutton.tsx",
+      "source_file": "src/components/WhatsAppButton.tsx",
       "source_location": "L1"
     },
     {
@@ -4224,6 +4765,39 @@
       "source_location": "L3"
     },
     {
+      "id": "src_app_admin_admin_konten_adminkontenclient",
+      "label": "AdminKontenClient.tsx",
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "gold-api.ts",
+      "file_type": "code",
+      "norm_label": "adminkontenclient.tsx",
+      "source_file": "src/app/(admin)/admin/konten/AdminKontenClient.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_admin_admin_konten_page",
+      "label": "konten/page.tsx",
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "gold-api.ts",
+      "file_type": "code",
+      "norm_label": "konten/page.tsx",
+      "source_file": "src/app/(admin)/admin/konten/page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_admin_admin_konten_page_dynamic",
+      "label": "dynamic",
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "gold-api.ts",
+      "file_type": "code",
+      "norm_label": "dynamic",
+      "source_file": "src/app/(admin)/admin/konten/page.tsx",
+      "source_location": "L4"
+    },
+    {
       "id": "src_app_api_admin_create_gold_type_route",
       "label": "create-gold-type/route.ts",
       "_origin": "ast",
@@ -4378,14 +4952,14 @@
       "source_location": "L5"
     },
     {
-      "id": "src_components_livepriceband",
-      "label": "LivePriceBand.tsx",
+      "id": "src_components_hero",
+      "label": "Hero.tsx",
       "_origin": "ast",
       "community": 32,
       "community_name": "gold-api.ts",
       "file_type": "code",
-      "norm_label": "livepriceband.tsx",
-      "source_file": "src/components/LivePriceBand.tsx",
+      "norm_label": "hero.tsx",
+      "source_file": "src/components/Hero.tsx",
       "source_location": "L1"
     },
     {
@@ -4420,6 +4994,72 @@
       "norm_label": "mode_tabs",
       "source_file": "src/app/(admin)/admin/harga/AdminHargaClient.tsx",
       "source_location": "L12"
+    },
+    {
+      "id": "src_app_admin_admin_stock_page",
+      "label": "stock/page.tsx",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "AdminHargaClient.tsx",
+      "file_type": "code",
+      "norm_label": "stock/page.tsx",
+      "source_file": "src/app/(admin)/admin/stock/page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_admin_admin_stock_page_dynamic",
+      "label": "dynamic",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "AdminHargaClient.tsx",
+      "file_type": "code",
+      "norm_label": "dynamic",
+      "source_file": "src/app/(admin)/admin/stock/page.tsx",
+      "source_location": "L5"
+    },
+    {
+      "id": "src_app_admin_admin_stock_page_metadata",
+      "label": "metadata",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "AdminHargaClient.tsx",
+      "file_type": "code",
+      "norm_label": "metadata",
+      "source_file": "src/app/(admin)/admin/stock/page.tsx",
+      "source_location": "L6"
+    },
+    {
+      "id": "src_app_admin_admin_stock_stockclient",
+      "label": "StockClient.tsx",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "AdminHargaClient.tsx",
+      "file_type": "code",
+      "norm_label": "stockclient.tsx",
+      "source_file": "src/app/(admin)/admin/stock/StockClient.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_admin_admin_stock_stockclient_category_labels",
+      "label": "CATEGORY_LABELS",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "AdminHargaClient.tsx",
+      "file_type": "code",
+      "norm_label": "category_labels",
+      "source_file": "src/app/(admin)/admin/stock/StockClient.tsx",
+      "source_location": "L11"
+    },
+    {
+      "id": "src_app_admin_admin_stock_stockclient_category_order",
+      "label": "CATEGORY_ORDER",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "AdminHargaClient.tsx",
+      "file_type": "code",
+      "norm_label": "category_order",
+      "source_file": "src/app/(admin)/admin/stock/StockClient.tsx",
+      "source_location": "L10"
     },
     {
       "id": "src_components_calculator",
@@ -4664,340 +5304,10 @@
       "source_location": "L29"
     },
     {
-      "id": "src_app_admin_admin_orders_id_invoice_page",
-      "label": "invoice/page.tsx",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "OrdersClient.tsx",
-      "file_type": "code",
-      "norm_label": "invoice/page.tsx",
-      "source_file": "src/app/(admin)/admin/orders/[id]/invoice/page.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_app_admin_admin_orders_id_invoice_page_dynamic",
-      "label": "dynamic",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "OrdersClient.tsx",
-      "file_type": "code",
-      "norm_label": "dynamic",
-      "source_file": "src/app/(admin)/admin/orders/[id]/invoice/page.tsx",
-      "source_location": "L5"
-    },
-    {
-      "id": "src_app_admin_admin_orders_ordersclient",
-      "label": "OrdersClient.tsx",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "OrdersClient.tsx",
-      "file_type": "code",
-      "norm_label": "ordersclient.tsx",
-      "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_app_admin_admin_orders_ordersclient_buyback_categories",
-      "label": "BUYBACK_CATEGORIES",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "OrdersClient.tsx",
-      "file_type": "code",
-      "norm_label": "buyback_categories",
-      "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L16"
-    },
-    {
-      "id": "src_app_admin_admin_orders_ordersclient_lm_products",
-      "label": "LM_PRODUCTS",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "OrdersClient.tsx",
-      "file_type": "code",
-      "norm_label": "lm_products",
-      "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L13"
-    },
-    {
-      "id": "src_app_admin_admin_orders_ordersclient_source_options",
-      "label": "SOURCE_OPTIONS",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "OrdersClient.tsx",
-      "file_type": "code",
-      "norm_label": "source_options",
-      "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L15"
-    },
-    {
-      "id": "src_app_admin_admin_pelanggan_page",
-      "label": "pelanggan/page.tsx",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "OrdersClient.tsx",
-      "file_type": "code",
-      "norm_label": "pelanggan/page.tsx",
-      "source_file": "src/app/(admin)/admin/pelanggan/page.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_app_admin_admin_pelanggan_page_dynamic",
-      "label": "dynamic",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "OrdersClient.tsx",
-      "file_type": "code",
-      "norm_label": "dynamic",
-      "source_file": "src/app/(admin)/admin/pelanggan/page.tsx",
-      "source_location": "L5"
-    },
-    {
-      "id": "src_app_admin_admin_pelanggan_page_metadata",
-      "label": "metadata",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "OrdersClient.tsx",
-      "file_type": "code",
-      "norm_label": "metadata",
-      "source_file": "src/app/(admin)/admin/pelanggan/page.tsx",
-      "source_location": "L6"
-    },
-    {
-      "id": "src_app_admin_admin_pelanggan_pelangganclient",
-      "label": "PelangganClient.tsx",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "OrdersClient.tsx",
-      "file_type": "code",
-      "norm_label": "pelangganclient.tsx",
-      "source_file": "src/app/(admin)/admin/pelanggan/PelangganClient.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_app_public_layout",
-      "label": "(public)/layout.tsx",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "OrdersClient.tsx",
-      "file_type": "code",
-      "norm_label": "(public)/layout.tsx",
-      "source_file": "src/app/(public)/layout.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_components_backtotop",
-      "label": "BackToTop.tsx",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "OrdersClient.tsx",
-      "file_type": "code",
-      "norm_label": "backtotop.tsx",
-      "source_file": "src/components/BackToTop.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_components_footer",
-      "label": "Footer.tsx",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "OrdersClient.tsx",
-      "file_type": "code",
-      "norm_label": "footer.tsx",
-      "source_file": "src/components/Footer.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_components_navbar",
-      "label": "Navbar.tsx",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "OrdersClient.tsx",
-      "file_type": "code",
-      "norm_label": "navbar.tsx",
-      "source_file": "src/components/Navbar.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_components_orderinvoice",
-      "label": "OrderInvoice.tsx",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "OrdersClient.tsx",
-      "file_type": "code",
-      "norm_label": "orderinvoice.tsx",
-      "source_file": "src/components/OrderInvoice.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_components_whatsappbutton",
-      "label": "WhatsAppButton.tsx",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "OrdersClient.tsx",
-      "file_type": "code",
-      "norm_label": "whatsappbutton.tsx",
-      "source_file": "src/components/WhatsAppButton.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_app_admin_admin_jenis_emas_jenisemasclient",
-      "label": "JenisEmasClient.tsx",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "JenisEmasClient.tsx",
-      "file_type": "code",
-      "norm_label": "jenisemasclient.tsx",
-      "source_file": "src/app/(admin)/admin/jenis-emas/JenisEmasClient.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_app_admin_admin_jenis_emas_jenisemasclient_categories",
-      "label": "CATEGORIES",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "JenisEmasClient.tsx",
-      "file_type": "code",
-      "norm_label": "categories",
-      "source_file": "src/app/(admin)/admin/jenis-emas/JenisEmasClient.tsx",
-      "source_location": "L7"
-    },
-    {
-      "id": "src_app_admin_admin_jenis_emas_jenisemasclient_emptyform",
-      "label": "emptyForm",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "JenisEmasClient.tsx",
-      "file_type": "code",
-      "norm_label": "emptyform",
-      "source_file": "src/app/(admin)/admin/jenis-emas/JenisEmasClient.tsx",
-      "source_location": "L33"
-    },
-    {
-      "id": "src_app_admin_admin_login_page",
-      "label": "login/page.tsx",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "JenisEmasClient.tsx",
-      "file_type": "code",
-      "norm_label": "login/page.tsx",
-      "source_file": "src/app/(admin)/admin/login/page.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_app_admin_layout",
-      "label": "(admin)/layout.tsx",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "JenisEmasClient.tsx",
-      "file_type": "code",
-      "norm_label": "(admin)/layout.tsx",
-      "source_file": "src/app/(admin)/layout.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_app_admin_layout_pagetitles",
-      "label": "pageTitles",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "JenisEmasClient.tsx",
-      "file_type": "code",
-      "norm_label": "pagetitles",
-      "source_file": "src/app/(admin)/layout.tsx",
-      "source_location": "L7"
-    },
-    {
-      "id": "src_components_admin_adminsidebar",
-      "label": "AdminSidebar.tsx",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "JenisEmasClient.tsx",
-      "file_type": "code",
-      "norm_label": "adminsidebar.tsx",
-      "source_file": "src/components/admin/AdminSidebar.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_components_admin_adminsidebar_groups",
-      "label": "groups",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "JenisEmasClient.tsx",
-      "file_type": "code",
-      "norm_label": "groups",
-      "source_file": "src/components/admin/AdminSidebar.tsx",
-      "source_location": "L17"
-    },
-    {
-      "id": "src_components_confirmmodal",
-      "label": "ConfirmModal.tsx",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "JenisEmasClient.tsx",
-      "file_type": "code",
-      "norm_label": "confirmmodal.tsx",
-      "source_file": "src/components/ConfirmModal.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_lib_supabase_client",
-      "label": "client.ts",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "JenisEmasClient.tsx",
-      "file_type": "code",
-      "norm_label": "client.ts",
-      "source_file": "src/lib/supabase/client.ts",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_app_admin_admin_stock_page",
-      "label": "stock/page.tsx",
-      "_origin": "ast",
-      "community": 8,
-      "community_name": "StockClient",
-      "file_type": "code",
-      "norm_label": "stock/page.tsx",
-      "source_file": "src/app/(admin)/admin/stock/page.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_app_admin_admin_stock_page_dynamic",
-      "label": "dynamic",
-      "_origin": "ast",
-      "community": 8,
-      "community_name": "StockClient",
-      "file_type": "code",
-      "norm_label": "dynamic",
-      "source_file": "src/app/(admin)/admin/stock/page.tsx",
-      "source_location": "L4"
-    },
-    {
-      "id": "src_app_admin_admin_stock_page_metadata",
-      "label": "metadata",
-      "_origin": "ast",
-      "community": 8,
-      "community_name": "StockClient",
-      "file_type": "code",
-      "norm_label": "metadata",
-      "source_file": "src/app/(admin)/admin/stock/page.tsx",
-      "source_location": "L5"
-    },
-    {
-      "id": "src_app_admin_admin_stock_stockclient",
-      "label": "StockClient.tsx",
-      "_origin": "ast",
-      "community": 8,
-      "community_name": "StockClient",
-      "file_type": "code",
-      "norm_label": "stockclient.tsx",
-      "source_file": "src/app/(admin)/admin/stock/StockClient.tsx",
-      "source_location": "L1"
-    },
-    {
       "id": "src_app_admin_admin_laporan_laporanclient",
       "label": "LaporanClient.tsx",
       "_origin": "ast",
-      "community": 9,
+      "community": 6,
       "community_name": "formatRupiah",
       "file_type": "code",
       "norm_label": "laporanclient.tsx",
@@ -5008,7 +5318,7 @@
       "id": "src_app_admin_admin_laporan_page",
       "label": "laporan/page.tsx",
       "_origin": "ast",
-      "community": 9,
+      "community": 6,
       "community_name": "formatRupiah",
       "file_type": "code",
       "norm_label": "laporan/page.tsx",
@@ -5019,7 +5329,7 @@
       "id": "src_app_admin_admin_laporan_page_dynamic",
       "label": "dynamic",
       "_origin": "ast",
-      "community": 9,
+      "community": 6,
       "community_name": "formatRupiah",
       "file_type": "code",
       "norm_label": "dynamic",
@@ -5030,7 +5340,7 @@
       "id": "src_app_admin_admin_laporan_page_metadata",
       "label": "metadata",
       "_origin": "ast",
-      "community": 9,
+      "community": 6,
       "community_name": "formatRupiah",
       "file_type": "code",
       "norm_label": "metadata",
@@ -5038,158 +5348,279 @@
       "source_location": "L5"
     },
     {
-      "id": "src_app_admin_admin_priceapprovalpanel",
-      "label": "PriceApprovalPanel.tsx",
+      "id": "src_app_admin_admin_orders_id_invoice_page",
+      "label": "invoice/page.tsx",
       "_origin": "ast",
-      "community": 9,
+      "community": 6,
       "community_name": "formatRupiah",
       "file_type": "code",
-      "norm_label": "priceapprovalpanel.tsx",
-      "source_file": "src/app/(admin)/admin/PriceApprovalPanel.tsx",
+      "norm_label": "invoice/page.tsx",
+      "source_file": "src/app/(admin)/admin/orders/[id]/invoice/page.tsx",
       "source_location": "L1"
     },
     {
-      "id": "src_app_public_harga_page",
-      "label": "(public)/harga/page.tsx",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "formatRupiah",
-      "file_type": "code",
-      "norm_label": "(public)/harga/page.tsx",
-      "source_file": "src/app/(public)/harga/page.tsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_app_public_harga_page_dynamic",
+      "id": "src_app_admin_admin_orders_id_invoice_page_dynamic",
       "label": "dynamic",
       "_origin": "ast",
-      "community": 9,
+      "community": 6,
       "community_name": "formatRupiah",
       "file_type": "code",
       "norm_label": "dynamic",
-      "source_file": "src/app/(public)/harga/page.tsx",
-      "source_location": "L12"
+      "source_file": "src/app/(admin)/admin/orders/[id]/invoice/page.tsx",
+      "source_location": "L5"
     },
     {
-      "id": "src_app_public_harga_page_metadata",
-      "label": "metadata",
+      "id": "src_app_admin_admin_orders_ordersclient",
+      "label": "OrdersClient.tsx",
       "_origin": "ast",
-      "community": 9,
+      "community": 6,
       "community_name": "formatRupiah",
       "file_type": "code",
-      "norm_label": "metadata",
-      "source_file": "src/app/(public)/harga/page.tsx",
-      "source_location": "L7"
-    },
-    {
-      "id": "src_app_public_kalkulator_page",
-      "label": "kalkulator/page.tsx",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "formatRupiah",
-      "file_type": "code",
-      "norm_label": "kalkulator/page.tsx",
-      "source_file": "src/app/(public)/kalkulator/page.tsx",
+      "norm_label": "ordersclient.tsx",
+      "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
       "source_location": "L1"
     },
     {
-      "id": "src_app_public_kalkulator_page_dynamic",
-      "label": "dynamic",
+      "id": "src_app_admin_admin_orders_ordersclient_buyback_categories",
+      "label": "BUYBACK_CATEGORIES",
       "_origin": "ast",
-      "community": 9,
+      "community": 6,
       "community_name": "formatRupiah",
       "file_type": "code",
-      "norm_label": "dynamic",
-      "source_file": "src/app/(public)/kalkulator/page.tsx",
-      "source_location": "L12"
+      "norm_label": "buyback_categories",
+      "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
+      "source_location": "L17"
     },
     {
-      "id": "src_app_public_kalkulator_page_metadata",
-      "label": "metadata",
+      "id": "src_app_admin_admin_orders_ordersclient_lm_products",
+      "label": "LM_PRODUCTS",
       "_origin": "ast",
-      "community": 9,
+      "community": 6,
       "community_name": "formatRupiah",
       "file_type": "code",
-      "norm_label": "metadata",
-      "source_file": "src/app/(public)/kalkulator/page.tsx",
-      "source_location": "L7"
+      "norm_label": "lm_products",
+      "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
+      "source_location": "L14"
     },
     {
-      "id": "src_components_legalnotice",
-      "label": "LegalNotice.tsx",
+      "id": "src_app_admin_admin_orders_ordersclient_source_options",
+      "label": "SOURCE_OPTIONS",
       "_origin": "ast",
-      "community": 9,
+      "community": 6,
       "community_name": "formatRupiah",
       "file_type": "code",
-      "norm_label": "legalnotice.tsx",
-      "source_file": "src/components/LegalNotice.tsx",
+      "norm_label": "source_options",
+      "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
+      "source_location": "L16"
+    },
+    {
+      "id": "src_app_admin_admin_pelanggan_pelangganclient",
+      "label": "PelangganClient.tsx",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "formatRupiah",
+      "file_type": "code",
+      "norm_label": "pelangganclient.tsx",
+      "source_file": "src/app/(admin)/admin/pelanggan/PelangganClient.tsx",
       "source_location": "L1"
     },
     {
-      "id": "src_components_pricepreviewmodal",
-      "label": "PricePreviewModal.tsx",
+      "id": "src_components_livepriceband",
+      "label": "LivePriceBand.tsx",
       "_origin": "ast",
-      "community": 9,
+      "community": 6,
       "community_name": "formatRupiah",
       "file_type": "code",
-      "norm_label": "pricepreviewmodal.tsx",
-      "source_file": "src/components/PricePreviewModal.tsx",
+      "norm_label": "livepriceband.tsx",
+      "source_file": "src/components/LivePriceBand.tsx",
       "source_location": "L1"
     },
     {
-      "id": "src_components_pricepreviewmodal_category_labels",
-      "label": "CATEGORY_LABELS",
+      "id": "src_components_orderinvoice",
+      "label": "OrderInvoice.tsx",
       "_origin": "ast",
-      "community": 9,
+      "community": 6,
       "community_name": "formatRupiah",
       "file_type": "code",
-      "norm_label": "category_labels",
-      "source_file": "src/components/PricePreviewModal.tsx",
-      "source_location": "L21"
-    },
-    {
-      "id": "src_components_tabbedpricelist",
-      "label": "TabbedPricelist.tsx",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "formatRupiah",
-      "file_type": "code",
-      "norm_label": "tabbedpricelist.tsx",
-      "source_file": "src/components/TabbedPricelist.tsx",
+      "norm_label": "orderinvoice.tsx",
+      "source_file": "src/components/OrderInvoice.tsx",
       "source_location": "L1"
     },
     {
-      "id": "src_components_tabbedpricelist_categories",
+      "id": "src_app_admin_admin_jenis_emas_jenisemasclient",
+      "label": "JenisEmasClient.tsx",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "createClient",
+      "file_type": "code",
+      "norm_label": "jenisemasclient.tsx",
+      "source_file": "src/app/(admin)/admin/jenis-emas/JenisEmasClient.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_admin_admin_jenis_emas_jenisemasclient_categories",
       "label": "CATEGORIES",
       "_origin": "ast",
-      "community": 9,
-      "community_name": "formatRupiah",
+      "community": 7,
+      "community_name": "createClient",
       "file_type": "code",
       "norm_label": "categories",
-      "source_file": "src/components/TabbedPricelist.tsx",
+      "source_file": "src/app/(admin)/admin/jenis-emas/JenisEmasClient.tsx",
       "source_location": "L7"
     },
     {
-      "id": "src_lib_gold_api_bb_lm_order",
-      "label": "BB_LM_ORDER",
+      "id": "src_app_admin_admin_jenis_emas_jenisemasclient_emptyform",
+      "label": "emptyForm",
       "_origin": "ast",
-      "community": 9,
-      "community_name": "formatRupiah",
+      "community": 7,
+      "community_name": "createClient",
       "file_type": "code",
-      "norm_label": "bb_lm_order",
-      "source_file": "src/lib/gold-api.ts",
-      "source_location": "L7"
+      "norm_label": "emptyform",
+      "source_file": "src/app/(admin)/admin/jenis-emas/JenisEmasClient.tsx",
+      "source_location": "L33"
     },
     {
-      "id": "src_lib_gold_api_bb_logam_order",
-      "label": "BB_LOGAM_ORDER",
+      "id": "src_app_admin_admin_jenis_emas_page",
+      "label": "jenis-emas/page.tsx",
       "_origin": "ast",
-      "community": 9,
-      "community_name": "formatRupiah",
+      "community": 7,
+      "community_name": "createClient",
       "file_type": "code",
-      "norm_label": "bb_logam_order",
-      "source_file": "src/lib/gold-api.ts",
-      "source_location": "L25"
+      "norm_label": "jenis-emas/page.tsx",
+      "source_file": "src/app/(admin)/admin/jenis-emas/page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_admin_admin_jenis_emas_page_dynamic",
+      "label": "dynamic",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "createClient",
+      "file_type": "code",
+      "norm_label": "dynamic",
+      "source_file": "src/app/(admin)/admin/jenis-emas/page.tsx",
+      "source_location": "L4"
+    },
+    {
+      "id": "src_app_admin_admin_login_page",
+      "label": "login/page.tsx",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "createClient",
+      "file_type": "code",
+      "norm_label": "login/page.tsx",
+      "source_file": "src/app/(admin)/admin/login/page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_admin_layout",
+      "label": "(admin)/layout.tsx",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "createClient",
+      "file_type": "code",
+      "norm_label": "(admin)/layout.tsx",
+      "source_file": "src/app/(admin)/layout.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_admin_layout_pagemeta",
+      "label": "pageMeta",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "createClient",
+      "file_type": "code",
+      "norm_label": "pagemeta",
+      "source_file": "src/app/(admin)/layout.tsx",
+      "source_location": "L8"
+    },
+    {
+      "id": "src_components_admin_adminsidebar",
+      "label": "AdminSidebar.tsx",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "createClient",
+      "file_type": "code",
+      "norm_label": "adminsidebar.tsx",
+      "source_file": "src/components/admin/AdminSidebar.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_components_admin_adminsidebar_groups",
+      "label": "groups",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "createClient",
+      "file_type": "code",
+      "norm_label": "groups",
+      "source_file": "src/components/admin/AdminSidebar.tsx",
+      "source_location": "L17"
+    },
+    {
+      "id": "src_components_confirmmodal",
+      "label": "ConfirmModal.tsx",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "createClient",
+      "file_type": "code",
+      "norm_label": "confirmmodal.tsx",
+      "source_file": "src/components/ConfirmModal.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_lib_supabase_client",
+      "label": "client.ts",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "createClient",
+      "file_type": "code",
+      "norm_label": "client.ts",
+      "source_file": "src/lib/supabase/client.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_admin_admin_eod_eodclient",
+      "label": "EODClient.tsx",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "EODClient.tsx",
+      "file_type": "code",
+      "norm_label": "eodclient.tsx",
+      "source_file": "src/app/(admin)/admin/eod/EODClient.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_admin_admin_eod_page",
+      "label": "eod/page.tsx",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "EODClient.tsx",
+      "file_type": "code",
+      "norm_label": "eod/page.tsx",
+      "source_file": "src/app/(admin)/admin/eod/page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_app_admin_admin_eod_page_dynamic",
+      "label": "dynamic",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "EODClient.tsx",
+      "file_type": "code",
+      "norm_label": "dynamic",
+      "source_file": "src/app/(admin)/admin/eod/page.tsx",
+      "source_location": "L4"
+    },
+    {
+      "id": "src_app_admin_admin_eod_page_metadata",
+      "label": "metadata",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "EODClient.tsx",
+      "file_type": "code",
+      "norm_label": "metadata",
+      "source_file": "src/app/(admin)/admin/eod/page.tsx",
+      "source_location": "L5"
     },
     {
       "id": "public_favicon_png",
@@ -5314,6 +5745,42 @@
     }
   ],
   "links": [
+    {
+      "source": "src_app_admin_admin_eod_eodclient_eodclient",
+      "target": "src_app_admin_admin_eod_eodclient_formatdate",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/app/(admin)/admin/eod/EODClient.tsx",
+      "source_location": "L117",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_admin_admin_eod_eodclient_eodclient",
+      "target": "src_lib_gold_api_formatrupiah",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/app/(admin)/admin/eod/EODClient.tsx",
+      "source_location": "L130",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_admin_admin_eod_eodclient_eodclient_handlegenerate",
+      "target": "src_app_admin_admin_eod_eodclient_eodclient_load",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/app/(admin)/admin/eod/EODClient.tsx",
+      "source_location": "L80",
+      "weight": 1.0
+    },
     {
       "source": "src_app_admin_admin_harga_adminhargaclient_adminhargaclient",
       "target": "src_lib_gold_api_sortgoldtypes",
@@ -5479,7 +5946,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/app/(admin)/admin/laporan/LaporanClient.tsx",
-      "source_location": "L63",
+      "source_location": "L57",
       "weight": 1.0
     },
     {
@@ -5527,7 +5994,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L291",
+      "source_location": "L289",
       "weight": 1.0
     },
     {
@@ -5539,7 +6006,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L227",
+      "source_location": "L228",
       "weight": 1.0
     },
     {
@@ -5551,7 +6018,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L227",
+      "source_location": "L228",
       "weight": 1.0
     },
     {
@@ -5563,7 +6030,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L229",
+      "source_location": "L230",
       "weight": 1.0
     },
     {
@@ -5747,15 +6214,27 @@
       "weight": 1.0
     },
     {
-      "source": "src_app_admin_admin_stock_stockclient_stockclient_handleadjust",
-      "target": "src_app_admin_admin_stock_stockclient_stockclient_fetchdata",
+      "source": "src_app_admin_admin_stock_page_stockpage",
+      "target": "src_lib_gold_api_getallgoldtypes",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/app/(admin)/admin/stock/page.tsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_admin_admin_stock_stockclient_stockclient",
+      "target": "src_lib_gold_api_sortgoldtypes",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/app/(admin)/admin/stock/StockClient.tsx",
-      "source_location": "L48",
+      "source_location": "L44",
       "weight": 1.0
     },
     {
@@ -5767,19 +6246,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/app/(admin)/admin/users/UsersClient.tsx",
-      "source_location": "L83",
-      "weight": 1.0
-    },
-    {
-      "source": "src_app_admin_admin_users_usersclient_usersclient_handlesave",
-      "target": "src_app_admin_admin_users_usersclient_usersclient_fetchusers",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "src/app/(admin)/admin/users/UsersClient.tsx",
-      "source_location": "L95",
+      "source_location": "L88",
       "weight": 1.0
     },
     {
@@ -5791,12 +6258,24 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/app/(admin)/admin/users/UsersClient.tsx",
-      "source_location": "L57",
+      "source_location": "L62",
       "weight": 1.0
     },
     {
       "source": "src_app_admin_layout_adminlayout",
-      "target": "src_app_admin_layout_getpagetitle",
+      "target": "src_app_admin_layout_getpagemeta",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/app/(admin)/layout.tsx",
+      "source_location": "L58",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_admin_layout_adminlayout_fetchuser",
+      "target": "src_lib_supabase_client_createclient",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -5915,6 +6394,30 @@
       "weight": 1.0
     },
     {
+      "source": "src_app_api_admin_laporan_eod_route_get",
+      "target": "src_lib_supabase_admin_createadminclient",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/app/api/admin/laporan/eod/route.ts",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_api_admin_laporan_eod_route_post",
+      "target": "src_app_api_admin_laporan_eod_route_wibdatestr",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/app/api/admin/laporan/eod/route.ts",
+      "source_location": "L40",
+      "weight": 1.0
+    },
+    {
       "source": "src_app_api_admin_laporan_eod_route_post",
       "target": "src_lib_supabase_admin_createadminclient",
       "relation": "calls",
@@ -5923,7 +6426,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/app/api/admin/laporan/eod/route.ts",
-      "source_location": "L7",
+      "source_location": "L42",
       "weight": 1.0
     },
     {
@@ -6139,6 +6642,18 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/app/api/admin/stock/adjust/route.ts",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_api_admin_stock_min_qty_route_post",
+      "target": "src_lib_supabase_admin_createadminclient",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/app/api/admin/stock/min-qty/route.ts",
       "source_location": "L13",
       "weight": 1.0
     },
@@ -6535,7 +7050,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/admin/AdminSidebar.tsx",
-      "source_location": "L187",
+      "source_location": "L193",
       "weight": 1.0
     },
     {
@@ -6547,7 +7062,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/admin/AdminSidebar.tsx",
-      "source_location": "L120",
+      "source_location": "L126",
       "weight": 1.0
     },
     {
@@ -6559,7 +7074,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/admin/AdminSidebar.tsx",
-      "source_location": "L139",
+      "source_location": "L145",
       "weight": 1.0
     },
     {
@@ -7199,6 +7714,18 @@
       "weight": 1.0
     },
     {
+      "source": "src_app_admin_admin_eod_eodclient_eodclient",
+      "target": "src_app_admin_admin_eod_eodclient_eodclient_load",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/app/(admin)/admin/eod/EODClient.tsx",
+      "source_location": "L47",
+      "weight": 1.0
+    },
+    {
       "source": "src_app_admin_admin_harga_adminhargaclient_adminhargaclient",
       "target": "src_app_admin_admin_harga_adminhargaclient_adminhargaclient_fetchrole",
       "relation": "contains",
@@ -7295,6 +7822,18 @@
       "weight": 1.0
     },
     {
+      "source": "src_app_admin_admin_laporan_laporanclient_laporanclient",
+      "target": "src_app_admin_admin_laporan_laporanclient_laporanclient_load",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/app/(admin)/admin/laporan/LaporanClient.tsx",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
       "source": "src_app_admin_admin_orders_ordersclient_ordersclient",
       "target": "src_app_admin_admin_orders_ordersclient_ordersclient_onprovincechange",
       "relation": "contains",
@@ -7303,7 +7842,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L129",
+      "source_location": "L130",
       "weight": 1.0
     },
     {
@@ -7315,7 +7854,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L138",
+      "source_location": "L139",
       "weight": 1.0
     },
     {
@@ -7327,7 +7866,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L147",
+      "source_location": "L148",
       "weight": 1.0
     },
     {
@@ -7339,7 +7878,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L157",
+      "source_location": "L158",
       "weight": 1.0
     },
     {
@@ -7351,7 +7890,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L178",
+      "source_location": "L179",
       "weight": 1.0
     },
     {
@@ -7363,7 +7902,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L182",
+      "source_location": "L183",
       "weight": 1.0
     },
     {
@@ -7375,7 +7914,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L213",
+      "source_location": "L214",
       "weight": 1.0
     },
     {
@@ -7387,7 +7926,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L78",
+      "source_location": "L79",
       "weight": 1.0
     },
     {
@@ -7399,7 +7938,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L81",
+      "source_location": "L82",
       "weight": 1.0
     },
     {
@@ -7411,7 +7950,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L91",
+      "source_location": "L92",
       "weight": 1.0
     },
     {
@@ -7548,14 +8087,26 @@
     },
     {
       "source": "src_app_admin_admin_stock_stockclient_stockclient",
-      "target": "src_app_admin_admin_stock_stockclient_stockclient_fetchdata",
+      "target": "src_app_admin_admin_stock_stockclient_stockclient_switchtype",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/app/(admin)/admin/stock/StockClient.tsx",
-      "source_location": "L29",
+      "source_location": "L100",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_admin_admin_stock_stockclient_stockclient",
+      "target": "src_app_admin_admin_stock_stockclient_stockclient_load",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/app/(admin)/admin/stock/StockClient.tsx",
+      "source_location": "L52",
       "weight": 1.0
     },
     {
@@ -7567,7 +8118,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/app/(admin)/admin/stock/StockClient.tsx",
-      "source_location": "L61",
+      "source_location": "L93",
       "weight": 1.0
     },
     {
@@ -7579,7 +8130,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/app/(admin)/admin/users/UsersClient.tsx",
-      "source_location": "L109",
+      "source_location": "L114",
       "weight": 1.0
     },
     {
@@ -7591,7 +8142,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/app/(admin)/admin/users/UsersClient.tsx",
-      "source_location": "L131",
+      "source_location": "L136",
       "weight": 1.0
     },
     {
@@ -7603,19 +8154,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/app/(admin)/admin/users/UsersClient.tsx",
-      "source_location": "L148",
+      "source_location": "L153",
       "weight": 1.0
     },
     {
       "source": "src_app_admin_admin_users_usersclient_usersclient",
-      "target": "src_app_admin_admin_users_usersclient_usersclient_fetchusers",
+      "target": "src_app_admin_admin_users_usersclient_usersclient_load",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/app/(admin)/admin/users/UsersClient.tsx",
-      "source_location": "L26",
+      "source_location": "L29",
       "weight": 1.0
     },
     {
@@ -7627,7 +8178,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/app/(admin)/admin/users/UsersClient.tsx",
-      "source_location": "L48",
+      "source_location": "L53",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_admin_layout_adminlayout",
+      "target": "src_app_admin_layout_adminlayout_fetchuser",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/app/(admin)/layout.tsx",
+      "source_location": "L39",
       "weight": 1.0
     },
     {
@@ -7639,7 +8202,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/components/admin/AdminSidebar.tsx",
-      "source_location": "L118",
+      "source_location": "L124",
       "weight": 1.0
     },
     {
@@ -7868,6 +8431,30 @@
       "context": "import",
       "source_file": "package.json",
       "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_admin_admin_eod_eodclient",
+      "target": "src_lib_gold_api_formatrupiah",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/(admin)/admin/eod/EODClient.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_admin_admin_eod_page",
+      "target": "src_app_admin_admin_eod_eodclient_eodclient",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/(admin)/admin/eod/page.tsx",
+      "source_location": "L2",
       "weight": 1.0
     },
     {
@@ -8507,6 +9094,42 @@
       "weight": 1.0
     },
     {
+      "source": "src_app_admin_admin_stock_page",
+      "target": "src_lib_gold_api_getallgoldtypes",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/(admin)/admin/stock/page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_admin_admin_stock_stockclient",
+      "target": "src_lib_gold_api_goldtyperow",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/(admin)/admin/stock/StockClient.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_admin_admin_stock_stockclient",
+      "target": "src_lib_gold_api_sortgoldtypes",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/(admin)/admin/stock/StockClient.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
       "source": "src_app_admin_admin_users_page",
       "target": "src_app_admin_admin_users_usersclient_usersclient",
       "relation": "imports",
@@ -8528,6 +9151,18 @@
       "context": "import",
       "source_file": "src/app/(admin)/layout.tsx",
       "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_admin_layout",
+      "target": "src_lib_supabase_client_createclient",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/(admin)/layout.tsx",
+      "source_location": "L6",
       "weight": 1.0
     },
     {
@@ -8815,6 +9450,18 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/app/api/admin/stock/adjust/route.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_api_admin_stock_min_qty_route",
+      "target": "src_lib_supabase_admin_createadminclient",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/api/admin/stock/min-qty/route.ts",
       "source_location": "L2",
       "weight": 1.0
     },
@@ -9695,6 +10342,30 @@
       "weight": 1.0
     },
     {
+      "source": "src_app_admin_admin_eod_eodclient",
+      "target": "src_lib_gold_api",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/(admin)/admin/eod/EODClient.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_admin_admin_eod_page",
+      "target": "src_app_admin_admin_eod_eodclient",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/(admin)/admin/eod/page.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
       "source": "src_app_admin_admin_harga_adminhargaclient",
       "target": "src_lib_gold_api",
       "relation": "imports_from",
@@ -10127,6 +10798,30 @@
       "weight": 1.0
     },
     {
+      "source": "src_app_admin_admin_stock_page",
+      "target": "src_lib_gold_api",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/(admin)/admin/stock/page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_admin_admin_stock_stockclient",
+      "target": "src_lib_gold_api",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/(admin)/admin/stock/StockClient.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
       "source": "src_app_admin_admin_users_page",
       "target": "src_app_admin_admin_users_usersclient",
       "relation": "imports_from",
@@ -10148,6 +10843,18 @@
       "context": "import",
       "source_file": "src/app/(admin)/layout.tsx",
       "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_admin_layout",
+      "target": "src_lib_supabase_client",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/(admin)/layout.tsx",
+      "source_location": "L6",
       "weight": 1.0
     },
     {
@@ -10339,6 +11046,18 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/app/api/admin/stock/adjust/route.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_api_admin_stock_min_qty_route",
+      "target": "src_lib_supabase_admin",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/api/admin/stock/min-qty/route.ts",
       "source_location": "L2",
       "weight": 1.0
     },
@@ -10943,6 +11662,116 @@
       "weight": 1.0
     },
     {
+      "source": "design",
+      "target": "design_design_md_safar_gold_atelier",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "DESIGN.md",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "design_design_md_safar_gold_atelier",
+      "target": "design_radius_scale",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "DESIGN.md",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "design_design_md_safar_gold_atelier",
+      "target": "design_shadows",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "DESIGN.md",
+      "source_location": "L36",
+      "weight": 1.0
+    },
+    {
+      "source": "design_design_md_safar_gold_atelier",
+      "target": "design_buttons",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "DESIGN.md",
+      "source_location": "L42",
+      "weight": 1.0
+    },
+    {
+      "source": "design_design_md_safar_gold_atelier",
+      "target": "design_design_tokens",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "DESIGN.md",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "design_design_md_safar_gold_atelier",
+      "target": "design_typography_conventions",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "DESIGN.md",
+      "source_location": "L56",
+      "weight": 1.0
+    },
+    {
+      "source": "design_design_md_safar_gold_atelier",
+      "target": "design_layout_shell",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "DESIGN.md",
+      "source_location": "L63",
+      "weight": 1.0
+    },
+    {
+      "source": "design_design_md_safar_gold_atelier",
+      "target": "design_state_patterns",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "DESIGN.md",
+      "source_location": "L69",
+      "weight": 1.0
+    },
+    {
+      "source": "design_design_md_safar_gold_atelier",
+      "target": "design_component_vocabulary",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "DESIGN.md",
+      "source_location": "L76",
+      "weight": 1.0
+    },
+    {
+      "source": "design_design_tokens",
+      "target": "design_fonts",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "DESIGN.md",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
       "source": "eslint_config",
       "target": "eslint_config_eslintconfig",
       "relation": "contains",
@@ -11273,6 +12102,105 @@
       "weight": 1.0
     },
     {
+      "source": "src_app_admin_admin_eod_eodclient",
+      "target": "src_app_admin_admin_eod_eodclient_stocksnapshot",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/(admin)/admin/eod/EODClient.tsx",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_admin_admin_eod_eodclient",
+      "target": "src_app_admin_admin_eod_eodclient_eod",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/(admin)/admin/eod/EODClient.tsx",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_admin_admin_eod_eodclient",
+      "target": "src_app_admin_admin_eod_eodclient_formatdate",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/(admin)/admin/eod/EODClient.tsx",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_admin_admin_eod_eodclient",
+      "target": "src_app_admin_admin_eod_eodclient_eodclient",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/(admin)/admin/eod/EODClient.tsx",
+      "source_location": "L39",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_admin_admin_eod_eodclient",
+      "target": "src_app_admin_admin_eod_eodclient_breakdown",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/(admin)/admin/eod/EODClient.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_admin_admin_eod_eodclient_eodclient",
+      "target": "src_app_admin_admin_eod_eodclient_eodclient_handlegenerate",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/(admin)/admin/eod/EODClient.tsx",
+      "source_location": "L60",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_admin_admin_eod_page",
+      "target": "src_app_admin_admin_eod_page_dynamic",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/(admin)/admin/eod/page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_admin_admin_eod_page",
+      "target": "src_app_admin_admin_eod_page_metadata",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/(admin)/admin/eod/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_admin_admin_eod_page",
+      "target": "src_app_admin_admin_eod_page_eodpage",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/(admin)/admin/eod/page.tsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
       "source": "src_app_admin_admin_harga_adminhargaclient",
       "target": "src_app_admin_admin_harga_adminhargaclient_mode_tabs",
       "relation": "contains",
@@ -11538,17 +12466,6 @@
     },
     {
       "source": "src_app_admin_admin_laporan_laporanclient",
-      "target": "src_app_admin_admin_laporan_laporanclient_laporanclient",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/app/(admin)/admin/laporan/LaporanClient.tsx",
-      "source_location": "L10",
-      "weight": 1.0
-    },
-    {
-      "source": "src_app_admin_admin_laporan_laporanclient",
       "target": "src_app_admin_admin_laporan_laporanclient_dailysummary",
       "relation": "contains",
       "_origin": "ast",
@@ -11560,7 +12477,7 @@
     },
     {
       "source": "src_app_admin_admin_laporan_laporanclient",
-      "target": "src_app_admin_admin_laporan_laporanclient_eod",
+      "target": "src_app_admin_admin_laporan_laporanclient_stockrow",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -11571,24 +12488,13 @@
     },
     {
       "source": "src_app_admin_admin_laporan_laporanclient",
-      "target": "src_app_admin_admin_laporan_laporanclient_stockrow",
+      "target": "src_app_admin_admin_laporan_laporanclient_laporanclient",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/(admin)/admin/laporan/LaporanClient.tsx",
-      "source_location": "L8",
-      "weight": 1.0
-    },
-    {
-      "source": "src_app_admin_admin_laporan_laporanclient_laporanclient",
-      "target": "src_app_admin_admin_laporan_laporanclient_laporanclient_handlegenerateeod",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/app/(admin)/admin/laporan/LaporanClient.tsx",
-      "source_location": "L30",
+      "source_location": "L9",
       "weight": 1.0
     },
     {
@@ -11692,7 +12598,7 @@
     },
     {
       "source": "src_app_admin_admin_orders_ordersclient",
-      "target": "src_app_admin_admin_orders_ordersclient_cartitem",
+      "target": "src_app_admin_admin_orders_ordersclient_customerlookup",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -11703,13 +12609,24 @@
     },
     {
       "source": "src_app_admin_admin_orders_ordersclient",
+      "target": "src_app_admin_admin_orders_ordersclient_cartitem",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_admin_admin_orders_ordersclient",
       "target": "src_app_admin_admin_orders_ordersclient_lm_products",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L13",
+      "source_location": "L14",
       "weight": 1.0
     },
     {
@@ -11720,7 +12637,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L15",
+      "source_location": "L16",
       "weight": 1.0
     },
     {
@@ -11731,7 +12648,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L16",
+      "source_location": "L17",
       "weight": 1.0
     },
     {
@@ -11742,7 +12659,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L17",
+      "source_location": "L18",
       "weight": 1.0
     },
     {
@@ -11753,7 +12670,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L19",
+      "source_location": "L20",
       "weight": 1.0
     },
     {
@@ -11775,7 +12692,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L105",
+      "source_location": "L106",
       "weight": 1.0
     },
     {
@@ -11786,7 +12703,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L186",
+      "source_location": "L187",
       "weight": 1.0
     },
     {
@@ -11797,7 +12714,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L200",
+      "source_location": "L201",
       "weight": 1.0
     },
     {
@@ -11808,7 +12725,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L216",
+      "source_location": "L217",
       "weight": 1.0
     },
     {
@@ -11819,7 +12736,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L236",
+      "source_location": "L237",
       "weight": 1.0
     },
     {
@@ -11830,7 +12747,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/(admin)/admin/orders/OrdersClient.tsx",
-      "source_location": "L243",
+      "source_location": "L244",
       "weight": 1.0
     },
     {
@@ -12127,7 +13044,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/(admin)/admin/stock/page.tsx",
-      "source_location": "L4",
+      "source_location": "L5",
       "weight": 1.0
     },
     {
@@ -12138,7 +13055,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/(admin)/admin/stock/page.tsx",
-      "source_location": "L5",
+      "source_location": "L6",
       "weight": 1.0
     },
     {
@@ -12149,7 +13066,40 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/(admin)/admin/stock/page.tsx",
-      "source_location": "L7",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_admin_admin_stock_stockclient",
+      "target": "src_app_admin_admin_stock_stockclient_category_order",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/(admin)/admin/stock/StockClient.tsx",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_admin_admin_stock_stockclient",
+      "target": "src_app_admin_admin_stock_stockclient_category_labels",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/(admin)/admin/stock/StockClient.tsx",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_admin_admin_stock_stockclient",
+      "target": "src_app_admin_admin_stock_stockclient_stockclient",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/(admin)/admin/stock/StockClient.tsx",
+      "source_location": "L18",
       "weight": 1.0
     },
     {
@@ -12160,23 +13110,12 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/(admin)/admin/stock/StockClient.tsx",
-      "source_location": "L5",
+      "source_location": "L7",
       "weight": 1.0
     },
     {
       "source": "src_app_admin_admin_stock_stockclient",
       "target": "src_app_admin_admin_stock_stockclient_movement",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/app/(admin)/admin/stock/StockClient.tsx",
-      "source_location": "L6",
-      "weight": 1.0
-    },
-    {
-      "source": "src_app_admin_admin_stock_stockclient",
-      "target": "src_app_admin_admin_stock_stockclient_stockclient",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12193,7 +13132,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/(admin)/admin/stock/StockClient.tsx",
-      "source_location": "L43",
+      "source_location": "L70",
       "weight": 1.0
     },
     {
@@ -12204,7 +13143,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/(admin)/admin/stock/StockClient.tsx",
-      "source_location": "L52",
+      "source_location": "L79",
       "weight": 1.0
     },
     {
@@ -12270,7 +13209,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/(admin)/admin/users/UsersClient.tsx",
-      "source_location": "L41",
+      "source_location": "L46",
       "weight": 1.0
     },
     {
@@ -12281,7 +13220,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/(admin)/admin/users/UsersClient.tsx",
-      "source_location": "L56",
+      "source_location": "L61",
       "weight": 1.0
     },
     {
@@ -12292,18 +13231,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/(admin)/admin/users/UsersClient.tsx",
-      "source_location": "L61",
+      "source_location": "L66",
       "weight": 1.0
     },
     {
       "source": "src_app_admin_layout",
-      "target": "src_app_admin_layout_getpagetitle",
+      "target": "src_app_admin_layout_getpagemeta",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/(admin)/layout.tsx",
-      "source_location": "L20",
+      "source_location": "L21",
       "weight": 1.0
     },
     {
@@ -12314,18 +13253,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/(admin)/layout.tsx",
-      "source_location": "L28",
+      "source_location": "L29",
       "weight": 1.0
     },
     {
       "source": "src_app_admin_layout",
-      "target": "src_app_admin_layout_pagetitles",
+      "target": "src_app_admin_layout_pagemeta",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/(admin)/layout.tsx",
-      "source_location": "L7",
+      "source_location": "L8",
       "weight": 1.0
     },
     {
@@ -12451,6 +13390,39 @@
     },
     {
       "source": "src_app_api_admin_laporan_eod_route",
+      "target": "src_app_api_admin_laporan_eod_route_wibdatestr",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/api/admin/laporan/eod/route.ts",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_api_admin_laporan_eod_route",
+      "target": "src_app_api_admin_laporan_eod_route_get",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/api/admin/laporan/eod/route.ts",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_api_admin_laporan_eod_route",
+      "target": "src_app_api_admin_laporan_eod_route_post",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/api/admin/laporan/eod/route.ts",
+      "source_location": "L37",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_api_admin_laporan_eod_route",
       "target": "src_app_api_admin_laporan_eod_route_dynamic",
       "relation": "contains",
       "_origin": "ast",
@@ -12462,13 +13434,46 @@
     },
     {
       "source": "src_app_api_admin_laporan_eod_route",
-      "target": "src_app_api_admin_laporan_eod_route_post",
+      "target": "src_app_api_admin_laporan_eod_route_eodorderitem",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/api/admin/laporan/eod/route.ts",
       "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_api_admin_laporan_eod_route",
+      "target": "src_app_api_admin_laporan_eod_route_eodorder",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/api/admin/laporan/eod/route.ts",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_api_admin_laporan_eod_route",
+      "target": "src_app_api_admin_laporan_eod_route_goldtypecat",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/api/admin/laporan/eod/route.ts",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_api_admin_laporan_eod_route",
+      "target": "src_app_api_admin_laporan_eod_route_stocksnapshotrow",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/api/admin/laporan/eod/route.ts",
+      "source_location": "L9",
       "weight": 1.0
     },
     {
@@ -12611,6 +13616,28 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/app/api/admin/stock/adjust/route.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_api_admin_stock_min_qty_route",
+      "target": "src_app_api_admin_stock_min_qty_route_dynamic",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/api/admin/stock/min-qty/route.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_api_admin_stock_min_qty_route",
+      "target": "src_app_api_admin_stock_min_qty_route_post",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/api/admin/stock/min-qty/route.ts",
       "source_location": "L6",
       "weight": 1.0
     },
@@ -13073,7 +14100,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/admin/AdminSidebar.tsx",
-      "source_location": "L100",
+      "source_location": "L106",
       "weight": 1.0
     },
     {
@@ -13084,7 +14111,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/admin/AdminSidebar.tsx",
-      "source_location": "L105",
+      "source_location": "L111",
       "weight": 1.0
     },
     {
@@ -13106,7 +14133,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/admin/AdminSidebar.tsx",
-      "source_location": "L138",
+      "source_location": "L144",
       "weight": 1.0
     },
     {
@@ -14308,5 +15335,5 @@
       "source_file": "README.md"
     }
   ],
-  "built_at_commit": "22ec31021dc8fe5c8bc7c0620c0b24fded96221e"
+  "built_at_commit": "a25b4cb29437857cc1bfb1a69ca10e695105f505"
 }

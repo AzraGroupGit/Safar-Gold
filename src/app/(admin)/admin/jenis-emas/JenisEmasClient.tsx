@@ -53,7 +53,7 @@ function FormModal({
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto px-4 pt-[10vh] pb-10">
       <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative w-full max-w-md rounded-2xl border border-border/60 bg-white shadow-2xl">
+      <div className="relative w-full max-w-md rounded-xl border border-border/60 bg-white shadow-lg">
         <div className="flex items-center justify-between border-b border-border/40 px-6 py-4">
           <h2 className="font-serif text-lg font-semibold text-text">
             {isEdit ? "Edit Jenis Emas" : "Tambah Jenis Emas"}
@@ -74,7 +74,7 @@ function FormModal({
                 value={form.id}
                 onChange={(e) => setForm({ ...form, id: e.target.value })}
                 placeholder="antam-1"
-                className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm text-text placeholder:text-text-light focus:border-gold focus:outline-none"
+                className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm text-text placeholder:text-text-light focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30"
               />
             </div>
           )}
@@ -88,7 +88,7 @@ function FormModal({
                 setForm({ ...form, name, id: isEdit ? form.id : nameToSlug(name) });
               }}
               placeholder="Antam 1gr"
-              className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm text-text placeholder:text-text-light focus:border-gold focus:outline-none"
+              className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm text-text placeholder:text-text-light focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30"
             />
           </div>
           <div>
@@ -96,7 +96,7 @@ function FormModal({
             <select
               value={form.category}
               onChange={(e) => setForm({ ...form, category: e.target.value })}
-              className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm text-text focus:border-gold focus:outline-none"
+              className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm text-text focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30"
             >
               {CATEGORIES.map((c) => (
                 <option key={c.value} value={c.value}>{c.label}</option>
@@ -111,7 +111,7 @@ function FormModal({
                 value={form.karat}
                 onChange={(e) => setForm({ ...form, karat: e.target.value })}
                 placeholder="24"
-                className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm text-text placeholder:text-text-light focus:border-gold focus:outline-none"
+                className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm text-text placeholder:text-text-light focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30"
               />
             </div>
             <div>
@@ -122,20 +122,20 @@ function FormModal({
                 onChange={(e) => setForm({ ...form, weight: e.target.value })}
                 placeholder="1"
                 step="0.1"
-                className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm text-text placeholder:text-text-light focus:border-gold focus:outline-none"
+                className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm text-text placeholder:text-text-light focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30"
               />
             </div>
           </div>
         </div>
 
         <div className="flex items-center justify-end gap-3 border-t border-border/40 px-6 py-4">
-          <button onClick={onClose} className="rounded-lg border border-border/60 bg-white px-5 py-2.5 text-sm font-semibold text-text-muted transition-all hover:text-text">
+          <button onClick={onClose} className="rounded-lg border border-border/60 bg-white px-5 py-2.5 text-sm font-semibold text-text-muted transition-colors hover:bg-surface hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 focus-visible:ring-offset-2">
             Batal
           </button>
           <button
             onClick={() => onSave(form)}
             disabled={saving || !form.name || !form.category || (!isEdit && !form.id)}
-            className="gold-gradient-bg rounded-lg px-6 py-2.5 text-sm font-semibold text-white shadow-md shadow-gold/20 transition-all hover:shadow-lg hover:shadow-gold/30 disabled:opacity-50"
+            className="rounded-lg bg-gold px-6 py-2.5 text-sm font-semibold text-[#1a1a1a] transition-colors hover:bg-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 focus-visible:ring-offset-2 disabled:opacity-50"
           >
             {saving ? "Menyimpan..." : "Simpan"}
           </button>
@@ -146,7 +146,7 @@ function FormModal({
 }
 
 export default function JenisEmasClient({ goldTypes: initialGoldTypes }: { goldTypes: GoldTypeRow[] }) {
-  const [goldTypes, setGoldTypes] = useState(initialGoldTypes);
+  const [goldTypes] = useState(initialGoldTypes);
   const [formModal, setFormModal] = useState<{ open: boolean; data: FormData }>({ open: false, data: emptyForm });
   const [deleteTarget, setDeleteTarget] = useState<GoldTypeRow | null>(null);
   const [saving, setSaving] = useState(false);
@@ -199,15 +199,15 @@ export default function JenisEmasClient({ goldTypes: initialGoldTypes }: { goldT
     <div>
       <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="font-serif text-2xl font-bold text-text">Jenis Emas</h1>
+          <h1 className="font-serif text-2xl font-semibold text-text">Jenis Emas</h1>
           <p className="mt-1 text-sm text-text-muted">Kelola kategori & jenis emas</p>
         </div>
-        <button onClick={openAdd} className="gold-gradient-bg rounded-xl px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-gold/20 transition-all hover:shadow-lg hover:shadow-gold/30">
+        <button onClick={openAdd} className="rounded-lg bg-gold px-5 py-2.5 text-sm font-semibold text-[#1a1a1a] transition-colors hover:bg-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 focus-visible:ring-offset-2">
           + Tambah
         </button>
       </div>
 
-      <div className="overflow-hidden rounded-2xl border border-border/60 bg-white shadow-sm">
+      <div className="overflow-hidden rounded-xl border border-border/60 bg-white">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>

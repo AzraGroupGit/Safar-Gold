@@ -318,3 +318,26 @@ where key = 'spread_buyback_lm';
 insert into public.app_settings (key, value)
 values ('persen_buyback_perhiasan', '81')
 on conflict (key) do nothing;
+
+-- #####################################################################
+-- v9: EOD (End of Day) Report — snapshot penutupan kas harian
+-- #####################################################################
+
+create table if not exists public.eod_reports (
+  id                    bigint generated always as identity primary key,
+  date                  text not null unique,
+  total_orders          integer not null default 0,
+  total_jual_orders     integer not null default 0,
+  total_buyback_orders  integer not null default 0,
+  total_jual            integer not null default 0,
+  total_buyback         integer not null default 0,
+  total_jual_items      integer not null default 0,
+  total_buyback_items   integer not null default 0,
+  net                   integer not null default 0,
+  breakdown             jsonb not null default '{}',
+  stock_snapshot        jsonb not null default '[]',
+  generated_by          uuid,
+  generated_at          timestamptz not null default now()
+);
+
+alter table public.eod_reports enable row level security;

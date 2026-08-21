@@ -56,19 +56,19 @@ export default function AdminPengaturanClient({
     : "Belum pernah";
 
   const fieldClass =
-    "w-full rounded-xl border border-border/60 bg-white px-4 py-2.5 text-sm text-text placeholder:text-text-light focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/10";
+    "w-full rounded-lg border border-border/60 bg-white px-4 py-2.5 text-sm text-text placeholder:text-text-light focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30";
 
   return (
     <div>
       <div className="mb-8">
-        <h1 className="font-serif text-2xl font-bold text-text">Pengaturan</h1>
+        <h1 className="font-serif text-2xl font-semibold text-text">Pengaturan</h1>
         <p className="mt-1 text-sm text-text-muted">
           Konfigurasi API, margin, kontak, dan jam operasional
         </p>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-2">
-        <div className="rounded-2xl border border-border/60 bg-white p-6 shadow-sm">
+        <div className="rounded-xl border border-border/60 bg-white p-6">
           <h3 className="mb-1 font-serif text-lg font-semibold text-text">
             API Harga Emas
           </h3>
@@ -119,7 +119,7 @@ export default function AdminPengaturanClient({
           </div>
         </div>
 
-        <div className="rounded-2xl border border-border/60 bg-white p-6 shadow-sm">
+        <div className="rounded-xl border border-border/60 bg-white p-6">
           <h3 className="mb-5 font-serif text-lg font-semibold text-text">
             Informasi Kontak
           </h3>
@@ -146,7 +146,7 @@ export default function AdminPengaturanClient({
           </div>
         </div>
 
-        <div className="rounded-2xl border border-border/60 bg-white p-6 shadow-sm">
+        <div className="rounded-xl border border-border/60 bg-white p-6">
           <h3 className="mb-5 font-serif text-lg font-semibold text-text">
             Jam Operasional
           </h3>
@@ -209,7 +209,7 @@ export default function AdminPengaturanClient({
             </div>
           </div>
         </div>
-        <div className="rounded-2xl border border-border/60 bg-white p-6 shadow-sm">
+        <div className="rounded-xl border border-border/60 bg-white p-6">
           <h3 className="mb-5 font-serif text-lg font-semibold text-text">
             Google Reviews
           </h3>
@@ -240,7 +240,7 @@ export default function AdminPengaturanClient({
         <button
           onClick={handleSave}
           disabled={saving}
-          className="gold-gradient-bg rounded-xl px-6 py-3 text-sm font-semibold text-white shadow-md shadow-gold/20 transition-all hover:shadow-lg hover:shadow-gold/30 disabled:opacity-50"
+          className="rounded-lg bg-gold px-6 py-3 text-sm font-semibold text-[#1a1a1a] transition-colors hover:bg-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 focus-visible:ring-offset-2 disabled:opacity-50"
         >
           {saving ? "Menyimpan..." : "Simpan Pengaturan"}
         </button>
