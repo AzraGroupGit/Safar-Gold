@@ -58,7 +58,7 @@ function ModeModal({
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto px-4 pt-[10vh] pb-10">
       <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative w-full max-w-2xl rounded-2xl border border-border/60 bg-white shadow-2xl">
+      <div className="relative w-full max-w-2xl rounded-xl border border-border/60 bg-white shadow-lg">
         <div className="flex items-center justify-between border-b border-border/40 px-6 py-4">
           <div>
             <h2 className="font-serif text-lg font-semibold text-text">Atur Mode & Harga</h2>
@@ -84,7 +84,7 @@ function ModeModal({
               >
                 {t.label}
                 <span className="ml-1.5 text-xs font-normal text-text-light">({count})</span>
-                {tab === t.key && <span className="absolute bottom-0 left-0 right-0 h-0.5 gold-gradient-bg" />}
+                {tab === t.key && <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gold" />}
               </button>
             );
           })}
@@ -93,7 +93,7 @@ function ModeModal({
         <div className="max-h-[55vh] overflow-y-auto px-6 py-4">
           <div className="space-y-3">
             {filtered.map((gt) => (
-              <div key={gt.id} className="rounded-xl border border-border/40 bg-surface p-4">
+              <div key={gt.id} className="rounded-lg border border-border/40 bg-surface p-4">
                 <div className="flex items-center justify-between gap-4">
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-sm font-semibold text-text">{gt.name}</p>
@@ -108,11 +108,11 @@ function ModeModal({
                           value={manualPrices[gt.id]?.buy ? addDots(String(manualPrices[gt.id]?.buy)) : ""}
                           onChange={(e) => setManualPrices({ ...manualPrices, [gt.id]: { ...manualPrices[gt.id], buy: parseInt(cleanNumber(e.target.value)) || 0 } })}
                           placeholder="0"
-                          className="w-full rounded-lg border border-border/60 bg-white px-3 py-2 text-sm text-text focus:border-gold focus:outline-none"
+                          className="w-full rounded-lg border border-border/60 bg-white px-3 py-2 text-sm text-text focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30"
                         />
                         {gt.weight ? (
                           <p className="mt-1 text-[11px] text-text-muted">
-                            Harga yang dimasukkan adalah total per keping (sudah termasuk perkalian dengan berat). Sistem menampilkannya langsung, tanpa perlu dikalikan lagi.
+                            Total per keping — berat sudah termasuk, tidak perlu dikalikan.
                           </p>
                         ) : null}
                       </div>
@@ -125,7 +125,7 @@ function ModeModal({
                           value={manualPrices[gt.id]?.sell ? addDots(String(manualPrices[gt.id]?.sell)) : ""}
                           onChange={(e) => setManualPrices({ ...manualPrices, [gt.id]: { ...manualPrices[gt.id], sell: parseInt(cleanNumber(e.target.value)) || 0 } })}
                           placeholder="0"
-                          className="w-full rounded-lg border border-border/60 bg-white px-3 py-2 text-sm text-text focus:border-gold focus:outline-none"
+                          className="w-full rounded-lg border border-border/60 bg-white px-3 py-2 text-sm text-text focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30"
                         />
                       </div>
                     )}
@@ -136,7 +136,7 @@ function ModeModal({
                     </span>
                     <button
                       onClick={() => setAutoMode({ ...autoMode, [gt.id]: !autoMode[gt.id] })}
-                      className={`relative h-6 w-11 rounded-full transition-colors ${autoMode[gt.id] ? "gold-gradient-bg" : "bg-gray-200"}`}
+                      className={`relative h-6 w-11 rounded-full transition-colors ${autoMode[gt.id] ? "bg-gold" : "bg-border"}`}
                     >
                       <span className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform ${autoMode[gt.id] ? "translate-x-5" : "translate-x-0.5"}`} />
                     </button>
@@ -153,10 +153,10 @@ function ModeModal({
         <div className="flex items-center justify-between border-t border-border/40 px-6 py-4">
           {saved && <span className="text-sm font-medium text-green-600">Tersimpan! Refresh...</span>}
           <div className="flex items-center gap-3">
-            <button onClick={onClose} className="rounded-lg border border-border/60 bg-white px-5 py-2.5 text-sm font-semibold text-text-muted transition-all hover:text-text">
+            <button onClick={onClose} className="rounded-lg border border-border/60 bg-white px-5 py-2.5 text-sm font-semibold text-text-muted transition-colors hover:bg-surface hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 focus-visible:ring-offset-2">
               Batal
             </button>
-            <button onClick={onSave} disabled={saving} className="gold-gradient-bg rounded-lg px-6 py-2.5 text-sm font-semibold text-white shadow-md shadow-gold/20 transition-all hover:shadow-lg hover:shadow-gold/30 disabled:opacity-50">
+            <button onClick={onSave} disabled={saving} className="rounded-lg bg-gold px-6 py-2.5 text-sm font-semibold text-[#1a1a1a] transition-colors hover:bg-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 focus-visible:ring-offset-2 disabled:opacity-50">
               {saving ? "Menyimpan..." : "Simpan"}
             </button>
           </div>
@@ -246,11 +246,11 @@ export default function AdminHargaClient({ goldTypes, prices }: { goldTypes: Gol
     <div>
       <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="font-serif text-2xl font-bold text-text">Manajemen Harga</h1>
+          <h1 className="font-serif text-2xl font-semibold text-text">Manajemen Harga</h1>
           <p className="mt-1 text-sm text-text-muted">Atur mode & harga per jenis emas</p>
         </div>
         {role !== "cs" && (
-          <button onClick={() => setShowModal(true)} className="rounded-xl border border-border/60 bg-white px-5 py-2.5 text-sm font-semibold text-text shadow-sm transition-all hover:border-gold/30 hover:text-gold-dark hover:shadow-md">
+          <button onClick={() => setShowModal(true)} className="rounded-lg border border-gold/40 px-5 py-2.5 text-sm font-semibold text-gold-dark transition-colors hover:bg-gold/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 focus-visible:ring-offset-2">
             Atur Mode Harga
           </button>
         )}
@@ -269,7 +269,7 @@ export default function AdminHargaClient({ goldTypes, prices }: { goldTypes: Gol
         saved={saved}
       />
 
-      <div className="overflow-hidden rounded-2xl border border-border/60 bg-white shadow-sm">
+      <div className="overflow-hidden rounded-xl border border-border/60 bg-white">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
@@ -277,8 +277,8 @@ export default function AdminHargaClient({ goldTypes, prices }: { goldTypes: Gol
                 <th className="px-4 py-4 md:px-6">Jenis Emas</th>
                 <th className="px-4 py-4 md:px-6">Kategori</th>
                 <th className="hidden px-4 py-4 sm:table-cell md:px-6">Mode</th>
-                <th className="px-4 py-4 md:px-6">Harga</th>
-                <th className="px-4 py-4 md:px-6">Spread</th>
+                <th className="px-4 py-4 text-right md:px-6">Harga</th>
+                <th className="px-4 py-4 text-right md:px-6">Spread</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border/30">
@@ -295,11 +295,11 @@ export default function AdminHargaClient({ goldTypes, prices }: { goldTypes: Gol
                         {gt.is_auto ? "Auto" : "Manual"}
                       </span>
                     </td>
-                    <td className="px-4 py-4 text-sm font-bold text-gold-dark md:px-6">
+                    <td className="px-4 py-4 text-right text-sm font-bold tabular-nums text-gold-dark md:px-6">
                       <div>{formatPrice(displayPrice)}</div>
                       <div className="text-xs font-normal text-text-muted">{label}</div>
                     </td>
-                    <td className="px-4 py-4 text-sm text-text-muted md:px-6">
+                    <td className="px-4 py-4 text-right text-sm tabular-nums text-text-muted md:px-6">
                       {displayPrice !== null
                         ? `${formatRupiahClient(price?.spread ?? 0)} (${price?.spreadPercent ?? "0.0"}%)`
                         : "-"}

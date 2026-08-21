@@ -121,8 +121,8 @@ export default function OrderInvoice({ order, settings }: { order: InvoiceOrder;
                 )}
                 <td className="py-2.5 text-center text-text-muted">{item.weight}g</td>
                 <td className="py-2.5 text-center">{item.qty}</td>
-                <td className="py-2.5 text-right">{formatRupiah(item.price_per_gram)}</td>
-                <td className="py-2.5 text-right font-semibold text-text">
+                <td className="py-2.5 text-right tabular-nums">{formatRupiah(item.price_per_gram)}</td>
+                <td className="py-2.5 text-right font-semibold tabular-nums text-text">
                   {formatRupiah(item.price_total)}
                 </td>
               </tr>
@@ -136,7 +136,7 @@ export default function OrderInvoice({ order, settings }: { order: InvoiceOrder;
               >
                 Total
               </td>
-              <td className="py-3 text-right text-base font-bold text-text">
+              <td className="py-3 text-right text-base font-bold tabular-nums text-text">
                 {formatRupiah(order.total)}
               </td>
             </tr>
@@ -153,7 +153,7 @@ export default function OrderInvoice({ order, settings }: { order: InvoiceOrder;
         <div className="mt-6 text-center print:hidden">
           <button
             onClick={() => window.print()}
-            className="rounded-xl border-2 border-gold/40 px-6 py-2.5 text-sm font-semibold text-gold-dark transition-all hover:border-gold hover:bg-gold/5"
+            className="rounded-lg border border-gold/40 px-6 py-2.5 text-sm font-semibold text-gold-dark transition-colors hover:bg-gold/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 focus-visible:ring-offset-2"
           >
             Cetak / Download PDF
           </button>
