@@ -507,7 +507,50 @@ export type ScrapeAntamResult = {
   antamPrice?: number;
   previousPrice?: number;
   error?: string;
+  detail?: unknown;
 };
+
+/** Scrape logammulia.com via Firecrawl (force fresh), dengan retry + timeout. */
+async function firecrawlScrapeAntam(apiKey: string): Promise<string> {
+  const body = JSON.stringify({
+    url: "https://www.logammulia.com",
+    formats: ["markdown"],
+    onlyMainContent: true,
+    maxAge: 0,
+    storeInCache: false,
+  });
+
+  let lastErr = "";
+  for (let attempt = 0; attempt < 3; attempt++) {
+    if (attempt > 0) await new Promise((r) => setTimeout(r, attempt * 1500));
+    try {
+      const res = await fetch("https://api.firecrawl.dev/v2/scrape", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${apiKey}`,
+          "Content-Type": "application/json",
+        },
+        body,
+        signal: AbortSignal.timeout(30000),
+      });
+      if (!res.ok) {
+        lastErr = `Firecrawl HTTP ${res.status}`;
+        continue;
+      }
+      const data = await res.json();
+      if (!data.success) {
+        lastErr = "Firecrawl scrape gagal";
+        continue;
+      }
+      const markdown: string = data.data?.markdown ?? "";
+      if (markdown) return markdown;
+      lastErr = "Firecrawl mengembalikan markdown kosong";
+    } catch (e) {
+      lastErr = `Firecrawl network error: ${String(e)}`;
+    }
+  }
+  throw new Error(lastErr || "Firecrawl gagal");
+}
 
 /** Scrape harga emas Antam dari logammulia.com via Firecrawl (force fresh). */
 export async function scrapeAntamPrice(): Promise<ScrapeAntamResult> {
@@ -516,27 +559,12 @@ export async function scrapeAntamPrice(): Promise<ScrapeAntamResult> {
     return { success: false, error: "FIRECRAWL_API_KEY not configured" };
   }
 
-  const res = await fetch("https://api.firecrawl.dev/v2/scrape", {
-    method: "POST",
-    headers: {
-      "Authorization": `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      url: "https://www.logammulia.com",
-      formats: ["markdown"],
-      onlyMainContent: true,
-      maxAge: 0,
-      storeInCache: false,
-    }),
-  });
-
-  const data = await res.json();
-  if (!data.success) {
-    return { success: false, error: "Firecrawl scrape failed", detail: data } as any;
+  let markdown: string;
+  try {
+    markdown = await firecrawlScrapeAntam(apiKey);
+  } catch (e) {
+    return { success: false, error: String(e) };
   }
-
-  const markdown: string = data.data?.markdown ?? "";
 
   // Parse: "Emas\nHarga/gram Rp2.700.000,00..."
   const emasSection = markdown.match(/Emas\s*\n\s*Harga\/gram\s+Rp([\d.]+)/i);
@@ -553,7 +581,7 @@ export async function scrapeAntamPrice(): Promise<ScrapeAntamResult> {
   }
 
   if (price <= 0) {
-    return { success: false, error: "Could not parse gold price", detail: markdown.substring(0, 500) } as any;
+    return { success: false, error: "Could not parse gold price", detail: markdown.substring(0, 500) };
   }
 
   const prevRaw = await getSetting("antam_price");

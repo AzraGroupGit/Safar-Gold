@@ -14,7 +14,7 @@ function FluctuationBadge({ current, prev }: { current: number; prev: number }) 
   if (diff === 0) {
     return (
       <span className="inline-flex items-center gap-1 rounded-full bg-white/10 px-3 py-0.5 text-xs font-medium text-white/70">
-        — {(0).toLocaleString("id-ID")} (0,0%)
+        Harga stabil
       </span>
     );
   }
