@@ -586,8 +586,9 @@ export default function PriceApprovalPanel({
               Emas Antam (Rp/gram)
             </label>
             <p className="mb-1 text-[11px] text-text-muted">
-              Biarkan kosong untuk gunakan harga otomatis dari logammulia.com
-              (scrape tiap 06:00)
+              Harga diisi otomatis dari scraping logammulia.com (06:00). Gunakan
+              ikon refresh untuk scrape manual. Mengosongkan field akan
+              menampilkan &quot;-&quot;.
             </p>
             <div className="relative">
               <input

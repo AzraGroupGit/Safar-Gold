@@ -3,10 +3,13 @@ import { scrapeAntamPrice } from "@/lib/gold-api";
 
 export const dynamic = "force-dynamic";
 
-export async function POST() {
+async function run() {
   const result = await scrapeAntamPrice();
   if (!result.success) {
-    return NextResponse.json({ error: result.error }, { status: 500 });
+    return NextResponse.json(
+      { error: result.error, detail: result.detail },
+      { status: 500 },
+    );
   }
   return NextResponse.json({
     success: true,
@@ -14,4 +17,12 @@ export async function POST() {
     previousPrice: result.previousPrice,
     timestamp: new Date().toISOString(),
   });
+}
+
+export async function GET() {
+  return run();
+}
+
+export async function POST() {
+  return run();
 }
