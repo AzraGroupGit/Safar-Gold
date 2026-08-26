@@ -71,25 +71,20 @@ export default async function Hero() {
           </Link>
         </div>
 
-        <div className="mx-auto mt-12 max-w-2xl border-t border-gold/50 bg-black/20 backdrop-blur-sm md:mt-14">
-          <div className="grid grid-cols-1 divide-y divide-white/10 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+        <div className="mx-auto mt-12 max-w-2xl md:mt-16">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-0 sm:divide-x sm:divide-white/10">
             {stats.map((s) => (
-              <div
-                key={s.label}
-                className="group flex items-center justify-between gap-3 px-5 py-3.5 text-left sm:block sm:px-6 sm:py-5 sm:text-center"
-              >
-                <p className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-gold/75">
+              <div key={s.label} className="text-center sm:px-6">
+                <p className="flex items-center justify-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-gold/75">
                   {s.live && (
                     <span className="h-1.5 w-1.5 rounded-full bg-gold shadow-[0_0_8px_1px_rgba(200,145,22,0.7)]" />
                   )}
                   {s.label}
                 </p>
-                <div className="text-right sm:mt-3 sm:text-center">
-                  <p className="font-serif text-lg font-semibold leading-none text-white transition-colors group-hover:text-gold-light sm:text-2xl md:text-3xl">
-                    {s.value}
-                  </p>
-                  <p className="mt-1 text-[11px] text-white/50">{s.hint}</p>
-                </div>
+                <p className="mt-3 font-serif text-2xl font-semibold leading-none text-white md:text-3xl">
+                  {s.value}
+                </p>
+                <p className="mt-1.5 text-[11px] text-white/50">{s.hint}</p>
               </div>
             ))}
           </div>

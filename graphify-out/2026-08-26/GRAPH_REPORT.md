@@ -1,16 +1,16 @@
-# Graph Report - safar-gold  (2026-08-26)
+# Graph Report - safar-gold  (2026-08-24)
 
 ## Corpus Check
-- 95 files · ~191,694 words
+- 95 files · ~191,736 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 494 nodes · 829 edges · 31 communities (25 shown, 6 thin omitted)
+- 494 nodes · 831 edges · 31 communities (25 shown, 6 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 5 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `7a622410`
+- Built from commit: `6b1dac10`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -84,19 +84,19 @@ Nodes (32): Breakdown, EOD, EODClient(), handleGenerate(), load(), formatDate(),
 
 ### Community 2 - "(public)/page.tsx"
 Cohesion: 0.07
-Nodes (25): AdminKontenClient(), AdminKontenPage(), dynamic, dynamic, HomePage(), metadata, CaraTransaksi(), FAQ() (+17 more)
+Nodes (23): AdminKontenClient(), AdminKontenPage(), dynamic, dynamic, HomePage(), metadata, CaraTransaksi(), FAQ() (+15 more)
 
 ### Community 3 - "dependencies"
-Cohesion: 0.12
-Nodes (17): chart.js, next, dependencies, chart.js, next, react, react-chartjs-2, react-dom (+9 more)
+Cohesion: 0.08
+Nodes (25): chart.js, next, dependencies, chart.js, next, react, react-chartjs-2, react-dom (+17 more)
 
 ### Community 4 - "AdminHargaClient.tsx"
 Cohesion: 0.07
 Nodes (27): AdminHargaClient(), fetchRole(), formatPrice(), getPrice(), getPriceLabel(), isBuyable(), formatRupiahClient(), MODE_TABS (+19 more)
 
 ### Community 5 - "devDependencies"
-Cohesion: 0.08
-Nodes (25): eslint, eslint-config-next, devDependencies, eslint, eslint-config-next, tailwindcss, @tailwindcss/postcss, @types/node (+17 more)
+Cohesion: 0.12
+Nodes (17): eslint, eslint-config-next, devDependencies, eslint, eslint-config-next, tailwindcss, @tailwindcss/postcss, @types/node (+9 more)
 
 ### Community 6 - "OrdersClient.tsx"
 Cohesion: 0.09
@@ -148,7 +148,7 @@ Nodes (10): crosshairPlugin, formatCompact(), formatDateLabel(), formatRupiah(),
 
 ### Community 32 - "gold-api.ts"
 Cohesion: 0.09
-Nodes (37): POST(), DELETE(), dynamic, POST(), dynamic, POST(), dynamic, POST() (+29 more)
+Nodes (39): POST(), DELETE(), dynamic, POST(), dynamic, POST(), dynamic, POST() (+31 more)
 
 ## Knowledge Gaps
 - **148 isolated node(s):** `eslintConfig`, `nextConfig`, `name`, `version`, `private` (+143 more)
@@ -160,7 +160,7 @@ _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `createAdminClient()` connect `createAdminClient` to `gold-api.ts`, `OrdersClient.tsx`?**
   _High betweenness centrality (0.093) - this node is a cross-community bridge._
-- **Why does `formatRupiah()` connect `formatRupiah` to `gold-api.ts`, `(public)/page.tsx`, `OrdersClient.tsx`, `admin/page.tsx`, `OrdersClient`?**
+- **Why does `formatRupiah()` connect `formatRupiah` to `gold-api.ts`, `admin/page.tsx`, `OrdersClient`, `OrdersClient.tsx`?**
   _High betweenness centrality (0.058) - this node is a cross-community bridge._
 - **Why does `OrdersClient()` connect `OrdersClient` to `formatRupiah`, `admin/page.tsx`, `OrdersClient.tsx`?**
   _High betweenness centrality (0.047) - this node is a cross-community bridge._
@@ -171,4 +171,4 @@ _Questions this graph is uniquely positioned to answer:_
 - **Should `formatRupiah` be split into smaller, more focused modules?**
   _Cohesion score 0.06342494714587738 - nodes in this community are weakly interconnected._
 - **Should `(public)/page.tsx` be split into smaller, more focused modules?**
-  _Cohesion score 0.06852497096399536 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.07254623044096728 - nodes in this community are weakly interconnected._
