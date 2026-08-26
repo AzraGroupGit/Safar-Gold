@@ -1827,30 +1827,6 @@
       "source_location": "L1"
     },
     {
-      "id": "src_components_livepriceband_fluctuationbadge",
-      "label": "FluctuationBadge()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "(public)/page.tsx",
-      "file_type": "code",
-      "norm_label": "fluctuationbadge()",
-      "source_file": "src/components/LivePriceBand.tsx",
-      "source_location": "L6"
-    },
-    {
-      "id": "src_components_livepriceband_livepriceband",
-      "label": "LivePriceBand()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "(public)/page.tsx",
-      "file_type": "code",
-      "norm_label": "livepriceband()",
-      "source_file": "src/components/LivePriceBand.tsx",
-      "source_location": "L35"
-    },
-    {
       "id": "src_components_mesinpresisi_fileexists",
       "label": "fileExists()",
       "_callable": true,
@@ -1909,18 +1885,6 @@
       "norm_label": "getherocontent()",
       "source_file": "src/lib/gold-api.ts",
       "source_location": "L120"
-    },
-    {
-      "id": "src_lib_gold_api_getmarketinfo",
-      "label": "getMarketInfo()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "(public)/page.tsx",
-      "file_type": "code",
-      "norm_label": "getmarketinfo()",
-      "source_file": "src/lib/gold-api.ts",
-      "source_location": "L94"
     },
     {
       "id": "scripts_import_historis_supabase_post",
@@ -2271,6 +2235,30 @@
       "source_location": "L9"
     },
     {
+      "id": "src_components_livepriceband_fluctuationbadge",
+      "label": "FluctuationBadge()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "gold-api.ts",
+      "file_type": "code",
+      "norm_label": "fluctuationbadge()",
+      "source_file": "src/components/LivePriceBand.tsx",
+      "source_location": "L6"
+    },
+    {
+      "id": "src_components_livepriceband_livepriceband",
+      "label": "LivePriceBand()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "gold-api.ts",
+      "file_type": "code",
+      "norm_label": "livepriceband()",
+      "source_file": "src/components/LivePriceBand.tsx",
+      "source_location": "L35"
+    },
+    {
       "id": "src_lib_gold_api_calculateprices",
       "label": "calculatePrices()",
       "_callable": true,
@@ -2377,6 +2365,18 @@
       "norm_label": "formatdate()",
       "source_file": "src/lib/gold-api.ts",
       "source_location": "L846"
+    },
+    {
+      "id": "src_lib_gold_api_getmarketinfo",
+      "label": "getMarketInfo()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "gold-api.ts",
+      "file_type": "code",
+      "norm_label": "getmarketinfo()",
+      "source_file": "src/lib/gold-api.ts",
+      "source_location": "L94"
     },
     {
       "id": "src_lib_gold_api_getsetting",
@@ -4427,17 +4427,6 @@
       "source_location": "L1"
     },
     {
-      "id": "src_components_livepriceband",
-      "label": "LivePriceBand.tsx",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "(public)/page.tsx",
-      "file_type": "code",
-      "norm_label": "livepriceband.tsx",
-      "source_file": "src/components/LivePriceBand.tsx",
-      "source_location": "L1"
-    },
-    {
       "id": "src_components_mesinpresisi",
       "label": "MesinPresisi.tsx",
       "_origin": "ast",
@@ -4603,6 +4592,17 @@
       "source_location": "L25"
     },
     {
+      "id": "package",
+      "label": "package.json",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "package.json",
+      "source_file": "package.json",
+      "source_location": "L1"
+    },
+    {
       "id": "package_dependencies",
       "label": "dependencies",
       "_origin": "ast",
@@ -4700,6 +4700,94 @@
       "norm_label": "@supabase/supabase-js",
       "source_file": "package.json",
       "source_location": "L13"
+    },
+    {
+      "id": "package_name",
+      "label": "name",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "name",
+      "source_file": "package.json",
+      "source_location": "L2"
+    },
+    {
+      "id": "package_private",
+      "label": "private",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "private",
+      "source_file": "package.json",
+      "source_location": "L4"
+    },
+    {
+      "id": "package_scripts",
+      "label": "scripts",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "scripts",
+      "source_file": "package.json",
+      "source_location": "L5"
+    },
+    {
+      "id": "package_scripts_build",
+      "label": "build",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "build",
+      "source_file": "package.json",
+      "source_location": "L7"
+    },
+    {
+      "id": "package_scripts_dev",
+      "label": "dev",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "dev",
+      "source_file": "package.json",
+      "source_location": "L6"
+    },
+    {
+      "id": "package_scripts_lint",
+      "label": "lint",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "lint",
+      "source_file": "package.json",
+      "source_location": "L9"
+    },
+    {
+      "id": "package_scripts_start",
+      "label": "start",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "start",
+      "source_file": "package.json",
+      "source_location": "L8"
+    },
+    {
+      "id": "package_version",
+      "label": "version",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "version",
+      "source_file": "package.json",
+      "source_location": "L3"
     },
     {
       "id": "chart_js",
@@ -4966,6 +5054,17 @@
       "source_location": "L5"
     },
     {
+      "id": "src_components_livepriceband",
+      "label": "LivePriceBand.tsx",
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "gold-api.ts",
+      "file_type": "code",
+      "norm_label": "livepriceband.tsx",
+      "source_file": "src/components/LivePriceBand.tsx",
+      "source_location": "L1"
+    },
+    {
       "id": "src_lib_gold_api",
       "label": "gold-api.ts",
       "_origin": "ast",
@@ -5120,17 +5219,6 @@
       "source_location": "L19"
     },
     {
-      "id": "package",
-      "label": "package.json",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "package.json",
-      "source_file": "package.json",
-      "source_location": "L1"
-    },
-    {
       "id": "package_devdependencies",
       "label": "devDependencies",
       "_origin": "ast",
@@ -5228,94 +5316,6 @@
       "norm_label": "typescript",
       "source_file": "package.json",
       "source_location": "L29"
-    },
-    {
-      "id": "package_name",
-      "label": "name",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "name",
-      "source_file": "package.json",
-      "source_location": "L2"
-    },
-    {
-      "id": "package_private",
-      "label": "private",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "private",
-      "source_file": "package.json",
-      "source_location": "L4"
-    },
-    {
-      "id": "package_scripts",
-      "label": "scripts",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "scripts",
-      "source_file": "package.json",
-      "source_location": "L5"
-    },
-    {
-      "id": "package_scripts_build",
-      "label": "build",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "build",
-      "source_file": "package.json",
-      "source_location": "L7"
-    },
-    {
-      "id": "package_scripts_dev",
-      "label": "dev",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "dev",
-      "source_file": "package.json",
-      "source_location": "L6"
-    },
-    {
-      "id": "package_scripts_lint",
-      "label": "lint",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "lint",
-      "source_file": "package.json",
-      "source_location": "L9"
-    },
-    {
-      "id": "package_scripts_start",
-      "label": "start",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "start",
-      "source_file": "package.json",
-      "source_location": "L8"
-    },
-    {
-      "id": "package_version",
-      "label": "version",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "version",
-      "source_file": "package.json",
-      "source_location": "L3"
     },
     {
       "id": "eslint",
@@ -6967,6 +6967,18 @@
       "context": "call",
       "source_file": "src/app/api/cron/update-prices/route.ts",
       "source_location": "L52",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_api_cron_update_prices_route_get",
+      "target": "src_lib_gold_api_scrapeantamprice",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/app/api/cron/update-prices/route.ts",
+      "source_location": "L79",
       "weight": 1.0
     },
     {
@@ -9708,6 +9720,18 @@
     {
       "source": "src_app_api_cron_update_prices_route",
       "target": "src_lib_gold_api_getsetting",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/app/api/cron/update-prices/route.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app_api_cron_update_prices_route",
+      "target": "src_lib_gold_api_scrapeantamprice",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -15416,5 +15440,5 @@
       "source_file": "README.md"
     }
   ],
-  "built_at_commit": "7a622410f6305260fc7903c44fbc41e972285806"
+  "built_at_commit": "6b1dac10924432812cca195a30f9e808732ddbff"
 }
