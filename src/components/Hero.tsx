@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { getHeroContent, getMarketInfo } from "@/lib/gold-api";
 
 export default async function Hero() {
@@ -31,9 +32,13 @@ export default async function Hero() {
 
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden md:min-h-[90vh]">
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/safar-hero.webp')" }}
+      <Image
+        src="/safar-hero.webp"
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover object-center"
       />
       <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/65 to-black/45" />
 
