@@ -12,19 +12,19 @@ type Machine = {
 // Edit data di bawah ini — nama, fungsi, dan badge tiap alat
 const MACHINES: Machine[] = [
   {
-    src: "/mesin-1.png",
+    src: "/mesin-1.webp",
     name: "Vanta GX — XRF Analyzer (Evident/Olympus)",
     role: "Cek kadar & komposisi emas dengan teknologi XRF non-destruktif",
     badges: ["Kadar 0–24K", "Deteksi 27 unsur", "Anti-palsu"],
   },
   {
-    src: "/mesin-2.png",
+    src: "/mesin-2.webp",
     name: "Glory GFB Series — Penghitung Uang",
     role: "Hitung cepat & deteksi uang palsu (UV + magnetik)",
     badges: ["1.800 lembar/menit", "Deteksi UV"],
   },
   {
-    src: "/mesin-3.png",
+    src: "/mesin-3.webp",
     name: "GKS-300 — Gold & Platinum Tester (Alfa Mirage)",
     role: "Uji kemurnian emas & platina metode berat jenis, tanpa asam",
     badges: ["K9–K24 · Pt600–1000", "Made in Japan"],
