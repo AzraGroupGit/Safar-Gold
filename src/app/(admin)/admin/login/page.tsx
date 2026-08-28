@@ -43,9 +43,12 @@ export default function AdminLoginPage() {
     <div className="relative flex min-h-screen overflow-hidden bg-[#0c0a06]">
       {/* Brand panel (desktop) */}
       <aside className="relative hidden w-1/2 overflow-hidden lg:block">
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('/safar-hero.webp')" }}
+        <Image
+          src="/safar-hero.webp"
+          alt=""
+          fill
+          sizes="50vw"
+          className="object-cover object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0c0a06]/75 via-[#0c0a06]/55 to-[#0c0a06]" />
         <div className="bg-diamond absolute inset-0 opacity-[0.15]" />
