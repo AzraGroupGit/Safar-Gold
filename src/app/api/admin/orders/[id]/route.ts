@@ -39,7 +39,7 @@ export async function DELETE(_req: Request, { params }: { params: Promise<{ id: 
 
 export async function PUT(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const { customerName, customerPhone, type, items, source, nik, address, kelurahan, kecamatan, kabupaten, provinsi, instagram } = await request.json();
+  const { customerName, customerPhone, type, items, source, nik, address, kelurahan, kecamatan, kabupaten, provinsi, instagram, provinceId, regencyId, districtId, villageId } = await request.json();
 
   if (!customerName || !customerPhone || !items?.length) {
     return NextResponse.json({ error: "Data tidak lengkap" }, { status: 400 });
@@ -78,6 +78,10 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
     kabupaten: kabupaten ?? null,
     provinsi: provinsi ?? null,
     instagram: instagram ?? null,
+    province_id: provinceId ?? null,
+    regency_id: regencyId ?? null,
+    district_id: districtId ?? null,
+    village_id: villageId ?? null,
   }).eq("id", id);
 
   // Replace items
@@ -117,6 +121,7 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
     name: customerName,
     phone: customerPhone,
     nik, source, address, kelurahan, kecamatan, kabupaten, provinsi, instagram,
+    province_id: provinceId, regency_id: regencyId, district_id: districtId, village_id: villageId,
   });
   if (customerId) {
     const oldCustomerId = oldOrder.customer_id ?? null;

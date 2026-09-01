@@ -611,6 +611,10 @@ export type CustomerInput = {
   kabupaten?: string | null;
   provinsi?: string | null;
   instagram?: string | null;
+  province_id?: string | null;
+  regency_id?: string | null;
+  district_id?: string | null;
+  village_id?: string | null;
 };
 
 /** Upsert customer master by phone (normalized). Returns customer id. */
@@ -630,6 +634,10 @@ export async function upsertCustomerByPhone(input: CustomerInput): Promise<strin
     kabupaten: input.kabupaten ?? null,
     provinsi: input.provinsi ?? null,
     instagram: input.instagram ?? null,
+    province_id: input.province_id ?? null,
+    regency_id: input.regency_id ?? null,
+    district_id: input.district_id ?? null,
+    village_id: input.village_id ?? null,
   };
 
   const { data: existing } = await supabase
