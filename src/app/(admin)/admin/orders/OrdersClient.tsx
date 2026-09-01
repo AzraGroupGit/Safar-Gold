@@ -7,8 +7,8 @@ import { createClient } from "@/lib/supabase/client";
 import OrderInvoice, { type InvoiceOrder, type InvoiceSettings } from "@/components/OrderInvoice";
 
 type Order = { id: string; order_number: string; type: string; customer_name: string; customer_phone: string; total: number; status: string; created_at: string };
-type OrderDetail = Order & { order_items: { id?: string; item_name: string; weight: number; karat: number | null; qty: number; price_per_gram: number; price_total: number; gold_type_id?: string | null }[]; source?: string | null; nik?: string | null; address?: string | null; instagram?: string | null; provinsi?: string | null; kabupaten?: string | null; kecamatan?: string | null; kelurahan?: string | null };
-type CustomerLookup = { name: string | null; source: string | null; nik: string | null; address: string | null; kelurahan: string | null; kecamatan: string | null; kabupaten: string | null; provinsi: string | null; instagram: string | null; order_count: number };
+type OrderDetail = Order & { order_items: { id?: string; item_name: string; weight: number; karat: number | null; qty: number; price_per_gram: number; price_total: number; gold_type_id?: string | null }[]; source?: string | null; nik?: string | null; address?: string | null; instagram?: string | null; provinsi?: string | null; kabupaten?: string | null; kecamatan?: string | null; kelurahan?: string | null; province_id?: string | null; regency_id?: string | null; district_id?: string | null; village_id?: string | null };
+type CustomerLookup = { name: string | null; source: string | null; nik: string | null; address: string | null; kelurahan: string | null; kecamatan: string | null; kabupaten: string | null; provinsi: string | null; instagram: string | null; province_id: string | null; regency_id: string | null; district_id: string | null; village_id: string | null; order_count: number };
 type CartItem = { goldTypeId: string | null; itemName: string; weight: number; karat: number | null; qty: number; pricePerGram: number; priceTotal: number };
 
 const LM_PRODUCTS = ["antam-0.5", "antam-1", "antam-2", "antam-3", "antam-5", "antam-10", "antam-25", "antam-50", "antam-100"];
@@ -16,6 +16,12 @@ const PER_PAGE = 20;
 const SOURCE_OPTIONS = ["Instagram", "Google", "Teman/Keluarga", "TikTok", "Facebook", "Lainnya"];
 const BUYBACK_CATEGORIES = ["Anting", "Kalung", "Cincin", "Liontin", "Gelang"];
 type RegionOption = { id: string; name: string };
+
+function titleCase(s: string): string {
+  return s
+    .toLowerCase()
+    .replace(/(^|[\s\-'\/()])([a-z])/g, (m) => m.toUpperCase());
+}
 
 export default function OrdersClient({ prices, goldTypes, settings }: { prices: FormattedPrice[]; goldTypes: GoldTypeRow[]; settings: InvoiceSettings }) {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -64,6 +70,7 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
   const [provinceId, setProvinceId] = useState("");
   const [regencyId, setRegencyId] = useState("");
   const [districtId, setDistrictId] = useState("");
+  const [villageId, setVillageId] = useState("");
   const [provinsi, setProvinsi] = useState("");
   const [kabupaten, setKabupaten] = useState("");
   const [kecamatan, setKecamatan] = useState("");
@@ -84,7 +91,7 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
     setError(""); setSellProduct("antam-1"); setSellQty(1);
     setBbCategory("bb-lm"); setBbGoldType("bb-certi-1-2"); setBbWeight(""); setBbKarat("24"); setBbItemName(""); setBbCategoryName(""); setBbCustomName("");
     setSource(""); setNik(""); setAddress(""); setInstagram("");
-    setProvinsi(""); setProvinceId(""); setKabupaten(""); setRegencyId(""); setKecamatan(""); setDistrictId(""); setKelurahan("");
+    setProvinsi(""); setProvinceId(""); setKabupaten(""); setRegencyId(""); setKecamatan(""); setDistrictId(""); setKelurahan(""); setVillageId("");
     setRegencies([]); setDistricts([]); setVillages([]);
     setLookup(null);
   }
@@ -103,23 +110,41 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
     }
   }
 
-  function applyLookup() {
+  async function applyLookup() {
     if (!lookup) return;
     const c = lookup;
     setCustomerName(c.name ?? "");
     setSource(c.source ?? "");
     setNik(c.nik ?? "");
     setAddress(c.address ?? "");
-    setKelurahan(c.kelurahan ?? "");
-    setKecamatan(c.kecamatan ?? "");
-    setKabupaten(c.kabupaten ?? "");
-    setProvinsi(c.provinsi ?? "");
+    setKelurahan(titleCase(c.kelurahan ?? ""));
+    setKecamatan(titleCase(c.kecamatan ?? ""));
+    setKabupaten(titleCase(c.kabupaten ?? ""));
+    setProvinsi(titleCase(c.provinsi ?? ""));
     setInstagram(c.instagram ?? "");
+    setProvinceId(c.province_id ?? "");
+    setRegencyId(c.regency_id ?? "");
+    setDistrictId(c.district_id ?? "");
+    setVillageId(c.village_id ?? "");
+    setRegencies([]); setDistricts([]); setVillages([]);
+    if (c.province_id) {
+      const regs = await fetchRegion(`/api/regions?type=regency&parent=${c.province_id}`);
+      setRegencies(regs);
+    }
+    if (c.regency_id) {
+      const dists = await fetchRegion(`/api/regions?type=district&parent=${c.regency_id}`);
+      setDistricts(dists);
+    }
+    if (c.district_id) {
+      const vills = await fetchRegion(`/api/regions?type=village&parent=${c.district_id}`);
+      setVillages(vills);
+    }
   }
 
   const fetchRegion = useCallback(async (url: string) => {
     const res = await fetch(url); if (!res.ok) return [];
-    return (await res.json()) as RegionOption[];
+    const data = (await res.json()) as RegionOption[];
+    return data.map((r) => ({ ...r, name: titleCase(r.name) }));
   }, []);
 
   const loadProvinces = useCallback(async () => {
@@ -128,7 +153,7 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
   }, [fetchRegion]);
 
   async function onProvinceChange(id: string, name: string) {
-    setProvinsi(name); setProvinceId(id); setRegencyId(""); setDistrictId("");
+    setProvinsi(name); setProvinceId(id); setRegencyId(""); setDistrictId(""); setVillageId("");
     setKabupaten(""); setKecamatan(""); setKelurahan("");
     setRegencies([]); setDistricts([]); setVillages([]);
     if (!id) return;
@@ -137,7 +162,7 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
     setRegencies(data); setRegionLoading(r => ({ ...r, regency: false }));
   }
   async function onRegencyChange(id: string, name: string) {
-    setKabupaten(name); setRegencyId(id); setDistrictId("");
+    setKabupaten(name); setRegencyId(id); setDistrictId(""); setVillageId("");
     setKecamatan(""); setKelurahan("");
     setDistricts([]); setVillages([]);
     if (!id) return;
@@ -146,7 +171,7 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
     setDistricts(data); setRegionLoading(r => ({ ...r, district: false }));
   }
   async function onDistrictChange(id: string, name: string) {
-    setKecamatan(name); setDistrictId(id);
+    setKecamatan(name); setDistrictId(id); setVillageId("");
     setKelurahan("");
     setVillages([]);
     if (!id) return;
@@ -169,10 +194,31 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
     setNik(order.nik ?? "");
     setAddress(order.address ?? "");
     setInstagram(order.instagram ?? "");
-    setProvinsi(order.provinsi ?? "");
-    setKabupaten(order.kabupaten ?? "");
-    setKecamatan(order.kecamatan ?? "");
-    setKelurahan(order.kelurahan ?? "");
+    setProvinsi(titleCase(order.provinsi ?? ""));
+    setKabupaten(titleCase(order.kabupaten ?? ""));
+    setKecamatan(titleCase(order.kecamatan ?? ""));
+    setKelurahan(titleCase(order.kelurahan ?? ""));
+    setProvinceId(order.province_id ?? "");
+    setRegencyId(order.regency_id ?? "");
+    setDistrictId(order.district_id ?? "");
+    setVillageId(order.village_id ?? "");
+    setRegencies([]); setDistricts([]); setVillages([]);
+    if (provinces.length === 0) {
+      const p = await fetchRegion("/api/regions");
+      setProvinces(p);
+    }
+    if (order.province_id) {
+      const regs = await fetchRegion(`/api/regions?type=regency&parent=${order.province_id}`);
+      setRegencies(regs);
+    }
+    if (order.regency_id) {
+      const dists = await fetchRegion(`/api/regions?type=district&parent=${order.regency_id}`);
+      setDistricts(dists);
+    }
+    if (order.district_id) {
+      const vills = await fetchRegion(`/api/regions?type=village&parent=${order.district_id}`);
+      setVillages(vills);
+    }
     setShowModal(true);
   }
 
@@ -222,13 +268,13 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
     if (editingId) {
       const res = await fetch(`/api/admin/orders/${editingId}`, {
         method: "PUT", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ customerName, customerPhone, type, items, source: source || null, nik: nik || null, address: address || null, kelurahan: kelurahan || null, kecamatan: kecamatan || null, kabupaten: kabupaten || null, provinsi: provinsi || null, instagram: instagram || null }),
+        body: JSON.stringify({ customerName, customerPhone, type, items, source: source || null, nik: nik || null, address: address || null, kelurahan: kelurahan || null, kecamatan: kecamatan || null, kabupaten: kabupaten || null, provinsi: provinsi || null, instagram: instagram || null, provinceId: provinceId || null, regencyId: regencyId || null, districtId: districtId || null, villageId: villageId || null }),
       });
       const data = await res.json();
       if (data.success) { setShowModal(false); resetForm(); fetchOrders(); } else { setError(data.error ?? "Gagal"); setSaving(false); }
     } else {
       const supabase = createClient(); const { data: { user } } = await supabase.auth.getUser();
-      const res = await fetch("/api/admin/orders", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type, customerName, customerPhone, items, createdBy: user?.id, source: source || null, nik: nik || null, address: address || null, kelurahan: kelurahan || null, kecamatan: kecamatan || null, kabupaten: kabupaten || null, provinsi: provinsi || null, instagram: instagram || null }) });
+      const res = await fetch("/api/admin/orders", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type, customerName, customerPhone, items, createdBy: user?.id, source: source || null, nik: nik || null, address: address || null, kelurahan: kelurahan || null, kecamatan: kecamatan || null, kabupaten: kabupaten || null, provinsi: provinsi || null, instagram: instagram || null, provinceId: provinceId || null, regencyId: regencyId || null, districtId: districtId || null, villageId: villageId || null }) });
       const data = await res.json();
       if (data.success) { setShowModal(false); resetForm(); fetchOrders(); } else { setError(data.error ?? "Gagal"); setSaving(false); }
     }
@@ -506,9 +552,10 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
                       <label className="mb-1 block text-xs text-text-muted">Kelurahan</label>
                       <div className="relative">
                         <select
-                          value={""}
+                          value={villageId}
                           onChange={e => {
                             const sel = e.target.selectedOptions[0];
+                            setVillageId(e.target.value);
                             setKelurahan(sel?.textContent ?? "");
                           }}
                           disabled={!districtId || regionLoading.village}

@@ -341,3 +341,17 @@ create table if not exists public.eod_reports (
 );
 
 alter table public.eod_reports enable row level security;
+
+-- #####################################################################
+-- v10: Region IDs — simpan id wilayah (provinsi/kab/kec/kel) untuk restore dropdown saat edit
+-- #####################################################################
+
+alter table public.orders    add column if not exists province_id text;
+alter table public.orders    add column if not exists regency_id  text;
+alter table public.orders    add column if not exists district_id text;
+alter table public.orders    add column if not exists village_id  text;
+
+alter table public.customers add column if not exists province_id text;
+alter table public.customers add column if not exists regency_id  text;
+alter table public.customers add column if not exists district_id text;
+alter table public.customers add column if not exists village_id  text;

@@ -22,7 +22,7 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { type, customerName, customerPhone, items, notes, createdBy, source, nik, address, kelurahan, kecamatan, kabupaten, provinsi, instagram } = body;
+    const { type, customerName, customerPhone, items, notes, createdBy, source, nik, address, kelurahan, kecamatan, kabupaten, provinsi, instagram, provinceId, regencyId, districtId, villageId } = body;
 
     if (!type || !customerName || !customerPhone || !items?.length) {
       return NextResponse.json({ error: "Data tidak lengkap" }, { status: 400 });
@@ -58,6 +58,10 @@ export async function POST(request: Request) {
         kabupaten: kabupaten ?? null,
         provinsi: provinsi ?? null,
         instagram: instagram ?? null,
+        province_id: provinceId ?? null,
+        regency_id: regencyId ?? null,
+        district_id: districtId ?? null,
+        village_id: villageId ?? null,
         created_by: createdBy,
       })
       .select("id")
@@ -72,6 +76,7 @@ export async function POST(request: Request) {
       name: customerName,
       phone: customerPhone,
       nik, source, address, kelurahan, kecamatan, kabupaten, provinsi, instagram,
+      province_id: provinceId, regency_id: regencyId, district_id: districtId, village_id: villageId,
     });
     if (customerId) {
       await adm.from("orders").update({ customer_id: customerId }).eq("id", order.id);
