@@ -21,6 +21,8 @@ export type InvoiceOrder = {
   kabupaten: string | null;
   provinsi: string | null;
   instagram: string | null;
+  payment_method: string | null;
+  notes: string | null;
   order_items: {
     id?: string;
     item_name: string;
@@ -43,7 +45,7 @@ function buildAddress(o: InvoiceOrder) {
   return parts.length > 0 ? parts.join(", ") : null;
 }
 
-export default function OrderInvoice({ order, settings }: { order: InvoiceOrder; settings: InvoiceSettings }) {
+export default function OrderInvoice({ order, settings, creator, showActions = true, rootId = "invoice-root" }: { order: InvoiceOrder; settings: InvoiceSettings; creator?: { name: string | null; signature: string | null } | null; showActions?: boolean; rootId?: string }) {
   const isJual = order.type === "sell";
   const title = isJual ? "Nota Penjualan" : "Nota Pembelian";
   const address = buildAddress(order);
@@ -53,11 +55,11 @@ export default function OrderInvoice({ order, settings }: { order: InvoiceOrder;
       <style>{`
         @media print {
           body * { visibility: hidden; }
-          #invoice-root, #invoice-root * { visibility: visible; }
-          #invoice-root { position: fixed; left: 0; top: 0; width: 100%; }
+          #${rootId}, #${rootId} * { visibility: visible; }
+          #${rootId} { position: fixed; left: 0; top: 0; width: 100%; }
         }
       `}</style>
-      <div className="mx-auto max-w-2xl px-4 py-10" id="invoice-root">
+      <div className="mx-auto max-w-2xl bg-white px-4 py-10" id={rootId}>
         {/* Header Toko */}
         <div className="text-center">
           <h1 className="font-serif text-xl font-bold tracking-wide text-text">SAFAR GOLD</h1>
@@ -70,6 +72,9 @@ export default function OrderInvoice({ order, settings }: { order: InvoiceOrder;
         <h2 className="mt-4 text-center font-serif text-lg font-bold uppercase tracking-widest text-text">
           {title}
         </h2>
+        {order.status === "cancelled" && (
+          <div className="mt-3 rounded-lg border border-red-200 bg-red-50 px-4 py-2 text-center text-xs font-bold uppercase tracking-widest text-red-700">Invoice Dibatalkan</div>
+        )}
 
         {/* Info */}
         <div className="mt-4 grid gap-2 text-sm sm:grid-cols-2">
@@ -143,6 +148,38 @@ export default function OrderInvoice({ order, settings }: { order: InvoiceOrder;
           </tfoot>
         </table>
 
+        <div className="mt-4 flex flex-wrap items-start justify-between gap-2 text-sm">
+          <div>
+            <span className="text-xs text-text-muted">Metode Pembayaran: </span>
+            <span className="font-semibold text-text">
+              {order.payment_method === "transfer" ? "Transfer" : "Cash"}
+            </span>
+          </div>
+          {order.notes && (
+            <div className="text-right">
+              <span className="text-xs text-text-muted">Catatan: </span>
+              <span className="text-text">{order.notes}</span>
+            </div>
+          )}
+        </div>
+
+        {creator && (
+          <div className="mt-10 flex justify-end">
+            <div className="text-center">
+              {creator.signature ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={creator.signature} alt="Tanda tangan" className="mx-auto h-16 w-auto" />
+              ) : (
+                <div className="h-16" />
+              )}
+              <div className="mx-auto mt-2 w-44 border-t border-text/30 pt-1">
+                <p className="text-xs font-semibold text-text">{creator.name || "—"}</p>
+                <p className="text-[10px] text-text-muted">Penjual / CS</p>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Footer */}
         <div className="mt-10 text-center">
           <p className="text-xs text-text-muted">Terima kasih telah bertransaksi di Safar Gold</p>
@@ -150,7 +187,7 @@ export default function OrderInvoice({ order, settings }: { order: InvoiceOrder;
         </div>
 
         {/* Cetak Button — hidden on print */}
-        <div className="mt-6 text-center print:hidden">
+        {showActions && <div className="mt-6 text-center print:hidden">
           <button
             onClick={() => window.print()}
             className="rounded-lg border border-gold/40 px-6 py-2.5 text-sm font-semibold text-gold-dark transition-colors hover:bg-gold/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 focus-visible:ring-offset-2"
@@ -160,7 +197,7 @@ export default function OrderInvoice({ order, settings }: { order: InvoiceOrder;
           <p className="mt-2 text-[11px] text-text-light">
             Pilih &quot;Save as PDF&quot; di dialog cetak untuk menyimpan file
           </p>
-        </div>
+        </div>}
       </div>
     </>
   );

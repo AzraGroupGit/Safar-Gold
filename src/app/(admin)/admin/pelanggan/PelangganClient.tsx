@@ -3,6 +3,8 @@
 import { useState, useEffect, useMemo, useRef } from "react";
 import { formatRupiah } from "@/lib/gold-api";
 import OrderInvoice, { type InvoiceOrder, type InvoiceSettings } from "@/components/OrderInvoice";
+import InvoiceDownloadButton from "@/components/InvoiceDownloadButton";
+import { summarizeCustomerPurchases } from "@/lib/customer-purchase-summary";
 
 type Customer = {
   id: string;
@@ -73,6 +75,11 @@ export default function PelangganClient({ settings }: { settings: InvoiceSetting
     );
   }, [customers, search]);
 
+  const purchaseSummary = detail ? summarizeCustomerPurchases(detail.orders) : null;
+  const formatDate = (value: string | null) => value
+    ? new Date(value).toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" })
+    : "-";
+
   if (loading) return <div className="flex items-center justify-center py-20"><div className="h-8 w-8 animate-spin rounded-full border-2 border-gold border-t-transparent" /></div>;
 
   return (
@@ -110,9 +117,9 @@ export default function PelangganClient({ settings }: { settings: InvoiceSetting
 
       {/* Detail Modal */}
       {detail && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto px-4 pt-[6vh] pb-10">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setDetail(null)} />
-          <div className="relative w-full max-w-2xl rounded-xl border border-border/60 bg-white shadow-lg">
+          <div className="relative flex max-h-[90vh] w-full max-w-6xl flex-col overflow-hidden rounded-xl border border-border/60 bg-white shadow-lg lg:h-[min(820px,90vh)]">
             <div className="flex items-center justify-between border-b border-border/40 px-6 py-4">
               <div>
                 <h3 className="font-serif text-lg font-semibold text-text">{detail.customer.name}</h3>
@@ -120,30 +127,37 @@ export default function PelangganClient({ settings }: { settings: InvoiceSetting
               </div>
               <button onClick={() => setDetail(null)} className="rounded-lg p-1 text-text-muted hover:bg-surface hover:text-text">&times;</button>
             </div>
-            <div className="p-6 space-y-5">
-              <div className="grid gap-3 sm:grid-cols-2">
+            <div className="min-h-0 flex-1 space-y-4 overflow-y-auto p-5 lg:flex lg:flex-col lg:overflow-hidden lg:p-6">
+              <div className="grid shrink-0 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                <div className="rounded-lg border border-border/30 bg-surface p-3"><p className="text-[11px] uppercase tracking-wider text-text-muted">Pembelian Pertama</p><p className="mt-1 text-sm font-semibold text-text">{formatDate(purchaseSummary?.firstPurchaseAt ?? null)}</p></div>
+                <div className="rounded-lg border border-border/30 bg-surface p-3"><p className="text-[11px] uppercase tracking-wider text-text-muted">Pembelian Terakhir</p><p className="mt-1 text-sm font-semibold text-text">{formatDate(purchaseSummary?.latestPurchaseAt ?? null)}</p></div>
+                <div className="rounded-lg border border-border/30 bg-surface p-3"><p className="text-[11px] uppercase tracking-wider text-text-muted">Jumlah Order</p><p className="mt-1 text-sm font-semibold text-text">{purchaseSummary?.orderCount ?? 0} transaksi</p></div>
+                <div className="rounded-lg border border-gold/20 bg-gold/5 p-3"><p className="text-[11px] uppercase tracking-wider text-text-muted">Total Nilai</p><p className="mt-1 text-sm font-semibold text-gold-dark">{formatRupiah(purchaseSummary?.totalSpent ?? 0)}</p></div>
+              </div>
+              <div className="grid shrink-0 gap-3 sm:grid-cols-2 lg:grid-cols-4">
                 {detail.customer.nik && <div className="rounded-lg border border-border/30 bg-surface p-3"><p className="text-[11px] uppercase tracking-wider text-text-muted">NIK</p><p className="mt-1 text-sm font-medium text-text">{detail.customer.nik}</p></div>}
                 <div className="rounded-lg border border-border/30 bg-surface p-3"><p className="text-[11px] uppercase tracking-wider text-text-muted">Sumber</p><p className="mt-1 text-sm font-medium text-text">{detail.customer.source ?? "-"}</p></div>
                 {detail.customer.instagram && <div className="rounded-lg border border-border/30 bg-surface p-3"><p className="text-[11px] uppercase tracking-wider text-text-muted">Instagram</p><p className="mt-1 text-sm font-medium text-text">{detail.customer.instagram}</p></div>}
-                <div className="rounded-lg border border-border/30 bg-surface p-3 sm:col-span-2"><p className="text-[11px] uppercase tracking-wider text-text-muted">Alamat</p><p className="mt-1 text-sm text-text">{[detail.customer.address, detail.customer.kelurahan, detail.customer.kecamatan, detail.customer.kabupaten, detail.customer.provinsi].filter(Boolean).join(", ") || "-"}</p></div>
+                <div className="rounded-lg border border-border/30 bg-surface p-3 sm:col-span-2 lg:col-span-2"><p className="text-[11px] uppercase tracking-wider text-text-muted">Alamat</p><p className="mt-1 text-sm text-text">{[detail.customer.address, detail.customer.kelurahan, detail.customer.kecamatan, detail.customer.kabupaten, detail.customer.provinsi].filter(Boolean).join(", ") || "-"}</p></div>
               </div>
 
-              <div>
-                <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-text-muted">Riwayat Order ({detail.orders.length})</p>
+              <div className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-lg border border-border/40">
+                <p className="border-b border-border/30 px-4 py-3 text-xs font-semibold uppercase tracking-wider text-text-muted">Riwayat Order ({detail.orders.length})</p>
                 {detail.orders.length === 0 ? (
                   <p className="py-6 text-center text-sm text-text-muted">Belum ada order.</p>
                 ) : (
-                  <div className="overflow-x-auto">
-                  <table className="w-full min-w-[520px] text-sm">
-                    <thead><tr className="border-b border-border/30 text-left text-xs text-text-muted"><th className="py-2">No. Order</th><th className="py-2 text-center">Tipe</th><th className="py-2 text-right">Total</th><th className="py-2 text-center">Status</th><th className="py-2 text-center">Aksi</th></tr></thead>
+                  <div className="min-h-0 flex-1 overflow-auto px-4 pb-4">
+                  <table className="w-full min-w-[760px] text-sm">
+                    <thead className="sticky top-0 bg-white"><tr className="border-b border-border/30 text-left text-xs text-text-muted"><th className="py-2">Tanggal</th><th className="py-2">No. Order</th><th className="py-2 text-center">Tipe</th><th className="py-2 text-right">Total</th><th className="py-2 text-center">Status</th><th className="py-2 text-center">Aksi</th></tr></thead>
                     <tbody className="divide-y divide-border/20">
                       {detail.orders.map(o => (
                         <tr key={o.id}>
+                          <td className="whitespace-nowrap py-2.5 text-text-muted">{formatDate(o.created_at)}</td>
                           <td className="py-2.5 font-medium text-text">{o.order_number}</td>
                           <td className="py-2.5 text-center"><span className={`rounded-full px-2 py-0.5 text-xs font-medium ${o.type === "sell" ? "bg-emerald-50 text-emerald-700" : "bg-amber-50 text-amber-700"}`}>{o.type === "sell" ? "Jual" : "Buyback"}</span></td>
                           <td className="py-2.5 text-right font-semibold tabular-nums">{formatRupiah(o.total)}</td>
-                          <td className="py-2.5 text-center">{o.status === "completed" ? "Selesai" : "Batal"}</td>
-                          <td className="py-2.5 text-center"><button onClick={() => openInvoice(o.id)} className="text-xs font-semibold text-gold-dark hover:underline">Invoice</button></td>
+                          <td className="py-2.5 text-center"><span className={`rounded-full px-2 py-0.5 text-xs font-medium ${o.status === "completed" ? "bg-emerald-50 text-emerald-700" : "bg-red-50 text-red-700"}`}>{o.status === "completed" ? "Selesai" : "Dibatalkan"}</span></td>
+                          <td className="py-2.5 text-center"><button onClick={() => openInvoice(o.id)} className="rounded-lg border border-border/60 px-3 py-1.5 text-xs font-semibold text-gold-dark transition-colors hover:border-gold/40 hover:bg-gold/5">Lihat / Unduh Invoice</button></td>
                         </tr>
                       ))}
                     </tbody>
@@ -161,24 +175,27 @@ export default function PelangganClient({ settings }: { settings: InvoiceSetting
 
       {/* Invoice Modal */}
       {invoiceOrder && (
-        <div className="fixed inset-0 z-[60] flex items-start justify-center overflow-y-auto px-4 pt-[6vh] pb-10">
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
           <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setInvoiceOrder(null)} />
-          <div className="relative w-full max-w-2xl rounded-xl border border-border/60 bg-white shadow-lg">
+          <div className="relative flex max-h-[92vh] w-full max-w-4xl flex-col overflow-hidden rounded-xl border border-border/60 bg-white shadow-lg">
             <div className="flex items-center justify-between border-b border-border/40 px-6 py-4">
               <div className="flex items-center gap-3">
                 <button onClick={backToDetail} className="rounded-lg p-1 text-text-muted transition-colors hover:bg-surface hover:text-text" title="Kembali">
                   <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" /></svg>
                 </button>
-                <div><h3 className="font-serif text-lg font-semibold text-text">{invoiceOrder.order_number}</h3><p className="text-xs text-text-muted">Preview Invoice</p></div>
+                <div><div className="flex items-center gap-2"><h3 className="font-serif text-lg font-semibold text-text">{invoiceOrder.order_number}</h3>{invoiceOrder.status === "cancelled" && <span className="rounded-full bg-red-50 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-red-700">Dibatalkan</span>}</div><p className="text-xs text-text-muted">Preview Invoice</p></div>
               </div>
               <button onClick={() => setInvoiceOrder(null)} className="rounded-lg p-1 text-text-muted hover:bg-surface hover:text-text">&times;</button>
             </div>
             <div className="max-h-[70vh] overflow-y-auto">
-              <OrderInvoice order={invoiceOrder} settings={settings} />
+              <OrderInvoice order={invoiceOrder} settings={settings} showActions={false} rootId="customer-invoice-pdf" />
             </div>
-            <div className="flex items-center justify-between border-t border-border/40 bg-surface/30 px-6 py-4 rounded-b-xl">
+            <div className="flex flex-wrap items-start justify-between gap-3 border-t border-border/40 bg-surface/30 px-6 py-4 rounded-b-xl">
               <button onClick={backToDetail} className="rounded-lg border border-border/60 px-4 py-2.5 text-sm font-medium text-text-muted transition-colors hover:bg-white">← Kembali</button>
-              <button onClick={() => setInvoiceOrder(null)} className="rounded-lg border border-border/60 px-5 py-2.5 text-sm font-medium text-text-muted transition-colors hover:bg-white">Tutup</button>
+              <div className="flex items-start gap-2">
+                <button onClick={() => window.print()} className="rounded-lg border border-gold/40 px-4 py-2.5 text-sm font-semibold text-gold-dark transition-colors hover:bg-gold/5">Cetak / Simpan PDF</button>
+                <InvoiceDownloadButton elementId="customer-invoice-pdf" invoiceNumber={invoiceOrder.invoice_number} orderNumber={invoiceOrder.order_number} />
+              </div>
             </div>
           </div>
         </div>

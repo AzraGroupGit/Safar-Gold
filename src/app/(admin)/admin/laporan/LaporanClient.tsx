@@ -63,9 +63,9 @@ export default function LaporanClient() {
           <p className="text-xs text-text-muted">Customer jual ke Safar Gold</p>
         </div>
         <div className="rounded-xl border border-border/60 bg-white p-5">
-          <p className="text-xs font-medium uppercase tracking-wider text-text-muted">Net (GP)</p>
+          <p className="text-xs font-medium uppercase tracking-wider text-text-muted">Arus Transaksi Bersih</p>
           <p className={`mt-2 text-2xl font-bold tabular-nums ${(summary?.net ?? 0) >= 0 ? "text-emerald-600" : "text-red-500"}`}>{formatRupiah(summary?.net ?? 0)}</p>
-          <p className="text-xs text-text-muted">Omset − Buyback Cost</p>
+          <p className="text-xs text-text-muted">Omzet − Buyback · bukan laba</p>
         </div>
       </div>
 

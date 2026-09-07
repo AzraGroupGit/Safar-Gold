@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import type { GoldTypeRow, FormattedPrice } from "@/lib/gold-api";
 import { sortGoldTypes } from "@/lib/gold-api";
 
@@ -33,7 +33,9 @@ export default function Calculator({
   phone: string;
 }) {
   const waNumber = phone.replace(/\D/g, "");
-  const [goldTypeId, setGoldTypeId] = useState("");
+  const [goldTypeId, setGoldTypeId] = useState(
+    () => sortGoldTypes(goldTypes.filter((g) => g.category === "lm"))[0]?.id ?? "",
+  );
   const [weight, setWeight] = useState("");
   const [qty, setQty] = useState(1);
   const [txType, setTxType] = useState<"buy" | "sell">("buy");
@@ -44,10 +46,13 @@ export default function Calculator({
     return sortGoldTypes(goldTypes.filter((g) => g.category.startsWith("bb-")));
   }, [goldTypes, txType]);
 
-  // Reset pilihan saat txType berubah
-  useEffect(() => {
-    if (filteredTypes.length > 0) setGoldTypeId(filteredTypes[0].id);
-  }, [filteredTypes]);
+  function switchTransaction(nextType: "buy" | "sell") {
+    const nextTypes = nextType === "buy"
+      ? sortGoldTypes(goldTypes.filter((g) => g.category === "lm"))
+      : sortGoldTypes(goldTypes.filter((g) => g.category.startsWith("bb-")));
+    setTxType(nextType);
+    setGoldTypeId(nextTypes[0]?.id ?? "");
+  }
 
   const selectedGold = goldTypes.find((g) => g.id === goldTypeId);
   const price = prices.find((p) => p.goldTypeId === goldTypeId);
@@ -87,10 +92,10 @@ export default function Calculator({
               </div>
             </div>
             <div className="flex gap-2 rounded-xl border border-border/60 bg-surface p-1.5">
-              <button onClick={() => setTxType("buy")} className={`flex-1 rounded-lg px-4 py-2.5 text-sm font-semibold transition-all duration-200 ${txType === "buy" ? "gold-gradient-bg text-white shadow-md shadow-gold/20" : "text-text-muted hover:text-text"}`}>
+              <button onClick={() => switchTransaction("buy")} className={`flex-1 rounded-lg px-4 py-2.5 text-sm font-semibold transition-all duration-200 ${txType === "buy" ? "gold-gradient-bg text-white shadow-md shadow-gold/20" : "text-text-muted hover:text-text"}`}>
                 Beli Emas
               </button>
-              <button onClick={() => setTxType("sell")} className={`flex-1 rounded-lg px-4 py-2.5 text-sm font-semibold transition-all duration-200 ${txType === "sell" ? "gold-gradient-bg text-white shadow-md shadow-gold/20" : "text-text-muted hover:text-text"}`}>
+              <button onClick={() => switchTransaction("sell")} className={`flex-1 rounded-lg px-4 py-2.5 text-sm font-semibold transition-all duration-200 ${txType === "sell" ? "gold-gradient-bg text-white shadow-md shadow-gold/20" : "text-text-muted hover:text-text"}`}>
                 Jual Emas
               </button>
             </div>

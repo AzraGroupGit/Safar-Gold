@@ -29,7 +29,7 @@ export async function GET(request: Request) {
     if (o.created_at > a.last) a.last = o.created_at;
   }
 
-  let customers = (customersRes.data ?? []).map((c: any) => {
+  let customers = (customersRes.data ?? []).map((c) => {
     const a = agg.get(c.id) ?? { count: 0, total: 0, last: null };
     return {
       id: c.id,
@@ -51,7 +51,7 @@ export async function GET(request: Request) {
   });
 
   if (q) {
-    customers = customers.filter((c: any) =>
+    customers = customers.filter((c) =>
       (c.name ?? "").toLowerCase().includes(q) ||
       (c.phone ?? "").includes(q) ||
       (c.nik ?? "").toLowerCase().includes(q)

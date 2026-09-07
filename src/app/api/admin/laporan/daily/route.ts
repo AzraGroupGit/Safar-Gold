@@ -3,6 +3,8 @@ import { createAdminClient } from "@/lib/supabase/admin";
 
 export const dynamic = "force-dynamic";
 
+type OrderItemQuantity = { qty: number };
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const range = searchParams.get("range") ?? "today";
@@ -35,8 +37,8 @@ export async function GET(request: Request) {
 
   const totalJual = jual.reduce((s, o) => s + o.total, 0);
   const totalBuyback = buyback.reduce((s, o) => s + o.total, 0);
-  const totalJualItems = jual.reduce((s, o) => s + (o.order_items ?? []).reduce((si: number, i: any) => si + i.qty, 0), 0);
-  const totalBuybackItems = buyback.reduce((s, o) => s + (o.order_items ?? []).reduce((si: number, i: any) => si + i.qty, 0), 0);
+  const totalJualItems = jual.reduce((s, o) => s + ((o.order_items ?? []) as OrderItemQuantity[]).reduce((si, i) => si + i.qty, 0), 0);
+  const totalBuybackItems = buyback.reduce((s, o) => s + ((o.order_items ?? []) as OrderItemQuantity[]).reduce((si, i) => si + i.qty, 0), 0);
 
   return NextResponse.json({
     summary: {

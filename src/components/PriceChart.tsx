@@ -14,6 +14,7 @@ import {
   Legend,
   type ScriptableContext,
   type Chart as ChartInstance,
+  type ChartDataset,
 } from "chart.js";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Filler, Title, Tooltip, Legend);
@@ -152,7 +153,7 @@ export default function PriceChart({ history, todayValues }: { history: HistoryR
     return gradient;
   };
 
-  const datasets: any[] = SERIES.filter((s) => visible[s.key]).map((s) => {
+  const datasets: ChartDataset<"line", (number | null)[]>[] = SERIES.filter((s) => visible[s.key]).map((s) => {
     const isPrimary = s.key === "lm";
     return {
       label: s.label,
