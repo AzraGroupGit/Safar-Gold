@@ -5,15 +5,18 @@ import type { GoldTypeRow, FormattedPrice } from "@/lib/gold-api";
 import { formatRupiah } from "@/lib/gold-api";
 import { createClient } from "@/lib/supabase/client";
 import OrderInvoice, { type InvoiceOrder, type InvoiceSettings } from "@/components/OrderInvoice";
+import SignaturePad from "@/components/SignaturePad";
+import { formatOrderAddress, getOrderItemDetails } from "@/lib/order-cart-presentation";
 
-type Order = { id: string; order_number: string; type: string; customer_name: string; customer_phone: string; total: number; status: string; created_at: string };
-type OrderDetail = Order & { order_items: { id?: string; item_name: string; weight: number; karat: number | null; qty: number; price_per_gram: number; price_total: number; gold_type_id?: string | null }[]; source?: string | null; nik?: string | null; address?: string | null; instagram?: string | null; provinsi?: string | null; kabupaten?: string | null; kecamatan?: string | null; kelurahan?: string | null; province_id?: string | null; regency_id?: string | null; district_id?: string | null; village_id?: string | null };
+type Order = { id: string; order_number: string; type: string; customer_name: string; customer_phone: string; total: number; status: string; created_at: string; payment_method?: string | null; notes?: string | null; gp?: number | null; created_by?: string | null };
+type OrderDetail = Order & { order_items: { id?: string; item_name: string; weight: number; karat: number | null; qty: number; price_per_gram: number; price_total: number; gold_type_id?: string | null; brand?: string | null }[]; source?: string | null; nik?: string | null; address?: string | null; instagram?: string | null; provinsi?: string | null; kabupaten?: string | null; kecamatan?: string | null; kelurahan?: string | null; province_id?: string | null; regency_id?: string | null; district_id?: string | null; village_id?: string | null };
 type CustomerLookup = { name: string | null; source: string | null; nik: string | null; address: string | null; kelurahan: string | null; kecamatan: string | null; kabupaten: string | null; provinsi: string | null; instagram: string | null; province_id: string | null; regency_id: string | null; district_id: string | null; village_id: string | null; order_count: number };
-type CartItem = { goldTypeId: string | null; itemName: string; weight: number; karat: number | null; qty: number; pricePerGram: number; priceTotal: number };
+type CartItem = { goldTypeId: string | null; itemName: string; weight: number; karat: number | null; qty: number; pricePerGram: number; priceTotal: number; brand?: string | null };
 
 const LM_PRODUCTS = ["antam-0.5", "antam-1", "antam-2", "antam-3", "antam-5", "antam-10", "antam-25", "antam-50", "antam-100"];
 const PER_PAGE = 20;
-const SOURCE_OPTIONS = ["Instagram", "Google", "Teman/Keluarga", "TikTok", "Facebook", "Lainnya"];
+const SOURCE_OPTIONS = ["Instagram Bersponsor/Iklan", "Instagram KOL", "Tiktok Sponsor/Iklan", "Tiktok KOL", "Repeat Order", "Rekomendasi Teman", "Karyawan", "Baliho", "Google Maps", "CRM OPR", "CRM CS"];
+const SELL_BRANDS = ["Antam Retro", "Antam", "UBS", "HRTA", "BSI", "G24", "Lainnya"];
 const BUYBACK_CATEGORIES = ["Anting", "Kalung", "Cincin", "Liontin", "Gelang"];
 type RegionOption = { id: string; name: string };
 
@@ -47,6 +50,11 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
   const [error, setError] = useState("");
   const [sellProduct, setSellProduct] = useState("antam-1");
   const [sellQty, setSellQty] = useState(1);
+  const [sellType, setSellType] = useState<"emas" | "perak">("emas");
+  const [sellBrand, setSellBrand] = useState("Antam");
+  const [sellBrandCustom, setSellBrandCustom] = useState("");
+  const [sellWeight, setSellWeight] = useState("");
+  const [sellPricePerGram, setSellPricePerGram] = useState("");
   const [bbCategory, setBbCategory] = useState("bb-lm");
   const [bbGoldType, setBbGoldType] = useState("bb-certi-1-2");
   const [bbWeight, setBbWeight] = useState("");
@@ -60,6 +68,11 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
   const [nik, setNik] = useState("");
   const [address, setAddress] = useState("");
   const [instagram, setInstagram] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState<"cash" | "transfer">("cash");
+  const [notes, setNotes] = useState("");
+  const [gp, setGp] = useState("");
+  const [role, setRole] = useState<string>("admin");
+  const [printCreator, setPrintCreator] = useState<{ name: string | null; signature: string | null } | null>(null);
 
   // Region cascade
   const [provinces, setProvinces] = useState<RegionOption[]>([]);
@@ -81,16 +94,26 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
   const lookupTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const priceMap = new Map(prices.map(p => [p.goldTypeId, p]));
+  const isAntamSell = sellType === "emas" && sellBrand === "Antam";
   const bbGoldTypes = goldTypes.filter(g => g.category === bbCategory || (bbCategory === "bb-perhiasan" && g.category === "bb-perhiasan") || (bbCategory === "bb-logam" && g.category === "bb-logam") || (bbCategory === "bb-lm" && g.category === "bb-lm"));
 
   function fetchOrders() { fetch("/api/admin/orders").then(r => r.json()).then(d => { setOrders(d.orders ?? []); setLoading(false); }); }
   useEffect(() => { fetchOrders(); }, []);
 
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getUser().then(({ data }) => {
+      if (data?.user) setRole(data.user.user_metadata?.role ?? "admin");
+    });
+  }, []);
+
   function resetForm() {
     setType("sell"); setCustomerName(""); setCustomerPhone(""); setItems([]); setEditingId(null);
     setError(""); setSellProduct("antam-1"); setSellQty(1);
+    setSellType("emas"); setSellBrand("Antam"); setSellBrandCustom(""); setSellWeight(""); setSellPricePerGram("");
     setBbCategory("bb-lm"); setBbGoldType("bb-certi-1-2"); setBbWeight(""); setBbKarat("24"); setBbItemName(""); setBbCategoryName(""); setBbCustomName("");
     setSource(""); setNik(""); setAddress(""); setInstagram("");
+    setPaymentMethod("cash"); setNotes("");
     setProvinsi(""); setProvinceId(""); setKabupaten(""); setRegencyId(""); setKecamatan(""); setDistrictId(""); setKelurahan(""); setVillageId("");
     setRegencies([]); setDistricts([]); setVillages([]);
     setLookup(null);
@@ -189,11 +212,14 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
     setType(order.type as "sell" | "buyback");
     setCustomerName(order.customer_name);
     setCustomerPhone(order.customer_phone);
-    setItems(order.order_items.map(it => ({ goldTypeId: it.gold_type_id ?? null, itemName: it.item_name, weight: it.weight, karat: it.karat, qty: it.qty, pricePerGram: it.price_per_gram, priceTotal: it.price_total })));
+    setItems(order.order_items.map(it => ({ goldTypeId: it.gold_type_id ?? null, itemName: it.item_name, weight: it.weight, karat: it.karat, qty: it.qty, pricePerGram: it.price_per_gram, priceTotal: it.price_total, brand: it.brand ?? null })));
     setSource(order.source ?? "");
     setNik(order.nik ?? "");
     setAddress(order.address ?? "");
     setInstagram(order.instagram ?? "");
+    setPaymentMethod(order.payment_method === "transfer" ? "transfer" : "cash");
+    setNotes(order.notes ?? "");
+    setGp(order.gp != null ? String(order.gp) : "");
     setProvinsi(titleCase(order.provinsi ?? ""));
     setKabupaten(titleCase(order.kabupaten ?? ""));
     setKecamatan(titleCase(order.kecamatan ?? ""));
@@ -227,21 +253,41 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
   }
 
   function openPrint(o: Order) {
-    fetch(`/api/admin/orders/${o.id}`).then(r => r.json()).then(d => setPrintOrder(d.order ?? null));
+    fetch(`/api/admin/orders/${o.id}`).then(r => r.json()).then(async d => {
+      const order = d.order ?? null;
+      setPrintOrder(order);
+      setPrintCreator(null);
+      if (order?.created_by) {
+        const pr = await fetch(`/api/admin/user-profile?userId=${order.created_by}`).then(r => r.json());
+        setPrintCreator(pr.profile ?? null);
+      }
+    });
   }
 
   function addSellItem() {
-    const p = priceMap.get(sellProduct); if (!p || p.buyPrice <= 0) return;
-    const gt = goldTypes.find(g => g.id === sellProduct);
-    const weightPerPiece = gt?.weight ?? 1;
-    const qty = sellQty;
-    const pricePerGram = p.isTotalPrice
-      ? Math.round(p.buyPrice / weightPerPiece)
-      : p.buyPrice;
-    const priceTotal = p.isTotalPrice
-      ? p.buyPrice * qty
-      : Math.round(p.buyPrice * weightPerPiece * qty);
-    setItems([...items, { goldTypeId: sellProduct, itemName: gt?.name ?? sellProduct, weight: qty * weightPerPiece, karat: 24, qty, pricePerGram, priceTotal }]);
+    const qty = sellQty || 1;
+    const isEmas = sellType === "emas";
+    const isAntam = isEmas && sellBrand === "Antam";
+
+    if (isAntam) {
+      const p = priceMap.get(sellProduct); if (!p || p.buyPrice <= 0) return;
+      const gt = goldTypes.find(g => g.id === sellProduct);
+      const weightPerPiece = gt?.weight ?? 1;
+      const pricePerGram = p.isTotalPrice ? Math.round(p.buyPrice / weightPerPiece) : p.buyPrice;
+      const priceTotal = p.isTotalPrice ? p.buyPrice * qty : Math.round(p.buyPrice * weightPerPiece * qty);
+      setItems([...items, { goldTypeId: sellProduct, itemName: gt?.name ?? sellProduct, brand: "Antam", weight: qty * weightPerPiece, karat: 24, qty, pricePerGram, priceTotal }]);
+      return;
+    }
+
+    const weightPerPiece = parseFloat(sellWeight);
+    if (!weightPerPiece || weightPerPiece <= 0) { setError("Berat (g) wajib diisi"); return; }
+    const pricePerGram = parseInt(sellPricePerGram) || 0;
+    if (pricePerGram <= 0) { setError("Harga per gram wajib diisi"); return; }
+    const brandName = sellBrand === "Lainnya" ? (sellBrandCustom.trim() || "Lainnya") : sellBrand;
+    const jenisLabel = isEmas ? "Emas" : "Perak";
+    const itemName = `${brandName} ${jenisLabel} ${weightPerPiece}g`;
+    const priceTotal = Math.round(pricePerGram * weightPerPiece * qty);
+    setItems([...items, { goldTypeId: null, itemName, brand: brandName, weight: qty * weightPerPiece, karat: isEmas ? 24 : null, qty, pricePerGram, priceTotal }]);
   }
 
   function addBuybackItem() {
@@ -249,12 +295,17 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
     const p = priceMap.get(bbGoldType); const ppg = p?.sellPrice ?? 0;
     const gt = bbGoldTypes.find(g => g.id === bbGoldType);
     let name = bbItemName || gt?.name || bbGoldType;
+    const brand = "Antam"; // default for buyback
     if (bbCategory === "bb-perhiasan") {
       name = bbCategoryName === "Lainnya" ? bbCustomName : bbCategoryName;
       if (!name) name = gt?.name || bbGoldType;
     }
+    if (bbCategory === "bb-lm") {
+      // For buyback LM, brand could be from a dropdown - default to Antam
+      // TODO: add brand selector UI for buyback if needed
+    }
     const karatVal = bbCategory === "bb-perhiasan" ? parseInt(bbKarat) || null : bbCategory === "bb-lm" ? 24 : null;
-    setItems([...items, { goldTypeId: bbGoldType, itemName: name, weight: w, karat: karatVal, qty: 1, pricePerGram: ppg, priceTotal: Math.round(ppg * w) }]);
+    setItems([...items, { goldTypeId: bbGoldType, itemName: name, brand, weight: w, karat: karatVal, qty: 1, pricePerGram: ppg, priceTotal: Math.round(ppg * w) }]);
   }
 
   function removeItem(idx: number) { setItems(items.filter((_, i) => i !== idx)); }
@@ -268,13 +319,13 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
     if (editingId) {
       const res = await fetch(`/api/admin/orders/${editingId}`, {
         method: "PUT", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ customerName, customerPhone, type, items, source: source || null, nik: nik || null, address: address || null, kelurahan: kelurahan || null, kecamatan: kecamatan || null, kabupaten: kabupaten || null, provinsi: provinsi || null, instagram: instagram || null, provinceId: provinceId || null, regencyId: regencyId || null, districtId: districtId || null, villageId: villageId || null }),
+        body: JSON.stringify({ customerName, customerPhone, type, items, paymentMethod, notes: notes || null, gp: gp ? parseInt(gp) : null, source: source || null, nik: nik || null, address: address || null, kelurahan: kelurahan || null, kecamatan: kecamatan || null, kabupaten: kabupaten || null, provinsi: provinsi || null, instagram: instagram || null, provinceId: provinceId || null, regencyId: regencyId || null, districtId: districtId || null, villageId: villageId || null }),
       });
       const data = await res.json();
       if (data.success) { setShowModal(false); resetForm(); fetchOrders(); } else { setError(data.error ?? "Gagal"); setSaving(false); }
     } else {
       const supabase = createClient(); const { data: { user } } = await supabase.auth.getUser();
-      const res = await fetch("/api/admin/orders", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type, customerName, customerPhone, items, createdBy: user?.id, source: source || null, nik: nik || null, address: address || null, kelurahan: kelurahan || null, kecamatan: kecamatan || null, kabupaten: kabupaten || null, provinsi: provinsi || null, instagram: instagram || null, provinceId: provinceId || null, regencyId: regencyId || null, districtId: districtId || null, villageId: villageId || null }) });
+      const res = await fetch("/api/admin/orders", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type, customerName, customerPhone, items, paymentMethod, notes: notes || null, createdBy: user?.id, source: source || null, nik: nik || null, address: address || null, kelurahan: kelurahan || null, kecamatan: kecamatan || null, kabupaten: kabupaten || null, provinsi: provinsi || null, instagram: instagram || null, provinceId: provinceId || null, regencyId: regencyId || null, districtId: districtId || null, villageId: villageId || null }) });
       const data = await res.json();
       if (data.success) { setShowModal(false); resetForm(); fetchOrders(); } else { setError(data.error ?? "Gagal"); setSaving(false); }
     }
@@ -288,8 +339,8 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
   }
 
   function exportCSV() {
-    const header = "Order Number,Tanggal,Tipe,Customer,Phone,Total,Status";
-    const rows = filtered.map(o => `${o.order_number},${new Date(o.created_at).toLocaleDateString("id-ID")},${o.type==="sell"?"Jual":"Buyback"},${o.customer_name},${o.customer_phone},${o.total},${o.status==="completed"?"Selesai":"Batal"}`);
+    const header = "Order Number,Tanggal,Tipe,Customer,Phone,Total,Metode Pembayaran,Status";
+    const rows = filtered.map(o => `${o.order_number},${new Date(o.created_at).toLocaleDateString("id-ID")},${o.type==="sell"?"Jual":"Buyback"},${o.customer_name},${o.customer_phone},${o.total},${o.payment_method==="transfer"?"Transfer":"Cash"},${o.status==="completed"?"Selesai":"Batal"}`);
     const blob = new Blob(["\uFEFF" + [header, ...rows].join("\n")], { type: "text/csv;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a"); a.href = url; a.download = `orders-${new Date().toISOString().split("T")[0]}.csv`; a.click();
@@ -363,33 +414,84 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
 
       {/* Detail Order Modal */}
       {viewOrder && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto px-4 pt-[8vh] pb-10">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 lg:p-5">
           <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" onClick={()=>setViewOrder(null)} />
-          <div className="relative w-full max-w-2xl rounded-xl border border-border/60 bg-white shadow-lg">
+          <div role="dialog" aria-modal="true" aria-labelledby="order-detail-title" className="relative flex max-h-[95dvh] w-full max-w-[1400px] flex-col overflow-hidden rounded-xl border border-border/60 bg-white shadow-xl">
             <div className="flex items-center justify-between border-b border-border/40 px-6 py-4">
-              <div><h3 className="font-serif text-lg font-semibold text-text">{viewOrder.order_number}</h3><p className="text-xs text-text-muted">{new Date(viewOrder.created_at).toLocaleDateString("id-ID",{weekday:"long",day:"numeric",month:"long",year:"numeric",hour:"2-digit",minute:"2-digit"})}</p></div>
+              <div><h3 id="order-detail-title" className="font-serif text-xl font-semibold text-text">{viewOrder.order_number}</h3><p className="mt-0.5 text-xs text-text-muted">{new Date(viewOrder.created_at).toLocaleDateString("id-ID",{weekday:"long",day:"numeric",month:"long",year:"numeric",hour:"2-digit",minute:"2-digit"})}</p></div>
               <div className="flex items-center gap-2">
                 <span className={`rounded-full px-3 py-1 text-xs font-semibold ${viewOrder.type==="sell"?"bg-emerald-50 text-emerald-700":"bg-amber-50 text-amber-700"}`}>{viewOrder.type==="sell"?"Jual":"Buyback"}</span>
-                <button onClick={()=>setViewOrder(null)} className="rounded-lg p-1 text-text-muted hover:bg-surface hover:text-text">&times;</button>
+                <span className={`rounded-full px-3 py-1 text-xs font-semibold ${viewOrder.status==="completed"?"bg-emerald-50 text-emerald-700":"bg-red-50 text-red-600"}`}>{viewOrder.status==="completed"?"Selesai":"Batal"}</span>
+                <button type="button" aria-label="Tutup detail order" onClick={()=>setViewOrder(null)} className="rounded-lg p-2 text-xl leading-none text-text-muted hover:bg-surface hover:text-text">&times;</button>
               </div>
             </div>
-            <div className="p-6 space-y-5">
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div className="rounded-lg border border-border/30 bg-surface p-3"><p className="text-[11px] uppercase tracking-wider text-text-muted">Customer</p><p className="mt-1 text-sm font-semibold text-text">{viewOrder.customer_name}</p><p className="text-xs text-text-muted">{viewOrder.customer_phone}</p></div>
-                <div className="rounded-lg border border-border/30 bg-surface p-3"><p className="text-[11px] uppercase tracking-wider text-text-muted">Status</p><p className="mt-1 text-sm font-semibold text-text">{viewOrder.status==="completed"?"Selesai":"Batal"}</p></div>
-              </div>
-              <div>
-                <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-text-muted">Item</p>
-                <div className="overflow-x-auto">
-                <table className="w-full min-w-[520px] text-sm"><thead><tr className="border-b border-border/30 text-left text-xs text-text-muted"><th className="py-2">Item</th><th className="py-2 text-center">Berat</th><th className="py-2 text-center">Karat</th><th className="py-2 text-center">Qty</th><th className="py-2 text-right">Harga/g</th><th className="py-2 text-right">Total</th></tr></thead>
-                  <tbody className="divide-y divide-border/20">{viewOrder.order_items.map(it=>(<tr key={it.id}><td className="py-2.5 font-medium text-text">{it.item_name}</td><td className="py-2.5 text-center text-text-muted">{it.weight}g</td><td className="py-2.5 text-center text-text-muted">{it.karat?`${it.karat}K`:"-"}</td><td className="py-2.5 text-center">{it.qty}</td><td className="py-2.5 text-right">{formatRupiah(it.price_per_gram)}</td><td className="py-2.5 text-right font-semibold">{formatRupiah(it.price_total)}</td></tr>))}</tbody>
-                  <tfoot><tr className="border-t-2 border-border/40"><td colSpan={5} className="py-3 text-right text-sm font-bold text-text">Total</td><td className="py-3 text-right text-base font-bold text-gold-dark">{formatRupiah(viewOrder.total)}</td></tr></tfoot>
-                </table>
+            <div className="min-h-0 flex-1 overflow-y-auto p-4 xl:overflow-hidden xl:p-5">
+              <div className="grid min-h-0 gap-4 xl:grid-cols-12">
+                <div className="min-h-0 space-y-4 xl:col-span-7">
+                  <section className="rounded-lg border border-border/40 bg-surface p-4" aria-labelledby="order-items-heading">
+                    <div className="mb-3 flex items-center justify-between gap-3">
+                      <div><h4 id="order-items-heading" className="text-xs font-semibold uppercase tracking-wider text-text-muted">Detail Item</h4><p className="mt-0.5 text-[11px] text-text-light">Rincian item dalam transaksi ini.</p></div>
+                      <span className="rounded-md bg-gold/10 px-2.5 py-1 text-xs font-semibold tabular-nums text-gold-dark">{viewOrder.order_items.length} item</span>
+                    </div>
+                    <div className="max-h-72 space-y-2 overflow-y-auto pr-1">
+                      {viewOrder.order_items.map((item, index) => (
+                        <div key={item.id ?? `${item.item_name}-${index}`} className="flex items-start justify-between gap-3 rounded-lg border border-border/40 bg-white px-3 py-2.5">
+                          <div className="min-w-0 flex-1">
+                            <p className="truncate text-sm font-semibold text-text">{item.item_name}</p>
+                            <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-text-muted">
+                              {getOrderItemDetails({ brand: item.brand, qty: item.qty, weight: item.weight, karat: item.karat, pricePerGram: item.price_per_gram }).map(detail => <span key={detail}>{detail}</span>)}
+                            </div>
+                          </div>
+                          <p className="shrink-0 text-sm font-semibold tabular-nums text-gold-dark">{formatRupiah(item.price_total)}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+
+                  <section className="rounded-lg border border-border/40 bg-surface p-4" aria-labelledby="order-payment-heading">
+                    <h4 id="order-payment-heading" className="mb-3 text-xs font-semibold uppercase tracking-wider text-text-muted">Pembayaran & Catatan</h4>
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      <div className="rounded-lg border border-border/30 bg-white px-3 py-2.5"><p className="text-[11px] text-text-muted">Metode Pembayaran</p><p className="mt-0.5 text-sm font-semibold text-text">{viewOrder.payment_method === "transfer" ? "Transfer" : "Cash"}</p></div>
+                      <div className="rounded-lg border border-border/30 bg-white px-3 py-2.5"><p className="text-[11px] text-text-muted">Catatan</p><p className="mt-0.5 text-sm text-text">{viewOrder.notes || "-"}</p></div>
+                    </div>
+                    {role === "admin" && viewOrder.gp != null && (
+                      <div className="mt-3 rounded-lg border border-gold/30 bg-gold/5 px-3 py-2.5">
+                        <p className="text-[11px] text-text-muted">GP (Gross Profit)</p>
+                        <p className="mt-0.5 text-sm font-bold text-emerald-600">{formatRupiah(viewOrder.gp)}</p>
+                      </div>
+                    )}
+                  </section>
+                </div>
+
+                <section className="rounded-lg border border-border/40 bg-surface p-4 xl:col-span-5" aria-labelledby="order-customer-heading">
+                  <h4 id="order-customer-heading" className="mb-3 text-xs font-semibold uppercase tracking-wider text-text-muted">Data Customer</h4>
+                  <dl className="grid gap-2.5 sm:grid-cols-2">
+                    <div className="rounded-lg border border-border/30 bg-white px-3 py-2.5"><dt className="text-[11px] text-text-muted">Nama</dt><dd className="mt-0.5 text-sm font-semibold text-text">{viewOrder.customer_name}</dd></div>
+                    <div className="rounded-lg border border-border/30 bg-white px-3 py-2.5"><dt className="text-[11px] text-text-muted">No. WhatsApp</dt><dd className="mt-0.5 text-sm font-medium text-text">{viewOrder.customer_phone}</dd></div>
+                    <div className="rounded-lg border border-border/30 bg-white px-3 py-2.5"><dt className="text-[11px] text-text-muted">NIK</dt><dd className="mt-0.5 break-all text-sm text-text">{viewOrder.nik || "-"}</dd></div>
+                    <div className="rounded-lg border border-border/30 bg-white px-3 py-2.5"><dt className="text-[11px] text-text-muted">Instagram</dt><dd className="mt-0.5 text-sm text-text">{viewOrder.instagram || "-"}</dd></div>
+                    <div className="rounded-lg border border-border/30 bg-white px-3 py-2.5 sm:col-span-2"><dt className="text-[11px] text-text-muted">Sumber Pelanggan</dt><dd className="mt-0.5 text-sm text-text">{viewOrder.source || "-"}</dd></div>
+                  </dl>
+                  <div className="mt-3 border-t border-border/30 pt-3">
+                    <h4 className="mb-2 text-xs font-semibold uppercase tracking-wider text-text-muted">Alamat</h4>
+                    <dl className="grid gap-2.5 sm:grid-cols-2">
+                      <div><dt className="text-[11px] text-text-muted">Provinsi</dt><dd className="mt-0.5 text-sm text-text">{viewOrder.provinsi || "-"}</dd></div>
+                      <div><dt className="text-[11px] text-text-muted">Kabupaten / Kota</dt><dd className="mt-0.5 text-sm text-text">{viewOrder.kabupaten || "-"}</dd></div>
+                      <div><dt className="text-[11px] text-text-muted">Kecamatan</dt><dd className="mt-0.5 text-sm text-text">{viewOrder.kecamatan || "-"}</dd></div>
+                      <div><dt className="text-[11px] text-text-muted">Kelurahan</dt><dd className="mt-0.5 text-sm text-text">{viewOrder.kelurahan || "-"}</dd></div>
+                      <div className="sm:col-span-2"><dt className="text-[11px] text-text-muted">Alamat Lengkap</dt><dd className="mt-0.5 text-sm leading-relaxed text-text">{formatOrderAddress({ address: viewOrder.address, village: viewOrder.kelurahan, district: viewOrder.kecamatan, regency: viewOrder.kabupaten, province: viewOrder.provinsi })}</dd></div>
+                    </dl>
+                  </div>
+                </section>
                 </div>
               </div>
-            </div>
-            <div className="flex justify-end gap-3 border-t border-border/40 bg-surface/30 px-6 py-4 rounded-b-xl">
-              <button onClick={()=>setViewOrder(null)} className="rounded-lg border border-border/60 px-5 py-2.5 text-sm font-medium text-text-muted transition-colors hover:bg-white">Tutup</button>
+            <div className="flex items-center justify-between gap-4 rounded-b-xl border-t border-border/40 bg-surface/30 px-6 py-4">
+              <div><p className="text-xs text-text-muted">Total</p><p className="text-xl font-bold text-gold-dark">{formatRupiah(viewOrder.total)}</p></div>
+              <div className="flex flex-wrap justify-end gap-2">
+                <button type="button" onClick={()=>setViewOrder(null)} className="rounded-lg border border-border/60 px-5 py-2.5 text-sm font-medium text-text-muted transition-colors hover:bg-white">Tutup</button>
+                {viewOrder.status !== "cancelled" && <button type="button" onClick={()=>{const order=viewOrder;setViewOrder(null);void openEdit(order);}} className="rounded-lg border border-gold/40 px-5 py-2.5 text-sm font-semibold text-gold-dark transition-colors hover:bg-gold/5">Edit Order</button>}
+                <button type="button" onClick={()=>{const order=viewOrder;setViewOrder(null);openPrint(order);}} className="rounded-lg bg-gold px-5 py-2.5 text-sm font-semibold text-[#1a1a1a] transition-colors hover:bg-gold-light">Cetak Nota</button>
+              </div>
             </div>
           </div>
         </div>
@@ -408,7 +510,17 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
               </div>
             </div>
             <div className="max-h-[70vh] overflow-y-auto">
-              <OrderInvoice order={printOrder as InvoiceOrder} settings={settings} />
+              {printCreator && !printCreator.signature && (
+                <div className="border-b border-border/40 bg-surface/40 px-6 py-4">
+                  <p className="mb-2 text-xs font-semibold text-text">
+                    Tanda tangan pembuat order belum tersimpan. Gambar di bawah untuk mengisi manual:
+                  </p>
+                  <SignaturePad
+                    onChange={(sig) => setPrintCreator((c) => (c ? { ...c, signature: sig } : c))}
+                  />
+                </div>
+              )}
+              <OrderInvoice order={printOrder as InvoiceOrder} settings={settings} creator={printCreator} />
             </div>
             <div className="flex justify-end gap-3 border-t border-border/40 bg-surface/30 px-6 py-4 rounded-b-xl">
               <button onClick={()=>setPrintOrder(null)} className="rounded-lg border border-border/60 px-5 py-2.5 text-sm font-medium text-text-muted transition-colors hover:bg-white">Tutup</button>
@@ -432,20 +544,61 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
 
       {/* Create/Edit Modal */}
       {showModal && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto px-4 pt-[5vh] pb-10">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 lg:p-5">
           <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" onClick={()=>{setShowModal(false);resetForm();}} />
-          <div className="relative w-full max-w-3xl rounded-xl border border-border/60 bg-white shadow-lg">
-            <div className="flex items-center justify-between border-b border-border/40 px-6 py-4"><h3 className="font-serif text-lg font-semibold text-text">{editingId?"Edit Order":"Buat Order Baru"}</h3><button onClick={()=>{setShowModal(false);resetForm();}} className="rounded-lg p-1 text-text-muted hover:bg-surface hover:text-text">&times;</button></div>
-            <div className="p-6 space-y-6">
-              {error && <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">{error}</div>}
+          <div role="dialog" aria-modal="true" aria-labelledby="order-form-title" className="relative flex max-h-[95dvh] w-full max-w-[1400px] flex-col overflow-hidden rounded-xl border border-border/60 bg-white shadow-xl">
+            <div className="flex items-center justify-between border-b border-border/40 px-6 py-4"><div><h3 id="order-form-title" className="font-serif text-xl font-semibold text-text">{editingId?"Edit order":"Buat order baru"}</h3><p className="mt-0.5 text-xs text-text-muted">Transaksi, pelanggan, dan ringkasan dalam satu layar.</p></div><button aria-label="Tutup modal" onClick={()=>{setShowModal(false);resetForm();}} className="rounded-lg p-2 text-xl leading-none text-text-muted hover:bg-surface hover:text-text">&times;</button></div>
+            <div className="min-h-0 flex-1 space-y-4 overflow-y-auto p-4 xl:overflow-hidden xl:p-5">
+              {error && <div role="alert" className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">{error}</div>}
               <div className="flex gap-3">
                 <button onClick={()=>setType("sell")} className={`flex-1 rounded-lg border px-4 py-3 text-sm font-semibold transition-colors ${type==="sell"?"border-gold bg-gold/5 text-gold-dark":"border-border/60 text-text-muted hover:border-gold/30"}`}>Jual LM</button>
                 <button onClick={()=>setType("buyback")} className={`flex-1 rounded-lg border px-4 py-3 text-sm font-semibold transition-colors ${type==="buyback"?"border-gold bg-gold/5 text-gold-dark":"border-border/60 text-text-muted hover:border-gold/30"}`}>Buyback</button>
               </div>
-              <div className="rounded-lg border border-border/40 bg-surface p-4">
+              <div className="grid min-h-0 gap-4 xl:grid-cols-12">
+              <div className="rounded-lg border border-border/40 bg-surface p-4 xl:col-span-7 xl:row-start-1">
                 <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-text-muted">Tambah Item</p>
                 {type==="sell"?(
-                  <div className="flex flex-wrap gap-3 items-end"><div className="flex-1 min-w-[180px]"><label className="mb-1 block text-xs text-text-muted">Produk</label><select value={sellProduct} onChange={e=>setSellProduct(e.target.value)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm">{LM_PRODUCTS.map(id=>{const gt=goldTypes.find(g=>g.id===id);const p=priceMap.get(id);const ppg = p?.isTotalPrice && gt?.weight ? Math.round(p.buyPrice / gt.weight) : p?.buyPrice;return <option key={id} value={id}>{gt?.name??id} — {ppg?formatRupiah(ppg):"-"}/g</option>;})}</select></div><div className="w-24"><label className="mb-1 block text-xs text-text-muted">Qty</label><input type="number" min={1} value={sellQty} onChange={e=>setSellQty(parseInt(e.target.value)||1)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm" /></div><button onClick={addSellItem} className="rounded-lg border border-gold/40 px-4 py-2.5 text-sm font-semibold text-gold-dark hover:bg-gold/5">+ Tambah</button></div>
+                  <div className="flex flex-wrap gap-3 items-end">
+                    <div className="w-36">
+                      <label className="mb-1 block text-xs text-text-muted">Jenis</label>
+                      <div className="flex gap-2">
+                        <button onClick={() => setSellType("emas")} className={`flex-1 rounded-lg border px-3 py-2 text-sm font-medium ${sellType==="emas"?"border-gold bg-gold/5 text-gold-dark":"border-border/60 text-text-muted"}`}>Emas</button>
+                        <button onClick={() => setSellType("perak")} className={`flex-1 rounded-lg border px-3 py-2 text-sm font-medium ${sellType==="perak"?"border-gold bg-gold/5 text-gold-dark":"border-border/60 text-text-muted"}`}>Perak</button>
+                      </div>
+                    </div>
+                    <div className="w-40">
+                      <label className="mb-1 block text-xs text-text-muted">Merek</label>
+                      <select value={sellBrand} onChange={e => setSellBrand(e.target.value)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm">{SELL_BRANDS.map(b => <option key={b} value={b}>{b}</option>)}</select>
+                    </div>
+                    {sellBrand === "Lainnya" && (
+                      <div className="w-40">
+                        <label className="mb-1 block text-xs text-text-muted">Nama Merek</label>
+                        <input type="text" value={sellBrandCustom} onChange={e => setSellBrandCustom(e.target.value)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm" placeholder="Contoh: Lotus Archi" />
+                      </div>
+                    )}
+                    {isAntamSell ? (
+                      <div className="flex-1 min-w-[180px]">
+                        <label className="mb-1 block text-xs text-text-muted">Produk</label>
+                        <select value={sellProduct} onChange={e=>setSellProduct(e.target.value)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm">{LM_PRODUCTS.map(id=>{const gt=goldTypes.find(g=>g.id===id);const p=priceMap.get(id);const ppg = p?.isTotalPrice && gt?.weight ? Math.round(p.buyPrice / gt.weight) : p?.buyPrice;return <option key={id} value={id}>{gt?.name??id} — {ppg?formatRupiah(ppg):"-"}/g</option>;})}</select>
+                      </div>
+                    ) : (
+                      <>
+                        <div className="w-32">
+                          <label className="mb-1 block text-xs text-text-muted">Berat (g)</label>
+                          <input type="number" step="0.01" min="0.01" value={sellWeight} onChange={e=>setSellWeight(e.target.value)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm" placeholder="0.00" />
+                        </div>
+                        <div className="w-40">
+                          <label className="mb-1 block text-xs text-text-muted">Harga/g (Rp)</label>
+                          <input type="number" min={0} value={sellPricePerGram} onChange={e=>setSellPricePerGram(e.target.value)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm" placeholder="0" />
+                        </div>
+                      </>
+                    )}
+                    <div className="w-24">
+                      <label className="mb-1 block text-xs text-text-muted">Qty</label>
+                      <input type="number" min={1} value={sellQty} onChange={e=>setSellQty(parseInt(e.target.value)||1)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm" />
+                    </div>
+                    <button onClick={addSellItem} className="rounded-lg border border-gold/40 px-4 py-2.5 text-sm font-semibold text-gold-dark hover:bg-gold/5">+ Tambah</button>
+                  </div>
                 ):(
                   <div className="space-y-3">
                     <div className="flex flex-wrap gap-3"><div className="w-40"><label className="mb-1 block text-xs text-text-muted">Kategori</label><select value={bbCategory} onChange={e=>{setBbCategory(e.target.value);const f=goldTypes.filter(g=>g.category===e.target.value)[0];if(f)setBbGoldType(f.id);}} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm"><option value="bb-lm">LM (Antam)</option><option value="bb-perhiasan">Perhiasan</option><option value="bb-logam">Logam Lain</option></select></div><div className="flex-1 min-w-[180px]"><label className="mb-1 block text-xs text-text-muted">Jenis</label><select value={bbGoldType} onChange={e=>setBbGoldType(e.target.value)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm">{bbGoldTypes.map(g=>{const p=priceMap.get(g.id);return <option key={g.id} value={g.id}>{g.name} {p?`— ${formatRupiah(p.sellPrice)}/g`:""}</option>;})}</select></div></div>
@@ -474,11 +627,36 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
                     )}<button onClick={addBuybackItem} className="rounded-lg border border-gold/40 px-4 py-2.5 text-sm font-semibold text-gold-dark hover:bg-gold/5">+ Tambah</button></div>
                   </div>
                 )}
+                <div className="mt-4 border-t border-border/40 pt-3">
+                  <div className="mb-2 flex items-center justify-between gap-3">
+                    <div><p className="text-xs font-semibold uppercase tracking-wider text-text-muted">Item ditambahkan</p><p className="mt-0.5 text-[11px] text-text-light">Detail lengkap item dalam order ini.</p></div>
+                    <span className="rounded-md bg-gold/10 px-2.5 py-1 text-xs font-semibold tabular-nums text-gold-dark">{items.length} item</span>
+                  </div>
+                  {items.length > 0 ? (
+                    <div className="max-h-44 space-y-2 overflow-y-auto pr-1">
+                      {items.map((it, i) => (
+                        <div key={`${it.itemName}-${i}`} className="flex items-start justify-between gap-3 rounded-lg border border-border/40 bg-white px-3 py-2.5">
+                          <div className="min-w-0 flex-1">
+                            <p className="truncate text-sm font-semibold text-text">{it.itemName}</p>
+                            <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-text-muted">
+                              {getOrderItemDetails(it).map(detail => <span key={detail}>{detail}</span>)}
+                            </div>
+                          </div>
+                          <div className="flex shrink-0 items-center gap-3">
+                            <p className="text-sm font-semibold tabular-nums text-gold-dark">{formatRupiah(it.priceTotal)}</p>
+                            <button type="button" aria-label={`Hapus ${it.itemName}`} onClick={()=>removeItem(i)} className="rounded-md px-2 py-1 text-lg leading-none text-red-400 hover:bg-red-50 hover:text-red-600">&times;</button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="rounded-lg border border-dashed border-border/60 bg-white/60 px-4 py-4 text-center text-xs text-text-muted">Belum ada item yang ditambahkan.</div>
+                  )}
+                </div>
               </div>
-              {items.length>0&&(<div className="rounded-lg border border-border/40 bg-surface overflow-x-auto"><table className="w-full min-w-[560px] text-sm"><thead><tr className="border-b border-border/30 text-left text-xs text-text-muted"><th className="px-4 py-2">Item</th><th className="px-4 py-2">Berat/Karat</th><th className="px-4 py-2">Qty</th><th className="px-4 py-2 text-right">Harga/g</th><th className="px-4 py-2 text-right">Total</th><th className="px-4 py-2"></th></tr></thead><tbody className="divide-y divide-border/20">{items.map((it,i)=>(<tr key={i}><td className="px-4 py-2.5 font-medium text-text">{it.itemName}</td><td className="px-4 py-2.5 text-text-muted">{it.weight}g{it.karat?` — ${it.karat}K`:""}</td><td className="px-4 py-2.5">{it.qty}</td><td className="px-4 py-2.5 text-right">{formatRupiah(it.pricePerGram)}</td><td className="px-4 py-2.5 text-right font-semibold">{formatRupiah(it.priceTotal)}</td><td className="px-4 py-2.5 text-center"><button onClick={()=>removeItem(i)} className="text-red-400 hover:text-red-600">&times;</button></td></tr>))}</tbody></table></div>)}
-              <div className="rounded-lg border border-border/40 bg-surface p-4">
+              <div className="rounded-lg border border-border/40 bg-surface p-4 xl:col-span-5 xl:col-start-8 xl:row-span-2 xl:row-start-1">
                 <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-text-muted">Data Customer</p>
-                <div className="grid gap-4 sm:grid-cols-2">
+                <div className="grid gap-2.5 sm:grid-cols-2">
                   <div><label className="mb-1 block text-xs text-text-muted">Nama <span className="text-red-400">*</span></label><input type="text" value={customerName} onChange={e=>setCustomerName(e.target.value)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm" placeholder="Nama lengkap" /></div>
                   <div><label className="mb-1 block text-xs text-text-muted">No. WA <span className="text-red-400">*</span></label><input type="tel" value={customerPhone} onChange={e=>handlePhoneChange(e.target.value)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm" placeholder="0812-3456-7890" /></div>
                   {lookup && (
@@ -492,12 +670,12 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
                   )}
                   <div><label className="mb-1 block text-xs text-text-muted">Tau Safargold dari mana?</label><select value={source} onChange={e=>setSource(e.target.value)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm"><option value="">Pilih...</option>{SOURCE_OPTIONS.map(s=><option key={s} value={s}>{s}</option>)}</select></div>
                   <div><label className="mb-1 block text-xs text-text-muted">Instagram</label><input type="text" value={instagram} onChange={e=>setInstagram(e.target.value)} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm" placeholder="@username" /></div>
-                  <div className="sm:col-span-2"><label className="mb-1 block text-xs text-text-muted">NIK</label><input type="text" value={nik} onChange={e=>setNik(e.target.value)} maxLength={16} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm" placeholder="16 digit NIK KTP" /></div>
+                  <div className="sm:col-span-2"><label className="mb-1 block text-xs text-text-muted">NIK</label><input type="text" value={nik} onChange={e=>setNik(e.target.value)} maxLength={16} className="w-full rounded-lg border border-border/60 bg-white px-3 py-2 text-sm" placeholder="16 digit NIK KTP" /></div>
                 </div>
-                <div className="mt-4 border-t border-border/30 pt-4">
-                  <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-text-muted">Alamat</p>
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <div className="sm:col-span-2">
+                <div className="mt-3 border-t border-border/30 pt-3">
+                  <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-text-muted">Alamat</p>
+                  <div className="grid gap-2.5 sm:grid-cols-2">
+                    <div>
                       <label className="mb-1 block text-xs text-text-muted">Provinsi</label>
                       <select
                         value={provinceId}
@@ -512,7 +690,7 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
                         {provinces.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
                       </select>
                     </div>
-                    <div className="sm:col-span-2">
+                    <div>
                       <label className="mb-1 block text-xs text-text-muted">Kabupaten / Kota</label>
                       <div className="relative">
                         <select
@@ -571,6 +749,31 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
                   </div>
                 </div>
               </div>
+
+              <div className="rounded-lg border border-border/40 bg-surface p-4 xl:col-span-7 xl:row-start-2">
+                <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-text-muted">Pembayaran & Catatan</p>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <div>
+                    <label className="mb-1 block text-xs text-text-muted">Metode Pembayaran</label>
+                    <div className="flex gap-2">
+                      <button onClick={() => setPaymentMethod("cash")} className={`flex-1 rounded-lg border px-3 py-2 text-sm font-medium ${paymentMethod==="cash"?"border-gold bg-gold/5 text-gold-dark":"border-border/60 text-text-muted"}`}>Cash</button>
+                      <button onClick={() => setPaymentMethod("transfer")} className={`flex-1 rounded-lg border px-3 py-2 text-sm font-medium ${paymentMethod==="transfer"?"border-gold bg-gold/5 text-gold-dark":"border-border/60 text-text-muted"}`}>Transfer</button>
+                    </div>
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-xs text-text-muted">Catatan (opsional)</label>
+                    <textarea value={notes} onChange={e => setNotes(e.target.value)} rows={1} className="w-full resize-none rounded-lg border border-border/60 bg-white px-3 py-2 text-sm" placeholder="Keterangan tambahan..." />
+                  </div>
+                </div>
+                {role === "admin" && editingId && (
+                  <div className="mt-3">
+                    <label className="mb-1 block text-xs text-text-muted">GP (Gross Profit)</label>
+                    <input type="number" min={0} value={gp} onChange={e => setGp(e.target.value)} className="w-full max-w-xs rounded-lg border border-border/60 bg-white px-3 py-2.5 text-sm" placeholder="0" />
+                    <p className="mt-1 text-[10px] text-text-muted">Hanya admin yang bisa mengisi & melihat.</p>
+                  </div>
+                )}
+              </div>
+            </div>
             </div>
             <div className="flex items-center justify-between border-t border-border/40 bg-surface/30 px-6 py-4 rounded-b-xl"><div><p className="text-xs text-text-muted">Total</p><p className="text-xl font-bold text-gold-dark">{formatRupiah(total)}</p></div><div className="flex gap-3"><button onClick={()=>{setShowModal(false);resetForm();}} className="rounded-xl border border-border/60 px-5 py-2.5 text-sm font-medium text-text-muted hover:bg-white">Batal</button><button onClick={handleSubmit} disabled={saving||items.length===0} className="rounded-lg bg-gold px-6 py-2.5 text-sm font-semibold text-[#1a1a1a] transition-colors hover:bg-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 focus-visible:ring-offset-2 disabled:opacity-60">{saving?"Menyimpan...":editingId?"Update Order":"Simpan Order"}</button></div></div>
           </div>

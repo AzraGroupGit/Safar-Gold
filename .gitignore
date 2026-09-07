@@ -48,6 +48,9 @@ AGENTS.md
 CLAUDE.md
 build-output.txt
 
+# task & project files
+/tests
+
 # local files
 FORMULA.txt
 Historis_Pricelist_15Jul-4Aug2026.xlsx

@@ -16,7 +16,7 @@ type NavLink = {
 
 const groups: { label: string; items: NavLink[] }[] = [
   {
-    label: "Utama",
+    label: "Ringkasan",
     items: [
       {
         href: "/admin",
@@ -25,10 +25,10 @@ const groups: { label: string; items: NavLink[] }[] = [
         roles: ["admin", "cs"],
       },
       {
-        href: "/admin/harga",
-        label: "Harga",
-        icon: "M3 8l3-4h12l3 4-9 12L3 8zM12 4v.01",
-        roles: ["admin", "cs"],
+        href: "/admin/performa",
+        label: "Performa Saya",
+        icon: "M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3H2.25m1.5 0H21m-3.75 13.5h2.25m-11.25 0H15m-6.75 0l-1.5 4.5m8.25-4.5 1.5 4.5M9 11.25l1.5-1.5 2.25 2.25L16.5 8.25",
+        roles: ["cs"],
       },
     ],
   },
@@ -50,8 +50,14 @@ const groups: { label: string; items: NavLink[] }[] = [
     ],
   },
   {
-    label: "Inventori",
+    label: "Operasional",
     items: [
+      {
+        href: "/admin/harga",
+        label: "Harga",
+        icon: "M3 8l3-4h12l3 4-9 12L3 8zM12 4v.01",
+        roles: ["admin", "cs"],
+      },
       {
         href: "/admin/stock",
         label: "Stok",
@@ -60,15 +66,26 @@ const groups: { label: string; items: NavLink[] }[] = [
       },
       {
         href: "/admin/eod",
-        label: "EOD",
+        label: "Tutup Hari",
         icon: "M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
         roles: ["admin", "cs"],
       },
+    ],
+  },
+  {
+    label: "Laporan & Insight",
+    items: [
       {
         href: "/admin/laporan",
         label: "Laporan",
         icon: "M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z",
         roles: ["admin", "cs"],
+      },
+      {
+        href: "/admin/analitik",
+        label: "Analitik",
+        icon: "M3 13.125C3 12.504 3.504 12 4.125 12h1.5c.621 0 1.125.504 1.125 1.125v6.75C6.75 20.496 6.246 21 5.625 21h-1.5A1.125 1.125 0 013 19.875v-6.75zM9.75 9.375c0-.621.504-1.125 1.125-1.125h1.5c.621 0 1.125.504 1.125 1.125v10.5c0 .621-.504 1.125-1.125 1.125h-1.5a1.125 1.125 0 01-1.125-1.125v-10.5zM16.5 4.875c0-.621.504-1.125 1.125-1.125h1.5c.621 0 1.125.504 1.125 1.125v15c0 .621-.504 1.125-1.125 1.125h-1.5a1.125 1.125 0 01-1.125-1.125v-15z",
+        roles: ["admin"],
       },
     ],
   },
@@ -89,7 +106,7 @@ const groups: { label: string; items: NavLink[] }[] = [
       },
       {
         href: "/admin/users",
-        label: "Kelola User",
+        label: "Pengguna",
         icon: "M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z",
         roles: ["admin"],
       },
@@ -182,10 +199,10 @@ export default function AdminSidebar({
 
         <div className="mx-5 h-px bg-white/10" />
 
-        <nav className="flex-1 overflow-y-auto px-3 py-4">
+        <nav className="flex-1 overflow-y-auto px-3 py-3">
           {visibleGroups.map((group) => (
-            <div key={group.label} className="mb-5">
-              <p className="px-3 pb-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/35">
+            <div key={group.label} className="mb-4 last:mb-0">
+              <p className="px-3 pb-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/35">
                 {group.label}
               </p>
               <div className="space-y-0.5">
@@ -197,9 +214,9 @@ export default function AdminSidebar({
                       href={link.href}
                       onClick={onClose}
                       aria-current={active ? "page" : undefined}
-                      className={`group flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors duration-150 ${
+                      className={`group relative flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 ${
                         active
-                          ? "bg-gold/15 text-gold-light"
+                          ? "bg-gold/15 text-gold-light before:absolute before:left-0 before:h-5 before:w-0.5 before:rounded-full before:bg-gold-light"
                           : "text-white/60 hover:bg-white/5 hover:text-white"
                       }`}
                     >

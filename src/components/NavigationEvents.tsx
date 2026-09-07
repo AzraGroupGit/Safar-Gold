@@ -9,9 +9,12 @@ export default function NavigationEvents() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
-    const t = setTimeout(() => setLoading(false), 800);
-    return () => clearTimeout(t);
+    const showTimer = setTimeout(() => setLoading(true), 0);
+    const hideTimer = setTimeout(() => setLoading(false), 800);
+    return () => {
+      clearTimeout(showTimer);
+      clearTimeout(hideTimer);
+    };
   }, [pathname, searchParams]);
 
   if (!loading) return null;

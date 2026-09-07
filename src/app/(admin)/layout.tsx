@@ -6,15 +6,18 @@ import AdminSidebar from "@/components/admin/AdminSidebar";
 import { createClient } from "@/lib/supabase/client";
 
 const pageMeta: Record<string, { title: string; group: string }> = {
-  "/admin": { title: "Dashboard", group: "Utama" },
-  "/admin/harga": { title: "Manajemen Harga", group: "Utama" },
+  "/admin": { title: "Dashboard", group: "Ringkasan" },
+  "/admin/performa": { title: "Performa Saya", group: "Ringkasan" },
+  "/admin/harga": { title: "Manajemen Harga", group: "Operasional" },
   "/admin/orders": { title: "Orders", group: "Transaksi" },
   "/admin/pelanggan": { title: "Pelanggan", group: "Transaksi" },
-  "/admin/stock": { title: "Stok", group: "Inventori" },
-  "/admin/laporan": { title: "Laporan", group: "Inventori" },
+  "/admin/stock": { title: "Stok", group: "Operasional" },
+  "/admin/eod": { title: "Tutup Hari", group: "Operasional" },
+  "/admin/laporan": { title: "Laporan", group: "Laporan & Insight" },
+  "/admin/analitik": { title: "Analitik", group: "Laporan & Insight" },
   "/admin/jenis-emas": { title: "Jenis Emas", group: "Pengelolaan" },
   "/admin/konten": { title: "Konten", group: "Pengelolaan" },
-  "/admin/users": { title: "Kelola User", group: "Pengelolaan" },
+  "/admin/users": { title: "Pengguna", group: "Pengelolaan" },
   "/admin/pengaturan": { title: "Pengaturan", group: "Pengelolaan" },
 };
 

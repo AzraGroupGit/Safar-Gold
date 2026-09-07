@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
+import { canGenerateEod } from "@/lib/order-lifecycle";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { getServerUser, getUserRole } from "@/lib/supabase/server-user";
 
 export const dynamic = "force-dynamic";
 
@@ -36,6 +38,11 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
+    const user = await getServerUser();
+    if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    if (!canGenerateEod(getUserRole(user))) {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
     const body = await request.json().catch(() => ({}));
     const date = body.date ?? wibDateStr();
 
@@ -47,7 +54,7 @@ export async function POST(request: Request) {
       .select("*")
       .eq("date", date)
       .maybeSingle();
-    if (existing) return NextResponse.json({ exists: true, eod: existing });
+    if (existing && !existing.is_stale) return NextResponse.json({ exists: true, eod: existing });
 
     // Rentang WIB untuk tanggal tsb
     const start = new Date(`${date}T00:00:00+07:00`);
@@ -102,24 +109,27 @@ export async function POST(request: Request) {
       min_qty: s.min_qty,
     }));
 
-    const { data: eod, error: insErr } = await adm
-      .from("eod_reports")
-      .insert({
-        date,
-        total_orders: allOrders.length,
-        total_jual_orders: jual.length,
-        total_buyback_orders: buyback.length,
-        total_jual: totalJual,
-        total_buyback: totalBuyback,
-        total_jual_items: totalJualItems,
-        total_buyback_items: totalBuybackItems,
-        net: totalJual - totalBuyback,
-        breakdown,
-        stock_snapshot: stockSnapshot,
-        generated_by: body.generatedBy ?? null,
-      })
-      .select("*")
-      .single();
+    const report = {
+      date,
+      total_orders: allOrders.length,
+      total_jual_orders: jual.length,
+      total_buyback_orders: buyback.length,
+      total_jual: totalJual,
+      total_buyback: totalBuyback,
+      total_jual_items: totalJualItems,
+      total_buyback_items: totalBuybackItems,
+      net: totalJual - totalBuyback,
+      breakdown,
+      stock_snapshot: stockSnapshot,
+      generated_by: user.id,
+      generated_at: new Date().toISOString(),
+      is_stale: false,
+      stale_at: null,
+    };
+    const query = existing
+      ? adm.from("eod_reports").update(report).eq("id", existing.id)
+      : adm.from("eod_reports").insert(report);
+    const { data: eod, error: insErr } = await query.select("*").single();
 
     if (insErr) return NextResponse.json({ error: insErr.message }, { status: 500 });
 

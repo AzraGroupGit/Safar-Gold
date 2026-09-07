@@ -3,6 +3,7 @@
 import { getAllGoldTypes, getFormattedTodayPrices, getMedianFactors, formatRupiah } from "@/lib/gold-api";
 import type { GoldTypeRow, FormattedPrice } from "@/lib/gold-api";
 import PriceApprovalPanel from "./PriceApprovalPanel";
+import SignatureSection from "@/components/SignatureSection";
 import AdminSkeleton from "@/components/admin/AdminSkeleton";
 import { createAnonClient } from "@/lib/supabase/anon";
 import { createClient } from "@/lib/supabase/client";
@@ -325,6 +326,10 @@ export default function AdminDashboard() {
           </p>
         </div>
       )}
+
+      <div className="mt-8">
+        <SignatureSection />
+      </div>
     </div>
   );
 }
