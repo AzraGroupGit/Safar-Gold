@@ -1,15 +1,16 @@
 import type { AnalyticsGrain } from "./analytics";
 
-export type CsPerformanceOrder = {
+export type CsActivityOrder = {
   id: string;
   order_number: string;
   type: "sell" | "buyback";
   status: string;
   customer_name: string;
-  total: number;
   created_at: string;
   order_items: { qty: number; weight: number }[] | null;
 };
+
+export type CsPerformanceOrder = CsActivityOrder & { total: number };
 
 const wibFormatter = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Jakarta", year: "numeric", month: "2-digit", day: "2-digit" });
 
@@ -29,17 +30,16 @@ function bucketKey(timestamp: string, grain: AnalyticsGrain) {
   return date;
 }
 
-export function aggregateCsPerformance(orders: CsPerformanceOrder[], grain: AnalyticsGrain) {
+function aggregateCsActivityBase<T extends CsActivityOrder>(orders: T[], grain: AnalyticsGrain) {
   const completed = orders.filter(order => order.status === "completed");
   const cancelled = orders.filter(order => order.status === "cancelled");
-  const trend = new Map<string, { key: string; completed: number; cancelled: number; value: number }>();
+  const trend = new Map<string, { key: string; completed: number; cancelled: number }>();
 
   for (const order of orders) {
     const key = bucketKey(order.created_at, grain);
-    const point = trend.get(key) ?? { key, completed: 0, cancelled: 0, value: 0 };
+    const point = trend.get(key) ?? { key, completed: 0, cancelled: 0 };
     if (order.status === "completed") {
       point.completed += 1;
-      point.value += Number(order.total) || 0;
     } else if (order.status === "cancelled") {
       point.cancelled += 1;
     }
@@ -59,13 +59,52 @@ export function aggregateCsPerformance(orders: CsPerformanceOrder[], grain: Anal
       cancelledOrders: cancelled.length,
       sellOrders: completed.filter(order => order.type === "sell").length,
       buybackOrders: completed.filter(order => order.type === "buyback").length,
-      completedValue: completed.reduce((sum, order) => sum + (Number(order.total) || 0), 0),
       itemCount: itemTotals.itemCount,
       totalWeight: Math.round(itemTotals.totalWeight * 100) / 100,
       completionRate: totalOrders ? Math.round((completed.length / totalOrders) * 10_000) / 100 : 0,
     },
     trend: [...trend.values()].sort((a, b) => a.key.localeCompare(b.key)),
     recentOrders: [...orders].sort((a, b) => b.created_at.localeCompare(a.created_at)).slice(0, 20),
+  };
+}
+
+export function aggregateCsActivity(orders: CsActivityOrder[], grain: AnalyticsGrain) {
+  const activity = aggregateCsActivityBase(orders, grain);
+  return {
+    ...activity,
+    recentOrders: activity.recentOrders.map(order => ({
+      id: order.id,
+      order_number: order.order_number,
+      type: order.type,
+      status: order.status,
+      customer_name: order.customer_name,
+      created_at: order.created_at,
+      order_items: order.order_items,
+    })),
+  };
+}
+
+export type CsActivityResult = ReturnType<typeof aggregateCsActivity>;
+
+export function aggregateCsPerformance(orders: CsPerformanceOrder[], grain: AnalyticsGrain) {
+  const activity = aggregateCsActivityBase(orders, grain);
+  const values = new Map<string, number>();
+
+  for (const order of orders) {
+    if (order.status !== "completed") continue;
+    const key = bucketKey(order.created_at, grain);
+    values.set(key, (values.get(key) ?? 0) + (Number(order.total) || 0));
+  }
+
+  return {
+    metrics: {
+      ...activity.metrics,
+      completedValue: orders
+        .filter(order => order.status === "completed")
+        .reduce((sum, order) => sum + (Number(order.total) || 0), 0),
+    },
+    trend: activity.trend.map(point => ({ ...point, value: values.get(point.key) ?? 0 })),
+    recentOrders: activity.recentOrders,
   };
 }
 

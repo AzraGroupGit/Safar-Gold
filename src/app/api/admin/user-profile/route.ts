@@ -1,12 +1,16 @@
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { requireRole } from "@/lib/supabase/server-user";
 
 export const dynamic = "force-dynamic";
 
 export async function GET(request: Request) {
+  const auth = await requireRole("admin", "cs");
+  if (!auth.ok) return auth.response;
   const { searchParams } = new URL(request.url);
   const userId = searchParams.get("userId");
   if (!userId) return NextResponse.json({ profile: null });
+  if (userId !== auth.user.id) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
   const adm = createAdminClient();
   const { data } = await adm
@@ -19,9 +23,12 @@ export async function GET(request: Request) {
 }
 
 export async function PUT(request: Request) {
+  const auth = await requireRole("admin", "cs");
+  if (!auth.ok) return auth.response;
   try {
     const { userId, name, signature } = await request.json();
     if (!userId) return NextResponse.json({ error: "userId required" }, { status: 400 });
+    if (userId !== auth.user.id) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
     const adm = createAdminClient();
     const { error } = await adm.from("user_profiles").upsert({

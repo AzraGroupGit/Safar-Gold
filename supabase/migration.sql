@@ -731,3 +731,40 @@ revoke all on function public.adjust_stock_atomic(text, text, text, integer, tex
 revoke all on function public.correct_manual_stock_movement_atomic(uuid, integer, text, uuid) from public, anon, authenticated;
 grant execute on function public.adjust_stock_atomic(text, text, text, integer, text, uuid) to service_role;
 grant execute on function public.correct_manual_stock_movement_atomic(uuid, integer, text, uuid) to service_role;
+
+-- #####################################################################
+-- v17: Protect operational and customer data from anonymous access
+-- #####################################################################
+
+-- Operational reads must go through authenticated, role-checked server
+-- handlers. The service role used by those handlers bypasses RLS.
+drop policy if exists "public read orders" on public.orders;
+drop policy if exists "public read order_items" on public.order_items;
+drop policy if exists "public read customers" on public.customers;
+drop policy if exists "public read stock_movements" on public.stock_movements;
+drop policy if exists "public read app_settings" on public.app_settings;
+drop policy if exists "public read safe app_settings" on public.app_settings;
+
+-- Keep RLS enabled even when this section is applied to an older database.
+alter table public.orders enable row level security;
+alter table public.order_items enable row level security;
+alter table public.customers enable row level security;
+alter table public.stock_movements enable row level security;
+alter table public.app_settings enable row level security;
+
+-- Only values rendered by the public website or used for public price
+-- calculations may be read with the publishable key. In particular, api_key
+-- and any future setting stay private unless explicitly added here.
+create policy "public read safe app_settings"
+on public.app_settings for select
+using (key = any (array[
+  'usd_idr_rate', 'last_price_update',
+  'harga_dasar_jual', 'acuan_buyback_lm', 'premi_pecahan', 'spread_buyback_lm',
+  'offset_perhiasan_k24s', 'offset_perhiasan_k24', 'dasar_perhiasan_offset',
+  'adjustment_jual', 'adjustment_beli', 'adjustment_perhiasan', 'persen_buyback_perhiasan',
+  'last_cron_xau_usd', 'last_cron_xag_usd', 'last_cron_xpd_usd',
+  'antam_price', 'antam_price_prev', 'global_gold_price', 'global_gold_price_prev',
+  'phone', 'email', 'address', 'weekday_open', 'weekday_close', 'saturday_open', 'saturday_close',
+  'hero_badge', 'hero_headline_start', 'hero_headline_gradient', 'hero_headline_end',
+  'hero_subheadline', 'hero_cta', 'google_reviews_widget_id'
+]::text[]));

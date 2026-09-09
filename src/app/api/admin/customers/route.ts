@@ -1,18 +1,35 @@
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { normalizePhone } from "@/lib/gold-api";
+import { hasCapability, redactCustomerForRole } from "@/lib/permissions";
+import { requireCapability } from "@/lib/supabase/server-user";
 
 export const dynamic = "force-dynamic";
 
 export async function GET(request: Request) {
+  const auth = await requireCapability("customers:read-own");
+  if (!auth.ok) return auth.response;
   const adm = createAdminClient();
   const { searchParams } = new URL(request.url);
   const q = (searchParams.get("q") ?? "").trim().toLowerCase();
 
-  const [customersRes, ordersRes] = await Promise.all([
-    adm.from("customers").select("*").order("created_at", { ascending: false }),
-    adm.from("orders").select("customer_id, total, created_at").not("customer_id", "is", null),
-  ]);
+  const canReadAny = hasCapability(auth.role, "customers:read-any");
+  let ordersQuery = adm
+    .from("orders")
+    .select("customer_id, total, created_at")
+    .not("customer_id", "is", null);
+  if (!canReadAny) ordersQuery = ordersQuery.eq("created_by", auth.user.id);
+  const ordersRes = await ordersQuery;
+  if (ordersRes.error) {
+    return NextResponse.json({ error: ordersRes.error.message }, { status: 500 });
+  }
+
+  const customerIds = Array.from(new Set((ordersRes.data ?? []).map((order) => order.customer_id)));
+  const customersRes = canReadAny
+    ? await adm.from("customers").select("*").order("created_at", { ascending: false })
+    : customerIds.length > 0
+      ? await adm.from("customers").select("*").in("id", customerIds).order("created_at", { ascending: false })
+      : { data: [], error: null };
 
   if (customersRes.error) {
     return NextResponse.json({ error: customersRes.error.message }, { status: 500 });
@@ -31,7 +48,7 @@ export async function GET(request: Request) {
 
   let customers = (customersRes.data ?? []).map((c) => {
     const a = agg.get(c.id) ?? { count: 0, total: 0, last: null };
-    return {
+    const customer = {
       id: c.id,
       name: c.name,
       phone: c.phone,
@@ -48,6 +65,7 @@ export async function GET(request: Request) {
       total_spent: a.total,
       last_order_at: a.last,
     };
+    return redactCustomerForRole(customer, auth.role);
   });
 
   if (q) {
@@ -58,11 +76,13 @@ export async function GET(request: Request) {
     );
   }
 
-  return NextResponse.json({ customers });
+  return NextResponse.json({ customers, scope: canReadAny ? "all" : "own" });
 }
 
 // POST: buat/update customer langsung (opsional, dipakai via order flow)
 export async function POST(request: Request) {
+  const auth = await requireCapability("customers:manage");
+  if (!auth.ok) return auth.response;
   const adm = createAdminClient();
   const body = await request.json();
   const phone = normalizePhone(body.phone ?? "");

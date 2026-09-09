@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Calculator from "@/components/Calculator";
 import LegalNotice from "@/components/LegalNotice";
-import { getAllGoldTypes, getFormattedTodayPrices, getPublicSettings, formatRupiah } from "@/lib/gold-api";
+import { getAllGoldTypes, getFormattedTodayPrices, formatRupiah } from "@/lib/gold-api";
+import { getPublicSettings } from "@/lib/public-site-data";
 
 export const metadata: Metadata = {
   title: "Kalkulator Emas — Hitung Jual Beli Instan",

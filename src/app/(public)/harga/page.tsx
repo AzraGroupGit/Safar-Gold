@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import TabbedPricelist from "@/components/TabbedPricelist";
 import PriceChart from "@/components/PriceChart";
 import LegalNotice from "@/components/LegalNotice";
-import { getFormattedTodayPrices, getMarketInfo, getPriceHistory, formatRupiah } from "@/lib/gold-api";
+import { getFormattedTodayPrices, getPriceHistory, formatRupiah } from "@/lib/gold-api";
+import { getPublicMarketInfo } from "@/lib/public-site-data";
 
 export const metadata: Metadata = {
   title: "Harga Emas Hari Ini — Logam Mulia, Buyback & Perhiasan",
@@ -14,7 +15,7 @@ export const dynamic = "force-dynamic";
 export default async function HargaPage() {
   const [prices, market, history] = await Promise.all([
     getFormattedTodayPrices(),
-    getMarketInfo(),
+    getPublicMarketInfo(),
     getPriceHistory(90),
   ]);
   const hasData = prices.length > 0 && prices[0].buyPrice > 0;

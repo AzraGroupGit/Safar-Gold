@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import AdminSidebar from "@/components/admin/AdminSidebar";
 import { createClient } from "@/lib/supabase/client";
+import { normalizeAppRole, type AppRole } from "@/lib/permissions";
 
 const pageMeta: Record<string, { title: string; group: string }> = {
   "/admin": { title: "Dashboard", group: "Ringkasan" },
@@ -35,7 +36,7 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [user, setUser] = useState<{ email: string; role: string } | null>(null);
+  const [user, setUser] = useState<{ email: string; role: AppRole | null } | null>(null);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -44,7 +45,7 @@ export default function AdminLayout({
         const supabase = createClient();
         const { data: { user: u } } = await supabase.auth.getUser();
         if (u) {
-          setUser({ email: u.email ?? "", role: u.user_metadata?.role ?? "admin" });
+          setUser({ email: u.email ?? "", role: normalizeAppRole(u.app_metadata?.role) });
         }
       } catch {
         // keep null
@@ -60,7 +61,7 @@ export default function AdminLayout({
 
   const { title, group } = getPageMeta(pathname);
   const name = user?.email ? user.email.split("@")[0] : "";
-  const roleLabel = user?.role === "cs" ? "CS" : "Admin";
+  const roleLabel = user?.role === "admin" ? "Admin" : user?.role === "cs" ? "CS" : "Tanpa Role";
   const initial = (name.charAt(0) || "A").toUpperCase();
 
   return (

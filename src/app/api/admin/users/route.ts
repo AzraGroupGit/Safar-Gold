@@ -1,20 +1,13 @@
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { getServerUser, getUserRole } from "@/lib/supabase/server-user";
+import { getUserRole, requireRole } from "@/lib/supabase/server-user";
 
 export const dynamic = "force-dynamic";
 
-async function requireAdmin() {
-  const user = await getServerUser();
-  if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  if (getUserRole(user) !== "admin") return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-  return null;
-}
-
 export async function GET() {
   try {
-    const denied = await requireAdmin();
-    if (denied) return denied;
+    const auth = await requireRole("admin");
+    if (!auth.ok) return auth.response;
     const supabase = createAdminClient();
     const { data, error } = await supabase.auth.admin.listUsers();
 
@@ -38,8 +31,8 @@ export async function GET() {
 
 export async function PUT(request: Request) {
   try {
-    const denied = await requireAdmin();
-    if (denied) return denied;
+    const auth = await requireRole("admin");
+    if (!auth.ok) return auth.response;
     const { userId, role, email, password } = await request.json();
 
     if (!userId) {
@@ -53,7 +46,6 @@ export async function PUT(request: Request) {
     if (password && password.length >= 6) updates.password = password;
     if (role && ["admin", "cs"].includes(role)) {
       updates.app_metadata = { role };
-      updates.user_metadata = { role };
     }
 
     if (Object.keys(updates).length === 0) {
@@ -74,8 +66,8 @@ export async function PUT(request: Request) {
 
 export async function POST(request: Request) {
   try {
-    const denied = await requireAdmin();
-    if (denied) return denied;
+    const auth = await requireRole("admin");
+    if (!auth.ok) return auth.response;
     const { email, password, role } = await request.json();
 
     if (!email || !password) {
@@ -93,7 +85,6 @@ export async function POST(request: Request) {
       password,
       email_confirm: true,
       app_metadata: { role: validRole },
-      user_metadata: { role: validRole },
     });
 
     if (error) {
@@ -108,8 +99,8 @@ export async function POST(request: Request) {
 
 export async function DELETE(request: Request) {
   try {
-    const denied = await requireAdmin();
-    if (denied) return denied;
+    const auth = await requireRole("admin");
+    if (!auth.ok) return auth.response;
     const { userId } = await request.json();
 
     if (!userId) {

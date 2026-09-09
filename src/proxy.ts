@@ -1,19 +1,12 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { createServerClient } from "@supabase/ssr";
+import {
+  hasCapability,
+  normalizeAppRole,
+  requiredCapabilityForAdminPage,
+} from "@/lib/permissions";
 
-const CS_RESTRICTED_PAGES = ["/admin/jenis-emas", "/admin/konten", "/admin/pengaturan", "/admin/users"];
-const CS_RESTRICTED_API = [
-  "/api/admin/publish-prices",
-  "/api/admin/update-settings",
-  "/api/admin/update-konten",
-  "/api/admin/update-gold-types",
-  "/api/admin/update-gold-type",
-  "/api/admin/create-gold-type",
-  "/api/admin/delete-gold-type",
-  "/api/admin/trigger-update",
-];
-
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   let response = NextResponse.next({ request });
 
   const supabase = createServerClient(
@@ -43,9 +36,10 @@ export async function middleware(request: NextRequest) {
 
   const { pathname } = request.nextUrl;
   const isLoginPage = pathname === "/admin/login";
+  const role = normalizeAppRole(user?.app_metadata?.role);
 
   if (isLoginPage) {
-    if (user) return NextResponse.redirect(new URL("/admin", request.url));
+    if (user && role) return NextResponse.redirect(new URL("/admin", request.url));
     return response;
   }
 
@@ -56,13 +50,16 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/admin/login", request.url));
   }
 
-  const role = user.user_metadata?.role ?? "admin";
-
-  if (role === "cs") {
-    if (CS_RESTRICTED_API.some((p) => pathname.startsWith(p))) {
-      return NextResponse.json({ error: "Forbidden — hanya Admin" }, { status: 403 });
+  if (!role) {
+    if (pathname.startsWith("/api/")) {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
-    if (CS_RESTRICTED_PAGES.some((p) => pathname.startsWith(p))) {
+    return NextResponse.redirect(new URL("/admin/login?error=role", request.url));
+  }
+
+  if (!pathname.startsWith("/api/")) {
+    const requiredCapability = requiredCapabilityForAdminPage(pathname);
+    if (requiredCapability && !hasCapability(role, requiredCapability)) {
       return NextResponse.redirect(new URL("/admin", request.url));
     }
   }

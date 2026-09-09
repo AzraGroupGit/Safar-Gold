@@ -1,14 +1,13 @@
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { getServerUser, getUserRole } from "@/lib/supabase/server-user";
-import { canManageStock } from "@/lib/stock-adjustment";
+import { hasCapability } from "@/lib/permissions";
+import { requireCapability } from "@/lib/supabase/server-user";
 
 export const dynamic = "force-dynamic";
 
 export async function GET(request: Request) {
-  const user = await getServerUser();
-  if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  if (!canManageStock(getUserRole(user))) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  const auth = await requireCapability("stock:read");
+  if (!auth.ok) return auth.response;
   const { searchParams } = new URL(request.url);
   const range = searchParams.get("range") ?? "all";
   if (!["all", "today", "week", "month"].includes(range)) {
@@ -68,7 +67,7 @@ export async function GET(request: Request) {
   for (const [key, data] of summaryMap.entries()) {
     result[key] = {
       total_weight_sold: Math.round(data.totalWeightSold * 1000) / 1000,
-      total_revenue: data.totalRevenue,
+      total_revenue: hasCapability(auth.role, "reports:read-all") ? data.totalRevenue : 0,
     };
   }
 

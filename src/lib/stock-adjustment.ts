@@ -25,7 +25,7 @@ function positiveInteger(value: unknown, label: string): number {
 }
 
 export function canManageStock(role: unknown): boolean {
-  return typeof role === "string" && role.trim().toLowerCase() === "admin";
+  return hasCapability(normalizeAppRole(role), "stock:manage");
 }
 
 export function parseStockAdjustment(input: unknown): StockAdjustmentInput {
@@ -51,3 +51,4 @@ export function parseStockCorrection(input: unknown): StockCorrectionInput {
     reason: requiredText(body.reason, "Alasan koreksi"),
   };
 }
+import { hasCapability, normalizeAppRole } from "./permissions";

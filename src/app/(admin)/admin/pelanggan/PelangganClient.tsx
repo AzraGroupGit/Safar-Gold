@@ -40,10 +40,12 @@ export default function PelangganClient({ settings }: { settings: InvoiceSetting
   const [search, setSearch] = useState("");
   const [detail, setDetail] = useState<{ customer: Customer; orders: CustomerOrder[] } | null>(null);
   const [invoiceOrder, setInvoiceOrder] = useState<InvoiceOrder | null>(null);
+  const [invoiceCreator, setInvoiceCreator] = useState<{ name: string | null; signature: string | null } | null>(null);
+  const [scope, setScope] = useState<"all" | "own">("all");
   const detailRef = useRef<{ customer: Customer; orders: CustomerOrder[] } | null>(null);
 
   function fetchCustomers() {
-    fetch("/api/admin/customers").then(r => r.json()).then(d => { setCustomers(d.customers ?? []); setLoading(false); });
+    fetch("/api/admin/customers").then(r => r.json()).then(d => { setCustomers(d.customers ?? []); setScope(d.scope === "own" ? "own" : "all"); setLoading(false); });
   }
   useEffect(() => { fetchCustomers(); }, []);
 
@@ -60,10 +62,12 @@ export default function PelangganClient({ settings }: { settings: InvoiceSetting
     const res = await fetch(`/api/admin/orders/${orderId}`);
     const data = await res.json();
     setInvoiceOrder(data.order ?? null);
+    setInvoiceCreator(data.creator ?? null);
   }
 
   function backToDetail() {
     setInvoiceOrder(null);
+    setInvoiceCreator(null);
     setDetail(detailRef.current);
   }
 
@@ -91,13 +95,13 @@ export default function PelangganClient({ settings }: { settings: InvoiceSetting
       <div className="mb-4">
         <div className="relative max-w-sm">
           <svg className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-text-muted" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg>
-          <input type="text" value={search} onChange={e => setSearch(e.target.value)} placeholder="Cari nama, No WA, atau NIK..." className="w-full rounded-lg border border-border/60 bg-white pl-10 pr-4 py-2.5 text-sm text-text focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30" />
+          <input type="text" value={search} onChange={e => setSearch(e.target.value)} placeholder={scope === "all" ? "Cari nama, No WA, atau NIK..." : "Cari nama atau No WA..."} className="w-full rounded-lg border border-border/60 bg-white pl-10 pr-4 py-2.5 text-sm text-text focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold/30" />
         </div>
       </div>
 
       <div className="overflow-x-auto rounded-xl border border-border/60 bg-white">
         <table className="w-full min-w-[640px]">
-          <thead><tr className="border-b border-border/40 bg-surface/50 text-left text-xs font-semibold uppercase tracking-wider text-text-muted"><th className="px-4 py-4 md:px-6">Nama</th><th className="px-4 py-4 md:px-6">No WA</th><th className="hidden px-4 py-4 sm:table-cell md:px-6">Sumber</th><th className="px-4 py-4 text-center md:px-6">Order</th><th className="px-4 py-4 text-right md:px-6">Total Belanja</th><th className="hidden px-4 py-4 sm:table-cell md:px-6">Terakhir</th><th className="px-4 py-4 text-center md:px-6">Aksi</th></tr></thead>
+          <thead><tr className="border-b border-border/40 bg-surface/50 text-left text-xs font-semibold uppercase tracking-wider text-text-muted"><th className="px-4 py-4 md:px-6">Nama</th><th className="px-4 py-4 md:px-6">No WA</th><th className="hidden px-4 py-4 sm:table-cell md:px-6">Sumber</th><th className="px-4 py-4 text-center md:px-6">Order</th><th className="px-4 py-4 text-right md:px-6">{scope === "all" ? "Total Belanja" : "Nilai via Anda"}</th><th className="hidden px-4 py-4 sm:table-cell md:px-6">Terakhir</th><th className="px-4 py-4 text-center md:px-6">Aksi</th></tr></thead>
           <tbody className="divide-y divide-border/30">
             {filtered.map(c => (
               <tr key={c.id} className="hover:bg-surface/30">
@@ -188,7 +192,7 @@ export default function PelangganClient({ settings }: { settings: InvoiceSetting
               <button onClick={() => setInvoiceOrder(null)} className="rounded-lg p-1 text-text-muted hover:bg-surface hover:text-text">&times;</button>
             </div>
             <div className="max-h-[70vh] overflow-y-auto">
-              <OrderInvoice order={invoiceOrder} settings={settings} showActions={false} rootId="customer-invoice-pdf" />
+              <OrderInvoice order={invoiceOrder} settings={settings} creator={invoiceCreator} showActions={false} rootId="customer-invoice-pdf" />
             </div>
             <div className="flex flex-wrap items-start justify-between gap-3 border-t border-border/40 bg-surface/30 px-6 py-4 rounded-b-xl">
               <button onClick={backToDetail} className="rounded-lg border border-border/60 px-4 py-2.5 text-sm font-medium text-text-muted transition-colors hover:bg-white">← Kembali</button>

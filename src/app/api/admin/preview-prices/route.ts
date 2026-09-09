@@ -1,9 +1,12 @@
 import { NextResponse } from "next/server";
 import { computePrices, getAllGoldTypes, getSetting, fetchInternationalGoldPrice, convertToIdrPerGram } from "@/lib/gold-api";
+import { requireRole } from "@/lib/supabase/server-user";
 
 export const dynamic = "force-dynamic";
 
 export async function POST(request: Request) {
+  const auth = await requireRole("admin", "cs");
+  if (!auth.ok) return auth.response;
   try {
     const body = await request.json();
     const hargaDasarJual = parseFloat(body.hargaDasarJual) || 0;

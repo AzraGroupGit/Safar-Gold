@@ -1,10 +1,13 @@
 import { NextResponse } from "next/server";
 import { calculatePrices, insertPriceHistory, setSetting } from "@/lib/gold-api";
 import { fetchInternationalGoldPrice, convertToIdrPerGram } from "@/lib/gold-api";
+import { requireRole } from "@/lib/supabase/server-user";
 
 export const dynamic = "force-dynamic";
 
 export async function POST(request: Request) {
+  const auth = await requireRole("admin");
+  if (!auth.ok) return auth.response;
   try {
     const body = await request.json();
     const { hargaDasarJual, acuanBuybackLM, adjJual, adjBeli, adjPerhiasan, persenBuybackPerhiasan } = body;

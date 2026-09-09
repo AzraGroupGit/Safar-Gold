@@ -1,5 +1,6 @@
 import NextLink from "next/link";
-import { getPublicSettings } from "@/lib/gold-api";
+import Image from "next/image";
+import { getPublicSettings } from "@/lib/public-site-data";
 
 export default async function Footer() {
   const s = await getPublicSettings();
@@ -38,7 +39,7 @@ export default async function Footer() {
         <div className="grid gap-10 md:grid-cols-3">
           <div>
             <div className="flex items-center gap-3">
-              <img src="/logo-1.webp" alt="Safar Gold" className="h-9 w-auto rounded-lg object-contain brightness-0 invert" />
+              <Image src="/logo-1.webp" alt="Safar Gold" width={1901} height={2085} className="h-9 w-auto rounded-lg object-contain brightness-0 invert" />
               <div>
                 <p className="font-serif text-base font-semibold text-white">Safar<span className="text-gold">Gold</span></p>
                 <p className="text-xs text-footer-text/60">Jual Beli Emas Terpercaya</p>

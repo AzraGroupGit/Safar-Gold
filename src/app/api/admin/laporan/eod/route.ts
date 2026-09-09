@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
-import { canGenerateEod } from "@/lib/order-lifecycle";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { getServerUser, getUserRole } from "@/lib/supabase/server-user";
+import { requireCapability } from "@/lib/supabase/server-user";
 
 export const dynamic = "force-dynamic";
 
@@ -25,6 +24,8 @@ function wibDateStr(d: Date = new Date()): string {
 }
 
 export async function GET() {
+  const auth = await requireCapability("eod:read");
+  if (!auth.ok) return auth.response;
   const adm = createAdminClient();
   const { data, error } = await adm
     .from("eod_reports")
@@ -38,11 +39,8 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    const user = await getServerUser();
-    if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    if (!canGenerateEod(getUserRole(user))) {
-      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-    }
+    const auth = await requireCapability("eod:generate");
+    if (!auth.ok) return auth.response;
     const body = await request.json().catch(() => ({}));
     const date = body.date ?? wibDateStr();
 
@@ -121,7 +119,7 @@ export async function POST(request: Request) {
       net: totalJual - totalBuyback,
       breakdown,
       stock_snapshot: stockSnapshot,
-      generated_by: user.id,
+      generated_by: auth.user.id,
       generated_at: new Date().toISOString(),
       is_stale: false,
       stale_at: null,

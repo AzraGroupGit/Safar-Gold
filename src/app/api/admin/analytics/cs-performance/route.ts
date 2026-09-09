@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { aggregateCsTeamPerformance, type CsTeamOrder } from "@/lib/cs-performance";
 import type { AnalyticsGrain } from "@/lib/analytics";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { getServerUser, getUserRole } from "@/lib/supabase/server-user";
+import { getUserRole, requireCapability } from "@/lib/supabase/server-user";
 
 export const dynamic = "force-dynamic";
 const datePattern = /^\d{4}-\d{2}-\d{2}$/;
@@ -12,9 +12,8 @@ function isValidDate(value: string) { return datePattern.test(value) && !Number.
 
 export async function GET(request: Request) {
   try {
-    const user = await getServerUser();
-    if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    if (getUserRole(user) !== "admin") return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    const auth = await requireCapability("analytics:read");
+    if (!auth.ok) return auth.response;
 
     const params = new URL(request.url).searchParams;
     const today = wibToday();

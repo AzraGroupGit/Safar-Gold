@@ -1,5 +1,14 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
+import { NextResponse } from "next/server";
+import {
+  hasCapability,
+  normalizeAppRole,
+  type AppRole,
+  type Capability,
+} from "../permissions";
+
+export type { AppRole } from "../permissions";
 
 export async function getServerUser() {
   const cookieStore = await cookies();
@@ -21,10 +30,50 @@ export async function getServerUser() {
 }
 
 export function getUserRole(user: { app_metadata?: Record<string, unknown>; user_metadata?: Record<string, unknown> }) {
-  for (const candidate of [user.app_metadata?.role, user.user_metadata?.role]) {
-    if (typeof candidate !== "string") continue;
-    const normalized = candidate.trim().toLowerCase();
-    if (normalized === "admin" || normalized === "cs") return normalized;
+  return normalizeAppRole(user.app_metadata?.role);
+}
+
+export function isRoleAllowed(role: AppRole | null, allowedRoles: readonly AppRole[]): boolean {
+  return role !== null && allowedRoles.includes(role);
+}
+
+export async function requireUser() {
+  const user = await getServerUser();
+  if (!user) {
+    return {
+      ok: false as const,
+      response: NextResponse.json({ error: "Unauthorized" }, { status: 401 }),
+    };
   }
-  return null;
+  return { ok: true as const, user };
+}
+
+export async function requireRole(...allowedRoles: AppRole[]) {
+  const authenticated = await requireUser();
+  if (!authenticated.ok) return authenticated;
+
+  const role = getUserRole(authenticated.user);
+  if (!isRoleAllowed(role, allowedRoles)) {
+    return {
+      ok: false as const,
+      response: NextResponse.json({ error: "Forbidden" }, { status: 403 }),
+    };
+  }
+
+  return { ok: true as const, user: authenticated.user, role };
+}
+
+export async function requireCapability(capability: Capability) {
+  const authenticated = await requireUser();
+  if (!authenticated.ok) return authenticated;
+
+  const role = getUserRole(authenticated.user);
+  if (!hasCapability(role, capability)) {
+    return {
+      ok: false as const,
+      response: NextResponse.json({ error: "Forbidden" }, { status: 403 }),
+    };
+  }
+
+  return { ok: true as const, user: authenticated.user, role };
 }

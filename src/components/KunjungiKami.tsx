@@ -1,4 +1,4 @@
-import { getPublicSettings } from "@/lib/gold-api";
+import { getPublicSettings } from "@/lib/public-site-data";
 
 export default async function KunjungiKami() {
   const s = await getPublicSettings();
