@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Navbar() {
   const [visible, setVisible] = useState(true);
@@ -45,9 +46,11 @@ export default function Navbar() {
       >
         <div className="flex items-center gap-3 rounded-[20px] border border-border/60 bg-white/70 px-4 py-3 shadow-lg shadow-black/[0.03] backdrop-blur-md md:gap-6 md:rounded-[24px] md:px-8 md:py-4">
           <Link href="/" className="flex shrink-0 items-center">
-            <img
+            <Image
               src="/logo-1.webp"
               alt="Safar Gold"
+              width={1901}
+              height={2085}
               className="h-8 w-auto rounded-lg object-contain md:h-11"
             />
           </Link>

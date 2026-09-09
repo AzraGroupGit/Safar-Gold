@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import type { GoldTypeRow, FormattedPrice } from "@/lib/gold-api";
 import { sortGoldTypes } from "@/lib/gold-api";
 import { createClient } from "@/lib/supabase/client";
+import { normalizeAppRole, type AppRole } from "@/lib/permissions";
 
 function formatRupiahClient(amount: number): string {
   return new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(amount);
@@ -179,14 +180,16 @@ export default function AdminHargaClient({ goldTypes, prices }: { goldTypes: Gol
   );
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
-  const [role, setRole] = useState<string>("admin");
+  const [role, setRole] = useState<AppRole | null>(null);
   const hasData = prices.length > 0 && prices.some(p => p.buyPrice > 0 || p.sellPrice > 0);
 
   useEffect(() => {
     async function fetchRole() {
       const supabase = createClient();
       const { data: { user } } = await supabase.auth.getUser();
-      if (user) setRole(user.user_metadata?.role ?? "admin");
+      if (user) {
+        setRole(normalizeAppRole(user.app_metadata?.role));
+      }
     }
     fetchRole();
   }, []);
@@ -249,7 +252,7 @@ export default function AdminHargaClient({ goldTypes, prices }: { goldTypes: Gol
           <h1 className="font-serif text-2xl font-semibold text-text">Manajemen Harga</h1>
           <p className="mt-1 text-sm text-text-muted">Atur mode & harga per jenis emas</p>
         </div>
-        {role !== "cs" && (
+        {role === "admin" && (
           <button onClick={() => setShowModal(true)} className="rounded-lg border border-gold/40 px-5 py-2.5 text-sm font-semibold text-gold-dark transition-colors hover:bg-gold/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 focus-visible:ring-offset-2">
             Atur Mode Harga
           </button>

@@ -1,8 +1,8 @@
-import { getSetting } from "@/lib/gold-api";
+import { getPublicSetting } from "@/lib/public-site-data";
 import FeaturableWidget from "@/components/FeaturableWidget";
 
 export default async function Testimoni() {
-  const widgetId = (await getSetting("google_reviews_widget_id")) || "example";
+  const widgetId = (await getPublicSetting("google_reviews_widget_id")) || "example";
 
   return (
     <section className="relative overflow-hidden bg-surface px-4 py-16 md:px-6 md:py-24 lg:py-32">

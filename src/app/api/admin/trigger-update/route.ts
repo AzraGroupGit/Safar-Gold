@@ -6,10 +6,13 @@ import {
   insertPriceHistory,
   setSetting,
 } from "@/lib/gold-api";
+import { requireRole } from "@/lib/supabase/server-user";
 
 export const dynamic = "force-dynamic";
 
 export async function POST() {
+  const auth = await requireRole("admin");
+  if (!auth.ok) return auth.response;
   try {
     const { xauUsdPerOz, xagUsdPerOz, xpdUsdPerOz, usdIdrRate, error } =
       await fetchInternationalGoldPrice();

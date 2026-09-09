@@ -1,8 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { syncTodayPrices } from "@/lib/gold-api";
+import { requireRole } from "@/lib/supabase/server-user";
 
 export async function POST(request: NextRequest) {
+  const auth = await requireRole("admin");
+  if (!auth.ok) return auth.response;
   try {
     const body = await request.json();
     if (!Array.isArray(body)) {

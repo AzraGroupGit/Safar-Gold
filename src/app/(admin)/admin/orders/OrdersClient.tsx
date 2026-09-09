@@ -7,6 +7,7 @@ import { createClient } from "@/lib/supabase/client";
 import OrderInvoice, { type InvoiceOrder, type InvoiceSettings } from "@/components/OrderInvoice";
 import SignaturePad from "@/components/SignaturePad";
 import { formatOrderAddress, getOrderItemDetails } from "@/lib/order-cart-presentation";
+import { normalizeAppRole, type AppRole } from "@/lib/permissions";
 
 type Order = { id: string; order_number: string; type: string; customer_name: string; customer_phone: string; total: number; status: string; created_at: string; payment_method?: string | null; notes?: string | null; gp?: number | null; created_by?: string | null };
 type OrderDetail = Order & { order_items: { id?: string; item_name: string; weight: number; karat: number | null; qty: number; price_per_gram: number; price_total: number; gold_type_id?: string | null; brand?: string | null }[]; source?: string | null; nik?: string | null; address?: string | null; instagram?: string | null; provinsi?: string | null; kabupaten?: string | null; kecamatan?: string | null; kelurahan?: string | null; province_id?: string | null; regency_id?: string | null; district_id?: string | null; village_id?: string | null };
@@ -71,7 +72,7 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
   const [paymentMethod, setPaymentMethod] = useState<"cash" | "transfer">("cash");
   const [notes, setNotes] = useState("");
   const [gp, setGp] = useState("");
-  const [role, setRole] = useState<string>("admin");
+  const [role, setRole] = useState<AppRole | null>(null);
   const [printCreator, setPrintCreator] = useState<{ name: string | null; signature: string | null } | null>(null);
 
   // Region cascade
@@ -103,7 +104,9 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
   useEffect(() => {
     const supabase = createClient();
     supabase.auth.getUser().then(({ data }) => {
-      if (data?.user) setRole(data.user.user_metadata?.role ?? "admin");
+      if (data?.user) {
+        setRole(normalizeAppRole(data.user.app_metadata?.role));
+      }
     });
   }, []);
 
@@ -253,14 +256,10 @@ export default function OrdersClient({ prices, goldTypes, settings }: { prices: 
   }
 
   function openPrint(o: Order) {
-    fetch(`/api/admin/orders/${o.id}`).then(r => r.json()).then(async d => {
+    fetch(`/api/admin/orders/${o.id}`).then(r => r.json()).then(d => {
       const order = d.order ?? null;
       setPrintOrder(order);
-      setPrintCreator(null);
-      if (order?.created_by) {
-        const pr = await fetch(`/api/admin/user-profile?userId=${order.created_by}`).then(r => r.json());
-        setPrintCreator(pr.profile ?? null);
-      }
+      setPrintCreator(d.creator ?? null);
     });
   }
 

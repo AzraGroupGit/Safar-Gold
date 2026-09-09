@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { getMarketInfo, getSetting, formatRupiah } from "@/lib/gold-api";
+import { formatRupiah } from "@/lib/gold-api";
+import { getPublicMarketInfo, getPublicSetting } from "@/lib/public-site-data";
 
 const GOLD_OZ = 31.1034768;
 
@@ -34,11 +35,11 @@ function FluctuationBadge({ current, prev }: { current: number; prev: number }) 
 
 export default async function LivePriceBand() {
   const [market, globalRaw, globalPrevRaw, antamRaw, antamPrevRaw] = await Promise.all([
-    getMarketInfo(),
-    getSetting("global_gold_price"),
-    getSetting("global_gold_price_prev"),
-    getSetting("antam_price"),
-    getSetting("antam_price_prev"),
+    getPublicMarketInfo(),
+    getPublicSetting("global_gold_price"),
+    getPublicSetting("global_gold_price_prev"),
+    getPublicSetting("antam_price"),
+    getPublicSetting("antam_price_prev"),
   ]);
 
   const antamPrice = parseInt(antamRaw) || 0;

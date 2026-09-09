@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { aggregateCsPerformance, canViewOwnCsPerformance, type CsPerformanceOrder } from "@/lib/cs-performance";
+import { aggregateCsActivity, canViewOwnCsPerformance, type CsActivityOrder } from "@/lib/cs-performance";
 import { getPreviousRange, type AnalyticsGrain } from "@/lib/analytics";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getServerUser, getUserRole } from "@/lib/supabase/server-user";
@@ -12,13 +12,13 @@ function isValidDate(value: string) { return datePattern.test(value) && !Number.
 
 async function loadOrders(userId: string, from: string, to: string) {
   const { data, error } = await createAdminClient().from("orders")
-    .select("id, order_number, type, status, customer_name, total, created_at, order_items(qty, weight)")
+    .select("id, order_number, type, status, customer_name, created_at, order_items(qty, weight)")
     .eq("created_by", userId)
     .gte("created_at", new Date(`${from}T00:00:00+07:00`).toISOString())
     .lt("created_at", new Date(`${addDays(to, 1)}T00:00:00+07:00`).toISOString())
     .order("created_at", { ascending: false });
   if (error) throw error;
-  return (data ?? []) as unknown as CsPerformanceOrder[];
+  return (data ?? []) as unknown as CsActivityOrder[];
 }
 
 export async function GET(request: Request) {
@@ -40,7 +40,7 @@ export async function GET(request: Request) {
     const grain = grainParam as AnalyticsGrain;
     const previousRange = getPreviousRange(from, to);
     const [currentOrders, previousOrders] = await Promise.all([loadOrders(user.id, from, to), loadOrders(user.id, previousRange.from, previousRange.to)]);
-    return NextResponse.json({ range: { from, to, grain }, previousRange, current: aggregateCsPerformance(currentOrders, grain), previous: aggregateCsPerformance(previousOrders, grain) });
+    return NextResponse.json({ range: { from, to, grain }, previousRange, current: aggregateCsActivity(currentOrders, grain), previous: aggregateCsActivity(previousOrders, grain) });
   } catch (error) {
     return NextResponse.json({ error: error instanceof Error ? error.message : "Gagal memuat performa" }, { status: 500 });
   }

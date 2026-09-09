@@ -17,7 +17,7 @@ const CATEGORY_LABELS: Record<string, string> = {
 };
 const BRAND_OPTIONS = ["Antam", "Antam Retro", "UBS", "HRTA", "BSI", "G24", "Lainnya"];
 
-export default function StockClient({ goldTypes }: { goldTypes: GoldTypeRow[] }) {
+export default function StockClient({ goldTypes, canManage }: { goldTypes: GoldTypeRow[]; canManage: boolean }) {
   const [stock, setStock] = useState<StockRow[]>([]);
   const [movements, setMovements] = useState<Movement[]>([]);
   const [loading, setLoading] = useState(true);
@@ -72,7 +72,9 @@ export default function StockClient({ goldTypes }: { goldTypes: GoldTypeRow[] })
       try {
         const [s, m] = await Promise.all([
           fetch(`/api/admin/stock?range=${range}`).then(r => r.json()),
-          fetch("/api/admin/stock/movements").then(r => r.json()),
+          canManage
+            ? fetch("/api/admin/stock/movements").then(r => r.json())
+            : Promise.resolve({ movements: [] }),
         ]);
         if (!cancelled) {
           setStock(s.stock ?? []);
@@ -84,7 +86,7 @@ export default function StockClient({ goldTypes }: { goldTypes: GoldTypeRow[] })
     }
     load();
     return () => { cancelled = true; };
-  }, [reloadKey, range]);
+  }, [canManage, reloadKey, range]);
 
   async function handleAdjust() {
     if (!adjProduct || adjQty <= 0) { setError("Pilih produk dan qty"); return; }
@@ -202,9 +204,9 @@ export default function StockClient({ goldTypes }: { goldTypes: GoldTypeRow[] })
     <div>
       <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
         <div><h1 className="font-serif text-2xl font-semibold text-text">Stok</h1><p className="mt-1 text-sm text-text-muted">Inventori emas — LM jual dan buyback</p></div>
-        {activeTab === "stock" && (
+        {canManage && activeTab === "stock" ? (
           <button onClick={() => { setAdjType("in"); setAdjProduct(inOptions[0]?.id ?? ""); setAdjQty(1); setAdjNotes(""); setError(""); setShowModal(true); }} className="rounded-lg bg-gold px-5 py-2.5 text-sm font-semibold text-[#1a1a1a] transition-colors hover:bg-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40 focus-visible:ring-offset-2">Sesuaikan stok</button>
-        )}
+        ) : !canManage ? <span className="rounded-full border border-border/60 bg-white px-3 py-1.5 text-xs font-semibold text-text-muted">Akses baca saja</span> : null}
       </div>
 
       <div className="mb-5 border-b border-border/50">
@@ -213,10 +215,10 @@ export default function StockClient({ goldTypes }: { goldTypes: GoldTypeRow[] })
             Stok <span className="ml-1 text-xs font-normal text-text-light">{stock.length}</span>
             {activeTab === "stock" && <span className="absolute inset-x-0 bottom-0 h-0.5 bg-gold" />}
           </button>
-          <button role="tab" aria-selected={activeTab === "movements"} onClick={() => setActiveTab("movements")} className={`relative pb-3 text-sm font-semibold transition-colors ${activeTab === "movements" ? "text-gold-dark" : "text-text-muted hover:text-text"}`}>
+          {canManage && <button role="tab" aria-selected={activeTab === "movements"} onClick={() => setActiveTab("movements")} className={`relative pb-3 text-sm font-semibold transition-colors ${activeTab === "movements" ? "text-gold-dark" : "text-text-muted hover:text-text"}`}>
             Riwayat pergerakan <span className="ml-1 text-xs font-normal text-text-light">{movements.length}</span>
             {activeTab === "movements" && <span className="absolute inset-x-0 bottom-0 h-0.5 bg-gold" />}
-          </button>
+          </button>}
         </div>
       </div>
 
@@ -260,10 +262,10 @@ export default function StockClient({ goldTypes }: { goldTypes: GoldTypeRow[] })
                   <tr key={`${s.gold_type_id}|${s.brand ?? ""}`} className="hover:bg-surface/30">
                     <td className="px-4 py-3.5 md:px-5"><p className="truncate text-sm font-semibold text-text">{s.gold_types?.name ?? s.gold_type_id}</p><p className="mt-0.5 truncate text-[11px] text-text-muted">{CATEGORY_LABELS[goldTypeMap.get(s.gold_type_id)?.category ?? ""] ?? "-"} · {s.brand ?? "Antam"}</p></td>
                     <td className="hidden px-3 py-3.5 text-sm text-text-muted lg:table-cell">{s.gold_types?.weight ? `${s.gold_types.weight} g` : "-"}</td>
-                    <td className="hidden px-3 py-3.5 md:table-cell"><p className="text-sm font-medium tabular-nums text-text">{s.total_weight_sold ? `${s.total_weight_sold.toLocaleString("id-ID", { maximumFractionDigits: 3 })} g` : "-"}</p><p className="mt-0.5 truncate text-xs tabular-nums text-emerald-600">{s.total_revenue ? `Rp ${s.total_revenue.toLocaleString("id-ID")}` : "Belum ada penjualan"}</p></td>
+                    <td className="hidden px-3 py-3.5 md:table-cell"><p className="text-sm font-medium tabular-nums text-text">{s.total_weight_sold ? `${s.total_weight_sold.toLocaleString("id-ID", { maximumFractionDigits: 3 })} g` : "-"}</p>{canManage && <p className="mt-0.5 truncate text-xs tabular-nums text-emerald-600">{s.total_revenue ? `Rp ${s.total_revenue.toLocaleString("id-ID")}` : "Belum ada penjualan"}</p>}</td>
                     <td className="px-2 py-3.5 text-center"><span className={`text-sm font-bold tabular-nums ${s.qty <= s.min_qty ? "text-red-500" : "text-text"}`}>{s.qty}</span></td>
                     <td className="px-2 py-3.5 text-center">
-                      <button onClick={() => openMinModal(s)} className="text-sm text-text-muted underline underline-offset-2 hover:text-gold-dark">{s.min_qty}</button>
+                      {canManage ? <button onClick={() => openMinModal(s)} className="text-sm text-text-muted underline underline-offset-2 hover:text-gold-dark">{s.min_qty}</button> : <span className="text-sm text-text-muted">{s.min_qty}</span>}
                     </td>
                     <td className="px-2 py-3.5 text-center">
                       {s.qty === 0 ? <span className="rounded-full bg-red-50 px-2 py-0.5 text-xs font-medium text-red-600">Habis</span>
@@ -279,7 +281,7 @@ export default function StockClient({ goldTypes }: { goldTypes: GoldTypeRow[] })
         </div>
       )}
 
-{activeTab === "movements" && (
+{canManage && activeTab === "movements" && (
         <div className="overflow-x-auto rounded-xl border border-border/60 bg-white">
             <table className="w-full min-w-[1080px]">
               <thead><tr className="border-b border-border/40 bg-surface/50 text-left text-xs font-semibold uppercase tracking-wider text-text-muted"><th className="px-4 py-3">Waktu</th><th className="px-4 py-3">Produk</th><th className="px-4 py-3">Sumber</th><th className="px-4 py-3 text-center">Tipe</th><th className="px-4 py-3 text-center">Qty</th><th className="px-4 py-3">Petugas</th><th className="px-4 py-3">Catatan</th><th className="px-4 py-3">Status</th><th className="px-4 py-3 text-right">Aksi</th></tr></thead>
@@ -294,7 +296,7 @@ export default function StockClient({ goldTypes }: { goldTypes: GoldTypeRow[] })
        )}
 
       {/* Adjustment Modal */}
-      {showModal && (
+      {canManage && showModal && (
         <StockModalShell eyebrow="Inventori" title="Sesuaikan stok" description="Catat penambahan atau pengurangan inventori dengan histori yang dapat diaudit." onClose={() => setShowModal(false)} footer={<><p className="mr-auto hidden text-xs text-text-muted sm:block">Perubahan akan tercatat di riwayat.</p><button onClick={() => setShowModal(false)} className="rounded-lg border border-border/60 px-5 py-2.5 text-sm font-medium text-text-muted hover:bg-white">Batal</button><button onClick={handleAdjust} disabled={saving || adjustedStock < 0} className={`rounded-lg px-5 py-2.5 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-50 ${adjType === "in" ? "bg-emerald-600 hover:bg-emerald-700" : "bg-red-600 hover:bg-red-700"}`}>{saving ? "Menyimpan..." : adjType === "in" ? "Tambahkan stok" : "Kurangi stok"}</button></>}>
             <div className="px-5 py-5 sm:px-6">
               <div className="mb-5 grid grid-cols-2 rounded-lg border border-border/60 bg-surface p-1" role="tablist" aria-label="Jenis penyesuaian stok">
@@ -311,7 +313,7 @@ export default function StockClient({ goldTypes }: { goldTypes: GoldTypeRow[] })
       )}
 
       {/* Stock Correction Modal */}
-      {correctionMovement && (
+      {canManage && correctionMovement && (
         <StockModalShell eyebrow="Koreksi audit" title="Koreksi pergerakan stok" description="Histori asli tetap dipertahankan; sistem membuat movement pembalik dan pengganti." onClose={() => setCorrectionMovement(null)} footer={<><button type="button" onClick={() => setCorrectionMovement(null)} className="rounded-lg border border-border/60 px-5 py-2.5 text-sm font-medium text-text-muted hover:bg-white">Batal</button><button type="button" onClick={handleCorrection} disabled={saving || correctedQty <= 0 || correctedQty === correctionMovement.qty || correctionFinalStock < 0 || !correctionReason.trim()} className="rounded-lg bg-gold px-5 py-2.5 text-sm font-semibold text-[#1a1a1a] hover:bg-gold-light disabled:cursor-not-allowed disabled:opacity-50">{saving ? "Menyimpan..." : "Simpan koreksi"}</button></>}>
             <div className="space-y-4 px-5 py-5 sm:px-6">
               {error && <div role="alert" className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-600">{error}</div>}
@@ -325,7 +327,7 @@ export default function StockClient({ goldTypes }: { goldTypes: GoldTypeRow[] })
       )}
 
       {/* Min Qty Modal */}
-      {showMinModal && minProduct && (
+      {canManage && showMinModal && minProduct && (
         <StockModalShell size="compact" eyebrow="Batas inventori" title="Edit minimum stok" description="Atur kapan produk ditandai menipis dan membutuhkan perhatian." onClose={() => setShowMinModal(false)} footer={<><button onClick={() => setShowMinModal(false)} className="rounded-lg border border-border/60 px-5 py-2.5 text-sm font-medium text-text-muted hover:bg-white">Batal</button><button onClick={handleSaveMinQty} disabled={saving} className="rounded-lg bg-gold px-5 py-2.5 text-sm font-semibold text-[#1a1a1a] hover:bg-gold-light disabled:opacity-60">{saving ? "Menyimpan..." : "Simpan minimum"}</button></>}>
           <div className="space-y-4 px-5 py-5 sm:px-6">
             {error && <div className="mb-3 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-xs text-red-600">{error}</div>}

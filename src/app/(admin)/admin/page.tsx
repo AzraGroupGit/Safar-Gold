@@ -9,6 +9,7 @@ import { createAnonClient } from "@/lib/supabase/anon";
 import { createClient } from "@/lib/supabase/client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { normalizeAppRole, type AppRole } from "@/lib/permissions";
 
 export const dynamic = "force-dynamic";
 
@@ -138,7 +139,7 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
   const [settings, setSettings] = useState<Record<string, string> | null>(null);
   const [medianFactors, setMedianFactors] = useState<Awaited<ReturnType<typeof getMedianFactors>> | null>(null);
-  const [role, setRole] = useState<string>("admin");
+  const [role, setRole] = useState<AppRole | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [retryKey, setRetryKey] = useState(0);
 
@@ -149,7 +150,9 @@ export default function AdminDashboard() {
       try {
         const supabase = createClient();
         const { data: { user } } = await supabase.auth.getUser();
-        if (!cancelled && user) setRole(user.user_metadata?.role ?? "admin");
+        if (!cancelled && user) {
+          setRole(normalizeAppRole(user.app_metadata?.role));
+        }
 
         const [gt, pr, mf] = await Promise.all([
           getAllGoldTypes(),
@@ -259,7 +262,7 @@ export default function AdminDashboard() {
           label="Jenis Emas"
           value={`${goldTypes.length}`}
           sub={`${goldTypes.filter((g: GoldTypeRow) => g.is_auto).length} auto, ${goldTypes.length - goldTypes.filter((g: GoldTypeRow) => g.is_auto).length} manual`}
-          href="/admin/jenis-emas"
+          href={role === "admin" ? "/admin/jenis-emas" : "/admin/stock"}
         />
         <StatCard
           label="Harga Tersedia"
@@ -324,6 +327,10 @@ export default function AdminDashboard() {
           <p className="mt-1 text-sm text-text-muted">
             Halaman ini hanya dapat dilihat. Pengaturan harga hanya untuk Admin.
           </p>
+          <div className="mt-5 flex flex-wrap justify-center gap-2">
+            <Link href="/admin/orders" className="rounded-lg bg-gold px-4 py-2 text-sm font-semibold text-[#1a1a1a] hover:bg-gold-light">Buat Order</Link>
+            <Link href="/admin/performa" className="rounded-lg border border-border/60 px-4 py-2 text-sm font-semibold text-text-muted hover:border-gold/40 hover:text-gold-dark">Lihat Performa Saya</Link>
+          </div>
         </div>
       )}
 

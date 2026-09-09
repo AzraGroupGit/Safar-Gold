@@ -9,7 +9,7 @@ import KunjungiKami from "@/components/KunjungiKami";
 import FAQ from "@/components/FAQ";
 import GoldDivider from "@/components/GoldDivider";
 import LegalitasSection from "@/components/LegalitasSection";
-import { getPublicSettings } from "@/lib/gold-api";
+import { getPublicSettings } from "@/lib/public-site-data";
 
 export const metadata: Metadata = {
   title: {

@@ -1,9 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
-import { getHeroContent, getMarketInfo } from "@/lib/gold-api";
+import { getHeroContent, getPublicMarketInfo } from "@/lib/public-site-data";
 
 export default async function Hero() {
-  const [hero, market] = await Promise.all([getHeroContent(), getMarketInfo()]);
+  const [hero, market] = await Promise.all([getHeroContent(), getPublicMarketInfo()]);
 
   const lastUpdate = market.lastUpdate
     ? new Date(market.lastUpdate).toLocaleDateString("id-ID", { day: "numeric", month: "short" })

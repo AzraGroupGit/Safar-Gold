@@ -35,12 +35,11 @@ export type ParsedOrderMutation = {
 };
 
 export function canManageOrders(role: unknown): boolean {
-  const normalized = typeof role === "string" ? role.trim().toLowerCase() : "";
-  return normalized === "admin" || normalized === "cs";
+  return hasCapability(normalizeAppRole(role), "orders:create");
 }
 
 export function canGenerateEod(role: unknown): boolean {
-  return typeof role === "string" && role.trim().toLowerCase() === "admin";
+  return hasCapability(normalizeAppRole(role), "eod:generate");
 }
 
 function optionalText(value: unknown): string | null {
@@ -123,3 +122,4 @@ export function parseOrderMutation(input: unknown): ParsedOrderMutation {
     total: items.reduce((sum, item) => sum + item.priceTotal, 0),
   };
 }
+import { hasCapability, normalizeAppRole } from "./permissions";

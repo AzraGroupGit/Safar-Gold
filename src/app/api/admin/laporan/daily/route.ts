@@ -1,11 +1,14 @@
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { requireCapability } from "@/lib/supabase/server-user";
 
 export const dynamic = "force-dynamic";
 
 type OrderItemQuantity = { qty: number };
 
 export async function GET(request: Request) {
+  const auth = await requireCapability("reports:read-all");
+  if (!auth.ok) return auth.response;
   const { searchParams } = new URL(request.url);
   const range = searchParams.get("range") ?? "today";
   const adm = createAdminClient();

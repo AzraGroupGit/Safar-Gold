@@ -1,5 +1,86 @@
 {
-  "generated_at": "2026-09-07T02:38:36.905674+00:00",
-  "nodes": {},
+  "generated_at": "2026-09-08T03:05:49.276985+00:00",
+  "nodes": {
+    "src_app_admin_admin_analitik_analyticsclient": {
+      "code_fingerprint": "1d8893844d082549dcb36fd2c5f668d2a04cf0dea7d8f0c4d3c64f226ff44b90",
+      "label": "AnalyticsClient.tsx",
+      "last": "2026-09-07T02:39:16.078096+00:00",
+      "provenance": [
+        {
+          "date": "2026-09-07T02:39:16.078096+00:00",
+          "outcome": "useful",
+          "q": "Dashboard statistik stock dan sumber pelanggan sebaiknya ditempatkan di mana dan berisi apa"
+        }
+      ],
+      "score": 0.976743738,
+      "source_file": "src/app/(admin)/admin/analitik/AnalyticsClient.tsx",
+      "status": "tentative",
+      "uses": 1
+    },
+    "src_app_admin_admin_stock_stockclient": {
+      "code_fingerprint": "9b1ccf0fca105271b1a071441131e131c1ff3e2238eb2cc8605a8020b1b59249",
+      "label": "StockClient.tsx",
+      "last": "2026-09-07T02:39:16.078096+00:00",
+      "provenance": [
+        {
+          "date": "2026-09-07T02:39:16.078096+00:00",
+          "outcome": "useful",
+          "q": "Dashboard statistik stock dan sumber pelanggan sebaiknya ditempatkan di mana dan berisi apa"
+        }
+      ],
+      "score": 0.976743738,
+      "source_file": "src/app/(admin)/admin/stock/StockClient.tsx",
+      "status": "tentative",
+      "uses": 1
+    },
+    "src_app_api_admin_stock_movements_route": {
+      "code_fingerprint": "5662b6adab16923671d3a1b4956861f125c939c6fe77b1a0f4855bf101ae03fa",
+      "label": "movements/route.ts",
+      "last": "2026-09-07T02:39:16.078096+00:00",
+      "provenance": [
+        {
+          "date": "2026-09-07T02:39:16.078096+00:00",
+          "outcome": "useful",
+          "q": "Dashboard statistik stock dan sumber pelanggan sebaiknya ditempatkan di mana dan berisi apa"
+        }
+      ],
+      "score": 0.976743738,
+      "source_file": "src/app/api/admin/stock/movements/route.ts",
+      "status": "tentative",
+      "uses": 1
+    },
+    "src_app_api_admin_stock_sales_summary_route": {
+      "code_fingerprint": "a20222581afec19d2999721216bca667e011f3afe8f7812a35dbb514db982726",
+      "label": "sales-summary/route.ts",
+      "last": "2026-09-07T02:39:16.078096+00:00",
+      "provenance": [
+        {
+          "date": "2026-09-07T02:39:16.078096+00:00",
+          "outcome": "useful",
+          "q": "Dashboard statistik stock dan sumber pelanggan sebaiknya ditempatkan di mana dan berisi apa"
+        }
+      ],
+      "score": 0.976743738,
+      "source_file": "src/app/api/admin/stock/sales-summary/route.ts",
+      "status": "tentative",
+      "uses": 1
+    },
+    "src_lib_supabase_server_user_approle": {
+      "code_fingerprint": "a9012a2241626fd9703c1e5a303cae1f98bd9a9c2518642b83fb1cd46e7f3dc0",
+      "label": "AppRole",
+      "last": "2026-09-08T02:57:34.703932+00:00",
+      "provenance": [
+        {
+          "date": "2026-09-08T02:57:34.703932+00:00",
+          "outcome": "useful",
+          "q": "Apakah dashboard CS dan admin sudah saling sinkron untuk seluruh fitur?"
+        }
+      ],
+      "score": 0.999867751,
+      "source_file": "src/lib/supabase/server-user.ts",
+      "status": "tentative",
+      "uses": 1
+    }
+  },
   "version": 1
 }

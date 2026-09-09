@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "vitest run"
+    "test": "vitest run",
+    "smoke:v17": "node --env-file-if-exists=.env scripts/smoke-v17.mts",
+    "smoke:v17:anon": "node --env-file-if-exists=.env scripts/smoke-v17.mts --scope=anon",
+    "smoke:v17:roles": "node --env-file-if-exists=.env scripts/smoke-v17.mts --scope=roles"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.4",
@@ -15,7 +18,7 @@
     "chart.js": "^4.5.1",
     "html2canvas": "^1.4.1",
     "jspdf": "^4.2.1",
-    "next": "16.2.12",
+    "next": "16.3.4",
     "react": "19.2.4",
     "react-chartjs-2": "^5.3.1",
     "react-dom": "19.2.4",
@@ -27,7 +30,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.2.12",
+    "eslint-config-next": "16.3.4",
     "tailwindcss": "^4",
     "typescript": "^5",
     "vitest": "^4.1.11"

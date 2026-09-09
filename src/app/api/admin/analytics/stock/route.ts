@@ -2,15 +2,14 @@ import { NextResponse } from "next/server";
 import { aggregateStockAnalytics, type StockMovementInput, type StockSale, type StockSnapshot } from "@/lib/operational-analytics";
 import type { AnalyticsGrain } from "@/lib/analytics";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { getServerUser, getUserRole } from "@/lib/supabase/server-user";
+import { requireCapability } from "@/lib/supabase/server-user";
 
 export const dynamic = "force-dynamic";
 const addDay = (date: string) => { const d = new Date(`${date}T00:00:00Z`); d.setUTCDate(d.getUTCDate() + 1); return d.toISOString().slice(0, 10); };
 
 export async function GET(request: Request) {
-  const user = await getServerUser();
-  if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  if (getUserRole(user) !== "admin") return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  const auth = await requireCapability("analytics:read");
+  if (!auth.ok) return auth.response;
   const p = new URL(request.url).searchParams; const from = p.get("from") ?? ""; const to = p.get("to") ?? ""; const grain = (p.get("grain") ?? "day") as AnalyticsGrain;
   if (!/^\d{4}-\d{2}-\d{2}$/.test(from) || !/^\d{4}-\d{2}-\d{2}$/.test(to) || from > to || !["day", "week", "month"].includes(grain)) return NextResponse.json({ error: "Filter tidak valid" }, { status: 400 });
   const start = new Date(`${from}T00:00:00+07:00`).toISOString(); const end = new Date(`${addDay(to)}T00:00:00+07:00`).toISOString(); const db = createAdminClient();
