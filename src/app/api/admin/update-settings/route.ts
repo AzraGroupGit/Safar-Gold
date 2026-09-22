@@ -1,24 +1,23 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { requireRole } from "@/lib/supabase/server-user";
+import { parseSettingsInput } from "@/lib/admin-input";
+import { internalServerError, validationError } from "@/lib/api-response";
 
-export async function POST(request: NextRequest) {
+export async function POST(request: Request) {
   const auth = await requireRole("admin");
   if (!auth.ok) return auth.response;
   try {
-    const body = await request.json();
-    const admin = createAdminClient();
+    const body = await request.json().catch(() => null);
+    const parsed = parseSettingsInput(body);
+    if (!parsed.ok) return validationError(parsed.error);
 
-    if (body.settings) {
-      const entries = Object.entries(body.settings).map(([key, value]) => ({
-        key,
-        value: String(value),
-      }));
-      await admin.from("app_settings").upsert(entries);
-    }
+    const admin = createAdminClient();
+    const { error } = await admin.from("app_settings").upsert(parsed.value);
+    if (error) throw error;
 
     return NextResponse.json({ success: true });
   } catch (err) {
-    return NextResponse.json({ error: String(err) }, { status: 500 });
+    return internalServerError("update-settings failed", err);
   }
 }

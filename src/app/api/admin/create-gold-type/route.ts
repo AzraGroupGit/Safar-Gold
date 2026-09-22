@@ -1,35 +1,20 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
+import { parseGoldTypeCreateInput } from "@/lib/admin-input";
+import { internalServerError, validationError } from "@/lib/api-response";
 import { createGoldType } from "@/lib/gold-api";
 import { requireRole } from "@/lib/supabase/server-user";
 
-export async function POST(request: NextRequest) {
+export async function POST(request: Request) {
   const auth = await requireRole("admin");
   if (!auth.ok) return auth.response;
   try {
-    const body = await request.json();
-    const { id, name, category, karat, weight, margin_buy, margin_sell } = body;
-
-    if (!id || !name || !category) {
-      return NextResponse.json({ error: "id, name, category wajib diisi" }, { status: 400 });
-    }
-
-    const validCategories = ["lm", "bb-lm", "bb-perhiasan", "bb-logam"];
-    if (!validCategories.includes(category)) {
-      return NextResponse.json({ error: "Kategori tidak valid" }, { status: 400 });
-    }
-
-    await createGoldType({
-      id,
-      name,
-      category,
-      karat: karat ?? null,
-      weight: weight ?? null,
-      margin_buy: margin_buy ?? 3.0,
-      margin_sell: margin_sell ?? 2.0,
-    });
+    const body = await request.json().catch(() => null);
+    const parsed = parseGoldTypeCreateInput(body);
+    if (!parsed.ok) return validationError(parsed.error);
+    await createGoldType(parsed.value);
 
     return NextResponse.json({ success: true });
   } catch (err) {
-    return NextResponse.json({ error: String(err) }, { status: 500 });
+    return internalServerError("gold-types.create", err);
   }
 }

@@ -1,8 +1,36 @@
 import { NextResponse } from "next/server";
+import {
+  parseAdminUserCreateInput,
+  parseAdminUserDeleteInput,
+  parseAdminUserUpdateInput,
+} from "@/lib/admin-input";
+import { conflictError, internalServerError, validationError } from "@/lib/api-response";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getUserRole, requireRole } from "@/lib/supabase/server-user";
 
 export const dynamic = "force-dynamic";
+
+function authErrorCode(error: unknown): string | null {
+  if (typeof error !== "object" || error === null || !("code" in error)) return null;
+  return typeof error.code === "string" ? error.code : null;
+}
+
+function authProviderError(context: string, error: unknown) {
+  const code = authErrorCode(error);
+  if (code === "email_exists" || code === "user_already_exists") {
+    return conflictError("USER_ALREADY_EXISTS", "Email sudah digunakan");
+  }
+  if (code === "weak_password") {
+    return validationError("Password tidak memenuhi kebijakan keamanan");
+  }
+  if (code === "user_not_found") {
+    return NextResponse.json(
+      { success: false, code: "USER_NOT_FOUND", error: "Pengguna tidak ditemukan" },
+      { status: 404 },
+    );
+  }
+  return internalServerError(context, error);
+}
 
 export async function GET() {
   try {
@@ -12,7 +40,7 @@ export async function GET() {
     const { data, error } = await supabase.auth.admin.listUsers();
 
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      return authProviderError("users.list", error);
     }
 
     const users = (data?.users ?? []).map((u) => ({
@@ -25,7 +53,7 @@ export async function GET() {
 
     return NextResponse.json({ users });
   } catch (err) {
-    return NextResponse.json({ error: String(err) }, { status: 500 });
+    return internalServerError("users.list", err);
   }
 }
 
@@ -33,34 +61,27 @@ export async function PUT(request: Request) {
   try {
     const auth = await requireRole("admin");
     if (!auth.ok) return auth.response;
-    const { userId, role, email, password } = await request.json();
-
-    if (!userId) {
-      return NextResponse.json({ error: "userId required" }, { status: 400 });
-    }
+    const body = await request.json().catch(() => null);
+    const parsed = parseAdminUserUpdateInput(body);
+    if (!parsed.ok) return validationError(parsed.error);
+    const { userId, role, email, password } = parsed.value;
 
     const supabase = createAdminClient();
     const updates: Record<string, unknown> = {};
 
-    if (email) updates.email = email;
-    if (password && password.length >= 6) updates.password = password;
-    if (role && ["admin", "cs"].includes(role)) {
-      updates.app_metadata = { role };
-    }
-
-    if (Object.keys(updates).length === 0) {
-      return NextResponse.json({ error: "No fields to update" }, { status: 400 });
-    }
+    if (email !== undefined) updates.email = email;
+    if (password !== undefined) updates.password = password;
+    if (role !== undefined) updates.app_metadata = { role };
 
     const { error } = await supabase.auth.admin.updateUserById(userId, updates);
 
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      return authProviderError("users.update", error);
     }
 
     return NextResponse.json({ success: true });
   } catch (err) {
-    return NextResponse.json({ error: String(err) }, { status: 500 });
+    return internalServerError("users.update", err);
   }
 }
 
@@ -68,32 +89,26 @@ export async function POST(request: Request) {
   try {
     const auth = await requireRole("admin");
     if (!auth.ok) return auth.response;
-    const { email, password, role } = await request.json();
-
-    if (!email || !password) {
-      return NextResponse.json({ error: "email and password required" }, { status: 400 });
-    }
-    if (password.length < 6) {
-      return NextResponse.json({ error: "Password minimal 6 karakter" }, { status: 400 });
-    }
-
-    const validRole = role && ["admin", "cs"].includes(role) ? role : "cs";
+    const body = await request.json().catch(() => null);
+    const parsed = parseAdminUserCreateInput(body);
+    if (!parsed.ok) return validationError(parsed.error);
+    const { email, password, role } = parsed.value;
     const supabase = createAdminClient();
 
     const { error } = await supabase.auth.admin.createUser({
       email,
       password,
       email_confirm: true,
-      app_metadata: { role: validRole },
+      app_metadata: { role },
     });
 
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      return authProviderError("users.create", error);
     }
 
     return NextResponse.json({ success: true });
   } catch (err) {
-    return NextResponse.json({ error: String(err) }, { status: 500 });
+    return internalServerError("users.create", err);
   }
 }
 
@@ -101,21 +116,20 @@ export async function DELETE(request: Request) {
   try {
     const auth = await requireRole("admin");
     if (!auth.ok) return auth.response;
-    const { userId } = await request.json();
-
-    if (!userId) {
-      return NextResponse.json({ error: "userId required" }, { status: 400 });
-    }
+    const body = await request.json().catch(() => null);
+    const parsed = parseAdminUserDeleteInput(body);
+    if (!parsed.ok) return validationError(parsed.error);
+    const userId = parsed.value;
 
     const supabase = createAdminClient();
     const { error } = await supabase.auth.admin.deleteUser(userId);
 
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      return authProviderError("users.delete", error);
     }
 
     return NextResponse.json({ success: true });
   } catch (err) {
-    return NextResponse.json({ error: String(err) }, { status: 500 });
+    return internalServerError("users.delete", err);
   }
 }

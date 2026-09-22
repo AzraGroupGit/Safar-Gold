@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import { parseEodDate } from "@/lib/admin-input";
+import { internalServerError, validationError } from "@/lib/api-response";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { requireCapability } from "@/lib/supabase/server-user";
 
@@ -26,44 +28,65 @@ function wibDateStr(d: Date = new Date()): string {
 export async function GET() {
   const auth = await requireCapability("eod:read");
   if (!auth.ok) return auth.response;
-  const adm = createAdminClient();
-  const { data, error } = await adm
-    .from("eod_reports")
-    .select("*")
-    .order("date", { ascending: false });
+  try {
+    const adm = createAdminClient();
+    const { data, error } = await adm
+      .from("eod_reports")
+      .select("*")
+      .order("date", { ascending: false });
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    if (error) return internalServerError("reports.eod.list", error);
 
-  return NextResponse.json({ eods: data ?? [] });
+    return NextResponse.json({ eods: data ?? [] });
+  } catch (error) {
+    return internalServerError("reports.eod.list", error);
+  }
 }
 
 export async function POST(request: Request) {
   try {
     const auth = await requireCapability("eod:generate");
     if (!auth.ok) return auth.response;
-    const body = await request.json().catch(() => ({}));
-    const date = body.date ?? wibDateStr();
+    const rawBody = await request.text();
+    let body: unknown = {};
+    if (rawBody.trim()) {
+      try {
+        body = JSON.parse(rawBody);
+      } catch {
+        return validationError("Payload EOD tidak valid");
+      }
+    }
+    if (typeof body !== "object" || body === null || Array.isArray(body)) {
+      return validationError("Payload EOD tidak valid");
+    }
+    const parsedDate = parseEodDate(
+      (body as Record<string, unknown>).date ?? wibDateStr(),
+    );
+    if (!parsedDate.ok) return validationError(parsedDate.error);
+    const date = parsedDate.value;
 
     const adm = createAdminClient();
 
     // Guard: EOD untuk tanggal ini sudah ada?
-    const { data: existing } = await adm
+    const { data: existing, error: existingError } = await adm
       .from("eod_reports")
       .select("*")
       .eq("date", date)
       .maybeSingle();
+    if (existingError) return internalServerError("reports.eod.lookup", existingError);
     if (existing && !existing.is_stale) return NextResponse.json({ exists: true, eod: existing });
 
     // Rentang WIB untuk tanggal tsb
     const start = new Date(`${date}T00:00:00+07:00`);
     const end = new Date(`${date}T23:59:59.999+07:00`);
 
-    const { data: orders } = await adm
+    const { data: orders, error: ordersError } = await adm
       .from("orders")
       .select("*, order_items(*)")
       .eq("status", "completed")
       .gte("created_at", start.toISOString())
       .lte("created_at", end.toISOString());
+    if (ordersError) return internalServerError("reports.eod.orders", ordersError);
 
     const allOrders = (orders ?? []) as EodOrder[];
     const jual = allOrders.filter((o) => o.type === "sell");
@@ -75,7 +98,10 @@ export async function POST(request: Request) {
     const totalBuybackItems = buyback.reduce((s, o) => s + (o.order_items ?? []).reduce((si, it) => si + it.qty, 0), 0);
 
     // Kategori per gold_type (untuk breakdown buyback)
-    const { data: goldTypes } = await adm.from("gold_types").select("id, category");
+    const { data: goldTypes, error: goldTypesError } = await adm
+      .from("gold_types")
+      .select("id, category");
+    if (goldTypesError) return internalServerError("reports.eod.gold-types", goldTypesError);
     const catMap = new Map((goldTypes ?? ([] as GoldTypeCat[])).map((g) => [g.id, g.category]));
 
     const breakdown = {
@@ -97,9 +123,10 @@ export async function POST(request: Request) {
     }
 
     // Snapshot stok
-    const { data: stock } = await adm
+    const { data: stock, error: stockError } = await adm
       .from("stock")
       .select("gold_type_id, qty, min_qty, gold_types:gold_type_id(name)");
+    if (stockError) return internalServerError("reports.eod.stock", stockError);
     const stockSnapshot = ((stock ?? []) as unknown as StockSnapshotRow[]).map((s) => ({
       gold_type_id: s.gold_type_id,
       name: s.gold_types?.name ?? s.gold_type_id,
@@ -129,10 +156,10 @@ export async function POST(request: Request) {
       : adm.from("eod_reports").insert(report);
     const { data: eod, error: insErr } = await query.select("*").single();
 
-    if (insErr) return NextResponse.json({ error: insErr.message }, { status: 500 });
+    if (insErr) return internalServerError("reports.eod.save", insErr);
 
     return NextResponse.json({ success: true, eod });
   } catch (err) {
-    return NextResponse.json({ error: String(err) }, { status: 500 });
+    return internalServerError("reports.eod.generate", err);
   }
 }

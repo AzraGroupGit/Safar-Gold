@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { aggregateCsTeamPerformance, type CsTeamOrder } from "@/lib/cs-performance";
 import type { AnalyticsGrain } from "@/lib/analytics";
+import { internalServerError } from "@/lib/api-response";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getUserRole, requireCapability } from "@/lib/supabase/server-user";
 
@@ -39,6 +40,6 @@ export async function GET(request: Request) {
     const data = aggregateCsTeamPerformance(csUsers, (orders ?? []) as unknown as CsTeamOrder[], grainParam as AnalyticsGrain);
     return NextResponse.json({ range: { from, to, grain: grainParam }, data });
   } catch (error) {
-    return NextResponse.json({ error: error instanceof Error ? error.message : "Gagal memuat performa CS" }, { status: 500 });
+    return internalServerError("analytics.cs-team", error);
   }
 }

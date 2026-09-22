@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { computePrices, getAllGoldTypes, getSetting, fetchInternationalGoldPrice, convertToIdrPerGram } from "@/lib/gold-api";
 import { requireRole } from "@/lib/supabase/server-user";
+import { parsePriceInput } from "@/lib/admin-input";
+import { internalServerError, validationError } from "@/lib/api-response";
 
 export const dynamic = "force-dynamic";
 
@@ -8,12 +10,16 @@ export async function POST(request: Request) {
   const auth = await requireRole("admin", "cs");
   if (!auth.ok) return auth.response;
   try {
-    const body = await request.json();
-    const hargaDasarJual = parseFloat(body.hargaDasarJual) || 0;
-    const acuanBuybackLM = parseFloat(body.acuanBuybackLM) || 0;
-    const adjJual = parseFloat(body.adjJual) || 0;
-    const adjBeli = parseFloat(body.adjBeli) || 0;
-    const persenBuybackPerhiasan = parseFloat(body.persenBuybackPerhiasan) || 81;
+    const body = await request.json().catch(() => null);
+    const parsed = parsePriceInput(body);
+    if (!parsed.ok) return validationError(parsed.error);
+    const {
+      hargaDasarJual,
+      acuanBuybackLM,
+      adjJual,
+      adjBeli,
+      persenBuybackPerhiasan,
+    } = parsed.value;
 
     const [goldTypes, premiStr, spreadStr, international] = await Promise.all([
       getAllGoldTypes(),
@@ -58,6 +64,6 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ success: true, items });
   } catch (err) {
-    return NextResponse.json({ error: String(err) }, { status: 500 });
+    return internalServerError("preview-prices failed", err);
   }
 }

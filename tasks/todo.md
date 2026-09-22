@@ -104,6 +104,9 @@ Dokumen ini mencatat perubahan yang telah selesai serta backlog hasil audit meny
 - [x] Gunakan hanya `app_metadata.role` sebagai sumber authorization; hapus fallback ke `user_metadata.role`.
 - [x] Hapus seluruh fallback role `admin` pada proxy, layout, sidebar, dan komponen client.
 - [x] Pastikan penyembunyian menu di UI hanya menjadi bantuan UX dan bukan mekanisme keamanan utama.
+- [x] Lindungi cron pembaruan harga dan scrape Antam dengan sesi admin atau `Authorization: Bearer CRON_SECRET`.
+- [x] Tolak akses anonim sebelum provider eksternal maupun penulisan `app_settings` dijalankan.
+- [x] Sanitasi kegagalan scrape Antam dan tambahkan regression test untuk admin, secret valid, secret salah, serta akses anonim.
 
 ### Sinkronisasi Akses Admin dan CS
 
@@ -144,14 +147,86 @@ Dokumen ini mencatat perubahan yang telah selesai serta backlog hasil audit meny
 - [x] Tambahkan test policy role dan audit authorization untuk seluruh handler API admin.
 - [x] Tambahkan test respons error utama: 400, 401, 403, 404, dan 409.
 - [x] Tambahkan integration test untuk lifecycle order, stok, EOD, pelanggan, serta publikasi harga.
-- [x] Pastikan build production selesai tanpa lock proses lain dan dokumentasikan hasil quality gate terakhir (2026-09-09: 117 test, typecheck, lint, build, dan audit production lulus).
+- [x] Pastikan build production selesai tanpa lock proses lain dan dokumentasikan hasil quality gate terakhir (2026-09-15: 251 test, typecheck, lint, dan build lulus; audit production terakhir lulus pada 2026-09-09).
 
 ## P1 — Sangat Disarankan Setelah P0
 
 ### Validasi dan Kontrak API
 
-- [ ] Buat parser/schema input per domain untuk harga, pelanggan, profil, konten, pengaturan, dan laporan.
-- [ ] Batasi panjang dan format nama, nomor telepon, NIK, alamat, catatan, Instagram, dan signature.
+Progres terverifikasi (2026-09-14):
+
+- [x] Validasi boundary untuk preview/publikasi harga: angka wajib finite, rentang harga dan persentase dibatasi, serta adjustment tetap mendukung nilai bertanda.
+- [x] Validasi allowlist, format, panjang, dan rentang nilai untuk endpoint penyimpanan pengaturan admin.
+- [x] Terapkan respons `VALIDATION_ERROR` (400) dan `INTERNAL_ERROR` (500) yang aman pada endpoint harga dan pengaturan.
+- [x] Tambahkan logging internal berkonteks tanpa mengirim detail error mentah ke browser pada endpoint harga dan pengaturan.
+- [x] Tambahkan regression test untuk payload invalid, kegagalan database/provider, dan payload pengaturan dashboard yang valid.
+
+Progres terverifikasi (2026-09-15):
+
+- [x] Batasi dan validasi nama, nomor HP, NIK, alamat, wilayah, sumber, Instagram, dan catatan pada mutasi order serta endpoint pelanggan langsung.
+- [x] Normalisasikan nomor Indonesia berawalan `62` secara konsisten pada alur order dan pelanggan.
+- [x] Validasi nama profil serta signature PNG data URL, termasuk batas ukuran payload tanda tangan.
+- [x] Sanitasi error database pada endpoint daftar, detail, lookup, dan penyimpanan pelanggan serta profil pengguna.
+- [x] Tambahkan regression test pelanggan/profil dan perluas test lifecycle order untuk batas serta format data pelanggan.
+
+Progres terverifikasi (2026-09-15, konten dan laporan):
+
+- [x] Validasi serta normalisasi seluruh field Hero sebelum penyimpanan konten.
+- [x] Batasi rentang laporan harian ke `today`, `week`, atau `month`.
+- [x] Validasi payload dan tanggal kalender EOD sebelum query database dijalankan.
+- [x] Tangani kegagalan query pendukung EOD serta sanitasi error konten dan laporan.
+- [x] Tambahkan regression test untuk payload invalid, normalisasi konten, dan error database yang aman.
+
+Progres terverifikasi (2026-09-15, jenis emas):
+
+- [x] Validasi ID, nama, kategori, karat, berat, margin, mode otomatis, dan harga manual pada boundary API.
+- [x] Batasi nilai angka jenis emas terhadap format, rentang, dan nilai maksimum yang aman.
+- [x] Hentikan sinkronisasi harga jika update mode gagal serta propagasikan error write dari helper database.
+- [x] Berikan respons konflik stabil saat jenis emas masih digunakan tanpa membocorkan detail database.
+- [x] Tambahkan regression test route dan helper write database untuk domain jenis emas.
+
+Progres terverifikasi (2026-09-15, mutasi stok):
+
+- [x] Batasi jumlah penyesuaian, koreksi, dan minimum stok ke bilangan bulat aman hingga `1.000.000`.
+- [x] Validasi format ID produk dan UUID movement serta batasi panjang merek, catatan, dan alasan koreksi.
+- [x] Pisahkan error validasi, konflik stok yang dikenal, dan kegagalan internal pada route mutasi stok.
+- [x] Sanitasi detail error database pada penyesuaian, koreksi, dan minimum stok.
+- [x] Tambahkan regression test parser, batas input, konflik stok, dan kegagalan database.
+
+Progres terverifikasi (2026-09-15, pembacaan stok):
+
+- [x] Validasi rentang `all`, `today`, `week`, atau `month` secara konsisten sebelum query stok dijalankan.
+- [x] Sanitasi detail error database pada daftar stok, ringkasan penjualan, dan riwayat movement.
+- [x] Pertahankan data stok/movement saat pengayaan ringkasan penjualan atau identitas petugas gagal, dengan logging internal yang aman.
+- [x] Tambahkan regression test untuk range invalid, error query, dan kegagalan pengayaan non-blocking.
+
+Progres terverifikasi (2026-09-15, order):
+
+- [x] Batasi jumlah item, qty, berat, harga per gram, total order, dan GP pada rentang operasional yang aman.
+- [x] Validasi nama item, merek, ID produk, karat, metode pembayaran, dan UUID order pada boundary API.
+- [x] Pisahkan error validasi, stok tidak mencukupi, order dibatalkan/tidak ditemukan, dan kegagalan internal.
+- [x] Sanitasi error database pada daftar, pembuatan, detail, perubahan, dan pembatalan order.
+- [x] Tangani kegagalan lookup profil pembuat invoice sebagai pengayaan non-blocking dengan logging aman.
+- [x] Tambahkan regression test parser order, error query/RPC, ID invalid, serta konflik stok.
+
+Progres terverifikasi (2026-09-15, pengguna Admin/CS):
+
+- [x] Validasi dan normalisasi email serta batasi password, role, dan UUID pengguna pada boundary API.
+- [x] Tolak field perubahan yang invalid tanpa meneruskannya ke Supabase Auth.
+- [x] Petakan konflik email, password lemah, dan pengguna tidak ditemukan ke respons API yang stabil.
+- [x] Sanitasi error Supabase Auth pada daftar, pembuatan, perubahan, dan penghapusan pengguna.
+- [x] Tambahkan regression test untuk payload invalid, normalisasi input, konflik email, dan error provider yang aman.
+
+Progres terverifikasi (2026-09-15, analitik dan cron harga):
+
+- [x] Sanitasi error database pada analitik keuangan, stok, sumber pelanggan, dan performa tim CS.
+- [x] Sanitasi error database pada dashboard performa pribadi CS.
+- [x] Sanitasi respons error internal cron pembaruan harga tanpa mengubah payload sukses.
+- [x] Catat kegagalan BI, MetalpriceAPI, dan CoinGecko hanya sebagai konteks serta tipe error tanpa detail sensitif.
+- [x] Tambahkan regression test untuk error analitik, performa CS, cron harga, dan logging provider.
+
+- [x] Buat parser/schema input per domain untuk harga, pelanggan, profil, konten, pengaturan, dan laporan.
+- [x] Batasi panjang dan format nama, nomor telepon, NIK, alamat, catatan, Instagram, dan signature.
 - [ ] Validasi seluruh nilai angka terhadap `NaN`, infinity, nilai negatif, nol yang tidak valid, dan batas maksimum.
 - [ ] Terapkan format respons API serta kode error yang konsisten.
 - [ ] Jangan mengirim pesan database, stack trace, atau `String(error)` mentah kepada browser.
@@ -225,7 +300,7 @@ Dokumen ini mencatat perubahan yang telah selesai serta backlog hasil audit meny
 
 - [x] Seluruh task P0 selesai sebelum deployment production.
 - [x] Tidak ada kerentanan dependency production high atau critical yang belum memiliki mitigasi terdokumentasi.
-- [ ] Tidak ada endpoint service-role tanpa pemeriksaan authorization di dalam handler.
+- [x] Tidak ada endpoint service-role tanpa pemeriksaan authorization di dalam handler (audit route 2026-09-15).
 - [ ] Anon key tidak dapat membaca data transaksi, pelanggan, profil pengguna, atau histori stok internal.
 - [ ] Unit, integration, dan E2E test kritis lulus di CI.
 - [ ] Typecheck, lint, dan production build lulus dari clean checkout.

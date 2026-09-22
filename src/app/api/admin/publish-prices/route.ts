@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { calculatePrices, insertPriceHistory, setSetting } from "@/lib/gold-api";
 import { fetchInternationalGoldPrice, convertToIdrPerGram } from "@/lib/gold-api";
 import { requireRole } from "@/lib/supabase/server-user";
+import { parsePriceInput } from "@/lib/admin-input";
+import { internalServerError, validationError } from "@/lib/api-response";
 
 export const dynamic = "force-dynamic";
 
@@ -9,15 +11,24 @@ export async function POST(request: Request) {
   const auth = await requireRole("admin");
   if (!auth.ok) return auth.response;
   try {
-    const body = await request.json();
-    const { hargaDasarJual, acuanBuybackLM, adjJual, adjBeli, adjPerhiasan, persenBuybackPerhiasan } = body;
+    const body = await request.json().catch(() => null);
+    const parsed = parsePriceInput(body);
+    if (!parsed.ok) return validationError(parsed.error);
+    const {
+      hargaDasarJual,
+      acuanBuybackLM,
+      adjJual,
+      adjBeli,
+      adjPerhiasan,
+      persenBuybackPerhiasan,
+    } = parsed.value;
 
-    await setSetting("harga_dasar_jual", String(hargaDasarJual ?? 0));
-    await setSetting("acuan_buyback_lm", String(acuanBuybackLM ?? 0));
-    await setSetting("adjustment_jual", String(adjJual ?? 0));
-    await setSetting("adjustment_beli", String(adjBeli ?? 0));
-    await setSetting("adjustment_perhiasan", String(adjPerhiasan ?? 0));
-    await setSetting("persen_buyback_perhiasan", String(persenBuybackPerhiasan ?? 81));
+    await setSetting("harga_dasar_jual", String(hargaDasarJual));
+    await setSetting("acuan_buyback_lm", String(acuanBuybackLM));
+    await setSetting("adjustment_jual", String(adjJual));
+    await setSetting("adjustment_beli", String(adjBeli));
+    await setSetting("adjustment_perhiasan", String(adjPerhiasan));
+    await setSetting("persen_buyback_perhiasan", String(persenBuybackPerhiasan));
 
     const { xauUsdPerOz, xagUsdPerOz, xpdUsdPerOz, usdIdrRate, error, warning } =
       await fetchInternationalGoldPrice();
@@ -58,9 +69,6 @@ export async function POST(request: Request) {
       ...(warning && { warning }),
     });
   } catch (err) {
-    return NextResponse.json(
-      { success: false, error: String(err) },
-      { status: 500 }
-    );
+    return internalServerError("publish-prices failed", err);
   }
 }
