@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { aggregateCsActivity, canViewOwnCsPerformance, type CsActivityOrder } from "@/lib/cs-performance";
 import { getPreviousRange, type AnalyticsGrain } from "@/lib/analytics";
+import { internalServerError } from "@/lib/api-response";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getServerUser, getUserRole } from "@/lib/supabase/server-user";
 
@@ -42,6 +43,6 @@ export async function GET(request: Request) {
     const [currentOrders, previousOrders] = await Promise.all([loadOrders(user.id, from, to), loadOrders(user.id, previousRange.from, previousRange.to)]);
     return NextResponse.json({ range: { from, to, grain }, previousRange, current: aggregateCsActivity(currentOrders, grain), previous: aggregateCsActivity(previousOrders, grain) });
   } catch (error) {
-    return NextResponse.json({ error: error instanceof Error ? error.message : "Gagal memuat performa" }, { status: 500 });
+    return internalServerError("cs-performance", error);
   }
 }

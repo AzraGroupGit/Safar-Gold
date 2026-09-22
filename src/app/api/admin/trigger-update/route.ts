@@ -7,6 +7,7 @@ import {
   setSetting,
 } from "@/lib/gold-api";
 import { requireRole } from "@/lib/supabase/server-user";
+import { internalServerError } from "@/lib/api-response";
 
 export const dynamic = "force-dynamic";
 
@@ -52,9 +53,6 @@ export async function POST() {
       ...(error && { warning: error }),
     });
   } catch (err) {
-    return NextResponse.json(
-      { success: false, error: String(err) },
-      { status: 500 }
-    );
+    return internalServerError("trigger-update failed", err);
   }
 }

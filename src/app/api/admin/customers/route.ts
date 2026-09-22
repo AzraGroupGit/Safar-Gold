@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { normalizePhone } from "@/lib/gold-api";
 import { hasCapability, redactCustomerForRole } from "@/lib/permissions";
 import { requireCapability } from "@/lib/supabase/server-user";
+import { parseCustomerInput } from "@/lib/admin-input";
+import { internalServerError, validationError } from "@/lib/api-response";
 
 export const dynamic = "force-dynamic";
 
@@ -21,7 +22,7 @@ export async function GET(request: Request) {
   if (!canReadAny) ordersQuery = ordersQuery.eq("created_by", auth.user.id);
   const ordersRes = await ordersQuery;
   if (ordersRes.error) {
-    return NextResponse.json({ error: ordersRes.error.message }, { status: 500 });
+    return internalServerError("customers order summary failed", ordersRes.error);
   }
 
   const customerIds = Array.from(new Set((ordersRes.data ?? []).map((order) => order.customer_id)));
@@ -32,7 +33,7 @@ export async function GET(request: Request) {
       : { data: [], error: null };
 
   if (customersRes.error) {
-    return NextResponse.json({ error: customersRes.error.message }, { status: 500 });
+    return internalServerError("customers list failed", customersRes.error);
   }
 
   // Aggregate orders by customer_id
@@ -83,31 +84,33 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   const auth = await requireCapability("customers:manage");
   if (!auth.ok) return auth.response;
-  const adm = createAdminClient();
-  const body = await request.json();
-  const phone = normalizePhone(body.phone ?? "");
-  if (!phone) return NextResponse.json({ error: "Phone wajib" }, { status: 400 });
+  try {
+    const body = await request.json().catch(() => null);
+    const parsed = parseCustomerInput(body);
+    if (!parsed.ok) return validationError(parsed.error);
+    const fields = parsed.value;
+    const adm = createAdminClient();
 
-  const fields = {
-    name: body.name ?? "",
-    phone,
-    nik: body.nik ?? null,
-    source: body.source ?? null,
-    address: body.address ?? null,
-    kelurahan: body.kelurahan ?? null,
-    kecamatan: body.kecamatan ?? null,
-    kabupaten: body.kabupaten ?? null,
-    provinsi: body.provinsi ?? null,
-    instagram: body.instagram ?? null,
-  };
+    const { data: existing, error: lookupError } = await adm
+      .from("customers")
+      .select("id")
+      .eq("phone", fields.phone)
+      .maybeSingle();
+    if (lookupError) throw lookupError;
 
-  const { data: existing } = await adm.from("customers").select("id").eq("phone", phone).maybeSingle();
-  if (existing) {
-    await adm.from("customers").update({ ...fields, updated_at: new Date().toISOString() }).eq("id", existing.id);
-    return NextResponse.json({ success: true, customer: { id: existing.id, ...fields } });
+    if (existing) {
+      const { error } = await adm
+        .from("customers")
+        .update({ ...fields, updated_at: new Date().toISOString() })
+        .eq("id", existing.id);
+      if (error) throw error;
+      return NextResponse.json({ success: true, customer: { id: existing.id, ...fields } });
+    }
+
+    const { data: created, error } = await adm.from("customers").insert(fields).select("*").single();
+    if (error) throw error;
+    return NextResponse.json({ success: true, customer: created });
+  } catch (error) {
+    return internalServerError("customer save failed", error);
   }
-
-  const { data: created, error } = await adm.from("customers").insert(fields).select("*").single();
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-  return NextResponse.json({ success: true, customer: created });
 }

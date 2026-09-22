@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { aggregateAnalytics, getPreviousRange, type AnalyticsGrain, type AnalyticsOrder } from "@/lib/analytics";
+import { internalServerError } from "@/lib/api-response";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { requireCapability } from "@/lib/supabase/server-user";
 
@@ -65,6 +66,6 @@ export async function GET(request: Request) {
       previous: aggregateAnalytics(previousOrders, grain),
     });
   } catch (error) {
-    return NextResponse.json({ error: error instanceof Error ? error.message : "Gagal memuat analitik" }, { status: 500 });
+    return internalServerError("analytics.finance", error);
   }
 }

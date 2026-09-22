@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import { parseDailyReportRange } from "@/lib/admin-input";
+import { internalServerError, validationError } from "@/lib/api-response";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { requireCapability } from "@/lib/supabase/server-user";
 
@@ -10,8 +12,9 @@ export async function GET(request: Request) {
   const auth = await requireCapability("reports:read-all");
   if (!auth.ok) return auth.response;
   const { searchParams } = new URL(request.url);
-  const range = searchParams.get("range") ?? "today";
-  const adm = createAdminClient();
+  const parsedRange = parseDailyReportRange(searchParams.get("range") ?? "today");
+  if (!parsedRange.ok) return validationError(parsedRange.error);
+  const range = parsedRange.value;
 
   let fromDate: string;
   const today = new Date().toISOString().split("T")[0];
@@ -25,34 +28,39 @@ export async function GET(request: Request) {
     fromDate = today;
   }
 
-  const { data: orders, error } = await adm
-    .from("orders")
-    .select("*, order_items(*)")
-    .eq("status", "completed")
-    .gte("created_at", fromDate)
-    .order("created_at", { ascending: false });
+  try {
+    const adm = createAdminClient();
+    const { data: orders, error } = await adm
+      .from("orders")
+      .select("*, order_items(*)")
+      .eq("status", "completed")
+      .gte("created_at", fromDate)
+      .order("created_at", { ascending: false });
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    if (error) return internalServerError("reports.daily.load", error);
 
-  const allOrders = orders ?? [];
-  const jual = allOrders.filter(o => o.type === "sell");
-  const buyback = allOrders.filter(o => o.type === "buyback");
+    const allOrders = orders ?? [];
+    const jual = allOrders.filter(o => o.type === "sell");
+    const buyback = allOrders.filter(o => o.type === "buyback");
 
-  const totalJual = jual.reduce((s, o) => s + o.total, 0);
-  const totalBuyback = buyback.reduce((s, o) => s + o.total, 0);
-  const totalJualItems = jual.reduce((s, o) => s + ((o.order_items ?? []) as OrderItemQuantity[]).reduce((si, i) => si + i.qty, 0), 0);
-  const totalBuybackItems = buyback.reduce((s, o) => s + ((o.order_items ?? []) as OrderItemQuantity[]).reduce((si, i) => si + i.qty, 0), 0);
+    const totalJual = jual.reduce((s, o) => s + o.total, 0);
+    const totalBuyback = buyback.reduce((s, o) => s + o.total, 0);
+    const totalJualItems = jual.reduce((s, o) => s + ((o.order_items ?? []) as OrderItemQuantity[]).reduce((si, i) => si + i.qty, 0), 0);
+    const totalBuybackItems = buyback.reduce((s, o) => s + ((o.order_items ?? []) as OrderItemQuantity[]).reduce((si, i) => si + i.qty, 0), 0);
 
-  return NextResponse.json({
-    summary: {
-      totalOrders: allOrders.length,
-      totalJual,
-      totalBuyback,
-      totalJualItems,
-      totalBuybackItems,
-      net: totalJual - totalBuyback,
-      range,
-    },
-    orders: allOrders.slice(0, 50),
-  });
+    return NextResponse.json({
+      summary: {
+        totalOrders: allOrders.length,
+        totalJual,
+        totalBuyback,
+        totalJualItems,
+        totalBuybackItems,
+        net: totalJual - totalBuyback,
+        range,
+      },
+      orders: allOrders.slice(0, 50),
+    });
+  } catch (error) {
+    return internalServerError("reports.daily.load", error);
+  }
 }

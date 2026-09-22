@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-08T03:05:49.276985+00:00",
+  "generated_at": "2026-09-15T02:50:20.683744+00:00",
   "nodes": {
     "src_app_admin_admin_analitik_analyticsclient": {
       "code_fingerprint": "1d8893844d082549dcb36fd2c5f668d2a04cf0dea7d8f0c4d3c64f226ff44b90",
@@ -12,13 +12,13 @@
           "q": "Dashboard statistik stock dan sumber pelanggan sebaiknya ditempatkan di mana dan berisi apa"
         }
       ],
-      "score": 0.976743738,
+      "score": 0.831090175,
       "source_file": "src/app/(admin)/admin/analitik/AnalyticsClient.tsx",
       "status": "tentative",
       "uses": 1
     },
     "src_app_admin_admin_stock_stockclient": {
-      "code_fingerprint": "9b1ccf0fca105271b1a071441131e131c1ff3e2238eb2cc8605a8020b1b59249",
+      "code_fingerprint": "d6c304ac42f21eece46593f49a6a4e4602448e92e161de6ab88bfad639484dcc",
       "label": "StockClient.tsx",
       "last": "2026-09-07T02:39:16.078096+00:00",
       "provenance": [
@@ -28,13 +28,29 @@
           "q": "Dashboard statistik stock dan sumber pelanggan sebaiknya ditempatkan di mana dan berisi apa"
         }
       ],
-      "score": 0.976743738,
+      "score": 0.831090175,
       "source_file": "src/app/(admin)/admin/stock/StockClient.tsx",
       "status": "tentative",
       "uses": 1
     },
+    "src_app_api_admin_publish_prices_route": {
+      "code_fingerprint": "1499dc951e8cfa325c964eaec5cbb3f0047e4fbefc4e7828fdedffc92e70314e",
+      "label": "publish-prices/route.ts",
+      "last": "2026-09-14T13:05:05.860182+00:00",
+      "provenance": [
+        {
+          "date": "2026-09-14T13:05:05.860182+00:00",
+          "outcome": "useful",
+          "q": "Task todo.md mana yang penting dikerjakan lebih dahulu tanpa overengineering?"
+        }
+      ],
+      "score": 0.986846129,
+      "source_file": "src/app/api/admin/publish-prices/route.ts",
+      "status": "tentative",
+      "uses": 1
+    },
     "src_app_api_admin_stock_movements_route": {
-      "code_fingerprint": "5662b6adab16923671d3a1b4956861f125c939c6fe77b1a0f4855bf101ae03fa",
+      "code_fingerprint": "0a942b92baa55dc7df4253f3b0df71e405c9e0f603a85156a909da0cb0c7fced",
       "label": "movements/route.ts",
       "last": "2026-09-07T02:39:16.078096+00:00",
       "provenance": [
@@ -44,13 +60,13 @@
           "q": "Dashboard statistik stock dan sumber pelanggan sebaiknya ditempatkan di mana dan berisi apa"
         }
       ],
-      "score": 0.976743738,
+      "score": 0.831090175,
       "source_file": "src/app/api/admin/stock/movements/route.ts",
       "status": "tentative",
       "uses": 1
     },
     "src_app_api_admin_stock_sales_summary_route": {
-      "code_fingerprint": "a20222581afec19d2999721216bca667e011f3afe8f7812a35dbb514db982726",
+      "code_fingerprint": "4a99144448fb81b15f503f310b58edbb8e43a8a6683a164341e4b9a2cc2c6236",
       "label": "sales-summary/route.ts",
       "last": "2026-09-07T02:39:16.078096+00:00",
       "provenance": [
@@ -60,13 +76,66 @@
           "q": "Dashboard statistik stock dan sumber pelanggan sebaiknya ditempatkan di mana dan berisi apa"
         }
       ],
-      "score": 0.976743738,
+      "score": 0.831090175,
       "source_file": "src/app/api/admin/stock/sales-summary/route.ts",
       "status": "tentative",
       "uses": 1
     },
-    "src_lib_supabase_server_user_approle": {
-      "code_fingerprint": "a9012a2241626fd9703c1e5a303cae1f98bd9a9c2518642b83fb1cd46e7f3dc0",
+    "src_lib_gold_api_fetchallfallbackprices": {
+      "code_fingerprint": "bd7ca2bc8251ef769a7cb5bbfd818ef0bbb1880bfbc088ac5fbd45e3e075d034",
+      "label": "fetchAllFallbackPrices()",
+      "last": "2026-09-14T09:50:19.646559+00:00",
+      "provenance": [
+        {
+          "date": "2026-09-14T09:50:19.646559+00:00",
+          "outcome": "useful",
+          "q": "Scraping tool apa untuk fallback XAU XAG dan XPD?"
+        }
+      ],
+      "score": 0.983766947,
+      "source_file": "src/lib/gold-api.ts",
+      "status": "tentative",
+      "uses": 1
+    },
+    "src_lib_gold_api_fetchinternationalgoldprice": {
+      "code_fingerprint": "bd7ca2bc8251ef769a7cb5bbfd818ef0bbb1880bfbc088ac5fbd45e3e075d034",
+      "label": "fetchInternationalGoldPrice()",
+      "last": "2026-09-14T13:05:05.860182+00:00",
+      "provenance": [
+        {
+          "date": "2026-09-14T13:05:05.860182+00:00",
+          "outcome": "useful",
+          "q": "Task todo.md mana yang penting dikerjakan lebih dahulu tanpa overengineering?"
+        },
+        {
+          "date": "2026-09-14T09:50:19.646559+00:00",
+          "outcome": "useful",
+          "q": "Scraping tool apa untuk fallback XAU XAG dan XPD?"
+        }
+      ],
+      "score": 1.970613076,
+      "source_file": "src/lib/gold-api.ts",
+      "status": "preferred",
+      "uses": 2
+    },
+    "src_lib_gold_api_firecrawlscrapeantam": {
+      "code_fingerprint": "bd7ca2bc8251ef769a7cb5bbfd818ef0bbb1880bfbc088ac5fbd45e3e075d034",
+      "label": "firecrawlScrapeAntam()",
+      "last": "2026-09-14T09:50:19.646559+00:00",
+      "provenance": [
+        {
+          "date": "2026-09-14T09:50:19.646559+00:00",
+          "outcome": "useful",
+          "q": "Scraping tool apa untuk fallback XAU XAG dan XPD?"
+        }
+      ],
+      "score": 0.983766947,
+      "source_file": "src/lib/gold-api.ts",
+      "status": "tentative",
+      "uses": 1
+    },
+    "src_lib_permissions_approle": {
+      "code_fingerprint": "40ebeee9c76822f0880a6447015c41c255d68f142a505721d4ed6577a8009d3b",
       "label": "AppRole",
       "last": "2026-09-08T02:57:34.703932+00:00",
       "provenance": [
@@ -76,8 +145,56 @@
           "q": "Apakah dashboard CS dan admin sudah saling sinkron untuk seluruh fitur?"
         }
       ],
-      "score": 0.999867751,
-      "source_file": "src/lib/supabase/server-user.ts",
+      "score": 0.850765899,
+      "source_file": "src/lib/permissions.ts",
+      "status": "tentative",
+      "uses": 1
+    },
+    "src_lib_public_site_data_getpublicsettings": {
+      "code_fingerprint": "b636112f3ec131799fb6f2a062ef1d6fccc29e10498df2630c63804ccffaf58a",
+      "label": "getPublicSettings",
+      "last": "2026-09-03T04:57:38.352002+00:00",
+      "provenance": [
+        {
+          "date": "2026-09-03T04:57:38.352002+00:00",
+          "outcome": "useful",
+          "q": "Analisa CodeGraph dan Graphify untuk project ini dan propose kesimpulannya"
+        }
+      ],
+      "score": 0.759407752,
+      "source_file": "src/lib/public-site-data.ts",
+      "status": "tentative",
+      "uses": 1
+    },
+    "tasks_todo": {
+      "code_fingerprint": "c9b3a3222ec4c27de68db1c95feb6c5e4ddcd9f772ff05c9bab26454eff82586",
+      "label": "todo.md",
+      "last": "2026-09-14T13:05:05.860182+00:00",
+      "provenance": [
+        {
+          "date": "2026-09-14T13:05:05.860182+00:00",
+          "outcome": "useful",
+          "q": "Task todo.md mana yang penting dikerjakan lebih dahulu tanpa overengineering?"
+        }
+      ],
+      "score": 0.986846129,
+      "source_file": "tasks/todo.md",
+      "status": "tentative",
+      "uses": 1
+    },
+    "tests_gold_api_admin_write_errors_test_createadminclient": {
+      "code_fingerprint": "f1264f548baf1d8ee0d86ffb3ddaaa34f7488b927ef33c743a6c27dab40129fa",
+      "label": "createAdminClient",
+      "last": "2026-09-03T04:57:38.352002+00:00",
+      "provenance": [
+        {
+          "date": "2026-09-03T04:57:38.352002+00:00",
+          "outcome": "useful",
+          "q": "Analisa CodeGraph dan Graphify untuk project ini dan propose kesimpulannya"
+        }
+      ],
+      "score": 0.759407752,
+      "source_file": "tests/gold-api-admin-write-errors.test.ts",
       "status": "tentative",
       "uses": 1
     }

@@ -2,6 +2,13 @@ import { createAnonClient } from "./supabase/anon";
 import { createAdminClient } from "./supabase/admin";
 
 const GOLD_OUNCE_TO_GRAM = 31.1034768;
+const BI_JISDOR_URL =
+  "https://www.bi.go.id/biwebservice/wskursbi.asmx/getSubKursJisdor1";
+
+function logMarketProviderError(context: string, error: unknown) {
+  const errorType = error instanceof Error ? error.name : typeof error;
+  console.error(`[market] ${context}`, { errorType });
+}
 
 // Urutan tampilan Buyback Logam Mulia — dari certi terkecil ke merek lain
 export const BB_LM_ORDER = [
@@ -84,10 +91,23 @@ export async function getSetting(key: string): Promise<string> {
   return data?.value ?? "0";
 }
 
+/** Server-side read for settings intentionally hidden from the public Supabase key. */
+export async function getPrivateSetting(key: string): Promise<string> {
+  const supabase = createAdminClient();
+  const { data, error } = await supabase
+    .from("app_settings")
+    .select("value")
+    .eq("key", key)
+    .maybeSingle();
+  if (error) throw error;
+  return data?.value ?? "0";
+}
+
 /** Tulis setting — pakai admin client (service role, lewati RLS). */
 export async function setSetting(key: string, value: string) {
   const supabase = createAdminClient();
-  await supabase.from("app_settings").upsert({ key, value });
+  const { error } = await supabase.from("app_settings").upsert({ key, value });
+  if (error) throw error;
 }
 
 // ---------- Market Info ----------
@@ -153,17 +173,20 @@ export async function getAllGoldTypes(): Promise<GoldTypeRow[]> {
 
 export async function createGoldType(gt: Omit<GoldTypeRow, "is_auto" | "manual_buy" | "manual_sell">) {
   const supabase = createAdminClient();
-  await supabase.from("gold_types").insert({ ...gt, is_auto: true });
+  const { error } = await supabase.from("gold_types").insert({ ...gt, is_auto: true });
+  if (error) throw error;
 }
 
 export async function updateGoldType(id: string, updates: Partial<Omit<GoldTypeRow, "id">>) {
   const supabase = createAdminClient();
-  await supabase.from("gold_types").update(updates).eq("id", id);
+  const { error } = await supabase.from("gold_types").update(updates).eq("id", id);
+  if (error) throw error;
 }
 
 export async function deleteGoldType(id: string) {
   const supabase = createAdminClient();
-  await supabase.from("gold_types").delete().eq("id", id);
+  const { error } = await supabase.from("gold_types").delete().eq("id", id);
+  if (error) throw error;
 }
 
 // ---------- Prices ----------
@@ -366,22 +389,79 @@ export async function syncTodayPrices(): Promise<void> {
 }
 
 // ---------- International Price Fetch ----------
+export function parseBiJisdorRate(xml: string): number | null {
+  const rateTags = xml.matchAll(
+    /<jual_subkursasing(?:\s[^>]*)?>([^<]+)<\/jual_subkursasing>/gi,
+  );
+
+  for (const match of rateTags) {
+    const raw = match[1]?.trim();
+    if (!raw) continue;
+
+    let normalized = raw.replace(/\s/g, "");
+    const commaIndex = normalized.lastIndexOf(",");
+    const dotIndex = normalized.lastIndexOf(".");
+
+    if (commaIndex >= 0 && dotIndex >= 0) {
+      normalized = commaIndex > dotIndex
+        ? normalized.replace(/\./g, "").replace(",", ".")
+        : normalized.replace(/,/g, "");
+    } else if (/^\d{1,3}(,\d{3})+$/.test(normalized)) {
+      normalized = normalized.replace(/,/g, "");
+    } else if (/^\d{1,3}(\.\d{3})+$/.test(normalized)) {
+      normalized = normalized.replace(/\./g, "");
+    } else {
+      normalized = normalized.replace(",", ".");
+    }
+
+    const rate = Number(normalized);
+    if (Number.isFinite(rate) && rate >= 5_000 && rate <= 100_000) {
+      return rate;
+    }
+  }
+
+  return null;
+}
+
+export async function fetchBiJisdorRate(): Promise<number | null> {
+  try {
+    const response = await fetch(BI_JISDOR_URL, {
+      headers: { Accept: "application/xml" },
+      signal: AbortSignal.timeout(10_000),
+      cache: "no-store",
+    });
+    if (!response.ok) return null;
+
+    return parseBiJisdorRate(await response.text());
+  } catch (error) {
+    logMarketProviderError("bi-jisdor.fetch", error);
+    return null;
+  }
+}
+
 export async function fetchInternationalGoldPrice(): Promise<{
   xauUsdPerOz: number;
   xagUsdPerOz: number;
   xpdUsdPerOz: number;
   usdIdrRate: number;
+  xauSource: "metalprice" | "coingecko" | "static";
+  xagSource: "metalprice" | "coingecko" | "static";
+  xpdSource: "metalprice" | "coingecko" | "static";
   error?: string;
   warning?: string;
 }> {
-  const apiKey = await getSetting("api_key");
+  const apiKey = await getPrivateSetting("api_key");
   const fallback = await fetchAllFallbackPrices();
 
   let xauUsdPerOz = 0;
   let xagUsdPerOz = fallback.xagUsdPerOz;
   let xpdUsdPerOz = fallback.xpdUsdPerOz;
+  let xagSource: "metalprice" | "coingecko" | "static" = fallback.xagSource;
+  let xpdSource: "metalprice" | "coingecko" | "static" = fallback.xpdSource;
   let usdIdrRate = 0;
-  let apiError: string | undefined;
+  let apiError: string | undefined = apiKey && apiKey !== "0"
+    ? undefined
+    : "MetalpriceAPI key not configured";
   const warnings: string[] = [];
 
   const validApi = apiKey && apiKey !== "0" && apiKey !== "";
@@ -399,9 +479,11 @@ export async function fetchInternationalGoldPrice(): Promise<{
           }
           if (typeof data.rates.XAG === "number" && data.rates.XAG > 0) {
             xagUsdPerOz = Math.round((1 / data.rates.XAG) * 100) / 100;
+            xagSource = "metalprice";
           }
           if (typeof data.rates.XPD === "number" && data.rates.XPD > 0) {
             xpdUsdPerOz = Math.round((1 / data.rates.XPD) * 100) / 100;
+            xpdSource = "metalprice";
           }
           if (typeof data.rates.IDR === "number" && data.rates.IDR > 0) {
             usdIdrRate = data.rates.IDR;
@@ -417,56 +499,37 @@ export async function fetchInternationalGoldPrice(): Promise<{
         apiError = `MetalpriceAPI error: ${res.status}`;
       }
     } catch (e) {
-      console.error("MetalpriceAPI fetch failed:", e);
+      logMarketProviderError("metalprice.fetch", e);
       apiError = "MetalpriceAPI network error";
     }
   }
 
-  // Jika XAU gagal → full fallback
-  if (!xauUsdPerOz) {
-    return { ...fallback, error: apiError };
-  }
-
-  // Jika XAG/XPD gagal → pakai fallback
-  if (xagUsdPerOz === fallback.xagUsdPerOz) {
-    warnings.push("XAG using fallback");
-  }
-  if (xpdUsdPerOz === fallback.xpdUsdPerOz) {
-    warnings.push("XPD using fallback");
-  }
-
-  // Kurs USD/IDR — jika belum didapat dari MetalpriceAPI, fallback frankfurter
+  // Kurs USD/IDR — jika belum didapat dari MetalpriceAPI, pakai JISDOR BI.
   if (!usdIdrRate) {
     usdIdrRate = parseFloat(await getSetting("usd_idr_rate"));
     if (!usdIdrRate || isNaN(usdIdrRate)) usdIdrRate = 16300;
 
-    try {
-      const biRes = await fetch("https://api.frankfurter.app/latest?from=USD&to=IDR");
-      if (biRes.ok) {
-        const biData = await biRes.json();
-        if (biData.rates?.IDR) {
-          usdIdrRate = biData.rates.IDR;
-          await setSetting("usd_idr_rate", usdIdrRate.toString());
-        }
-      } else {
-        throw new Error("JISDOR failed");
-      }
-    } catch (e) {
-      console.error("JISDOR fetch failed, trying exchangerate-api:", e);
-      try {
-        const fxRes = await fetch("https://api.exchangerate-api.com/v4/latest/USD");
-        if (fxRes.ok) {
-          const fxData = await fxRes.json();
-          if (fxData.rates?.IDR) {
-            usdIdrRate = fxData.rates.IDR;
-            await setSetting("usd_idr_rate", usdIdrRate.toString());
-          }
-        }
-      } catch (e2) { console.error("exchangerate-api also failed:", e2); }
+    const biJisdorRate = await fetchBiJisdorRate();
+    if (biJisdorRate) {
+      usdIdrRate = biJisdorRate;
+      await setSetting("usd_idr_rate", usdIdrRate.toString());
     }
   }
 
-  return { xauUsdPerOz, xagUsdPerOz, xpdUsdPerOz, usdIdrRate, ...(warnings.length > 0 && { warning: warnings.join("; ") }) };
+  // Jika XAU gagal → full fallback, tetapi tetap gunakan kurs BI terbaru jika tersedia.
+  if (!xauUsdPerOz) {
+    return { ...fallback, usdIdrRate, error: apiError };
+  }
+
+  // Jika XAG/XPD gagal → pakai fallback
+  if (xagSource !== "metalprice") {
+    warnings.push("XAG using fallback");
+  }
+  if (xpdSource !== "metalprice") {
+    warnings.push("XPD using fallback");
+  }
+
+  return { xauUsdPerOz, xagUsdPerOz, xpdUsdPerOz, usdIdrRate, xauSource: "metalprice", xagSource, xpdSource, ...(warnings.length > 0 && { warning: warnings.join("; ") }) };
 }
 
 async function fetchAllFallbackPrices(): Promise<{
@@ -474,6 +537,9 @@ async function fetchAllFallbackPrices(): Promise<{
   xagUsdPerOz: number;
   xpdUsdPerOz: number;
   usdIdrRate: number;
+  xauSource: "coingecko" | "static";
+  xagSource: "coingecko" | "static";
+  xpdSource: "coingecko" | "static";
 }> {
   const usdIdrRate = parseFloat(await getSetting("usd_idr_rate")) || 16300;
   const DEFAULT_XAU = 2400;
@@ -483,18 +549,30 @@ async function fetchAllFallbackPrices(): Promise<{
   let xau = DEFAULT_XAU;
   let xag = DEFAULT_XAG;
   let xpd = DEFAULT_XPD;
+  let xauSource: "coingecko" | "static" = "static";
+  let xagSource: "coingecko" | "static" = "static";
+  let xpdSource: "coingecko" | "static" = "static";
 
   try {
     const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=gold,silver,palladium&vs_currencies=usd");
     if (res.ok) {
       const data = await res.json();
-      if (typeof data.gold?.usd === "number" && data.gold.usd > 200) xau = data.gold.usd;
-      if (typeof data.silver?.usd === "number" && data.silver.usd > 10) xag = data.silver.usd;
-      if (typeof data.palladium?.usd === "number" && data.palladium.usd > 100) xpd = data.palladium.usd;
+      if (typeof data.gold?.usd === "number" && data.gold.usd > 200) {
+        xau = data.gold.usd;
+        xauSource = "coingecko";
+      }
+      if (typeof data.silver?.usd === "number" && data.silver.usd > 10) {
+        xag = data.silver.usd;
+        xagSource = "coingecko";
+      }
+      if (typeof data.palladium?.usd === "number" && data.palladium.usd > 100) {
+        xpd = data.palladium.usd;
+        xpdSource = "coingecko";
+      }
     }
-  } catch (e) { console.error("CoinGecko fetch failed:", e); }
+  } catch (e) { logMarketProviderError("coingecko.fetch", e); }
 
-  return { xauUsdPerOz: xau, xagUsdPerOz: xag, xpdUsdPerOz: xpd, usdIdrRate };
+  return { xauUsdPerOz: xau, xagUsdPerOz: xag, xpdUsdPerOz: xpd, usdIdrRate, xauSource, xagSource, xpdSource };
 }
 
 export function convertToIdrPerGram(usdPerOz: number, usdIdrRate: number): number {
@@ -507,7 +585,6 @@ export type ScrapeAntamResult = {
   antamPrice?: number;
   previousPrice?: number;
   error?: string;
-  detail?: unknown;
 };
 
 /** Scrape logammulia.com via Firecrawl (force fresh), dengan retry + timeout. */
@@ -546,7 +623,8 @@ async function firecrawlScrapeAntam(apiKey: string): Promise<string> {
       if (markdown) return markdown;
       lastErr = "Firecrawl mengembalikan markdown kosong";
     } catch (e) {
-      lastErr = `Firecrawl network error: ${String(e)}`;
+      logMarketProviderError("firecrawl.fetch", e);
+      lastErr = "Firecrawl network error";
     }
   }
   throw new Error(lastErr || "Firecrawl gagal");
@@ -563,7 +641,8 @@ export async function scrapeAntamPrice(): Promise<ScrapeAntamResult> {
   try {
     markdown = await firecrawlScrapeAntam(apiKey);
   } catch (e) {
-    return { success: false, error: String(e) };
+    logMarketProviderError("firecrawl.scrape", e);
+    return { success: false, error: "Firecrawl gagal" };
   }
 
   // Parse: "Emas\nHarga/gram Rp2.700.000,00..."
@@ -581,7 +660,7 @@ export async function scrapeAntamPrice(): Promise<ScrapeAntamResult> {
   }
 
   if (price <= 0) {
-    return { success: false, error: "Could not parse gold price", detail: markdown.substring(0, 500) };
+    return { success: false, error: "Could not parse gold price" };
   }
 
   const prevRaw = await getSetting("antam_price");

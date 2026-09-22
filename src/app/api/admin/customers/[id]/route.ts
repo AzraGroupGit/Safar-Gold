@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { hasCapability, redactCustomerForRole } from "@/lib/permissions";
 import { requireCapability } from "@/lib/supabase/server-user";
+import { internalServerError } from "@/lib/api-response";
 
 export const dynamic = "force-dynamic";
 
@@ -19,7 +20,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
     .order("created_at", { ascending: false });
   if (!canReadAny) ordersQuery = ordersQuery.eq("created_by", auth.user.id);
   const { data: orders, error: ordersError } = await ordersQuery;
-  if (ordersError) return NextResponse.json({ error: ordersError.message }, { status: 500 });
+  if (ordersError) return internalServerError("customer orders failed", ordersError);
   if (!canReadAny && (orders ?? []).length === 0) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }

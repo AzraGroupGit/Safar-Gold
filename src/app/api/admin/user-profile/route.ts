@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { requireRole } from "@/lib/supabase/server-user";
+import { parseUserProfileInput } from "@/lib/admin-input";
+import { internalServerError, validationError } from "@/lib/api-response";
 
 export const dynamic = "force-dynamic";
 
@@ -13,11 +15,12 @@ export async function GET(request: Request) {
   if (userId !== auth.user.id) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
   const adm = createAdminClient();
-  const { data } = await adm
+  const { data, error } = await adm
     .from("user_profiles")
     .select("*")
     .eq("user_id", userId)
     .maybeSingle();
+  if (error) return internalServerError("user profile load failed", error);
 
   return NextResponse.json({ profile: data ?? null });
 }
@@ -26,8 +29,10 @@ export async function PUT(request: Request) {
   const auth = await requireRole("admin", "cs");
   if (!auth.ok) return auth.response;
   try {
-    const { userId, name, signature } = await request.json();
-    if (!userId) return NextResponse.json({ error: "userId required" }, { status: 400 });
+    const body = await request.json().catch(() => null);
+    const parsed = parseUserProfileInput(body);
+    if (!parsed.ok) return validationError(parsed.error);
+    const { userId, name, signature } = parsed.value;
     if (userId !== auth.user.id) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
     const adm = createAdminClient();
@@ -38,10 +43,10 @@ export async function PUT(request: Request) {
       updated_at: new Date().toISOString(),
     });
 
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    if (error) throw error;
 
     return NextResponse.json({ success: true });
   } catch (err) {
-    return NextResponse.json({ error: String(err) }, { status: 500 });
+    return internalServerError("user profile save failed", err);
   }
 }
